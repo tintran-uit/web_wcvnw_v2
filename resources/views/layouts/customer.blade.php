@@ -5,8 +5,9 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="Template">
-      <meta name="keywords" content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
+      <meta name="description" content="{{ $page->meta_description }}">
+      <meta name="title" content="{{ $page->meta_title }}">
+      <meta name="keywords" content="{{ $page->meta_keywords }}">
       <meta name="author" content="">
       <!-- Use title if it's in the page YAML frontmatter -->
       <title>@yield('title')</title>
@@ -509,7 +510,7 @@
                <div class="row clearfix">
                   <div class="col-sm-6">
                      <p class="hidden-xs spacer-top-10">
-                        <i class="fa fa-truck"></i> FREE SHIPPING WORLDWIDE
+                        <i class="fa fa-truck"></i> GIAO HÀNG TẬN NƠI
                      </p>
                   </div>
                   <div class="col-sm-6">
@@ -566,21 +567,12 @@
          <section id="main-header">
             <div class="container">
                <div class="row clearfix">
-                  <article class="col-sm-12 col-md-4 col-lg-3">
-                     <form id="search" class="bg-white">
-                        <div class="input-group">
-                           <input type="text" class="form-control" name="search" placeholder="Search the whole shop" />
-                           <span class="input-group-addon">
-                           <button class="btn-link no-margin" type="button">
-                           <i class="fa fa-search"></i>
-                           </button>
-                           </span>
-                        </div>
-                     </form>
+                  <article class="col-sm-12 col-md-4 col-lg-3" id="logo">
+                    <a href="./">          <img class="image-responsive" alt="Kids Store" src="assets/images/baner.png" style="height: 86px" />
+                     </a>
                   </article>
-                  <article class="col-sm-12 col-md-4 col-lg-6" id="logo">
-                     <a href="./">          <img class="image-responsive center-block" alt="Kids Store" src="assets/images/logo.png" />
-                     </a>      
+                  <article class="col-sm-12 col-md-4 col-lg-6" >
+                           
                   </article>
                   <article class="col-sm-12 col-md-4 col-lg-3 hidden-xs">
                      <div class="dropdown bg-white" id="basket">
@@ -1242,5 +1234,6 @@
             </div>
          </section>
       </footer>
+      @yield('scrip_code')
    </body>
 </html>

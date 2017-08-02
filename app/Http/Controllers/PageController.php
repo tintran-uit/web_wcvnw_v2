@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Backpack\PageManager\app\Models\Page;
+use App\Models\ProductCategory;
 use App\Models\MenuItem;
 
 class PageController extends Controller
@@ -21,6 +22,8 @@ class PageController extends Controller
         $this->data['page'] = $page->withFakes();
         $this->data['menu'] = MenuItem::all();
 
+        $categories = ProductCategory::where('visible', 1)->get();
+        $this->data['categories'] = $categories;
         return view('pages.index', $this->data);
     }
 
