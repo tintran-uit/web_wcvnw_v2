@@ -685,9 +685,9 @@
                                     <a href="about-us.html">Thông tin</a>
                                  </li>
                                  <li>
-                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"> Mua hàng <i class="fa fa-angle-down"></i>
+                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="" id="menu-Muahang"> Mua hàng <i class="fa fa-angle-down"></i>
                                     </a>                  
-                                    <ul class="dropdown-menu">
+                                 <!--    <ul class="dropdown-menu">
                                        <li>
                                           <a href="#">Baby 0-24 months</a>
                                        </li>
@@ -703,7 +703,7 @@
                                        <li>
                                           <a href="#">Infant Boy</a>
                                        </li>
-                                    </ul>
+                                    </ul> -->
                                  </li>
                                  <li>
                                     <a href="#">Thư viện ảnh</a> 

@@ -58,7 +58,7 @@
       <!--     <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2> -->
    </div>
 </section>
-<section>
+<section id="category-content">
    <div class="container">
       
       <section class="text-center spacer-bottom-20">
@@ -501,7 +501,7 @@
 <section class="news-box spacer-bottom-30">
    <div class="container">
       <h3 class="text-uppercase text-center spacer-bottom-20 no-margin">
-         From the Blog
+         Góc kinh nghiệm
       </h3>
       <div class="row">
          <article class="col-xs-12 col-sm-6 col-md-4">
@@ -511,7 +511,7 @@
                      <figure>
                         <a href="post.html">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo4.jpg" />
-                           <h4 class="title">Title articles</h4>
+                           <h4 class="title">Mẹo vặt đi chợ</h4>
                         </a>
                      </figure>
                   </section>
@@ -525,7 +525,7 @@
                      <figure>
                         <a href="post.html">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo5.jpg" />
-                           <h4 class="title">Title articles</h4>
+                           <h4 class="title">Phân biệt thực phẩm sạch</h4>
                         </a>
                      </figure>
                   </section>
@@ -539,7 +539,7 @@
                      <figure>
                         <a href="post.html">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo6.jpg" />
-                           <h4 class="title">Title articles</h4>
+                           <h4 class="title">Kinh nghiệm nhà nông</h4>
                         </a>
                      </figure>
                   </section>
@@ -570,8 +570,17 @@
                     }, 'slow');
                     e.preventDefault();
                     
-                });
+                  });
+                  
                } 
+            $('#menu-Muahang').on('click', function (e) {
+                     $('html, body').animate({
+                        scrollTop: $('#category-content').offset().top
+                    }, 'slow');
+                     $('.navbar-nav li.active').removeClass('active');
+                     $(this).addClass('active');
+                    e.preventDefault();
+                  });
             });
          
       </script>

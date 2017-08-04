@@ -27,6 +27,23 @@ class PageController extends Controller
         return view('pages.index', $this->data);
     }
 
+    public function aboutUs()
+    {
+        $page = Page::findBySlug('index');
+
+        if (!$page)
+        {
+            abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
+        }
+
+        $this->data['title'] = $page->title;
+        $this->data['page'] = $page->withFakes();
+        $this->data['menu'] = MenuItem::all();
+
+        
+        return view('pages.about_us', $this->data);
+    }
+
     public function page($slug)
     {
         $page = Page::findBySlug($slug);

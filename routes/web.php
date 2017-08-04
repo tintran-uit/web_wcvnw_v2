@@ -29,6 +29,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 
 Route::get('/', 'PageController@index');
 
+
 Route::get('{page}/{subs?}', ['uses' => 'PageController@page'])
     ->where(['page' => '^((?!admin).)*$', 'subs' => '.*']);
 
