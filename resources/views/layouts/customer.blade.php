@@ -678,14 +678,14 @@
                         <div class="nav-bar navbar-default dropdown-main-nav">
                            <div class="collapse navbar-collapse">
                               <ul class="nav navbar-nav">
-                                 <li class="active">
+                                 <li class="{{ Request::is('/') ? 'active' : '' }}">
                                     <a href="{{url('/')}}">Trang chủ</a>
                                  </li>
-                                 <li>
-                                    <a href="about-us.html">Thông tin</a>
+                                 <li class="{{ Request::is('thong-tin-nha-phan-phoi-we-cae-vn') ? 'active' : '' }}">
+                                    <a href="{{url('/thong-tin-nha-phan-phoi-we-cae-vn')}}">Thông tin</a>
                                  </li>
-                                 <li>
-                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="" id="menu-Muahang"> Mua hàng <i class="fa fa-angle-down"></i>
+                                 <li class="{{ Request::is('mua-thuc-pham-sach') ? 'active' : '' }}">
+                                    <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> Mua hàng <i class="fa fa-angle-down"></i>
                                     </a>                  
                                  <!--    <ul class="dropdown-menu">
                                        <li>
@@ -705,7 +705,7 @@
                                        </li>
                                     </ul> -->
                                  </li>
-                                 <li>
+                                 <li class="">
                                     <a href="#">Thư viện ảnh</a> 
                                  </li>
                                  <li class="dropdown box-extended">
@@ -1025,9 +1025,9 @@
             </nav>
          </section>
       </header>
-      <main class="bg-extra-light-grey">
-         @yield('main class')
-      </main>
+      
+      @yield('main class')
+      
       <footer id="footer">
          <section id="contact-footer">
             <section class="info-box">

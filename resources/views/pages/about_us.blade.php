@@ -3,6 +3,7 @@
 {{$title}}
 @endsection
 @section('main class')
+<main>
 <!-- Modal advertising -->
    <section class="spacer-20">
       <div class="container">
@@ -95,6 +96,7 @@
          </div>
       </div>
    </section>
+</main>
 @endsection
 
 @section('scrip_code')

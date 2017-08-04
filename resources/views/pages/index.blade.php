@@ -3,6 +3,7 @@
 {{$title}}
 @endsection
 @section('main class')
+<main class="bg-extra-light-grey">
 <!-- Modal advertising -->
 <section id="main-slideshow" class="carousel slide carousel-fade">
    <div class="container-fluid no-padding">
@@ -549,11 +550,15 @@
       </div>
    </div>
 </section>
+</main>
 @endsection
 
 @section('scrip_code')
 
 <script type="text/javascript">
+
+         var isShop = {{$isShop or '0'}};
+         isMuaHang(isShop);
 
          jQuery(document).ready(function ($) {
             if ($(window).width() < 768) {
@@ -574,15 +579,27 @@
                   
                } 
             $('#menu-Muahang').on('click', function (e) {
-                     $('html, body').animate({
+                  scrollToMuaHang();
+                  e.preventDefault();
+               });
+
+         });
+
+         function isMuaHang(isShop) {
+            if(isShop == '1'){
+               scrollToMuaHang();
+            }
+         }
+
+         function scrollToMuaHang() {
+            
+            $('html, body').animate({
                         scrollTop: $('#category-content').offset().top
                     }, 'slow');
                      $('.navbar-nav li.active').removeClass('active');
                      $(this).addClass('active');
-                    e.preventDefault();
-                  });
-            });
-         
+                    
+         }
       </script>
 
 @endsection
