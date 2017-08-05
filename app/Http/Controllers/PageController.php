@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Backpack\PageManager\app\Models\Page;
 use App\Models\ProductCategory;
 use App\Models\MenuItem;
+use DB;
 
 class PageController extends Controller
 {
@@ -47,6 +48,10 @@ class PageController extends Controller
             $categories = ProductCategory::where('visible', 1)->get();
             $this->data['categories'] = $categories;
             return view('pages.index', $this->data);
+        }
+
+        if ($page->template == 'about_us'){
+            $this->data['about_pages'] = DB::table('pages')->where('template', 'about_us')->get();
         }
 
         return view('pages.'.$page->template, $this->data);

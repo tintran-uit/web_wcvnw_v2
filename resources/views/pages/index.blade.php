@@ -561,7 +561,8 @@
          isMuaHang(isShop);
 
          jQuery(document).ready(function ($) {
-            if ($(window).width() < 768) {
+
+            if (isMobile()) {
    
               $('.nav a').click(function (e) {
               e.preventDefault()
@@ -578,6 +579,7 @@
                   });
                   
                } 
+
             $('#menu-Muahang').on('click', function (e) {
                   scrollToMuaHang();
                   e.preventDefault();
@@ -591,8 +593,14 @@
             }
          }
 
+         function isMobile() {
+            if($(window).width() < 768)
+               return true;
+            return false;
+         }
+
          function scrollToMuaHang() {
-            
+
             $('html, body').animate({
                         scrollTop: $('#category-content').offset().top
                     }, 'slow');
