@@ -50,8 +50,11 @@ class PageController extends Controller
             return view('pages.index', $this->data);
         }
 
-        if ($page->template == 'about_us'){
+        if ($page->template == 'about_us' || $page->template == 'services'){
+            //thông tin
             $this->data['about_pages'] = DB::table('pages')->where('template', 'about_us')->get();
+            //chăm sóc khách hàng
+            $this->data['service_pages'] = DB::table('pages')->where('template', 'services')->get();
         }
 
         return view('pages.'.$page->template, $this->data);

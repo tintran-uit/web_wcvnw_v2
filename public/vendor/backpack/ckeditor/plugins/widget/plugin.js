@@ -3197,148 +3197,148 @@
 		 * @class CKEDITOR.style.customHandlers.widget
 		 * @extends CKEDITOR.style
 		 */
-		CKEDITOR.style.addCustomHandler( {
-			type: 'widget',
+		// CKEDITOR.style.addCustomHandler( {
+		// 	type: 'widget',
 
-			setup: function( styleDefinition ) {
-				/**
-				 * The name of widget to which this style can be applied.
-				 * It is extracted from style definition's `widget` property.
-				 *
-				 * @property {String} widget
-				 */
-				this.widget = styleDefinition.widget;
-			},
+		// 	setup: function( styleDefinition ) {
+		// 		/**
+		// 		 * The name of widget to which this style can be applied.
+		// 		 * It is extracted from style definition's `widget` property.
+		// 		 *
+		// 		 * @property {String} widget
+		// 		 */
+		// 		this.widget = styleDefinition.widget;
+		// 	},
 
-			apply: function( editor ) {
-				// Before CKEditor 4.4 wasn't a required argument, so we need to
-				// handle a case when it wasn't provided.
-				if ( !( editor instanceof CKEDITOR.editor ) )
-					return;
+		// 	apply: function( editor ) {
+		// 		// Before CKEditor 4.4 wasn't a required argument, so we need to
+		// 		// handle a case when it wasn't provided.
+		// 		if ( !( editor instanceof CKEDITOR.editor ) )
+		// 			return;
 
-				// Theoretically we could bypass checkApplicable, get widget from
-				// widgets.focused and check its name, what would be faster, but then
-				// this custom style would work differently than the default style
-				// which checks if it's applicable before applying or removeing itself.
-				if ( this.checkApplicable( editor.elementPath(), editor ) )
-					editor.widgets.focused.applyStyle( this );
-			},
+		// 		// Theoretically we could bypass checkApplicable, get widget from
+		// 		// widgets.focused and check its name, what would be faster, but then
+		// 		// this custom style would work differently than the default style
+		// 		// which checks if it's applicable before applying or removeing itself.
+		// 		if ( this.checkApplicable( editor.elementPath(), editor ) )
+		// 			editor.widgets.focused.applyStyle( this );
+		// 	},
 
-			remove: function( editor ) {
-				// Before CKEditor 4.4 wasn't a required argument, so we need to
-				// handle a case when it wasn't provided.
-				if ( !( editor instanceof CKEDITOR.editor ) )
-					return;
+		// 	remove: function( editor ) {
+		// 		// Before CKEditor 4.4 wasn't a required argument, so we need to
+		// 		// handle a case when it wasn't provided.
+		// 		if ( !( editor instanceof CKEDITOR.editor ) )
+		// 			return;
 
-				if ( this.checkApplicable( editor.elementPath(), editor ) )
-					editor.widgets.focused.removeStyle( this );
-			},
+		// 		if ( this.checkApplicable( editor.elementPath(), editor ) )
+		// 			editor.widgets.focused.removeStyle( this );
+		// 	},
 
-			checkActive: function( elementPath, editor ) {
-				return this.checkElementMatch( elementPath.lastElement, 0, editor );
-			},
+		// 	checkActive: function( elementPath, editor ) {
+		// 		return this.checkElementMatch( elementPath.lastElement, 0, editor );
+		// 	},
 
-			checkApplicable: function( elementPath, editor ) {
-				// Before CKEditor 4.4 wasn't a required argument, so we need to
-				// handle a case when it wasn't provided.
-				if ( !( editor instanceof CKEDITOR.editor ) )
-					return false;
+		// 	checkApplicable: function( elementPath, editor ) {
+		// 		// Before CKEditor 4.4 wasn't a required argument, so we need to
+		// 		// handle a case when it wasn't provided.
+		// 		if ( !( editor instanceof CKEDITOR.editor ) )
+		// 			return false;
 
-				return this.checkElement( elementPath.lastElement );
-			},
+		// 		return this.checkElement( elementPath.lastElement );
+		// 	},
 
-			checkElementMatch: checkElementMatch,
+		// 	checkElementMatch: checkElementMatch,
 
-			checkElementRemovable: checkElementMatch,
+		// 	checkElementRemovable: checkElementMatch,
 
-			/**
-			 * Checks if an element is a {@link CKEDITOR.plugins.widget#wrapper wrapper} of a
-			 * widget whose name matches the {@link #widget widget name} specified in the style definition.
-			 *
-			 * @param {CKEDITOR.dom.element} element
-			 * @returns {Boolean}
-			 */
-			checkElement: function( element ) {
-				if ( !isDomWidgetWrapper( element ) )
-					return false;
+		// 	/**
+		// 	 * Checks if an element is a {@link CKEDITOR.plugins.widget#wrapper wrapper} of a
+		// 	 * widget whose name matches the {@link #widget widget name} specified in the style definition.
+		// 	 *
+		// 	 * @param {CKEDITOR.dom.element} element
+		// 	 * @returns {Boolean}
+		// 	 */
+		// 	checkElement: function( element ) {
+		// 		if ( !isDomWidgetWrapper( element ) )
+		// 			return false;
 
-				var widgetElement = element.getFirst( isDomWidgetElement );
-				return widgetElement && widgetElement.data( 'widget' ) == this.widget;
-			},
+		// 		var widgetElement = element.getFirst( isDomWidgetElement );
+		// 		return widgetElement && widgetElement.data( 'widget' ) == this.widget;
+		// 	},
 
-			buildPreview: function( label ) {
-				return label || this._.definition.name;
-			},
+		// 	buildPreview: function( label ) {
+		// 		return label || this._.definition.name;
+		// 	},
 
-			/**
-			 * Returns allowed content rules which should be registered for this style.
-			 * Uses widget's {@link CKEDITOR.plugins.widget.definition#styleableElements} to make a rule
-			 * allowing classes on specified elements or use widget's
-			 * {@link CKEDITOR.plugins.widget.definition#styleToAllowedContentRules} method to transform a style
-			 * into allowed content rules.
-			 *
-			 * @param {CKEDITOR.editor} The editor instance.
-			 * @returns {CKEDITOR.filter.allowedContentRules}
-			 */
-			toAllowedContentRules: function( editor ) {
-				if ( !editor )
-					return null;
+		// 	/**
+		// 	 * Returns allowed content rules which should be registered for this style.
+		// 	 * Uses widget's {@link CKEDITOR.plugins.widget.definition#styleableElements} to make a rule
+		// 	 * allowing classes on specified elements or use widget's
+		// 	 * {@link CKEDITOR.plugins.widget.definition#styleToAllowedContentRules} method to transform a style
+		// 	 * into allowed content rules.
+		// 	 *
+		// 	 * @param {CKEDITOR.editor} The editor instance.
+		// 	 * @returns {CKEDITOR.filter.allowedContentRules}
+		// 	 */
+		// 	toAllowedContentRules: function( editor ) {
+		// 		if ( !editor )
+		// 			return null;
 
-				var widgetDef = editor.widgets.registered[ this.widget ],
-					classes,
-					rule = {};
+		// 		var widgetDef = editor.widgets.registered[ this.widget ],
+		// 			classes,
+		// 			rule = {};
 
-				if ( !widgetDef )
-					return null;
+		// 		if ( !widgetDef )
+		// 			return null;
 
-				if ( widgetDef.styleableElements ) {
-					classes = this.getClassesArray();
-					if ( !classes )
-						return null;
+		// 		if ( widgetDef.styleableElements ) {
+		// 			classes = this.getClassesArray();
+		// 			if ( !classes )
+		// 				return null;
 
-					rule[ widgetDef.styleableElements ] = {
-						classes: classes,
-						propertiesOnly: true
-					};
-					return rule;
-				}
-				if ( widgetDef.styleToAllowedContentRules )
-					return widgetDef.styleToAllowedContentRules( this );
-				return null;
-			},
+		// 			rule[ widgetDef.styleableElements ] = {
+		// 				classes: classes,
+		// 				propertiesOnly: true
+		// 			};
+		// 			return rule;
+		// 		}
+		// 		if ( widgetDef.styleToAllowedContentRules )
+		// 			return widgetDef.styleToAllowedContentRules( this );
+		// 		return null;
+		// 	},
 
-			/**
-			 * Returns classes defined in the style in form of an array.
-			 *
-			 * @returns {String[]}
-			 */
-			getClassesArray: function() {
-				var classes = this._.definition.attributes && this._.definition.attributes[ 'class' ];
+		// 	/**
+		// 	 * Returns classes defined in the style in form of an array.
+		// 	 *
+		// 	 * @returns {String[]}
+		// 	 */
+		// 	getClassesArray: function() {
+		// 		var classes = this._.definition.attributes && this._.definition.attributes[ 'class' ];
 
-				return classes ? CKEDITOR.tools.trim( classes ).split( /\s+/ ) : null;
-			},
+		// 		return classes ? CKEDITOR.tools.trim( classes ).split( /\s+/ ) : null;
+		// 	},
 
-			/**
-			 * Not implemented.
-			 *
-			 * @method applyToRange
-			 */
-			applyToRange: notImplemented,
+		// 	/**
+		// 	 * Not implemented.
+		// 	 *
+		// 	 * @method applyToRange
+		// 	 */
+		// 	applyToRange: notImplemented,
 
-			/**
-			 * Not implemented.
-			 *
-			 * @method removeFromRange
-			 */
-			removeFromRange: notImplemented,
+		// 	/**
+		// 	 * Not implemented.
+		// 	 *
+		// 	 * @method removeFromRange
+		// 	 */
+		// 	removeFromRange: notImplemented,
 
-			/**
-			 * Not implemented.
-			 *
-			 * @method applyToObject
-			 */
-			applyToObject: notImplemented
-		} );
+		// 	/**
+		// 	 * Not implemented.
+		// 	 *
+		// 	 * @method applyToObject
+		// 	 */
+		// 	applyToObject: notImplemented
+		// } );
 
 		function notImplemented() {}
 
