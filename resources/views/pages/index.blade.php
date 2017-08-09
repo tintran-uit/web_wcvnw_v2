@@ -558,6 +558,7 @@
 <script type="text/javascript">
 
          var isShop = {{$isShop or '0'}};
+         loadProdList();
          isMuaHang(isShop);
 
          jQuery(document).ready(function ($) {
@@ -607,6 +608,27 @@
                      $('.navbar-nav li.active').removeClass('active');
                      $(this).addClass('active');
                     
+         }
+
+         function loadProdList() {
+         
+              /* set no cache */
+           $.ajaxSetup({ cache: false });
+           var url = "wecarevn.com/api/products"; 
+           $.getJSON(url, function(data){ 
+               var html = [];
+    
+               /* loop through array */
+               $.each(data, function(index, d){            
+                   
+               });
+    
+    
+               $("#div381").html(html.join('')).css("background-color", "orange");
+           }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+               /* alert(jqXHR.responseText) */
+               alert("error occurred!");
+           });
          }
       </script>
 

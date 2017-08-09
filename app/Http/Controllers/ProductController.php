@@ -18,6 +18,7 @@ class ProductController extends Controller
 	 */
     public function getProducts()
 	{
+		
 		$categories = DB::select('SELECT `category_id` FROM `categories` ORDER BY `category_id` ASC');
 
 		foreach($categories as $cat)
