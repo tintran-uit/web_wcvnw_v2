@@ -23,7 +23,7 @@ class PageController extends Controller
         $this->data['page'] = $page->withFakes();
         $this->data['menu'] = MenuItem::all();
 
-        $categories = ProductCategory::where('visible', 1)->get();
+        $categories = ProductCategory::where('visible', 1)->orderBy('category_id', 'asc')->get();
         $this->data['categories'] = $categories;
         return view('pages.index', $this->data);
     }
