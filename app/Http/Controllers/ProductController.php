@@ -22,8 +22,8 @@ class ProductController extends Controller
 
 		foreach($categories as $cat)
 		{
-		 $products_list["" + $cat->category_id] = DB::select('SELECT p.`name` "Sản Phẩm", p.`image` 
-		 	"Hình Ảnh", i.`price_customer` "Giá Thành" FROM `products` p, `prices` i WHERE p.`price_id` = i.`price_id` AND p.`category` = ? ', [$cat->category_id]);
+		 $products_list["" + $cat->category_id] = DB::select('SELECT p.`name` "Name", p.`image` 
+		 	"Image", i.`price_customer` "Price" FROM `products` p, `prices` i WHERE p.`price_id` = i.`price_id` AND p.`category` = ? ', [$cat->category_id]);
 		}
 
 	        return $products_list;	        

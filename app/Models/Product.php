@@ -24,7 +24,7 @@ class Product extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['name','brand_id','slug','visible','featured','price','old_price','meta_title','meta_keywords','meta_description','description'];
+    protected $fillable = ['name','slug','visible','featured','price'];
     // protected $hidden = [];
     // protected $dates = [];
     protected $casts = [
