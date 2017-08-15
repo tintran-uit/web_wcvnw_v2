@@ -91,6 +91,7 @@ class ComposerStaticInitc32b0fbf9ac7620402d1c7d73588a343
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
+            'Gloudemans\\Shoppingcart\\' => 24,
         ),
         'F' => 
         array (
@@ -284,6 +285,10 @@ class ComposerStaticInitc32b0fbf9ac7620402d1c7d73588a343
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'Gloudemans\\Shoppingcart\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gloudemans/shoppingcart/src',
         ),
         'Faker\\' => 
         array (
