@@ -23,7 +23,7 @@ class PageController extends Controller
         $this->data['page'] = $page->withFakes();
         $this->data['menu'] = MenuItem::all();
 
-        $categories = ProductCategory::where('visible', 1)->get();
+        $categories = ProductCategory::where('visible', 1)->orderBy('category_id', 'asc')->get();
         $this->data['categories'] = $categories;
         return view('pages.index', $this->data);
     }
@@ -50,8 +50,11 @@ class PageController extends Controller
             return view('pages.index', $this->data);
         }
 
-        if ($page->template == 'about_us'){
+        if ($page->template == 'about_us' || $page->template == 'services'){
+            //thông tin
             $this->data['about_pages'] = DB::table('pages')->where('template', 'about_us')->get();
+            //chăm sóc khách hàng
+            $this->data['service_pages'] = DB::table('pages')->where('template', 'services')->get();
         }
 
         return view('pages.'.$page->template, $this->data);

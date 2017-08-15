@@ -684,7 +684,7 @@
                                  <li class="{{ Request::is('thong-tin-nha-phan-phoi-we-cae-vn') ? 'active' : '' }}">
                                     <a href="{{url('/thong-tin-nha-phan-phoi-we-cae-vn')}}">Thông tin</a>
                                  </li>
-                                 <li class="{{ Request::is('/mua-thuc-pham-sach') ? 'active' : '' }}">
+                                 <li class="{{ Request::is('/mua-thuc-pham-sach' or 'thong-tin-chi-tiet-thuc-pham-sach') ? 'active' : '' }}">
                                     <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> Mua hàng <i class="fa fa-angle-down"></i>
                                     </a>                  
                                  <!--    <ul class="dropdown-menu">

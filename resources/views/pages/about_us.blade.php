@@ -38,26 +38,13 @@
                            <i class="fa fa-angle-down"></i> Chăm sóc khách hàng
                            </strong>
                         </dt>
+                        @foreach($service_pages as $item)
                         <dd>
-                           <a href="#">          <i class="fa fa-angle-right"></i> Warranty and Return
+                           <a class="{{ Request::is($item->slug) ? 'current' : '' }}" href="{{$item->slug}}">          <i class="fa fa-angle-right"></i> {{$item->name}}
                            </a>      
                         </dd>
-                        <dd>
-                           <a href="#">          <i class="fa fa-angle-right"></i> Payment Methods
-                           </a>      
-                        </dd>
-                        <dd>
-                           <a href="#">          <i class="fa fa-angle-right"></i> International Shipping
-                           </a>      
-                        </dd>
-                        <dd>
-                           <a href="#">          <i class="fa fa-angle-right"></i> Shopping FAQ
-                           </a>      
-                        </dd>
-                        <dd>
-                           <a href="#">          <i class="fa fa-angle-right"></i> Legal Window
-                           </a>      
-                        </dd>
+                        @endforeach
+                        
                      </dl>
                   </div>
                </div>
@@ -90,14 +77,17 @@
 @section('scrip_code')
 
 <script type="text/javascript">
-$('#article').children('img').each(function(){
-    $(this).addClass('img-responsive');
-  });
+
    $(document).ready(function(){
-  $('#article').children('img').each(function(){
-    $(this).addClass('img-responsive');
-  });
-});
+     $('#article').children('p').children('img').each(function(){
+       $(this).addClass('img-responsive');
+       $(this).css("height", "auto");
+     });
+     $('#article').children('img').each(function(){
+       $(this).addClass('img-responsive');
+       $(this).css("height", "auto");
+     });
+   });
 </script>
 
 @endsection

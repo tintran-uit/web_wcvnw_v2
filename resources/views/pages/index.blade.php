@@ -86,7 +86,7 @@
                    $selected = ($counter === 0) ? 'class="active"' : ''; 
                    $output  = '';
                    $output .= '<li '. $selected .'>'; 
-                   $output .= '<a data-toggle="tab" href="#'.$category->slug.'" class="scroll">' . $category->name . '</a>';
+                   $output .= '<a data-toggle="tab" href="#category'.$category->category_id.'" class="scroll">' . $category->name . '</a>';
                    $output .= '</li>';
                    echo($output);
                    $counter++; 
@@ -108,341 +108,8 @@
                         $selected = ($counter === 0) ? 'active in' : ''; 
                         $counter++;
                      ?>
-                      <div id="{{$category->slug}}" class="tab-pane fade {{$selected}}">
-                        <article class="col-sm-6 col-lg-3">
-                           <div class="relative">
-                              <div class="ribbon ribbon-new">
-                                 <span class="ribbonBadge new text-uppercase">
-                                 NEW
-                                 </span>
-                              </div>
-                              <div class="simple-wishlist">
-                                 <a class="" href="#">    <i class="fa fa-heart"></i>
-                                 </a>
-                              </div>
-                              <div class="content-product">
-                                 <div class="thumbnail">
-                                    <figure class="image-product">
-                                       <div class="btn-view">
-                                          <a class="white" href="product-details.html">    <i class="fa fa-search"></i>
-                                          </a>
-                                       </div>
-                                       <a class="center-block" href="product-details.html">        <img class="img-responsive center-block small-img" alt="product" src="assets/images/products/product-02.png" />
-                                       </a>    
-                                    </figure>
-                                    <div class="caption text-center">
-                                       <article class="copy">
-                                          <h4 class="no-margin-top">Yellow Suit</h4>
-                                          <p>
-                                             Size: 12 - 18 mounths<br>
-                                             Discount end to 50%
-                                          <p>
-                                       </article>
-                                       <article class="price">
-                                          <span class="old-price">
-                                          $10.50
-                                          </span>
-                                          <span class="new-price">
-                                          <strong>$5.50</strong>
-                                          </span>
-                                       </article>
-                                       <article class="color-section">
-                                          <i class="label-color" style="background-color: #ff7473"></i>
-                                          <i class="label-color" style="background-color: #f8c931"></i>
-                                          <i class="label-color" style="background-color: #14cfc4"></i>
-                                          <i class="label-color" style="background-color: #b04072"></i>
-                                       </article>
-                                       <article class="button-group clearfix">
-                                          <div class="pull-left">
-                                             <a class="btn btn-info no-margin" href="#">            <i class="fa fa-heart"></i>
-                                             </a><a class="btn btn-info no-margin" href="product-details.html">            <i class="fa fa-eye"></i>
-                                             </a>        
-                                          </div>
-                                          <div class="pull-right">
-                                             <a class="btn btn-primary no-margin" href="product-details.html">            Add to cart
-                                             </a>        
-                                          </div>
-                                       </article>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </article>
-                        <article class="col-sm-6 col-lg-3">
-                           <div class="relative">
-                              <div class="simple-wishlist">
-                                 <a class="" href="#">    <i class="fa fa-heart"></i>
-                                 </a>
-                              </div>
-                              <div class="content-product">
-                                 <div class="thumbnail">
-                                    <figure class="image-product">
-                                       <div class="btn-view">
-                                          <a class="white" href="product-details.html">    <i class="fa fa-search"></i>
-                                          </a>
-                                       </div>
-                                       <a class="center-block" href="product-details.html">        <img class="img-responsive center-block small-img" alt="product" src="assets/images/products/product-03.png" />
-                                       </a>    
-                                    </figure>
-                                    <div class="caption text-center">
-                                       <article class="copy">
-                                          <h4 class="no-margin-top">Blue Dress</h4>
-                                          <p>
-                                             Size: 12 - 18 mounths<br>
-                                             Discount end to 50%
-                                          <p>
-                                       </article>
-                                       <article class="price">
-                                          <span class="old-price">
-                                          $10.50
-                                          </span>
-                                          <span class="new-price">
-                                          <strong>$5.50</strong>
-                                          </span>
-                                       </article>
-                                       <article class="color-section">
-                                          <i class="label-color" style="background-color: #ff7473"></i>
-                                          <i class="label-color" style="background-color: #f8c931"></i>
-                                          <i class="label-color" style="background-color: #14cfc4"></i>
-                                          <i class="label-color" style="background-color: #b04072"></i>
-                                       </article>
-                                       <article class="button-group clearfix">
-                                          <div class="pull-left">
-                                             <a class="btn btn-info no-margin" href="#">            <i class="fa fa-heart"></i>
-                                             </a><a class="btn btn-info no-margin" href="product-details.html">            <i class="fa fa-eye"></i>
-                                             </a>        
-                                          </div>
-                                          <div class="pull-right">
-                                             <a class="btn btn-primary no-margin" href="product-details.html">            Add to cart
-                                             </a>        
-                                          </div>
-                                       </article>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </article>
-                        <article class="col-sm-6 col-lg-3">
-                           <div class="relative">
-                              <div class="simple-wishlist">
-                                 <a class="" href="#">    <i class="fa fa-heart"></i>
-                                 </a>
-                              </div>
-                              <div class="content-product">
-                                 <div class="thumbnail">
-                                    <figure class="image-product">
-                                       <div class="btn-view">
-                                          <a class="white" href="product-details.html">    <i class="fa fa-search"></i>
-                                          </a>
-                                       </div>
-                                       <a class="center-block" href="product-details.html">        <img class="img-responsive center-block small-img" alt="product" src="assets/images/products/product-04.png" />
-                                       </a>    
-                                    </figure>
-                                    <div class="caption text-center">
-                                       <article class="copy">
-                                          <h4 class="no-margin-top">Jeans</h4>
-                                          <p>
-                                             Size: 12 - 18 mounths<br>
-                                             Discount end to 50%
-                                          <p>
-                                       </article>
-                                       <article class="price">
-                                          <span class="old-price">
-                                          $10.50
-                                          </span>
-                                          <span class="new-price">
-                                          <strong>$5.50</strong>
-                                          </span>
-                                       </article>
-                                       <article class="color-section">
-                                          <i class="label-color" style="background-color: #ff7473"></i>
-                                          <i class="label-color" style="background-color: #f8c931"></i>
-                                          <i class="label-color" style="background-color: #14cfc4"></i>
-                                          <i class="label-color" style="background-color: #b04072"></i>
-                                       </article>
-                                       <article class="button-group clearfix">
-                                          <div class="pull-left">
-                                             <a class="btn btn-info no-margin" href="#">            <i class="fa fa-heart"></i>
-                                             </a><a class="btn btn-info no-margin" href="product-details.html">            <i class="fa fa-eye"></i>
-                                             </a>        
-                                          </div>
-                                          <div class="pull-right">
-                                             <a class="btn btn-primary no-margin" href="product-details.html">            Add to cart
-                                             </a>        
-                                          </div>
-                                       </article>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </article>
-                        <article class="col-sm-6 col-lg-3">
-                           <div class="relative">
-                              <div class="simple-wishlist">
-                                 <a class="" href="#">    <i class="fa fa-heart"></i>
-                                 </a>
-                              </div>
-                              <div class="content-product">
-                                 <div class="thumbnail">
-                                    <figure class="image-product">
-                                       <div class="btn-view">
-                                          <a class="white" href="product-details.html">    <i class="fa fa-search"></i>
-                                          </a>
-                                       </div>
-                                       <a class="center-block" href="product-details.html">        <img class="img-responsive center-block small-img" alt="product" src="assets/images/products/product-05.png" />
-                                       </a>    
-                                    </figure>
-                                    <div class="caption text-center">
-                                       <article class="copy">
-                                          <h4 class="no-margin-top">Dress Sailor</h4>
-                                          <p>
-                                             Size: 12 - 18 mounths<br>
-                                             Discount end to 50%
-                                          <p>
-                                       </article>
-                                       <article class="price">
-                                          <span class="old-price">
-                                          $10.50
-                                          </span>
-                                          <span class="new-price">
-                                          <strong>$5.50</strong>
-                                          </span>
-                                       </article>
-                                       <article class="color-section">
-                                          <i class="label-color" style="background-color: #ff7473"></i>
-                                          <i class="label-color" style="background-color: #f8c931"></i>
-                                          <i class="label-color" style="background-color: #14cfc4"></i>
-                                          <i class="label-color" style="background-color: #b04072"></i>
-                                       </article>
-                                       <article class="button-group clearfix">
-                                          <div class="pull-left">
-                                             <a class="btn btn-info no-margin" href="#">            <i class="fa fa-heart"></i>
-                                             </a><a class="btn btn-info no-margin" href="product-details.html">            <i class="fa fa-eye"></i>
-                                             </a>        
-                                          </div>
-                                          <div class="pull-right">
-                                             <a class="btn btn-primary no-margin" href="product-details.html">            Add to cart
-                                             </a>        
-                                          </div>
-                                       </article>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </article>
-                        <article class="col-sm-6 col-lg-3">
-                           <div class="relative">
-                              <div class="simple-wishlist">
-                                 <a class="selected" href="#">    <i class="fa fa-heart"></i>
-                                 </a>
-                              </div>
-                              <div class="content-product">
-                                 <div class="thumbnail">
-                                    <figure class="image-product">
-                                       <div class="btn-view">
-                                          <a class="white" href="product-details.html">    <i class="fa fa-search"></i>
-                                          </a>
-                                       </div>
-                                       <a class="center-block" href="product-details.html">        <img class="img-responsive center-block small-img" alt="product" src="assets/images/products/product-07.png" />
-                                       </a>    
-                                    </figure>
-                                    <div class="caption text-center">
-                                       <article class="copy">
-                                          <h4 class="no-margin-top">Summer top</h4>
-                                          <p>
-                                             Size: 12 - 18 mounths<br>
-                                             Discount end to 50%
-                                          <p>
-                                       </article>
-                                       <article class="price">
-                                          <span class="old-price">
-                                          $10.50
-                                          </span>
-                                          <span class="new-price">
-                                          <strong>$5.50</strong>
-                                          </span>
-                                       </article>
-                                       <article class="color-section">
-                                          <i class="label-color" style="background-color: #ff7473"></i>
-                                          <i class="label-color" style="background-color: #f8c931"></i>
-                                          <i class="label-color" style="background-color: #14cfc4"></i>
-                                          <i class="label-color" style="background-color: #b04072"></i>
-                                       </article>
-                                       <article class="button-group clearfix">
-                                          <div class="pull-left">
-                                             <a class="btn btn-info no-margin" href="#">            <i class="fa fa-heart"></i>
-                                             </a><a class="btn btn-info no-margin" href="product-details.html">            <i class="fa fa-eye"></i>
-                                             </a>        
-                                          </div>
-                                          <div class="pull-right">
-                                             <a class="btn btn-primary no-margin" href="product-details.html">            Add to cart
-                                             </a>        
-                                          </div>
-                                       </article>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </article>
-                        <article class="col-sm-6 col-lg-3">
-                           <div class="relative">
-                              <div class="simple-wishlist">
-                                 <a class="" href="#">    <i class="fa fa-heart"></i>
-                                 </a>
-                              </div>
-                              <div class="ribbon ribbon-sale">
-                                 <span class="ribbonBadge sale text-uppercase">
-                                 50% OFF
-                                 </span>
-                              </div>
-                              <div class="content-product">
-                                 <div class="thumbnail">
-                                    <figure class="image-product">
-                                       <div class="btn-view">
-                                          <a class="white" href="product-details.html">    <i class="fa fa-search"></i>
-                                          </a>
-                                       </div>
-                                       <a class="center-block" href="product-details.html">        <img class="img-responsive center-block small-img" alt="product" src="assets/images/products/product-08.png" />
-                                       </a>    
-                                    </figure>
-                                    <div class="caption text-center">
-                                       <article class="copy">
-                                          <h4 class="no-margin-top">Grey Suit</h4>
-                                          <p>
-                                             Size: 12 - 18 mounths<br>
-                                             Discount end to 50%
-                                          <p>
-                                       </article>
-                                       <article class="price">
-                                          <span class="old-price">
-                                          $10.50
-                                          </span>
-                                          <span class="new-price">
-                                          <strong>$5.50</strong>
-                                          </span>
-                                       </article>
-                                       <article class="color-section">
-                                          <i class="label-color" style="background-color: #ff7473"></i>
-                                          <i class="label-color" style="background-color: #f8c931"></i>
-                                          <i class="label-color" style="background-color: #14cfc4"></i>
-                                          <i class="label-color" style="background-color: #b04072"></i>
-                                       </article>
-                                       <article class="button-group clearfix">
-                                          <div class="pull-left">
-                                             <a class="btn btn-info no-margin" href="#">            <i class="fa fa-heart"></i>
-                                             </a><a class="btn btn-info no-margin" href="product-details.html">            <i class="fa fa-eye"></i>
-                                             </a>        
-                                          </div>
-                                          <div class="pull-right">
-                                             <a class="btn btn-primary no-margin" href="product-details.html">            Add to cart
-                                             </a>        
-                                          </div>
-                                       </article>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </article>
+                      <div id="category{{$category->category_id}}" class="tab-pane fade {{$selected}}">
+                        
                       </div>
                   @endforeach
                    
@@ -558,6 +225,7 @@
 <script type="text/javascript">
 
          var isShop = {{$isShop or '0'}};
+         loadProdList();
          isMuaHang(isShop);
 
          jQuery(document).ready(function ($) {
@@ -607,6 +275,35 @@
                      $('.navbar-nav li.active').removeClass('active');
                      $(this).addClass('active');
                     
+         }
+
+         function loadProdList() {
+         
+              /* set no cache */
+           $.ajaxSetup({ cache: false });
+           var url = "/api/products"; 
+           $.getJSON(url, function(data){ 
+               var html = [];
+    
+               /* loop through array */
+               $.each(data, function(index, data){ 
+                  var html = '';
+                  $.each(data, function(i, d){
+                     html = html + '<article class=\"col-sm-6 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 NEW\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product-details.html\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"product-details.html\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"assets\/images\/products\/product-02.png\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\">'+d.name+'<\/h4>\r\n                                          <p>\r\n                                             Size: 12 - 18 mounths<br>\r\n                                             Discount end to 50%\r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\" style=\"padding-left: 0px;\">\r\n                                          <strong>'+numberWithCommas(d.price_customer)+' VND<\/strong>\r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"pull-left\">\r\n                                             <a class=\"btn btn-info no-margin\" href=\"#\">            <i class=\"fa fa-heart\"><\/i>\r\n                                             <\/a><a class=\"btn btn-info no-margin\" href=\"product-details.html\">            <i class=\"fa fa-eye\"><\/i>\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                          <div class=\"pull-right\">\r\n                                             <a class=\"btn btn-primary no-margin\" href=\"product-details.html\">            Add to cart\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
+                  });
+                  $('#category'+index).html(html);
+               });
+    
+               
+               $("#div381").html(html.join('')).css("background-color", "orange");
+           }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+               /* alert(jqXHR.responseText) */
+               console.log("error occurred!");
+           });
+         }
+
+         function numberWithCommas(x) {
+             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
          }
       </script>
 
