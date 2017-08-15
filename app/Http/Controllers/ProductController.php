@@ -18,17 +18,12 @@ class ProductController extends Controller
 	 */
     public function getProducts()
 	{
-
-		$categories = DB::select('SELECT `category_id`, `slug` FROM `categories` ORDER BY `category_id` ASC');
-
+		$categories = DB::select('SELECT `id`, `name` FROM `categories` ORDER BY `id` ASC');
 		foreach($categories as $cat)
 		{
-		 $products_list["" + $cat->category_id] = DB::select('SELECT p.`name` "name", p.`image` 
-		 	"image", i.`price_customer` "price_customer" FROM `products` p, `prices` i WHERE p.`price_id` = i.`price_id` AND p.`category` = ? ', [$cat->category_id]);
+		 $products_list[""+$cat->id] = DB::select('SELECT p.`name` "Name", p.`image` 
+		 	"Image", i.`price_customer` "Price" FROM `products` p, `prices` i WHERE p.`price_id` = i.`id` AND p.`category` = ? ', [$cat->id]);
 		}
-
 	        return $products_list;	        
 	}
-
 }
-
