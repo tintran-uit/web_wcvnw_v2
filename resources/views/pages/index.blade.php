@@ -86,7 +86,7 @@
                    $selected = ($counter === 0) ? 'class="active"' : ''; 
                    $output  = '';
                    $output .= '<li '. $selected .'>'; 
-                   $output .= '<a data-toggle="tab" href="#category'.$category->category_id.'" class="scroll">' . $category->name . '</a>';
+                   $output .= '<a data-toggle="tab" href="#category'.$category->id.'" class="scroll">' . $category->name . '</a>';
                    $output .= '</li>';
                    echo($output);
                    $counter++; 
@@ -108,7 +108,7 @@
                         $selected = ($counter === 0) ? 'active in' : ''; 
                         $counter++;
                      ?>
-                      <div id="category{{$category->category_id}}" class="tab-pane fade {{$selected}}">
+                      <div id="category{{$category->id}}" class="tab-pane fade {{$selected}}">
                         
                       </div>
                   @endforeach

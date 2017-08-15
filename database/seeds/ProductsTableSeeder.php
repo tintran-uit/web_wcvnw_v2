@@ -86,15 +86,15 @@ class ProductsTableSeeder extends Seeder
         for( $i= 1 ; $i <= 10 ; $i++ ) {
             DB::table('products_categories')->insert([
                 'product_id' => $i,
-                'category_id' => 1,
+                'id' => 1,
             ]);
             DB::table('products_categories')->insert([
                 'product_id' => $i,
-                'category_id' => 2,
+                'id' => 2,
             ]);
             DB::table('products_categories')->insert([
                 'product_id' => $i,
-                'category_id' => 3,
+                'id' => 3,
             ]);
         }
     }
