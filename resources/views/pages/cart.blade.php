@@ -38,7 +38,7 @@
             <article class="col-sm-12 col-md-9">
                <div class="spacer-bottom-25">
                   <h3 class="no-margin-top text-uppercase spacer-10 text-center">
-                     Giỏ hàng thực phẩm an 
+                     Giỏ hàng thực phẩm an toàn
                   </h3>
                   <form action="/destroy" accept-charset="UTF-8" class="form-style-base" method="post">
                      <input type="hidden" name="_method" value="delete">
@@ -47,7 +47,7 @@
                            <table class="table table-bordered">
                               <thead>
                                  <tr>
-                                    <th class="bg-extra-light-grey"></th>
+                                    <th class="bg-extra-light-grey col-md-2 col-xs-1">Hình ảnh</th>
                                     <th class="bg-extra-light-grey">Sản Phẩm</th>
                                     <th class="bg-extra-light-grey">Số Lượng</th>
                                     <th class="bg-extra-light-grey">Giá</th>
@@ -59,30 +59,31 @@
                               @foreach($cart as $item)
                                  <tr>
                                     <td class="align-middle">
-                                       <a href="product-details.html">                            <img class="img-responsive center-block extra-small-img" alt="product" src="assets/images/products/product-01.png">
-                                       </a>                        
+                                       <img class="img-responsive center-block extra-small-img" alt="product" src="{{$item->options->image}}">
+                                                         
                                     </td>
                                     <td class="align-middle">
-                                       {{$item->name}}
+                                       <div style="width: auto;">{{$item->name}}</div>
                                     </td>
                                     <td class="align-middle">
-                                       <div class="stepper "><input type="number" class="form-control stepper-input" value="1" min="1" max="20" step="1"><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
+                                       <div class="stepper "><input type="number" class="form-control stepper-input" value="{{$item->qty}}" min="1" max="20" step="1"><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
                                     </td>
                                     <td class="align-middle text-center">
-                                       $20.00
+                                       {{$item->price}} VND
                                     </td>
                                     <td class="align-middle text-center">
-                                       50%
-                                    </td>
-                                    <td class="align-middle text-center">
-                                       $10.00
+                                       {{$item->price*$item->qty}} VND
                                     </td>
                                     <td class="align-middle text-center">
                                        <a class="btn btn-info text-center no-margin" href="#">                            <i class="fa fa-trash"></i>
                                        </a>                        
                                     </td>
                                  </tr>
-                                 
+                                 @endforeach
+                                 <tr>
+                                   <td colspan="4" align="right" style="padding-right: 20px"><b>Tổng Tiền</b>  </td>
+                                   <td colspan="2" style="padding-left: 20px">100000 VND</td>
+                                 </tr>
                               </tbody>
                            </table>
                         </div>
@@ -90,8 +91,8 @@
                      <hr>
                      <fieldset class="buttons">
                         <div class="pull-right">
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="shop.html">Back to shopping</a>
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="payment.html">Purchase it</a>
+                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="shop.html">Tiếp tục mua hàng</a>
+                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="payment.html">Thanh toán</a>
                            <a class="btn btn-success btn-lg" href="#">                    <i class="glyphicon glyphicon-refresh"></i>
                            </a>                
                         </div>

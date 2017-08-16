@@ -24,7 +24,7 @@ class PageController extends Controller
         $this->data['page'] = $page->withFakes();
         $this->data['menu'] = MenuItem::all();
 
-        $categories = ProductCategory::where('visible', 1)->orderBy('id', 'asc')->get();
+        $categories = ProductCategory::where('visible', 1)->orderBy('category_id', 'asc')->get();
         $this->data['categories'] = $categories;
         return view('pages.index', $this->data);
     }
@@ -59,7 +59,7 @@ class PageController extends Controller
             //chăm sóc khách hàng
             $this->data['service_pages'] = DB::table('pages')->where('template', 'services')->get();
         }
-        
+
         return view('pages.'.$page->template, $this->data);
     }
 
@@ -67,8 +67,8 @@ class PageController extends Controller
     {
         Cart::destroy();
         Cart::add([
-          ['id' => '1', 'name' => 'Product 1', 'qty' => 1, 'price' => 20000, 'options' => ['image' => 'http://trangtraitrungthuc.com/media/thit/thit-ba-chi.png','nd_id' => 'TG111', 'name' => 'Nông trại Bác 8 Bình D ']],
-          ['id' => '3', 'name' => 'Product 2', 'qty' => 1, 'price' => 10000, 'options' => ['image' => 'http://trangtraitrungthuc.com/media/rau/cai-thao.png','nd_id' => 'TG111', 'name' => 'Nông trại Bác 8 Bình ']]
+          ['id' => '1', 'name' => 'Thit heo 1', 'qty' => 1, 'price' => 20000, 'options' => ['image' => 'http://trangtraitrungthuc.com/media/thit/thit-ba-chi.png','nd_id' => 'TG111', 'name' => 'Nông trại Bác 8 Bình D ']],
+          ['id' => '3', 'name' => 'rau cai huu co 2', 'qty' => 1, 'price' => 10000, 'options' => ['image' => 'http://trangtraitrungthuc.com/media/rau/cai-thao.png','nd_id' => 'TG111', 'name' => 'Nông trại Bác 8 Bình ']]
         ]);
         return Cart::content();
     }
