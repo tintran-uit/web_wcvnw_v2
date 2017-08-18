@@ -65,34 +65,22 @@ class PageController extends Controller
 
     public function getProduct($slug)
     {
-        $page = Page::findBySlug('product');
+        
+        $product = DB::select('SELECT p.`name` "name", p.`slug` "slug", im.`filename` 
+            "image", i.`price_customer` "price" FROM `products` p, `prices` i, `images` im, `products_images` pi WHERE p.`price_id` = i.`id` AND p.`id` = pi.`product_id` AND pi.`image_id` = im.`id` AND p.`slug` = ? ', [$slug]);
 
-        if (!$page)
+        if (!$product)
         {
             abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
         }
 
+        $page = Page::findBySlug('thong-tin-chi-tiet-thuc-pham-sach');
         $this->data['title'] = $page->title;
         $this->data['page'] = $page->withFakes();
         $this->data['menu'] = MenuItem::all();
         $this->data['cart'] = Cart::content();
-        //danh sach san pham
-        if ($slug == 'mua-thuc-pham-sach') {
-            $this->data['isShop'] = '1';
-            $categories = ProductCategory::where('visible', 1)->get();
-            $this->data['categories'] = $categories;
-            return view('pages.index', $this->data);
-        }
 
-        // thonbg tin san pham
-        if ($page->template == 'about_us' || $page->template == 'services'){
-            //thông tin
-            $this->data['about_pages'] = DB::table('pages')->where('template', 'about_us')->get();
-            //chăm sóc khách hàng
-            $this->data['service_pages'] = DB::table('pages')->where('template', 'services')->get();
-        }
-
-        return view('pages.'.$page->template, $this->data);
+        return view('pages.product_details', $this->data);
     }
 
     public function addCart(Request $request)
