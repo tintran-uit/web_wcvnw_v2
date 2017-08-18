@@ -44,7 +44,7 @@
                      <input type="hidden" name="_method" value="delete">
                      <fieldset>
                         <div class="table-responsive">
-                           <table class="table table-bordered">
+                           <table id="cartTable" class="table table-bordered" cellspacing="0">
                               <thead>
                                  <tr>
                                     <th class="bg-extra-light-grey col-md-2 col-xs-1">Hình ảnh</th>
@@ -80,11 +80,14 @@
                                     </td>
                                  </tr>
                                  @endforeach
+                                 
+                              </tbody>
+                              <tfoot>
                                  <tr>
                                    <td colspan="4" align="right" style="padding-right: 20px"><b>Tổng Tiền</b>  </td>
-                                   <td colspan="2" style="padding-left: 20px">100000 VND</td>
+                                   <td colspan="2" style="padding-left: 20px"><span id="total"></span></td>
                                  </tr>
-                              </tbody>
+                              </tfoot>
                            </table>
                         </div>
                      </fieldset>
@@ -221,19 +224,91 @@
 
 @section('scrip_code')
 
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
 <script type="text/javascript">
 
-function stepperUp() {
-  var num = document.getElementById('stepper').value;
-  num = parseInt(num);
-  document.getElementById('stepper').value = num + 1; 
+$(document).ready(function() {
+    var table = $('#cartTable').DataTable({searching: false, paging: false, "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+         
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\VND,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+ 
+            // Total over all pages
+            total = api
+                .column( 4 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+                
+            // Total over this page
+            pageTotal = api
+                .column( 4, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Update footer
+            $( api.column( 4 ).footer() ).html(
+                pageTotal +' VND'
+            );
+        }});
 
+    table.on( 'click', 'span.up' , function () {
+         var msg = '';
+         $(this).closest('tr').find(':input').each(function() {
+            msg +=  $(this).val();
+            msg = parseInt(msg) + 1;
+            $(this).val(msg);
+         });
+         var row = $(this).closest('tr').index();
+         var price = table.row(row).data()[3];
+         price = parseInt(price)*msg;
+         table.cell(row, 4).data(price + ' VND').draw();
+         updateTotal();
+      });
+    table.on( 'click', 'span.down' , function () {
+         var msg = '';
+         $(this).closest('tr').find(':input').each(function() {
+            msg +=  $(this).val();
+            msg = parseInt(msg) - 1;
+            if(msg > 0 )
+            {
+               $(this).val(msg);
+            }
+         });
+         var row = $(this).closest('tr').index();
+         var price = table.row(row).data()[3];
+         price = parseInt(price)*msg;
+         table.cell(row, 4).data(price + ' VND').draw();
+         updateTotal();
+      });
+   
+    function updateTotal() {
+      $('#table').DataTable( {
+        
+    } );
+   }
+});
+
+
+
+
+
+function stepperUp() {
+  
 }
 
 function stepperDown() {
-  var num = document.getElementById('stepper').value;
-  num = parseInt(num);
-  document.getElementById('stepper').value = num - 1; 
+  
 }
    
 </script>
