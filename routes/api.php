@@ -18,3 +18,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/products', 'ProductController@getproducts');
+
+//gio hang
+Route::post('/update-cart', 'PageController@addCart');
