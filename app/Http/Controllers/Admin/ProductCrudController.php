@@ -73,6 +73,8 @@ class ProductCrudController extends CrudController
             'label' => 'Featured',
             'type' => 'check',
         ]);
+
+
         // ------ CRUD FIELDS
         $this->crud->addField([    // CHECKBOX
             'name' => 'visible',
@@ -141,6 +143,7 @@ class ProductCrudController extends CrudController
                 'class' => 'form-group col-md-6'
             ],
         ]);
+
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => 'Product Categories',
             'type' => 'select2_multiple',
@@ -160,6 +163,7 @@ class ProductCrudController extends CrudController
             'type' => 'text',
             'placeholder' => 'Your meta title here',
         ]);
+
         $this->crud->addField([    // TEXT
             'name' => 'meta_keywords',
             'label' => 'Meta Keywords',
@@ -265,7 +269,7 @@ class ProductCrudController extends CrudController
         foreach ($request->images as $img) {
             if(isset($img) && !empty($img)) {
                 $image = new Image();
-                $image->filename = $img;
+                $image->filename = "/products/".$img;
                 $image->position = '0';
                 $image->save();
                 $imagesArray[] = $image->id;
@@ -289,7 +293,7 @@ class ProductCrudController extends CrudController
         foreach ($request->images as $img) {
             if(isset($img) && !empty($img)) {
                 $image = new Image();
-                $image->filename = $img;
+                $image->filename = "/products/".$img;
                 $image->position = '0';
                 $image->save();
                 $imagesArray[] = $image->id;
