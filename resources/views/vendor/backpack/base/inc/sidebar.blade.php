@@ -41,16 +41,18 @@
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-item') }}"><i class="fa fa-newspaper-o"></i> <span>Product Items</span></a></li>
                 </ul>
               </li>
-              <li class="treeview">
-                  <a href="#"><i class="fa fa-address-book"></i> <span>Stake Holders</span> <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/customer') }}"><i class="fa fa-user-md"></i> <span>Customers</span></a></li>
-                    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmer') }}"><i class="fa fa-user-plus"></i> <span>Farmers</span></a></li>
-                    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agent') }}"><i class="fa fa-user-o"></i> <span>Agents</span></a></li>
-                    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shipper') }}"><i class="fa fa-address-card"></i> <span>Shippers</span></a></li>
-                  </ul>
-                </li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/elfinder') }}"><i class="fa fa-files-o"></i> <span>File manager</span></a></li>
+            </ul>
+          </li>
+          
+          <!-- StakeHolders -->
+          <li class="treeview">
+            <a href="#"><i class="fa fa-address-book"></i> <span>Stake Holders</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/customer') }}"><i class="fa fa-user-md"></i> <span>Customers</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmer') }}"><i class="fa fa-user-plus"></i> <span>Farmers</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agent') }}"><i class="fa fa-user-o"></i> <span>Agents</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shipper') }}"><i class="fa fa-address-card"></i> <span>Shippers</span></a></li>
             </ul>
           </li>
           <!-- Users, Roles Permissions -->
