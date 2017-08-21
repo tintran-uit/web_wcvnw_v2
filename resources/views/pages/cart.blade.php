@@ -53,6 +53,7 @@
                                     <th class="bg-extra-light-grey">Giá</th>
                                     <th class="bg-extra-light-grey">Tổng</th>
                                     <th class="bg-extra-light-grey"></th>
+                                    <th style="display:none;"></th>
                                  </tr>
                               </thead>
                               <tbody>
@@ -75,9 +76,10 @@
                                        {{$item->price*$item->qty}} VND
                                     </td>
                                     <td class="align-middle text-center">
-                                       <a class="btn btn-info text-center no-margin" href="#">                            <i class="fa fa-trash"></i>
+                                       <a class="btn btn-info text-center no-margin item-delete">                            <i class="fa fa-trash"></i>
                                        </a>                        
                                     </td>
+                                    <td style="display:none;">{{$item->rowId}}</td>
                                  </tr>
                                  @endforeach
                                  
@@ -273,10 +275,11 @@ $(document).ready(function() {
          var price = table.row(row).data()[3];
          price = parseInt(price)*msg;
          table.cell(row, 4).data(price + ' VND').draw();
-         updateTotal();
+         var rowId = table.row(row).data()[6];
+         updateCart(rowId, msg);
       });
     table.on( 'click', 'span.down' , function () {
-         var msg = '';
+         var msg = 0;
          $(this).closest('tr').find(':input').each(function() {
             msg +=  $(this).val();
             msg = parseInt(msg) - 1;
@@ -289,14 +292,39 @@ $(document).ready(function() {
          var price = table.row(row).data()[3];
          price = parseInt(price)*msg;
          table.cell(row, 4).data(price + ' VND').draw();
-         updateTotal();
+         var rowId = table.row(row).data()[6];
+         updateCart(rowId, msg);
       });
    
-    function updateTotal() {
-      $('#table').DataTable( {
-        
-    } );
+   table.on( 'click', 'a.item-delete' , function () {
+      table
+        .row( $(this).parents('tr') )
+        .remove()
+        .draw();
+   });
+
+    function updateCart(rowId, qty) {
+      var markers = { "rowId": rowId, "qty": qty };
+
+      $.ajax({
+
+          type: "POST",
+          url: "api/update-cart",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify({ data: markers }),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){console.log(data);},
+          failure: function(errMsg) {
+              console.log(errMsg);
+          }
+      });
    }
+
+
 });
 
 

@@ -8,6 +8,7 @@
       <meta name="description" content="{{ $page->meta_description }}">
       <meta name="title" content="{{ $page->meta_title }}">
       <meta name="keywords" content="{{ $page->meta_keywords }}">
+      <meta name="csrf_token" content="{{ csrf_token() }}">
       <meta name="author" content="">
       <!-- Use title if it's in the page YAML frontmatter -->
       <title>@yield('title')</title>

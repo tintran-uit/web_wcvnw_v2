@@ -29,6 +29,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 
 Route::get('/', 'PageController@index');
 
+Route::get('/product&slug={slug}', 'PageController@getProduct');
+
 Route::get('/add', 'PageController@testcart');
 
 Route::get('{page}/{subs?}', ['uses' => 'PageController@page'])

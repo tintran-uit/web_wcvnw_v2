@@ -19,4 +19,8 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/products', 'ProductController@getproducts');
 
+
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
+
+//gio hang
+Route::post('/update-cart', 'PageController@addCart');
