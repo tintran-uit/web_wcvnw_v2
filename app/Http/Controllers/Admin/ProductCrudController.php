@@ -269,7 +269,7 @@ class ProductCrudController extends CrudController
         foreach ($request->images as $img) {
             if(isset($img) && !empty($img)) {
                 $image = new Image();
-                $image->filename = "/products/".$img;
+                $image->filename = "/products/"+$img;
                 $image->position = '0';
                 $image->save();
                 $imagesArray[] = $image->id;
@@ -293,7 +293,7 @@ class ProductCrudController extends CrudController
         foreach ($request->images as $img) {
             if(isset($img) && !empty($img)) {
                 $image = new Image();
-                $image->filename = "/products/".$img;
+                $image->filename = "/products/"+$img;
                 $image->position = '0';
                 $image->save();
                 $imagesArray[] = $image->id;
