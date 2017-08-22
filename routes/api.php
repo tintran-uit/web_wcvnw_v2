@@ -21,6 +21,7 @@ Route::get('/products', 'ProductController@getproducts');
 
 
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
+Route::get('/farmer/{farmer_id}', 'FarmerController@getFarmerProfile');
 
 //gio hang
 Route::post('/update-cart', 'PageController@addCart');
