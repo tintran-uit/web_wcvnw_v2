@@ -53,6 +53,7 @@
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmer') }}"><i class="fa fa-user-plus"></i> <span>Farmers</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agent') }}"><i class="fa fa-user-o"></i> <span>Agents</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shipper') }}"><i class="fa fa-address-card"></i> <span>Shippers</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/orders') }}"><i class="fa fa-list-alt"></i> <span>Orders</span></a></li>
             </ul>
           </li>
           <!-- Users, Roles Permissions -->
