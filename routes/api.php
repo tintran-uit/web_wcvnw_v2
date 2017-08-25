@@ -20,4 +20,6 @@ Route::get('/user', function (Request $request) {
 Route::get('/products', 'ProductController@getproducts');
 
 //gio hang
-Route::post('/update-cart', 'PageController@addCart');
+Route::post('cart/update-cart', 'CartProductController@addCart');
+Route::post('cart/delete-item', 'CartProductController@deleteItem');
+Route::post('cart/add-item', 'CartProductController@addItem');

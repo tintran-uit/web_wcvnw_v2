@@ -1137,6 +1137,8 @@ a {
   /* line 46, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_style-form.scss */
   .form-style-base .form-group.has-error .form-control {
     border-color: #b50000; }
+    .form-style-base .form-group.has-error .selecter .selecter-selected{
+    border-color: #b50000; }
   /* line 50, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_style-form.scss */
   .form-style-base .form-group .selecter {
     max-width: 100%;
@@ -2827,7 +2829,7 @@ a {
     margin-bottom: 3px; }
     /* line 37, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/_block-aside.scss */
     .block.block-nav .content ul li a.current {
-      font-weight: bold; }
+      font-weight: bold; color: #0071b6}
     /* line 40, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/_block-aside.scss */
     .block.block-nav .content ul li a .fa, .block.block-nav .content ul li a .glyphicon {
       padding-right: 3px;
@@ -2923,3 +2925,7 @@ a {
 .product-tabs li a:hover:after, .product-tabs li.active a:after {
     border-color: #3fb4fb;
 }
+
+/*form .has-error {
+  border-color: #b50000 !important;
+}*/

@@ -31,7 +31,7 @@
           <article class="col-sm-8 col-md-7">
             <section class="wrap internal-padding wrap-radius bg-white">
 <form action="#" accept-charset="UTF-8" id="product_addtocart_form" method="post">                <h2 class="title-box no-margin">
-                  Tên sản phẩm
+                  {{$product[0]->name}}
                 </h2>
                 <br>
                 <p class="copy-box no-margin">
@@ -118,15 +118,15 @@
                   <section>
                     <div class="row">
                       <article class="col-sm-7 button-group">
-                        <button class="btn btn-primary btn-lg lg-2x" type="submit">
+                        <a class="btn btn-primary btn-lg lg-2x" onclick="addCart()">
                           ADD TO CART <i class="glyphicon glyphicon-shopping-cart"></i>
-                        </button>
+                        </a>
 <a class="btn btn-info btn-lg" href="#">                          <i class="fa fa-heart"></i>
 </a>                  </article>
                       <article class="col-sm-5">
                         <div class="clearfix product-price"> 
                           <p class="discounted-price pull-left">
-                            29,000 VND
+                            {{number_format($product[0]->price)}} VND
                           </p>
                         </div>
                       </article>
@@ -239,6 +239,33 @@ function stepperDown() {
   var num = document.getElementById('stepper').value;
   num = parseInt(num);
   document.getElementById('stepper').value = num - 1; 
+}
+
+function addCart() {
+  var id = "{{$product[0]->id}}";
+  var qty = document.getElementById('stepper').value;
+  var data = { "id": id, "qty": qty };
+
+      $.ajax({
+
+          type: "POST",
+          url: "api/cart/add-item",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+          },
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify({ data: data }),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            updateCartStatus(data);
+            console.log(data);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log(textStatus);
+              alert("Vui lòng kiểm tra kết nối Internet!");
+          }
+      });
 }
    
 </script>

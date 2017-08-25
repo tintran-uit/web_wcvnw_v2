@@ -10,30 +10,27 @@
             <aside class="col-sm-12 col-md-3">
                <div class="block block-nav spacer-15">
                   <div class="title">
-                     <h4 class="text-uppercase no-margin">My account</h4>
+                     <h4 class="text-uppercase no-margin">Đơn hàng</h4>
                   </div>
                   <div class="content">
                      <ul class="list-unstyled">
                         <li>
-                           <a href="account.html">          <i class="fa fa-angle-right"></i> Account
+                           <a href="account.html">          <i class="fa fa-angle-right"></i> Tài khoản
                            </a>      
                         </li>
                         <li>
-                           <a class="current" href="orders.html">          <i class="fa fa-angle-right"></i> My orders
+                           <a class="current" href="{{url('gio-hang-thuc-pham-sach')}}">          <i class="fa fa-angle-right"></i> Đơn hàng
                            </a>      
                         </li>
                         <li>
-                           <a href="info-account.html">          <i class="fa fa-angle-right"></i> Info Account
-                           </a>      
-                        </li>
-                        <li>
-                           <a href="add-address.html">          <i class="fa fa-angle-right"></i> Address book
+                           <a class="" href="{{url('thanh-toan')}}">          <i class="fa fa-angle-right"></i> Thông tin giao hàng
                            </a>      
                         </li>
                         
                      </ul>
                   </div>
                </div>
+               
             </aside>
             <article class="col-sm-12 col-md-9">
                <div class="spacer-bottom-25">
@@ -60,7 +57,7 @@
                               @foreach($cart as $item)
                                  <tr>
                                     <td class="align-middle">
-                                       <img class="img-responsive center-block extra-small-img" alt="product" src="{{$item->options->image}}">
+                                       <img class="img-responsive center-block extra-small-img" alt="product" src="http://wecarevn.com/uploads{{$item->options->image}}">
                                                          
                                     </td>
                                     <td class="align-middle">
@@ -70,10 +67,10 @@
                                        <div class="stepper "><input type="number" class="form-control stepper-input" value="{{$item->qty}}" min="1" max="20" step="1"><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
                                     </td>
                                     <td class="align-middle text-center">
-                                       {{$item->price}} VND
+                                       {{number_format($item->price)}} VND
                                     </td>
                                     <td class="align-middle text-center">
-                                       {{$item->price*$item->qty}} VND
+                                       {{number_format($item->price*$item->qty)}} VND
                                     </td>
                                     <td class="align-middle text-center">
                                        <a class="btn btn-info text-center no-margin item-delete">                            <i class="fa fa-trash"></i>
@@ -98,8 +95,6 @@
                         <div class="pull-right">
                            <a class="btn btn-info btn-lg lg-2x text-uppercase" href="shop.html">Tiếp tục mua hàng</a>
                            <a class="btn btn-info btn-lg lg-2x text-uppercase" href="payment.html">Thanh toán</a>
-                           <a class="btn btn-success btn-lg" href="#">                    <i class="glyphicon glyphicon-refresh"></i>
-                           </a>                
                         </div>
                      </fieldset>
                   </form>
@@ -225,13 +220,13 @@
 @endsection
 
 @section('scrip_code')
-
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
 
 $(document).ready(function() {
-    var table = $('#cartTable').DataTable({searching: false, paging: false, "footerCallback": function ( row, data, start, end, display ) {
+
+    var table = $('#cartTable').DataTable({searching: false, paging: false, "bInfo" : false, "footerCallback": function ( row, data, start, end, display ) {
             var api = this.api(), data;
          
             // Remove the formatting to get integer data for summation
@@ -260,7 +255,7 @@ $(document).ready(function() {
  
             // Update footer
             $( api.column( 4 ).footer() ).html(
-                pageTotal +' VND'
+                numberWithCommas(pageTotal) +' VND'
             );
         }});
 
@@ -272,9 +267,9 @@ $(document).ready(function() {
             $(this).val(msg);
          });
          var row = $(this).closest('tr').index();
-         var price = table.row(row).data()[3];
+         var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
-         table.cell(row, 4).data(price + ' VND').draw();
+         table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
          var rowId = table.row(row).data()[6];
          updateCart(rowId, msg);
       });
@@ -289,14 +284,17 @@ $(document).ready(function() {
             }
          });
          var row = $(this).closest('tr').index();
-         var price = table.row(row).data()[3];
+         var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
-         table.cell(row, 4).data(price + ' VND').draw();
+         table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
          var rowId = table.row(row).data()[6];
          updateCart(rowId, msg);
       });
    
    table.on( 'click', 'a.item-delete' , function () {
+      var row = $(this).closest('tr').index();
+      var rowId = table.row(row).data()[6];
+      var status = deleteItem(rowId);
       table
         .row( $(this).parents('tr') )
         .remove()
@@ -309,25 +307,52 @@ $(document).ready(function() {
       $.ajax({
 
           type: "POST",
-          url: "api/update-cart",
+          url: "api/cart/update-cart",
           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
           },
           // The key needs to match your method's input parameter (case-sensitive).
           data: JSON.stringify({ data: markers }),
           contentType: "application/json; charset=utf-8",
           dataType: "json",
-          success: function(data){console.log(data);},
-          failure: function(errMsg) {
-              console.log(errMsg);
+          success: function(data){
+            console.log(data);
+            updateCartStatus(data);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log(textStatus);
+              alert("Vui lòng kiểm tra kết nối Internet!");
+          }
+      });
+   }
+
+   function deleteItem(rowId) {
+      var markers = { "rowId": rowId};
+
+      $.ajax({
+
+          type: "POST",
+          url: "api/cart/delete-item",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+          },
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify({ data: markers }),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            console.log(data);
+            updateCartStatus(data);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log(textStatus);
+              alert("Vui lòng kiểm tra kết nối Internet!");
           }
       });
    }
 
 
 });
-
-
 
 
 

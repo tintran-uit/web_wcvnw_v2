@@ -38,15 +38,19 @@
       <meta name="theme-color" content="#ffffff">
       <script src="assets/javascripts/vendor/jquery-2.1.3.min.js" type="text/javascript"></script>
       <script src="assets/javascripts/vendor/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.1/css/bootstrapValidator.min.css"/>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.1/js/bootstrapValidator.min.js"></script>
       <script src="assets/javascripts/utility.js" type="text/javascript"></script>
       <script src="assets/javascripts/all.js" type="text/javascript"></script>
       <script src="assets/javascripts/load.js" type="text/javascript"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script> -->
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+      @yield('headInput')
    </head>
    <body class="index">
       <div id="chat" class="box-chat col-sm-5 col-md-4 col-lg-2 hidden-xs">
@@ -106,7 +110,7 @@
                         </label>
                      </div>
                      <div class="text-right">
-           bạn          <a href="/#.html">SHOW MORE</a>
+                     <a href="/#.html">SHOW MORE</a>
                      </div>
                   </fieldset>
                </form>
@@ -583,9 +587,15 @@
                                  <i class="fa fa-shopping-cart"></i>
                               </div>
                               <div class="info-basket pull-left">
-                                 <span data-name="item">3 item(s) - </span>
+                                 <span id="cart-status" data-name="item" style="font-weight: 700; color: #008000">
+                                 @if(count($cart) == 0)
+                                 Giỏ hàng rỗng
+                                 @else
+                                 Bạn có {{count($cart)}} nông sản sạch!
+                                 @endif
+                                 </span>
                                  <span data-name="price">
-                                 <strong>$50.00</strong>
+                                 <strong></strong>
                                  </span>
                               </div>
                               <div class="pull-right arrow">
@@ -594,74 +604,40 @@
                            </a>
                            <div class="block-basket wrap-radius btn-block dropdown-menu col-lg-4 col-xs-12 col-md-4" role="menu">
                               <div class="content-basket">
-                                 <ul class="products-list list-unstyled">
+                                 <ul id='cart-list-product' class="products-list list-unstyled">
+                                 <?php $total = 0;?>
+                                 @foreach($cart as $item)
                                     <li class="item">
                                        <div class="clearfix row">
                                           <div class="col-xs-10 product-details">
                                              <div class="clearfix row">
                                                 <p class="col-xs-8 product-name no-margin">
-                                                   Pigiama bambina
+                                                   {{$item->name}}
                                                 </p>
                                                 <p class="col-xs-4 price no-margin text-right no-padding">
-                                                   $15
+                                                   {{number_format($item->subtotal)}} VND
                                                 </p>
                                              </div>
                                           </div>
                                           <div class="col-xs-2 no-padding-left">
-                                             <button type="button" class="close" data-dismiss="modal">
+                                             <a type="button" class="close" data-dismiss="modal" onclick="deleteItem('{{$item->rowId}}')">
                                              <i class="fa fa-times"></i>
-                                             </button>
+                                             </a>
                                           </div>
                                        </div>
                                     </li>
-                                    <li class="item">
-                                       <div class="clearfix row">
-                                          <div class="col-xs-10 product-details">
-                                             <div class="clearfix row">
-                                                <p class="col-xs-8 product-name no-margin">
-                                                   Dress blue
-                                                </p>
-                                                <p class="col-xs-4 price no-margin text-right no-padding">
-                                                   $15
-                                                </p>
-                                             </div>
-                                          </div>
-                                          <div class="col-xs-2 no-padding-left">
-                                             <button type="button" class="close" data-dismiss="modal">
-                                             <i class="fa fa-times"></i>
-                                             </button>
-                                          </div>
-                                       </div>
-                                    </li>
-                                    <li class="item">
-                                       <div class="clearfix row">
-                                          <div class="col-xs-10 product-details">
-                                             <div class="clearfix row">
-                                                <p class="col-xs-8 product-name no-margin">
-                                                   Pigiama bambino
-                                                </p>
-                                                <p class="col-xs-4 price no-margin text-right no-padding">
-                                                   $15
-                                                </p>
-                                             </div>
-                                          </div>
-                                          <div class="col-xs-2 no-padding-left">
-                                             <button type="button" class="close" data-dismiss="modal">
-                                             <i class="fa fa-times"></i>
-                                             </button>
-                                          </div>
-                                       </div>
-                                    </li>
+                                    <?php $total += $item->subtotal; ?>
+                                 @endforeach
                                  </ul>
                                  <div class="summary clearfix">
-                                    <p class="amount pull-left no-margin">2 Items</p>
+                                    <p class="amount pull-left no-margin"></p>
                                     <p class="subtotale pull-right no-margin">
-                                       Tot:&nbsp;&nbsp;&nbsp;<span class="price">€ 40,90</span>
+                                       Tổng:&nbsp;&nbsp;&nbsp;<span class="price" id="cart-status-total">{{number_format($total)}} VND</span>
                                     </p>
                                  </div>
                                  <div class="button-basket text-right">
-                                    <a class="btn btn-warning btn-sm no-margin" href="cart.html">view cart</a>
-                                    <a class="btn btn-warning btn-sm no-margin" href="payment.html">Checkout</a>
+                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/gio-hang-thuc-pham-sach')}}">Xem giỏ hàng</a>
+                                    <a class="btn btn-warning btn-sm no-margin" href="payment.html">Thanh toán</a>
                                  </div>
                               </div>
                            </div>
@@ -882,7 +858,7 @@
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                      </button>
-                     <a class="navbar-brand" href="basket.html">
+                     <a class="navbar-brand" href="{{url('/gio-hang-thuc-pham-sach')}}">
                      <i class="fa fa-shopping-cart"></i> <span class="badge">3</span>
                      </a>
                   </div>
@@ -1236,5 +1212,51 @@
          </section>
       </footer>
       @yield('scrip_code')
+      <script type="text/javascript">
+         function deleteItem(rowId) {
+         var markers = { "rowId": rowId};
+
+         $.ajax({
+
+             type: "POST",
+             url: "api/cart/delete-item",
+             headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+             },
+             // The key needs to match your method's input parameter (case-sensitive).
+             data: JSON.stringify({ data: markers }),
+             contentType: "application/json; charset=utf-8",
+             dataType: "json",
+             success: function(data){
+               
+             },
+             error: function(XMLHttpRequest, textStatus, errorThrown) {
+                 console.log(textStatus);
+                 alert("Vui lòng kiểm tra kết nối Internet!");
+             }
+         });
+         }
+      function updateCartStatus(data) {
+         var length = Object.keys(data).length;
+         if(length == 0)
+            $('#cart-status').html("Giỏ hàng rỗng");
+         else
+            $('#cart-status').html("bạn có " + length + " nông sản sạch!");
+
+         var code = "";
+         var total = 0;
+         $.each( data, function( key, value ) {
+           code += "<li class=\"item\">\r\n                                       <div class=\"clearfix row\">\r\n                                          <div class=\"col-xs-10 product-details\">\r\n                                             <div class=\"clearfix row\">\r\n                                                <p class=\"col-xs-8 product-name no-margin\">"+ value.name +"<\/p>\r\n                                                <p class=\"col-xs-4 price no-margin text-right no-padding\"> "+ numberWithCommas(value.subtotal) +" VND<\/p>\r\n                                             <\/div>\r\n                                          <\/div>\r\n                                          <div class=\"col-xs-2 no-padding-left\">\r\n                                             <a type=\"button\" class=\"close\" data-dismiss=\"modal\" onclick=\"deleteItem(\'"+value.rowId+"\')\">\r\n                                             <i class=\"fa fa-times\"><\/i>\r\n                                             <\/a>\r\n                                          <\/div>\r\n                                       <\/div>\r\n                                    <\/li>";
+           total += value.subtotal;
+         });
+         $('#cart-list-product').html(code);
+
+         $('#cart-status-total').html(numberWithCommas(total) + " VND");
+      }
+
+      function numberWithCommas(x) {
+             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         }
+      </script>
    </body>
 </html>
