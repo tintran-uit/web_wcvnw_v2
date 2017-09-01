@@ -49,10 +49,10 @@
           <li class="treeview">
             <a href="#"><i class="fa fa-database"></i> <span>Operations Management</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/customer') }}"><i class="fa fa-user-md"></i> <span>Customers</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmer') }}"><i class="fa fa-user-plus"></i> <span>Farmers</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agent') }}"><i class="fa fa-user-o"></i> <span>Agents</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shipper') }}"><i class="fa fa-address-card"></i> <span>Shippers</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/customers') }}"><i class="fa fa-user-md"></i> <span>Customers</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmers') }}"><i class="fa fa-user-plus"></i> <span>Farmers</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agents') }}"><i class="fa fa-user-o"></i> <span>Agents</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shippers') }}"><i class="fa fa-address-card"></i> <span>Shippers</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/orders') }}"><i class="fa fa-list-alt"></i> <span>Orders </span></a></li>
             </ul>
           </li>
