@@ -55,7 +55,7 @@
    <body class="index">
       <div id="chat" class="box-chat col-sm-5 col-md-4 col-lg-2 hidden-xs">
          <div class="clearfix">
-            <div class="pull-left" id="chat-title">Do you have questions?</div>
+            <div class="pull-left" id="chat-title">Bạn cần hỗ trợ?</div>
             <div class="pull-right">
                <a class="btn-link button-show" href="#">        <i class="glyphicon glyphicon-plus"></i>
                </a>    
@@ -98,15 +98,15 @@
                      </div>
                      <div class="form-inline">
                         <div class="form-group">
-                           <input type="email" class="form-control" id="email_address" />
+                           <input type="email" class="form-control" name="emailCus" />
                         </div>
-                        <button type="submit" class="btn btn-light no-margin">
+                        <a onclick="addEmailCus()" class="btn btn-light no-margin">
                         <i class="fa fa-chevron-right"></i>
-                        </button>
+                        </a>
                      </div>
                      <div class="checkbox">
                         <label>
-                        <input type="checkbox" name="Privacy" value="1" /> Đồng ý nhận thông tin khuyến mãi!
+                        <input type="checkbox" name="receiveEmailCus" value="1" /> Đồng ý nhận thông tin khuyến mãi!
                         </label>
                      </div>
                      <div class="text-right">
@@ -1257,6 +1257,18 @@
       function numberWithCommas(x) {
              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
          }
+
+      function addEmailCus() {
+         var emailCus = $("input[name=emailCus]").val();
+         var receiveEmailCus = $("input[name=receiveEmailCus]").val();
+         var url = 'api/customer/addEmailCus=' + emailCus + '&receiveEmailCus=' +receiveEmailCus;
+           $.ajaxSetup({ cache: false });
+           $.getJSON(url, function(data){ 
+                 console.log(data);
+              }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+                  alert("Vui lòng kiểm tra kết nối internet.");
+              });
+      }
       </script>
    </body>
 </html>

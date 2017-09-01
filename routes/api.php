@@ -29,5 +29,9 @@ Route::post('cart/update-cart', 'CartProductController@addCart');
 Route::post('cart/delete-item', 'CartProductController@deleteItem');
 Route::post('cart/add-item', 'CartProductController@addItem');
 
+//payment
 Route::get('payment/checkMa={ma}', 'CartProductController@checkMaGiamGia');
+
+//customer
+Route::get('customer/addEmailCus={emailCus}&receiveEmailCus={receiveEmailCus}', 'CustomerController@addEmai');
 

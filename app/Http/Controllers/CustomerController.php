@@ -36,4 +36,13 @@ class CustomerController extends Controller
 		return 0;
 	}
 
+	public function addEmai($emailCus, $receiveEmailCus)
+	{
+		return response()->json([
+            'status' => 1,
+            'ma' => $emailCus,
+            'giam' => $receiveEmailCus
+        ]);
+	}
+
 }

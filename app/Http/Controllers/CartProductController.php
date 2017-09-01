@@ -36,11 +36,18 @@ class CartProductController extends Controller
     }
 
     public function checkMaGiamGia($ma)
-    {
+    {   
+        $cart = Cart::content();
+        $subtotal = 0; 
+          foreach ($cart as $item) {
+            $subtotal += $item->subtotal;
+          }
+        $subtotal = $subtotal - 5000;
         return response()->json([
             'status' => 1,
             'ma' => $ma,
-            'giam' => '20000'
+            'giam' => '20000',
+            'subtotal' => $subtotal
         ]);
     }
 }
