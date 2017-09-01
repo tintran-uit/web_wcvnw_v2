@@ -36,6 +36,7 @@ class ProductController extends Controller
 	 */
     public function getProductDetail($product_id)
 	{
+		$product_detail = DB::select('SELECT F.`name`, F.`rating`, T.`quantity_left`, F.`id` FROM `farmers` F, `trading` T WHERE T.`product_id` = ? AND T.`farmer_id` = F.`id` ', [$product_id]);
 		/*
 		  SELECT F.name, F.rating, T.quantity_left, F.id
 		    FROM farmers F, trading T
@@ -43,6 +44,6 @@ class ProductController extends Controller
 		     AND T.farmer_id = F.id
 		*/
 
-		return $available_products;
+		return $product_detail;
 	}
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 
 class FarmerController extends Controller
 {
@@ -19,5 +20,20 @@ class FarmerController extends Controller
 	public function farmerOrderList($farmer_id)
 	{
 		return 0;
+	}
+
+	/**
+	 * getFarmerProfile
+	 *
+	 * Retrieve all available products in system into different categories
+	 * @param No
+	 * @return array of products in its categories 
+	 */
+    public function getFarmerProfile($farmer_id)
+	{
+		$farmer = DB::select('SELECT `id`, `name`, `address`, `rating`, `profile_image`, `profile` FROM `farmers` 
+			WHERE `id` = ?', [$farmer_id]);
+		
+	    return $farmer;	        
 	}
 }

@@ -19,7 +19,15 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/products', 'ProductController@getproducts');
 
+
+Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
+Route::get('/farmer/{farmer_id}', 'FarmerController@getFarmerProfile');
+
 //gio hang
+
 Route::post('cart/update-cart', 'CartProductController@addCart');
 Route::post('cart/delete-item', 'CartProductController@deleteItem');
 Route::post('cart/add-item', 'CartProductController@addItem');
+
+Route::get('payment/checkMa={ma}', 'CartProductController@checkMaGiamGia');
+

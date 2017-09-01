@@ -34,4 +34,13 @@ class CartProductController extends Controller
         ]);
         return Cart::content();
     }
+
+    public function checkMaGiamGia($ma)
+    {
+        return response()->json([
+            'status' => 1,
+            'ma' => $ma,
+            'giam' => '20000'
+        ]);
+    }
 }

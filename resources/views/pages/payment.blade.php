@@ -6,8 +6,8 @@
 @section('headInput')
 <script type="text/javascript">
             $(document).ready(function() {
-              $('#form-payment-1').bootstrapValidator({
-                  message: '',
+              $('#tab-1').bootstrapValidator({
+                  excluded: ':disabled',
                   feedbackIcons: {
                       valid: 'glyphicon glyphicon-ok',
                       invalid: 'glyphicon glyphicon-remove',
@@ -15,7 +15,6 @@
                   },
                   fields: {
                       ten: {
-                          message: '',
                           validators: {
                               notEmpty: {
                                   message: 'Vui lòng nhập họ tên.'
@@ -37,13 +36,6 @@
                               }
                           }
                       },
-                      email: {
-                          validators: {
-                              emailAddress: {
-                                  message: 'Vui lòng nhập chính xác địa chỉ eamil.'
-                              }
-                          }
-                      },
                       diaChi: {
                           validators: {
                             notEmpty: {
@@ -58,9 +50,16 @@
                               }
                           }
                       }
-                  }
-              }).on('error.form.bv', function (e) {
-                generateCaptcha();
+                  },
+
+              }).on('error.form.bv', function(e) {
+                console.log(e);
+              });
+              $('#liTab2').click(function() {
+                checkForm2();
+              });
+              $('#liTab3').click(function() {
+                checkForm3();
               });
           });
       </script>
@@ -137,26 +136,20 @@
                      <section id="steps-order">
                         <!-- Nav with Number -->
                         <ul class="nav nav-tabs" id="tab-payment">
-                           <!-- <li class="active" id="1">
-                              <a href="#tab-1" data-toggle="tab" aria-expanded="true">
-                              <span class="numberCircle">1</span>
-                              <label class="hidden-xs">Thông tin khách hàng</label>
-                              </a>
-                           </li> -->
-                           <li class="active" id="2">
-                              <a href="#tab-2" data-toggle="tab" aria-expanded="false">
+                           <li href="#tab-1" class="active" data-toggle="tab" id="liTab1">
+                              <a data-toggle="tab" aria-expanded="false">
                               <span class="numberCircle">1</span>
                               <label class="hidden-xs">Thông tin giao hàng</label>
                               </a>
                            </li>
-                           <li id="3">
-                              <a href="#tab-3" data-toggle="tab">
+                           <li data-toggle="tab" id="liTab2">
+                              <a id="aTab2" data-toggle="tab" href="#tab-2" class="li-disabled">
                               <span class="numberCircle">2</span>
                               <label class="hidden-xs">Phương thức thanh toán</label>
                               </a>
                            </li>
-                           <li id="4">
-                              <a href="#tab-4" data-toggle="tab">
+                           <li href="#tab-3" data-toggle="tab" id="liTab3">
+                              <a data-toggle="tab">
                               <span class="numberCircle">3</span>
                               <label class="hidden-xs">Hoàn thành</label>
                               </a>
@@ -167,8 +160,8 @@
                   </div>
                   <div class="content-body">
                      <section class="tab-content">
-                        <form id="form-payment-1" class="tab-pane active" id="tab-2">
-                           <div accept-charset="UTF-8" class="form-style-base">
+                        <div class="tab-pane active" id="tab-1">
+                           <form accept-charset="UTF-8" class="form-style-base" data-bv-onerror="onFormError" data-bv-onsuccess="onFormSuccess">
                               
                               <div class="row clearfix">
                                  <article class="col-sm-12">
@@ -228,9 +221,8 @@
                                     
                                  </article>
                                  <article class="col-sm-6">
-                                       <div class="spacer-20">
                                        <div class="form-group">
-                                          <label>Người nhận hàng</label>
+                                          <label>Thông tin liên lạc</label>
                                        </div>
                                           <div class="form-group row clearfix">
                                              <div class="col-sm-4">
@@ -256,17 +248,16 @@
                                                 <input name="email" type="text" class="form-control input-lg">
                                              </div>
                                           </div>
-                                       </div>
-                                 </article>
+                                   </article>
                                  </article>
                               </div>
                               <div class="form-group no-margin">
                                  <p class="required-fields text-right no-margin">* Bắt buộc</p>
                               </div>
-                           </div>
-                        </form>
-                        <div class="tab-pane" id="tab-3">
-                           <form action="#" accept-charset="UTF-8" method="post" id="form-payment" class="form-style-base">
+                           </form>
+                        </div>
+                        <div class="tab-pane" id="tab-2">
+                           <form action="#" accept-charset="UTF-8" method="post" id="tab-2" class="form-style-base">
                               <h4 class="nomargin spacer-bottom-15">Phương thức thanh toán:</h4>
                               <div class="payment-method-box">
                                  <div id="payment-0" class="choose selected">
@@ -320,13 +311,18 @@ trước khi giao hàng!</p>
                                  <h4>Bạn có mã giảm giá?</h4>
                                  <div class="row clearfix">
                                     <div class="col-xs-6 form-group">
-                                       <input name="ma-giam-gia" type="text" class="form-control input-lg" placeholder="Nhập mã giảm giá">
+                                       <input name="maGiamGia" type="text" class="form-control input-lg" placeholder="Nhập mã giảm giá">
                                     </div>
+                                    <div class="col-xs-2 form-group no-padding-left">
+                                    <a onclick="checkMaGiamGia()" class="btn btn-warning btn-block btn-lg no-margin">
+                                      Sử dụng mã
+                                    </a>
+                                  </div>
                                  </div>
                               </section>
                            </form>
                         </div>
-                        <div class="tab-pane" id="tab-4">
+                        <div class="tab-pane" id="tab-3">
                            <div class="text-center">
                               <i class="fa fa-check fa-4x alert-success"></i>
                               <h3>Đặt hàng thành công!</h3>
@@ -467,50 +463,71 @@ trước khi giao hàng!</p>
       </div>
    </section>
 </main>
+<div class="modal fade style-base-modal" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="modalResetPsw" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content" style="margin-top: 35%">
+               <div class="inner-container" style="border-color: #b50000">
+                  <div class="modal-header text-center">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">
+                     <i class="fa fa-times"></i>
+                     </span>
+                     </button>
+                     <h4 class="modal-title fa fa-exclamation-triangle" id="modalResetPsw"> VUI LÒNG NHẬP ĐỦ THÔNG TIN BẮT BUỘC (*)</h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
 @endsection
 @section('scrip_code')
 
 <script type="text/javascript">
-
+      
+      var dataPost = {};
+      dataPost['thanhToan'] = 1;
       isMobilePayment();
-
+      // var t=setInterval(checkForm1,900);
       function backStep() {
             var period_val = activaTab();
             switch (period_val){
-               case "1":
+               case "liTab1":
                   break;
-               case "2":
+               case "liTab2":
+                  $('[href="#tab-1"]').tab('show');
                   break;
-               case "3":
+               case "liTab3":
                   $('[href="#tab-2"]').tab('show');
                   break;
                case "4":
-                  $('[href="#tab-3"]').tab('show');
                   break;
             }             
           }
 
       function nextStep() {
              var period_val = activaTab();
-             var ten = $("input[name=ten]").val();
-             var diaChi = $("input[name=diaChi]").val();
-             var quan = $( "select[name=select-quan]" ).val();
-             var sdt = $("input[name=sdt]").val();
-             var email = $("input[name=email]").val();
 
             switch (period_val){
-               case "1":
-                  var validator = $('#Users').data('bootstrapValidator');
-        validator.validate();
-        if (validator.isValid()) {
-            // Make the ajax call here.
-        }
-                  $('[href="#tab-2"]').tab('show');
+               case "liTab1":
+                  var check = checkForm('#tab-1');
+                  console.log(check);
+                  if(check==true)
+                    {
+                      $('[href="#tab-2"]').tab('show');
+                      getFormValue('#tab-1');
+                      console.log(dataPost);
+                    }
+                  else{
+                      $('#modalAlert').modal('show');
+                    }
                   break;
-               case "2":
+               case "liTab2":
+                  getFormValue('#tab-2');
+                  console.log(dataPost);
                   $('[href="#tab-3"]').tab('show');
                   break;
-               case "3":
+               case "liTab3":
+                  postDataPay();
                   $('[href="#tab-4"]').tab('show');
                   break;
                case "4":
@@ -532,12 +549,14 @@ trước khi giao hàng!</p>
             $('#payment-1').addClass('choose deselected');
             $('#tick-pay-0').html(tick);
             $('#tick-pay-1').html(notick);
+            dataPost['thanhToan'] = 1;
          }
          else{
             $('#payment-0').addClass('choose deselected');
             $('#payment-1').removeClass('deselected').addClass('selected');
             $('#tick-pay-0').html(notick);
             $('#tick-pay-1').html(tick);
+            dataPost['thanhToan'] = 2;
          }
       }
 
@@ -546,7 +565,70 @@ trước khi giao hàng!</p>
                         scrollTop: $('#module-payment').offset().top
                     }, 'slow');
          }
+
+      function checkForm(ntab) {
+          return $(ntab).data('bootstrapValidator').isValid();
+      }
+
+      function checkForm2() {
+        var check1 = checkForm('#tab-1');
+        console.log(check1);
+              if(check1==true)
+              {
+                $('[href="#tab-2"]').tab('show');
+                $("#aTab2").removeClass("li-disabled");
+                getFormValue('#tab-1');
+              }else{
+                
+                $('#modalAlert').modal('show');
+
+                setTimeout(function(){ 
+                  $("#liTab2").removeClass("active");
+                  $("#liTab1").addClass("active");
+                 }, 1000);
+              }
+      }
+
+      function getFormValue(formID) {
+        var $inputs = $(formID+' :input');
+
+        $inputs.each(function() {
+            dataPost[this.name] = $(this).val();
+        });
+      }
    
+      function checkMaGiamGia() {
+        var ma = $("input[name=maGiamGia]").val();
+        var url = 'api/payment/checkMa=' + ma;
+        $.ajaxSetup({ cache: false });
+        $.getJSON(url, function(data){ 
+              console.log(data);
+           }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+               alert("Vui lòng kiểm tra kết nối internet.");
+           });
+      }
+
+      function postDataPay() {
+        $.ajax({
+          type: "POST",
+          url: "api/payment/add",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+          },
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify({ data: dataPost }),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            console.log(data);
+            updateCartStatus(data);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log(textStatus);
+              alert("Vui lòng kiểm tra kết nối Internet!");
+          }
+        });
+      }
       
 </script>
 @endsection

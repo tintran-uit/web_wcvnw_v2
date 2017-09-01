@@ -330,7 +330,6 @@ $(document).ready(function() {
       var markers = { "rowId": rowId};
 
       $.ajax({
-
           type: "POST",
           url: "api/cart/delete-item",
           headers: {

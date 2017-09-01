@@ -846,10 +846,11 @@
   background: #fff;
   border-color: #eee;
   cursor: default; }
-/*
+
+.li-disabled {
+    pointer-events:none; //This makes it not clickable
+}
 
 
 
-
-*/
 

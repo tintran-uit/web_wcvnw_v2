@@ -90,11 +90,11 @@
                </a>    
             </div>
             <div class="content pull-left" id="subscribe-nl">
-               <h2 class="no-margin-top">SUBSCRIBE TO NEWSLETTER</h2>
+               <h2 class="no-margin-top">Cơ hội nhận nhiều ưu đãi</h2>
                <form action="/#" accept-charset="UTF-8" method="post">
                   <fieldset>
                      <div>
-                        <label for="email_address">Email address: </label>
+                        <label for="email_address">Nhập email: </label>
                      </div>
                      <div class="form-inline">
                         <div class="form-group">
@@ -106,11 +106,11 @@
                      </div>
                      <div class="checkbox">
                         <label>
-                        <input type="checkbox" name="Privacy" value="1" /> Acetto le politiche della privacy
+                        <input type="checkbox" name="Privacy" value="1" /> Đồng ý nhận thông tin khuyến mãi!
                         </label>
                      </div>
                      <div class="text-right">
-                     <a href="/#.html">SHOW MORE</a>
+                     <a href="/">WE CARE VN</a>
                      </div>
                   </fieldset>
                </form>
