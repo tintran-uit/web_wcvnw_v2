@@ -238,7 +238,10 @@ function stepperUp() {
 function stepperDown() {
   var num = document.getElementById('stepper').value;
   num = parseInt(num);
-  document.getElementById('stepper').value = num - 1; 
+  if(num>0)
+            {
+            document.getElementById('stepper').value = num - 1; 
+            }
 }
 
 function addCart() {

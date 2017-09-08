@@ -53,7 +53,7 @@ class PageController extends Controller
             return view('pages.index', $this->data);
         }
 
-        // thonbg tin san pham
+        // thong tin 
         if ($page->template == 'about_us' || $page->template == 'services'){
             //thông tin
             $this->data['about_pages'] = DB::table('pages')->where('template', 'about_us')->get();

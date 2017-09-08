@@ -67,14 +67,6 @@
          <h5 class="no-margin"></h5>
          <br>
          <ul class="nav nav-tabs nav-justified">
-           <!--  <li class="active"><a data-toggle="tab" href="#home" aria-expanded="false">Gói sản phẩm</a></li>
-            <li><a data-toggle="tab" href="#home" aria-expanded="false">Thịt heo</a></li>
-            <li><a data-toggle="tab" href="#menu1s">Thịt bò</a></li>
-            <li><a data-toggle="tab" href="#menu2">Thịt gà và trứng gà</a></li>
-            <li><a data-toggle="tab" href="#menu3">Rau củ theo mùa</a></li>
-            <li><a data-toggle="tab" href="#menu4">Đồ khô</a></li>
-            <li><a data-toggle="tab" href="#menu5s">Thủy hải sản</a></li>
-            <li><a data-toggle="tab" href="#menu6s">Hoa quả</a></li> -->
             <?php  
                $counter = 0; 
 
@@ -218,6 +210,99 @@
    </div>
 </section>
 </main>
+<!-- Modal chon nong dan -->
+      <div class="modal fade simple-modal" id="modalChooseFarmer" tabindex="-1" role="dialog" aria-hidden="true">
+           <div class="modal-dialog">
+              <div class="modal-content">
+                 <div class="inner-container">
+                    <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">
+                       <i class="fa fa-times"></i>
+                       </span>
+                       </button>
+                       <h4 class="modal-title email-icon" id="modalSubscribeNewsletter">Chọn nhà cung cấp</h4>
+                    </div>
+                    <div class="modal-body">
+                       <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th class="col-sm-1">Chọn</th>
+                              <th class="col-sm-3">Nông trại</th>
+                              <th class="col-sm-2">Đáp ứng</th>
+                              <th class="col-sm-3">
+                               Đánh giá
+                              </th>
+                              <th class="col-sm-3"> </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><input type="radio" name="optradio"></td>
+                              <td>Nông trại anh Tài</td>
+                              <td>500 kg</td>
+                              <td>
+                                <div id="colorstar" class="starrr ratable">
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                </div>
+                              </td>
+                              <td><a>Xem nguồn gốc</a></td>
+                            </tr>
+                            <tr>
+                              <td><input type="radio" name="optradio"></td>
+                              <td>Nông trại Trung Thực</td>
+                              <td>500 kg</td>
+                              <td>
+                                <div id="colorstar" class="starrr ratable">
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                </div>
+                              </td>
+                              <td><a>Xem nguồn gốc</a></td>
+                            </tr>
+                            <tr>
+                              <td><input type="radio" name="optradio"></td>
+                              <td>Nông trại tươi xanh</td>
+                              <td>500 kg</td>
+                              <td>
+                                <div id="colorstar" class="starrr ratable">
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                  <span class="glyphicon glyphicon-star"></span>
+                                </div>
+                              </td>
+                              <td><a>Xem nguồn gốc</a></td>
+                            </tr>
+                          </tbody>
+                      </table>
+                      <div class="row">
+                      <section class="choose col-sm-10 col-xs-9">
+                          <div class="col-sm-2 vcenter">
+                            <h5 class="">
+                              <b>Số lượng:</b>
+                            </h5>
+                          </div>
+                          <div class="stepper col-sm-5 vcenter"><input type="number" class="form-control stepper-input" id="stepper" value="1" min="1" max="20" step="1"><span class="stepper-arrow up" onclick="stepperUp()">Up</span><span class="stepper-arrow down" onclick="stepperDown()">Down</span>
+                          </div>
+                      </section>
+                      <section class="choose col-sm-2 col-xs-3">
+                            <a class="btn btn-info btn-lg" onclick="addCart()">Thêm</a>
+                      </section>
+                      </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+      </div>
 @endsection
 
 @section('scrip_code')
@@ -283,24 +368,154 @@
            $.ajaxSetup({ cache: false });
            var url = "/api/products"; 
            $.getJSON(url, function(data){ 
-               var html = [];
-    
                /* loop through array */
                $.each(data, function(index, data){ 
-                  var html = '';
+                  var length = data.length;
+                  var html = '<div id=\"myCarousel'+index+'\" class=\"carousel slide\">\r\n ';
+                  //thanh so
+                  html += '\r\n <ul class=\"pagination\">\r\n    <li>\r\n<a href=\"#myCarousel'+index+'\" data-slide=\"prev\">        <span aria-hidden=\"true\" class=\"fa fa-chevron-left\"><\/span>\r\n<\/a>    <\/li>\r\n';
+                  var n = length/8;
+                  var numClick = '';
+                  for(var i = 0; i<=n; i++)
+                    {
+                      numClick += ' <li data-target=\"#myCarousel'+index+'\" data-slide-to=\"'+i+'\" class=\"active\"><a href=\"#\">'+(i+1)+'<\/a><\/li>';
+                      }
+                  html += numClick;
+                  html += '<li>\r\n      <a href=\"#myCarousel'+index+'\" data-slide=\"next\">\r\n        <span aria-hidden=\"true\" class=\"fa fa-chevron-right\"><\/span>\r\n      <\/a>\r\n    <\/li>\r\n  <\/ul>';
+
+                  html += '<!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\">';
                   $.each(data, function(i, d){
-                     html = html + '<article class=\"col-sm-6 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 NEW\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product&slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product&slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"http://wecarevn.com/uploads'+d.image+'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\">'+d.name+'<\/h4>\r\n                                          <p>\r\n                                             Size: 12 - 18 mounths<br>\r\n                                             Discount end to 50%\r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\" style=\"padding-left: 0px;\">\r\n                                          <strong>'+numberWithCommas(d.price)+' VND<\/strong>\r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"pull-left\">\r\n                                             <a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-heart\"><\/i>\r\n                                             <\/a><a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-eye\"><\/i>\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                          <div class=\"pull-right\">\r\n                                             <a class=\"btn btn-primary no-margin\" href=\"/product&slug='+d.slug+'\">            Add to cart\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
+
+                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product&slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product&slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"http://wecarevn.com/uploads'+d.image+'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a href=\"product&slug='+d.slug+'\">'+d.name+'</a><\/h4>\r\n                                          <p>\r\n                                             Size: 12 - 18 mounths<br>\r\n                                             Discount end to 50%\r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\" style=\"padding-left: 0px;\">\r\n                                          <strong>'+numberWithCommas(d.price)+' VND<\/strong>\r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"pull-left\">\r\n                                             <a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-heart\"><\/i>\r\n                                             <\/a><a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-eye\"><\/i>\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                          <div class=\"pull-right\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"clickFarm('+d.id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
+
+                     switch (i){
+                         case 0:
+                            html += '<div class=\"item active\">\r\n';
+                            html += prodHtml;
+                            if(i==length)
+                            {
+                              html += '\r\n <\/div>';
+                            }
+                            break;
+                         case 8:
+                            html += '\r\n <\/div>\r\n<div class=\"item\">\r\n';
+                            html += prodHtml;
+                            if(i==length)
+                            {
+                              html += '\r\n <\/div>';
+                            }
+                            break;
+                         case 16:
+                            html += '\r\n <\/div>\r\n<div class=\"item\">\r\n';
+                            html += prodHtml;
+                            if(i==length)
+                            {
+                              html += '\r\n <\/div>';
+                            }
+                            break;
+                         case 24:
+                            html += '\r\n <\/div>\r\n<div class=\"item\">\r\n';
+                            html += prodHtml;
+                            if(i==length)
+                            {
+                              html += '\r\n <\/div>';
+                            }
+                            break;
+                         case 32:
+                            html += '\r\n <\/div>\r\n<div class=\"item\">\r\n';
+                            html += prodHtml;
+                            if(i==length)
+                            {
+                              html += '\r\n <\/div>';
+                            }
+                            break;
+                         default:
+                            html += prodHtml;
+                            if(i==length)
+                            {
+                              html += '\r\n <\/div>';
+                            }
+                            break;
+                      }   
+
                   });
+
+                  html += '<\/div>\r\n <\/div> \r\n <ul class=\"pagination\">\r\n    <li>\r\n<a href=\"#myCarousel'+index+'\" data-slide=\"prev\">        <span aria-hidden=\"true\" class=\"fa fa-chevron-left\"><\/span>\r\n<\/a>    <\/li>\r\n';
+                  var numClick2 = '';
+                  for(var i = 0; i<=n; i++)
+                    {
+                      numClick2 += ' <li data-target=\"#myCarousel'+index+'\" data-slide-to=\"'+i+'\" class=\"active\"><a href=\"#\">'+(i+1)+'<\/a><\/li>';
+                      }
+                  html += numClick2;
+                  html += '<li>\r\n      <a href=\"#myCarousel'+index+'\" data-slide=\"next\">\r\n        <span aria-hidden=\"true\" class=\"fa fa-chevron-right\"><\/span>\r\n      <\/a>\r\n    <\/li>\r\n  <\/ul>';
                   $('#category'+index).html(html);
                });
     
                
-               $("#div381").html(html.join('')).css("background-color", "orange");
+               // $("#div381").html(html.join('')).css("background-color", "orange");
            }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
                /* alert(jqXHR.responseText) */
                console.log("error occurred!");
            });
          }
+
+         function stepperUp() {
+            var num = document.getElementById('stepper').value;
+            num = parseInt(num);
+            document.getElementById('stepper').value = num + 1; 
+
+          }
+
+          function stepperDown() {
+            var num = document.getElementById('stepper').value;
+            num = parseInt(num);
+            if(num>0)
+            {
+            document.getElementById('stepper').value = num - 1; 
+            }
+          }
+
+          function clickFarm(id) {
+            console.log(id);
+            var url = 'api/payment/checkMa=ma';
+            $.ajaxSetup({ cache: false });
+            $('#modalLoader').modal('show');
+            $.getJSON(url, function(data){
+                  $('#modalLoader').modal('hide');
+                  $('#modalChooseFarmer').modal('show');
+                  console.log(data);
+               }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+                  $('#modalLoader').modal('hide');
+                   alert("Vui lòng kiểm tra kết nối internet.");
+               });
+            
+          }
+
+          function addCart() {
+              var id = 1;
+              var qty = document.getElementById('stepper').value;
+              var data = { "id": id, "qty": qty };
+                  $.ajax({
+                      type: "POST",
+                      url: "api/cart/add-item",
+                      headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                      },
+                      // The key needs to match your method's input parameter (case-sensitive).
+                      data: JSON.stringify({ data: data }),
+                      contentType: "application/json; charset=utf-8",
+                      dataType: "json",
+                      success: function(data){
+                        updateCartStatus(data);
+                        console.log(data);
+                      },
+                      error: function(XMLHttpRequest, textStatus, errorThrown) {
+                          console.log(textStatus);
+                          alert("Vui lòng kiểm tra kết nối Internet!");
+                      }
+                  });
+          }
+
 
          function numberWithCommas(x) {
              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");

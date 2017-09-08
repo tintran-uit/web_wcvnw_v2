@@ -50,4 +50,9 @@ class CartProductController extends Controller
             'subtotal' => $subtotal
         ]);
     }
+
+    public function addPay(Request $request)
+    {
+        return $data = $request->data;
+    }
 }

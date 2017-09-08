@@ -2926,3 +2926,7 @@ a {
     border-color: #3fb4fb;
 }
 
+.pagination{
+  float: right;
+}
+

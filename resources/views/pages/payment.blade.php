@@ -4,6 +4,7 @@
 @endsection
 
 @section('headInput')
+
 <script type="text/javascript">
             $(document).ready(function() {
               $('#tab-1').bootstrapValidator({
@@ -59,7 +60,7 @@
                 checkForm2();
               });
               $('#liTab3').click(function() {
-                checkForm3();
+                postDataPay();
               });
           });
       </script>
@@ -112,6 +113,12 @@
                 <div class="row spacer-bottom-5">
                   <div class="col-xs-6">Phí vận chuyển:</div>
                   <div class="col-xs-6 text-right" id="spacer-ship">
+                    
+                  </div>
+                </div>
+                <div class="row spacer-bottom-5">
+                  <div class="col-xs-6">Khuyến mãi:</div>
+                  <div class="col-xs-6 text-right" id="spacer-coupon">
                     
                   </div>
                 </div>
@@ -313,9 +320,9 @@ trước khi giao hàng!</p>
                                     <div class="col-xs-6 form-group">
                                        <input name="maGiamGia" type="text" class="form-control input-lg" placeholder="Nhập mã giảm giá">
                                     </div>
-                                    <div class="col-xs-2 form-group no-padding-left">
+                                    <div class="col-xs-4 form-group no-padding-left">
                                     <a onclick="checkMaGiamGia()" class="btn btn-warning btn-block btn-lg no-margin">
-                                      Sử dụng mã
+                                      Thêm mã
                                     </a>
                                   </div>
                                  </div>
@@ -463,7 +470,7 @@ trước khi giao hàng!</p>
       </div>
    </section>
 </main>
-<div class="modal fade style-base-modal" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="modalResetPsw" aria-hidden="true">
+<div class="modal fade simple-modal" id="modalAlert" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content" style="margin-top: 35%">
                <div class="inner-container" style="border-color: #b50000">
@@ -483,7 +490,6 @@ trước khi giao hàng!</p>
 @section('scrip_code')
 
 <script type="text/javascript">
-      
       var dataPost = {};
       dataPost['thanhToan'] = 1;
       isMobilePayment();
@@ -524,15 +530,9 @@ trước khi giao hàng!</p>
                case "liTab2":
                   getFormValue('#tab-2');
                   console.log(dataPost);
-                  $('[href="#tab-3"]').tab('show');
-                  break;
-               case "liTab3":
                   postDataPay();
-                  $('[href="#tab-4"]').tab('show');
                   break;
-               case "4":
-                  $('span#payment-next-button').text('Hoàn thành');
-                  break;
+               
             }  
           }    
    
@@ -589,6 +589,7 @@ trước khi giao hàng!</p>
               }
       }
 
+
       function getFormValue(formID) {
         var $inputs = $(formID+' :input');
 
@@ -600,15 +601,30 @@ trước khi giao hàng!</p>
       function checkMaGiamGia() {
         var ma = $("input[name=maGiamGia]").val();
         var url = 'api/payment/checkMa=' + ma;
-        $.ajaxSetup({ cache: false });
-        $.getJSON(url, function(data){ 
-              console.log(data);
-           }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
-               alert("Vui lòng kiểm tra kết nối internet.");
-           });
+        if(ma=='')
+          alert('Bạn cần nhập mã!');
+        else{
+          $.ajaxSetup({ cache: false });
+          $('#modalLoader').modal('show');
+          $.getJSON(url, function(data){
+                $('#modalLoader').modal('hide');
+                console.log(data);
+                showTotal(data);
+             }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+                $('#modalLoader').modal('hide');
+                 alert("Vui lòng kiểm tra kết nối internet.");
+             });
+        }
+      }
+
+      function showTotal(data) {
+         // $('#spacer-subtoal').html(data.subtotal + ' VND');
+         $('#spacer-coupon').html('-' + data.giam + ' VND');
+         $('#spacer-toal').html(numberWithCommas(data.subtotal) + ' VND');
       }
 
       function postDataPay() {
+        $('#modalLoader').modal('show');
         $.ajax({
           type: "POST",
           url: "api/payment/add",
@@ -620,10 +636,12 @@ trước khi giao hàng!</p>
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           success: function(data){
+            $('#modalLoader').modal('hide');
+            $('[href="#tab-3"]').tab('show');
             console.log(data);
-            updateCartStatus(data);
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
+              $('#modalLoader').modal('hide');
               console.log(textStatus);
               alert("Vui lòng kiểm tra kết nối Internet!");
           }
