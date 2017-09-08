@@ -10,7 +10,7 @@
           </div>
           <div class="pull-left info">
             <p>{{ Auth::user()->name }}</p>
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            <a href="#"><i class="fa fa-circle text-success"></i> Đã Đăng Nhập</a>
           </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -21,56 +21,56 @@
           <!-- ================================================ -->
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/dashboard') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('backpack::base.dashboard') }}</span></a></li>
           <li class="treeview">
-            <a href="#"><i class="fa fa-newspaper-o"></i> <span>Content</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <a href="#"><i class="fa fa-newspaper-o"></i> <span>Nội Dung</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/menu-item') }}"><i class="fa fa-list"></i> <span>Menu</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/page') }}"><i class="fa fa-file-o"></i> <span>Pages</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/page') }}"><i class="fa fa-file-o"></i> <span>Trang Tin</span></a></li>
               <li class="treeview">
-                <a href="#"><i class="fa fa-newspaper-o"></i> <span>News</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class="fa fa-newspaper-o"></i> <span>Tin Tức</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/article') }}"><i class="fa fa-newspaper-o"></i> <span>Articles</span></a></li>
-                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/article-category') }}"><i class="fa fa-list"></i> <span>Categories</span></a></li>
-                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/article-tag') }}"><i class="fa fa-tag"></i> <span>Tags</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/article') }}"><i class="fa fa-newspaper-o"></i> <span>Bài Viết</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/article-category') }}"><i class="fa fa-list"></i> <span>Danh mục tin</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/article-tag') }}"><i class="fa fa-tag"></i> <span>Đánh dấu</span></a></li>
                 </ul>
               </li>
               <li class="treeview">
-                <a href="#"><i class="fa fa-list"></i> <span>Products</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class="fa fa-list"></i> <span>Sản Phẩm</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-brand') }}"><i class="fa fa-star"></i> <span>Product Brands</span></a></li>
-                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-category') }}"><i class="fa fa-sitemap"></i> <span>Product Categories</span></a></li>
-                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-item') }}"><i class="fa fa-newspaper-o"></i> <span>Product Items</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-brand') }}"><i class="fa fa-star"></i> <span>Thương hiệu sản phẩm</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-category') }}"><i class="fa fa-sitemap"></i> <span>Danh Mục Sản Phẩm</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-item') }}"><i class="fa fa-newspaper-o"></i> <span>Các Mặt Hàng</span></a></li>
                 </ul>
               </li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/elfinder') }}"><i class="fa fa-files-o"></i> <span>File manager</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/elfinder') }}"><i class="fa fa-files-o"></i> <span>Quản Lý File</span></a></li>
             </ul>
           </li>
           
           <!-- StakeHolders -->
           <li class="treeview">
-            <a href="#"><i class="fa fa-database"></i> <span>Operations Management</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <a href="#"><i class="fa fa-database"></i> <span>Quản Lý Vận Hành</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/customer') }}"><i class="fa fa-user-md"></i> <span>Customers</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmer') }}"><i class="fa fa-user-plus"></i> <span>Farmers</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agent') }}"><i class="fa fa-user-o"></i> <span>Agents</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shipper') }}"><i class="fa fa-address-card"></i> <span>Shippers</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/orders') }}"><i class="fa fa-list-alt"></i> <span>Orders </span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/customers') }}"><i class="fa fa-user-md"></i> <span>Khách Hàng</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmers') }}"><i class="fa fa-user-plus"></i> <span>Lương Nông</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agents') }}"><i class="fa fa-user-o"></i> <span>Đại Lý</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shippers') }}"><i class="fa fa-address-card"></i> <span>Giao Hàng</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/orders') }}"><i class="fa fa-list-alt"></i> <span>Đơn Đặt Hàng </span></a></li>
             </ul>
           </li>
           <!-- Users, Roles Permissions -->
           <li class="treeview">
-            <a href="#"><i class="fa fa-group"></i> <span>Users, Roles, Permissions</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <a href="#"><i class="fa fa-group"></i> <span>Quản Lý Người Dùng</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/role') }}"><i class="fa fa-group"></i> <span>Roles</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/user') }}"><i class="fa fa-user"></i> <span>Người Dùng</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/role') }}"><i class="fa fa-group"></i> <span>Vai Trò</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/permission') }}"><i class="fa fa-key"></i> <span>Cấp Quyền</span></a></li>
             </ul>
           </li>
-          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/setting') }}"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/setting') }}"><i class="fa fa-cog"></i> <span>Chỉnh sửa hệ thống</span></a></li>
 
 
           <!-- ======================================= -->
           <li class="header">{{ trans('backpack::base.user') }}</li>
-          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/logout') }}"><i class="fa fa-sign-out"></i> <span>{{ trans('backpack::base.logout') }}</span></a></li>
+          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/logout') }}"><i class="fa fa-sign-out"></i> <span>Đăng Xuất</span></a></li>
         </ul>
       </section>
       <!-- /.sidebar -->

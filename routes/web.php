@@ -22,6 +22,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
     CRUD::resource('product-category', 'ProductCategoryCrudController');
     CRUD::resource('product-item', 'ProductCrudController');
     CRUD::resource('product-brand', 'BrandCrudController');
+
+    //Operation Management CRUD
+    CRUD::resource('orders', 'OrderCrudController');
+    CRUD::resource('agents', 'AgentCrudController');
+    CRUD::resource('customers', 'CustomerCrudController');
+    CRUD::resource('farmers', 'FarmerCrudController');
+    CRUD::resource('shippers', 'ShipperCrudController');
+
 });
 
 
