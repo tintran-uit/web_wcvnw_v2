@@ -46,4 +46,24 @@ class ProductController extends Controller
 
 		return $product_detail;
 	}
+
+	/**
+	 *getProductDetail
+	 *
+	 * Retrieve all available products in system into different categories
+	 * @param No
+	 * @return array of products in its categories 
+	 */
+    public function getSuppliers($product_id)
+	{
+		$product_detail = DB::select('SELECT F.`name`, ROUND(F.`rating`/100, 2) as `rating`, T.`quantity_left`, F.`id` FROM `farmers` F, `trading` T WHERE T.`product_id` = ? AND T.`farmer_id` = F.`id` AND  T.`quantity_left` > 0 ', [$product_id]);
+		/*
+		  SELECT F.name, F.rating, T.quantity_left, F.id
+		    FROM farmers F, trading T
+		   WHERE T.product_id = ?
+		     AND T.farmer_id = F.id
+		*/
+
+		return $product_detail;
+	}
 }
