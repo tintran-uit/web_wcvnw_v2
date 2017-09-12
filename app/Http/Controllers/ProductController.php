@@ -22,7 +22,7 @@ class ProductController extends Controller
 		foreach($categories as $cat)
 		{
 		 $products_list[""+$cat->id] = DB::select('SELECT p.`id` "id" ,p.`name` "name", p.`slug` "slug", im.`filename` 
-		 	"image", i.`price_customer` "price" FROM `products` p, `prices` i, `images` im, `products_images` pi WHERE p.`price_id` = i.`id` AND p.`id` = pi.`product_id` AND pi.`image_id` = im.`id` AND p.`category` = ? ', [$cat->id]);
+		 	"image", i.`price_customer` "price", p.`unit_quantity` "unit_quantity", p.`unit` "unit"  FROM `products` p, `prices` i, `images` im, `products_images` pi WHERE p.`price_id` = i.`id` AND p.`id` = pi.`product_id` AND pi.`image_id` = im.`id` AND p.`category` = ? ', [$cat->id]);
 		}
 	        return $products_list;	        
 	}
