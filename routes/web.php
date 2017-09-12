@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 
 Route::get('/', 'PageController@index');
 
-Route::get('/product&slug={slug}', 'PageController@getProduct');
+Route::get('/product/slug={slug}', 'PageController@getProduct');
 
 Route::get('/add', 'PageController@testcart');
 

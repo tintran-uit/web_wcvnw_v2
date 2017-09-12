@@ -12,37 +12,37 @@
       <!-- Use title if it's in the page YAML frontmatter -->
       <title>@yield('title')</title>
       <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=cyrillic-ext,latin" rel="stylesheet" type="text/css" />
-      <link href="assets/stylesheets/vendor/normalize.css" rel="stylesheet" type="text/css" />
-      <link href="assets/stylesheets/vendor/animate.css" rel="stylesheet" type="text/css" />
-      <link href="assets/stylesheets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-      <link href="assets/stylesheets/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-      <link href="assets/stylesheets/all.css" rel="stylesheet" type="text/css" />
-      <link href="assets/stylesheets/main.css" rel="stylesheet" type="text/css" />
-      <link href="assets/stylesheets/loader.css" rel="stylesheet" type="text/css" />
-      <link rel="apple-touch-icon" sizes="57x57" href="assets/images/favicon/apple-icon-57x57.png">
-      <link rel="apple-touch-icon" sizes="60x60" href="assets/images/favicon/apple-icon-60x60.png">
-      <link rel="apple-touch-icon" sizes="72x72" href="assets/images/favicon/apple-icon-72x72.png">
-      <link rel="apple-touch-icon" sizes="76x76" href="assets/images/favicon/apple-icon-76x76.png">
-      <link rel="apple-touch-icon" sizes="114x114" href="assets/images/favicon/apple-icon-114x114.png">
-      <link rel="apple-touch-icon" sizes="120x120" href="assets/images/favicon/apple-icon-120x120.png">
-      <link rel="apple-touch-icon" sizes="144x144" href="assets/images/favicon/apple-icon-144x144.png">
-      <link rel="apple-touch-icon" sizes="152x152" href="assets/images/favicon/apple-icon-152x152.png">
-      <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-icon-180x180.png">
-      <link rel="icon" type="image/png" sizes="192x192"  href="assets/images/favicon/android-icon-192x192.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon/favicon-96x96.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
-      <link rel="manifest" href="assets/images/favicon/manifest.json">
+      <link href="{{url('')}}/assets/stylesheets/vendor/normalize.css" rel="stylesheet" type="text/css" />
+      <link href="{{url('')}}/assets/stylesheets/vendor/animate.css" rel="stylesheet" type="text/css" />
+      <link href="{{url('')}}/assets/stylesheets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+      <link href="{{url('')}}/assets/stylesheets/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+      <link href="{{url('')}}/assets/stylesheets/all.css" rel="stylesheet" type="text/css" />
+      <link href="{{url('')}}/assets/stylesheets/main.css" rel="stylesheet" type="text/css" />
+      <link href="{{url('')}}/assets/stylesheets/loader.css" rel="stylesheet" type="text/css" />
+      <link rel="apple-touch-icon" sizes="57x57" href="{{url('')}}/assets/images/favicon/apple-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="{{url('')}}/assets/images/favicon/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="{{url('')}}/assets/images/favicon/apple-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="{{url('')}}/assets/images/favicon/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="{{url('')}}/assets/images/favicon/apple-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="{{url('')}}/assets/images/favicon/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="{{url('')}}/assets/images/favicon/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="{{url('')}}/assets/images/favicon/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="{{url('')}}/assets/images/favicon/apple-icon-180x180.png">
+      <link rel="icon" type="image/png" sizes="192x192"  href="{{url('')}}/assets/images/favicon/android-icon-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="{{url('')}}/assets/images/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="96x96" href="{{url('')}}/assets/images/favicon/favicon-96x96.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{url('')}}/assets/images/favicon/favicon-16x16.png">
+      <link rel="manifest" href="{{url('')}}/assets/images/favicon/manifest.json">
       <meta name="msapplication-TileColor" content="#ffffff">
       <meta name="msapplication-TileImage" content="assets/images/favicon/ms-icon-144x144.png">
       <meta name="theme-color" content="#ffffff">
-      <script src="assets/javascripts/vendor/jquery-2.1.3.min.js" type="text/javascript"></script>
-      <script src="assets/javascripts/vendor/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+      <script src="{{url('')}}/assets/javascripts/vendor/jquery-2.1.3.min.js" type="text/javascript"></script>
+      <script src="{{url('')}}/assets/javascripts/vendor/bootstrap/bootstrap.min.js" type="text/javascript"></script>
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.1/css/bootstrapValidator.min.css"/>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.1/js/bootstrapValidator.min.js"></script>
-      <script src="assets/javascripts/utility.js" type="text/javascript"></script>
-      <script src="assets/javascripts/all.js" type="text/javascript"></script>
-      <script src="assets/javascripts/load.js" type="text/javascript"></script>
+      <script src="{{url('')}}/assets/javascripts/utility.js" type="text/javascript"></script>
+      <script src="{{url('')}}/assets/javascripts/all.js" type="text/javascript"></script>
+      <script src="{{url('')}}/assets/javascripts/load.js" type="text/javascript"></script>
       <!-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script> -->
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,7 +86,7 @@
       <div class="affix" id="nl-box-slider" style="right: -305px;">
          <div class="clearfix">
             <div class="pull-left">
-               <a class="btn-block" id="label-subscribe" href="#">        <img alt="subscribe newsletter" src="assets/images/icons/btn-nl.png" />
+               <a class="btn-block" id="label-subscribe" href="#">        <img alt="subscribe newsletter" src="{{url('')}}/assets/images/icons/btn-nl.png" />
                </a>    
             </div>
             <div class="content pull-left" id="subscribe-nl">
@@ -256,21 +256,21 @@
                         </nav>
                         <article class="hidden-xs pull-left">
                            <div class="dropdown language">
-                              <a data-toggle="dropdown" class="dropdown-toggle" href="#">                <img alt="England" src="assets/images/icons/flags/flag-vietnam.jpg" />
+                              <a data-toggle="dropdown" class="dropdown-toggle" href="#">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-vietnam.jpg" />
                               <span id="country-lang">Tiếng Việt</span>
                               <i class="fa fa-angle-down"></i>
                               </a>              
                               <ul class="dropdown-menu list-unstyled">
                                  <li>
-                                    <a class="text-center" href="#">                    <img alt="England" src="assets/images/icons/flags/flag-england.jpg" />
+                                    <a class="text-center" href="#">                    <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
                                     </a>                
                                  </li>
                                  <li>
-                                    <a class="text-center" href="#">                    <img alt="Italy" src="assets/images/icons/flags/flag-italia.png" />
+                                    <a class="text-center" href="#">                    <img alt="Italy" src="{{url('')}}/assets/images/icons/flags/flag-italia.png" />
                                     </a>                
                                  </li>
                                  <li>
-                                    <a class="text-center" href="#">                    <img alt="France" src="assets/images/icons/flags/flag-francia.png" />
+                                    <a class="text-center" href="#">                    <img alt="France" src="{{url('')}}/assets/images/icons/flags/flag-francia.png" />
                                     </a>                
                                  </li>
                               </ul>
@@ -285,7 +285,7 @@
             <div class="container">
                <div class="row clearfix">
                   <article class="col-sm-12 col-md-4 col-lg-3" id="logo">
-                    <a href="./">          <img class="image-responsive" alt="Kids Store" src="assets/images/baner.png" style="height: 86px" />
+                    <a href="./">          <img class="image-responsive" alt="Kids Store" src="{{url('')}}/assets/images/baner.png" style="height: 86px" />
                      </a>
                   </article>
                   <article class="col-sm-12 col-md-4 col-lg-6" >
@@ -724,19 +724,19 @@
                   <div class="row">
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
-                           <img class="hidden-sm hidden-md" alt="tel" src="assets/images/icons/icon-tel.png" />
+                           <img class="hidden-sm hidden-md" alt="tel" src="{{url('')}}/assets/images/icons/icon-tel.png" />
                            <span data-info="text-info">+0 888 9090 909</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
-                           <img class="hidden-sm hidden-md" alt="time" src="assets/images/icons/icon-time.png" />
+                           <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-time.png" />
                            <span data-info="text-info">Every day, 9 am to 18 pm</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
-                           <img class="hidden-sm hidden-md" alt="email" src="assets/images/icons/icon-mail.png" />
+                           <img class="hidden-sm hidden-md" alt="email" src="{{url('')}}/assets/images/icons/icon-mail.png" />
                            <span data-info="text-info">
                            margarita-barton@fastmail.com
                            </span>
@@ -744,7 +744,7 @@
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
-                           <img class="hidden-sm hidden-md" alt="location" src="assets/images/icons/icon-location.png" />
+                           <img class="hidden-sm hidden-md" alt="location" src="{{url('')}}/assets/images/icons/icon-location.png" />
                            <span data-info="text-info">21 Nursary Lane, Manchester</span>
                         </div>
                      </article>
@@ -904,19 +904,19 @@
                <div>
                   <ul class="clearfix creditcard pull-left list-unstyled">
                      <li class="pull-left">
-                        <img alt="mastercard" src="assets/images/icons/credit-cards/mastercard.png" />
+                        <img alt="mastercard" src="{{url('')}}/assets/images/icons/credit-cards/mastercard.png" />
                      </li>
                      <li class="pull-left">
-                        <img alt="american express" src="assets/images/icons/credit-cards/american-express.png" />
+                        <img alt="american express" src="{{url('')}}/assets/images/icons/credit-cards/american-express.png" />
                      </li>
                      <li class="pull-left">
-                        <img alt="maestro" src="assets/images/icons/credit-cards/maestro.png" />
+                        <img alt="maestro" src="{{url('')}}/assets/images/icons/credit-cards/maestro.png" />
                      </li>
                      <li class="pull-left">
-                        <img alt="circus" src="assets/images/icons/credit-cards/circus.png" />
+                        <img alt="circus" src="{{url('')}}/assets/images/icons/credit-cards/circus.png" />
                      </li>
                      <li class="pull-left">
-                        <img alt="visa" src="assets/images/icons/credit-cards/visa.png" />
+                        <img alt="visa" src="{{url('')}}/assets/images/icons/credit-cards/visa.png" />
                      </li>
                   </ul>
                </div>

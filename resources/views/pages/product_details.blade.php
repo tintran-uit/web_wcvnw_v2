@@ -44,64 +44,19 @@
                     </h5>
                     <article class="col-sm-12">
                         
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="tbSupp">
                           <thead>
                             <tr>
                               <th class="col-sm-1">Chọn</th>
-                              <th class="col-sm-3">Nông trại</th>
+                              <th class="col-sm-4">Nông trại</th>
                               <th class="col-sm-2">Đáp ứng</th>
-                              <th class="col-sm-3">
+                              <th class="col-sm-2">
                                Đánh giá
                               </th>
                               <th class="col-sm-3"> </th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td><input type="radio" name="optradio"></td>
-                              <td>Nông trại anh Tài</td>
-                              <td>500 kg</td>
-                              <td>
-                                <div id="colorstar" class="starrr ratable">
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                </div>
-                              </td>
-                              <td><a>Xem nguồn gốc</a></td>
-                            </tr>
-                            <tr>
-                              <td><input type="radio" name="optradio"></td>
-                              <td>Nông trại Trung Thực</td>
-                              <td>500 kg</td>
-                              <td>
-                                <div id="colorstar" class="starrr ratable">
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                </div>
-                              </td>
-                              <td><a>Xem nguồn gốc</a></td>
-                            </tr>
-                            <tr>
-                              <td><input type="radio" name="optradio"></td>
-                              <td>Nông trại tươi xanh</td>
-                              <td>500 kg</td>
-                              <td>
-                                <div id="colorstar" class="starrr ratable">
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                </div>
-                              </td>
-                              <td><a>Xem nguồn gốc</a></td>
-                            </tr>
                           </tbody>
                       </table>
                         
@@ -227,6 +182,25 @@
 @section('scrip_code')
 
 <script type="text/javascript">
+var cou
+loadsuppliers();
+
+function loadsuppliers() {
+  jQuery("#tbSupp tbody").empty();
+  var id = {{$product[0]->id}};
+  var url = '/api/products/suppliers/'+id;
+  $.ajaxSetup({ cache: false });
+  $.getJSON(url, function(data){
+        $.each(data, function(index, data){ 
+              var newRowContent = '<tr>\r\n                              <td><input type=\"radio\" name=\"optradio\"><\/td>\r\n                              <td>'+data.name+'<\/td>\r\n                              <td>'+data.quantity_left+' kg<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem ngu\u1ED3n g\u1ED1c<\/a><\/td>\r\n                            <\/tr>';
+              jQuery("#tbSupp tbody").append(newRowContent);
+            });
+     }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+         alert("Vui lòng kiểm tra kết nối internet.");
+     });
+
+  // setTimeout(loadsuppliers, 45000);
+}
 
 function stepperUp() {
   var num = document.getElementById('stepper').value;
@@ -252,7 +226,7 @@ function addCart() {
       $.ajax({
 
           type: "POST",
-          url: "api/cart/add-item",
+          url: "{{url('')}}/api/cart/add-item",
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
           },
