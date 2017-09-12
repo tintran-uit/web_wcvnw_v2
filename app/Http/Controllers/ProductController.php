@@ -22,7 +22,7 @@ class ProductController extends Controller
 		foreach($categories as $cat)
 		{
 		 $products_list[""+$cat->id] = DB::select('SELECT p.`id` "id" ,p.`name` "name", p.`slug` "slug", im.`filename` 
-		 	"image", i.`price_customer` "price" FROM `products` p, `prices` i, `images` im, `products_images` pi WHERE p.`price_id` = i.`id` AND p.`id` = pi.`product_id` AND pi.`image_id` = im.`id` AND p.`category` = ? ', [$cat->id]);
+		 	"image", i.`price_customer` "price", p.`unit_quantity` "unit_quantity", p.`unit` "unit"  FROM `products` p, `prices` i, `images` im, `products_images` pi WHERE p.`price_id` = i.`id` AND p.`id` = pi.`product_id` AND pi.`image_id` = im.`id` AND p.`category` = ? ', [$cat->id]);
 		}
 	        return $products_list;	        
 	}
@@ -56,7 +56,7 @@ class ProductController extends Controller
 	 */
     public function getSuppliers($product_id)
 	{
-		$product_detail = DB::select('SELECT F.`name`, ROUND(F.`rating`/100, 2) as `rating`, T.`quantity_left`, F.`id` FROM `farmers` F, `trading` T WHERE T.`product_id` = ? AND T.`farmer_id` = F.`id` AND  T.`quantity_left` > 0 ', [$product_id]);
+		$product_detail = DB::select('SELECT F.`name`, ROUND(F.`rating`/100, 2) as `rating`, T.`quantity_left`, T.`capacity`, T.`unit`, F.`id` FROM `farmers` F, `trading` T WHERE T.`product_id` = ? AND T.`farmer_id` = F.`id` AND  T.`quantity_left` > 0 ', [$product_id]);
 		/*
 		  SELECT F.name, F.rating, T.quantity_left, F.id
 		    FROM farmers F, trading T

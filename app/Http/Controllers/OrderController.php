@@ -9,6 +9,12 @@ use DB;
 class OrderController extends Controller
 {
 	/**
+	  * An Order Status: Order Submitted -> Processing -> Confirmed -> Assigned   ----> Picked ------> Delievered
+	  *                  (Đã nhập đơn hàng) (Đang xử lý)  (Xác nhận)  (Đã phân công)   (Đã lấy hàng)   (Đã giao hàng)
+	  * In case deliver on Wednesday & Saturday:
+	  */
+
+	/**
 	 *customerInsertOrder
 	 *
 	 * Insert an order for customer into DB

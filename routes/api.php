@@ -18,12 +18,12 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/products', 'ProductController@getproducts');
-Route::get('/products/suppliers/{product_id}', 'ProductController@getSuppliers');
+Route::get('/products/suppliers/product_id={product_id}', 'ProductController@getSuppliers');
 
 
 
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
-Route::get('/farmer/{farmer_id}', 'FarmerController@getFarmerProfile');
+Route::get('/farmer/farmer_id={farmer_id}', 'FarmerController@getFarmerProfile');
 
 //gio hang
 Route::post('cart/update-cart', 'CartProductController@addCart');
