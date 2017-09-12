@@ -56,7 +56,7 @@ class ProductController extends Controller
 	 */
     public function getSuppliers($product_id)
 	{
-		$product_detail = DB::select('SELECT F.`name`, ROUND(F.`rating`/100, 2) as `rating`, T.`quantity_left`, F.`id` FROM `farmers` F, `trading` T WHERE T.`product_id` = ? AND T.`farmer_id` = F.`id` AND  T.`quantity_left` > 0 ', [$product_id]);
+		$product_detail = DB::select('SELECT F.`name`, ROUND(F.`rating`/100, 2) as `rating`, T.`quantity_left`, T.`capacity`, T.`unit`, F.`id` FROM `farmers` F, `trading` T WHERE T.`product_id` = ? AND T.`farmer_id` = F.`id` AND  T.`quantity_left` > 0 ', [$product_id]);
 		/*
 		  SELECT F.name, F.rating, T.quantity_left, F.id
 		    FROM farmers F, trading T
