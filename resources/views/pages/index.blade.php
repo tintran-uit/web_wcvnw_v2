@@ -260,6 +260,22 @@
               </div>
            </div>
       </div>
+  <div class="modal fade simple-modal" id="modalAlert" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content" style="margin-top: 35%">
+               <div class="inner-container" style="border-color: #b50000">
+                  <div class="modal-header text-center">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">
+                     <i class="fa fa-times"></i>
+                     </span>
+                     </button>
+                     <h4 class="modal-title fa fa-exclamation-triangle" id="modalMessage" style="color: #b50000; margin-left: 3px;"></h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
 @endsection
 
 @section('scrip_code')
@@ -267,6 +283,7 @@
 <script type="text/javascript">
 
          var isShop = {{$isShop or '0'}};
+         var prodID = 0;
          loadProdList();
          isMuaHang(isShop);
 
@@ -343,7 +360,7 @@
                   html += '<!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\">';
                   $.each(data, function(i, d){
 
-                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"http://wecarevn.com/uploads'+d.image+'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a href=\"product/slug='+d.slug+'\">'+d.name+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\" style=\"padding-left: 0px;\">\r\n                                          <strong>'+numberWithCommas(d.price)+' VND<\/strong>\r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"pull-left\">\r\n                                             <a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-heart\"><\/i>\r\n                                             <\/a><a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-eye\"><\/i>\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                          <div class=\"pull-right\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"clickFarm(\''+d.name+'\','+d.id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
+                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/uploads/products/images/'+d.image+'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\" style=\"padding-left: 0px;\">\r\n                                          <strong>'+numberWithCommas(d.price)+' VND<\/strong>\r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"pull-left\">\r\n                                             <a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-heart\"><\/i>\r\n                                             <\/a><a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-eye\"><\/i>\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                          <div class=\"pull-right\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"clickFarm(\''+d.name+'\','+d.id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
 
                      switch (i){
                          case 0:
@@ -433,10 +450,11 @@
           }
 
           function clickFarm(prodName, id) {
+            prodID = id;
             console.log(prodName);
             $('#modalNameProd').html(prodName);
             jQuery("#tbSupp tbody").empty();
-            var url = '/api/products/suppliers/'+id;
+            var url = '/api/products/suppliers/product_id='+id;
             $.ajaxSetup({ cache: false });
             $('#modalLoader').modal('show');
             $.getJSON(url, function(data){
@@ -452,18 +470,31 @@
 
           function loadModal(data) {
             $.each(data, function(index, data){ 
-              var newRowContent = '<tr>\r\n                              <td><input type=\"radio\" name=\"optradio\"><\/td>\r\n                              <td>'+data.name+'<\/td>\r\n                              <td>'+data.quantity_left+' kg<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem ngu\u1ED3n g\u1ED1c<\/a><\/td>\r\n                            <\/tr>';
+                  var newRowContent = '';
+
+              if(index==0)
+              {
+                newRowContent = newRowContent = '<tr>\r\n <td><input type=\"radio\" value=\"'+data.id+'\" name=\"farmerID\" checked=\"checked\"><\/td>\r\n';
+              }else{
+                newRowContent = newRowContent = '<tr>\r\n <td><input type=\"radio\" value=\"'+data.id+'\" name=\"farmerID\"><\/td>\r\n';
+              }
+
+                                           newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+data.quantity_left+' kg<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem ngu\u1ED3n g\u1ED1c<\/a><\/td>\r\n                            <\/tr>';
               jQuery("#tbSupp tbody").append(newRowContent);
+
             });
           }
 
           function addCart() {
-              var id = 1;
               var qty = document.getElementById('stepper').value;
-              var data = { "id": id, "qty": qty };
+              var farmerID = $('input[name="farmerID"]:checked').val();;
+              console.log(farmerID);
+              var data = { "id": prodID, "qty": qty , 'farmerID':farmerID};
+              $('#modalLoader').modal('show');
                   $.ajax({
+
                       type: "POST",
-                      url: "api/cart/add-item",
+                      url: "{{url('')}}/api/cart/add-item",
                       headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
                       },
@@ -472,14 +503,24 @@
                       contentType: "application/json; charset=utf-8",
                       dataType: "json",
                       success: function(data){
-                        updateCartStatus(data);
+                        $('#modalLoader').modal('hide');
+                        if(data.error)
+                        {
+                          $('#modalMessage').html(data.message);
+                          $('#modalAlert').modal('show');
+                        }else{
+                          updateCartStatus(data);
+                        }
                         console.log(data);
                       },
                       error: function(XMLHttpRequest, textStatus, errorThrown) {
                           console.log(textStatus);
-                          alert("Vui lòng kiểm tra kết nối Internet!");
+                          $('#modalMessage').html("Vui lòng kiểm tra kết nối Internet!");
+                          $('#modalLoader').modal('hide');
+                          $('#modalAlert').modal('show');
                       }
                   });
+              $('#modalChooseFarmer').modal('hide');
           }
 
 

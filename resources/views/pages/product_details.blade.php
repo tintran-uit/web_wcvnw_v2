@@ -18,10 +18,10 @@
               </div>
               <div class="icon-shipping"> <!--icon-email, icon-discount, icon-shipping-->
   <h4 class="title-box text-uppercase no-margin-top">
-    FREE DELIVERY
+    GIAO HÀNG TẬN NƠI
   </h4>
   <p class="copy-box no-margin">
-    Free shipping throughout UK in 24 hours by express courier (only $ 5.00) for orders less than $ 50)
+    Miễn phí giao hàng cho đơn hàng trên 500.000 VNĐ.
   </p>
 </div>
 
@@ -177,6 +177,23 @@
 </section>
 
 </main>
+
+<div class="modal fade simple-modal" id="modalAlert" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content" style="margin-top: 35%">
+               <div class="inner-container" style="border-color: #b50000">
+                  <div class="modal-header text-center">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">
+                     <i class="fa fa-times"></i>
+                     </span>
+                     </button>
+                     <h4 class="modal-title fa fa-exclamation-triangle" id="modalMessage"></h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
 @endsection
 
 @section('scrip_code')
@@ -188,11 +205,20 @@ loadsuppliers();
 function loadsuppliers() {
   jQuery("#tbSupp tbody").empty();
   var id = {{$product[0]->id}};
-  var url = '/api/products/suppliers/'+id;
+  var url = '/api/products/suppliers/product_id='+id;
   $.ajaxSetup({ cache: false });
   $.getJSON(url, function(data){
         $.each(data, function(index, data){ 
-              var newRowContent = '<tr>\r\n                              <td><input type=\"radio\" name=\"optradio\"><\/td>\r\n                              <td>'+data.name+'<\/td>\r\n                              <td>'+data.quantity_left+' kg<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem ngu\u1ED3n g\u1ED1c<\/a><\/td>\r\n                            <\/tr>';
+              var newRowContent = '';
+
+              if(index==0)
+              {
+                newRowContent = newRowContent = '<tr>\r\n <td><input type=\"radio\" value=\"'+data.id+'\" name=\"farmerID\" checked=\"checked\"><\/td>\r\n';
+              }else{
+                newRowContent = newRowContent = '<tr>\r\n <td><input type=\"radio\" value=\"'+data.id+'\" name=\"farmerID\"><\/td>\r\n';
+              }
+
+                                           newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+data.quantity_left+' kg<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem ngu\u1ED3n g\u1ED1c<\/a><\/td>\r\n                            <\/tr>';
               jQuery("#tbSupp tbody").append(newRowContent);
             });
      }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
@@ -221,8 +247,10 @@ function stepperDown() {
 function addCart() {
   var id = "{{$product[0]->id}}";
   var qty = document.getElementById('stepper').value;
-  var data = { "id": id, "qty": qty };
-
+  var farmerID = $('input[name="farmerID"]:checked').val();;
+  console.log(farmerID);
+  var data = { "id": id, "qty": qty , 'farmerID':farmerID};
+  $('#modalLoader').modal('show');
       $.ajax({
 
           type: "POST",
@@ -235,12 +263,21 @@ function addCart() {
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           success: function(data){
-            updateCartStatus(data);
+            $('#modalLoader').modal('hide');
+            if(data.error)
+            {
+              $('#modalMessage').html(data.message);
+              $('#modalAlert').modal('show');
+            }else{
+              updateCartStatus(data);
+            }
             console.log(data);
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log(textStatus);
-              alert("Vui lòng kiểm tra kết nối Internet!");
+              $('#modalMessage').html("Vui lòng kiểm tra kết nối Internet!");
+              $('#modalLoader').modal('hide');
+              $('#modalAlert').modal('show');
           }
       });
 }

@@ -11,6 +11,7 @@
 	    		<a target="_blank" href="{{ isset($field['disk'])?asset(\Storage::disk($field['disk'])->url($file_path)):asset($file_path) }}">{{ $file_path }}</a>
 		    	<a id="{{ $field['name'] }}_{{ $key }}_clear_button" href="#" class="btn btn-default btn-xs pull-right file-clear-button" title="Clear file" data-filename="{{ $file_path }}"><i class="fa fa-remove"></i></a>
 		    	<div class="clearfix"></div>
+		    	<input type="hidden" name="imageInfo" value="{{ $file_path }}">
 	    	</div>
     	@endforeach
     </div>

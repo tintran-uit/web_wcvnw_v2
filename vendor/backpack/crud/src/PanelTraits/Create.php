@@ -111,7 +111,9 @@ trait Create
             }
 
             if (isset($field['morph']) && $field['morph']) {
+                var_dump($data[$field['morph']]); die();
                 $values = isset($data[$field['name']]) ? $data[$field['name']] : [];
+
                 if ($model->{$field['name']}) {
                     $model->{$field['name']}()->update($values);
                 } else {

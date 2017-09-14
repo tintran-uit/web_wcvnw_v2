@@ -20,6 +20,26 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [2.0.22] - 2017-08-30
+
+## Added
+- package autodiscovery;
+
+## Fixed
+= text type columns for values in example migrations;
+
+## [2.0.21] - 2017-08-11
+
+## Added
+- Russian (ru) language files, thanks to [Андрей](https://github.com/parabellumKoval);
+
+
+## [2.0.20] - 2017-08-11
+
+## Added
+- Danish (da_DK) language files, thanks to [Frederik Rabøl](https://github.com/Xayer);
+
+
 ## 2.0.19 - 2017-07-06
 
 ### Added

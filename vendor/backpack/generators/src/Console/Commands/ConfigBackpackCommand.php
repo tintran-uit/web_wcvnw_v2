@@ -45,6 +45,17 @@ class ConfigBackpackCommand extends GeneratorCommand
     }
 
     /**
+     * Alias for the fire method.
+     *
+     * In Laravel 5.5 the fire() method has been renamed to handle().
+     * This alias provides support for both Laravel 5.4 and 5.5.
+     */
+    public function handle()
+    {
+        $this->fire();
+    }
+
+    /**
      * Execute the console command.
      *
      * @return bool|null

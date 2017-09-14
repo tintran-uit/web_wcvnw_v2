@@ -470,22 +470,7 @@ trước khi giao hàng!</p>
       </div>
    </section>
 </main>
-<div class="modal fade simple-modal" id="modalAlert" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content" style="margin-top: 35%">
-               <div class="inner-container" style="border-color: #b50000">
-                  <div class="modal-header text-center">
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">
-                     <i class="fa fa-times"></i>
-                     </span>
-                     </button>
-                     <h4 class="modal-title fa fa-exclamation-triangle" id="modalResetPsw"> VUI LÒNG NHẬP ĐỦ THÔNG TIN BẮT BUỘC (*)</h4>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+
 @endsection
 @section('scrip_code')
 
@@ -524,6 +509,8 @@ trước khi giao hàng!</p>
                       console.log(dataPost);
                     }
                   else{
+                      var message = 'VUI LÒNG NHẬP ĐỦ THÔNG TIN BẮT BUỘC (*)';
+                      $('#modalMessage').html(message);
                       $('#modalAlert').modal('show');
                     }
                   break;
@@ -579,7 +566,8 @@ trước khi giao hàng!</p>
                 $("#aTab2").removeClass("li-disabled");
                 getFormValue('#tab-1');
               }else{
-                
+                var message = 'VUI LÒNG NHẬP ĐỦ THÔNG TIN BẮT BUỘC (*)';
+                $('#modalMessage').html(message);
                 $('#modalAlert').modal('show');
 
                 setTimeout(function(){ 

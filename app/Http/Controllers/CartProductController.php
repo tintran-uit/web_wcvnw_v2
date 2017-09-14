@@ -27,12 +27,22 @@ class CartProductController extends Controller
     {
         $data = $request->data;
         $proID = $data['id'];
-        $prod = DB::select('SELECT p.`id` "id", p.`name` "name", p.`slug` "slug", im.`filename` 
-            "image", i.`price_customer` "price" FROM `products` p, `prices` i, `images` im, `products_images` pi WHERE p.`price_id` = i.`id` AND p.`id` = pi.`product_id` AND pi.`image_id` = im.`id` AND p.`id` = ? ', [$proID]);
-        Cart::add([
-          'id' => $proID, 'name' => $prod[0]->name, 'qty' => $data['qty'], 'price' => $prod[0]->price, 'options' => ['image' => $prod[0]->image,'nd_id' => 'TG111', 'name' => 'Nông trại Bác 8 Bình D ']
-        ]);
-        return Cart::content();
+        $farmerID = $data['farmerID'];
+        $qty = $data['qty'];
+        $prod = DB::select('SELECT p.`id` "id", p.`name` "name", im.`filename` "image", i.`price_customer` "price" FROM `products` p, `prices` i, `images` im, `trading` td, `products_images` pi WHERE p.`price_id` = i.`id` AND p.`id` = pi.`product_id` AND pi.`image_id` = im.`id` AND p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`quantity_left` >= ?', [$proID, $farmerID, $qty]);
+        if($prod)
+        {
+            Cart::add([
+              'id' => $proID, 'name' => $prod[0]->name, 'qty' => $qty, 'price' => $prod[0]->price, 'options' => ['image' => $prod[0]->image,'nd_id' => 'TG111', 'name' => 'Nông trại Bác 8 Bình D ']
+            ]);
+            return Cart::content();
+        }else{
+            return response()->json([
+                'error' => 1,
+                'message' => 'Sản phẩm đã hết hàng. Vui lòng chọn nhà cung cấp khác.'
+            ]);
+        }
+        
     }
 
     public function checkMaGiamGia($ma)

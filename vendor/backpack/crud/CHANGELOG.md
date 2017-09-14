@@ -20,6 +20,57 @@ All Notable changes to `Backpack CRUD` will be documented in this file
 - Nothing
 
 
+## [3.2.19] - 2017-09-05
+
+## Added
+- text filter type;
+
+## Fixed
+- date_range field start_name value always falled back to default - #450;
+- hidden field types now have no height - fixes #555;
+- image field type can now be modified in size - fixes #572;
+- we were unable to save model with optional fake fields - fixes #616;
+
+## [3.2.18] - 2017-08-30
+
+## Added
+- Package autodiscovery for Laravel 5.5;
+
+
+## [3.2.17] - 2017-08-22
+
+## Fixed
+- SluggableScopeHelpers::scopeWhereSlug() signature, thanks to [Pascal VINEY](https://github.com/shaoshiva);
+
+
+## [3.2.16] - 2017-08-21
+
+## Added
+- translation strings for CRUD export buttons, thanks to [Alashow](https://github.com/alashow);
+
+## Fixed
+- you can now skip mentioning the model for relation fields and columns (select, select2, select2multiple, etc) - it will be picked up from the relation automatically;
+
+
+## [3.2.15] - 2017-08-11
+
+## Added
+- Danish (da_DK) language files, thanks to [Frederik Rabøl](https://github.com/Xayer);
+
+
+## [3.2.14] - 2017-08-04
+
+## Added
+- Brasilian Portugese translation, thanks to [Guilherme Augusto Henschel](https://github.com/cenoura);
+- $crud parameter to the model function that adds a button;
+
+## Fixed
+- setFromDb() now uses the column name as array index - so $this->crud->columns[id] instead of $this->crud->columns[arbitrary_number]; this makes afterColumn() and beforeColumn() work with setFromDb() too - #759;
+- radio field type now has customizable attributes - fixes #718;
+- model_function column breaking when not naming it - fixes #784;
+- video column type uses HTTPs and no longer triggers console error - fixes #735;
+
+
 ## [3.2.13] - 2017-07-07
 
 ## Added

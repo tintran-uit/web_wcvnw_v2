@@ -124,6 +124,23 @@
             
          </div>
       </div>
+      <!-- modal Alert -->
+       <div class="modal fade simple-modal" id="modalAlert" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content" style="margin-top: 35%">
+               <div class="inner-container" style="border-color: #b50000">
+                  <div class="modal-header text-center">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">
+                     <i class="fa fa-times"></i>
+                     </span>
+                     </button>
+                     <h4 class="modal-title fa fa-exclamation-triangle" id="modalMessage" style="color: #b50000; margin-left: 3px;"></h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
       <!-- Modal buy voucher -->
       <div class="modal fade style-base-modal" id="modal-buy-voucher" tabindex="-1" role="dialog" aria-labelledby="modalBuyVoucher" aria-hidden="true">
          <div class="modal-dialog">
@@ -324,7 +341,7 @@
                                           <div class="col-xs-10 product-details">
                                              <div class="clearfix row">
                                                 <p class="col-xs-8 product-name no-margin">
-                                                   {{$item->name}}
+                                                   {{$item->name}}  x{{$item->qty}}
                                                 </p>
                                                 <p class="col-xs-4 price no-margin text-right no-padding">
                                                    {{number_format($item->subtotal)}} VND
@@ -349,7 +366,7 @@
                                  </div>
                                  <div class="button-basket text-right">
                                     <a class="btn btn-warning btn-sm no-margin" href="{{url('/gio-hang-thuc-pham-sach')}}">Xem giỏ hàng</a>
-                                    <a class="btn btn-warning btn-sm no-margin" href="payment.html">Thanh toán</a>
+                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/thanh-toan')}}">Thanh toán</a>
                                  </div>
                               </div>
                            </div>
@@ -366,7 +383,7 @@
                      <nav id="main-nav">
                         <div class="nav-bar navbar-default dropdown-main-nav">
                            <div class="collapse navbar-collapse">
-                              <ul class="nav navbar-nav">
+                              <ul class="nav navbar-nav" id="mainMN">
                                  <li class="{{ Request::is('/') ? 'active' : '' }}">
                                     <a href="{{url('/')}}">Trang chủ</a>
                                  </li>
@@ -376,23 +393,6 @@
                                  <li class="">
                                     <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> Mua hàng <i class="fa fa-angle-down"></i>
                                     </a>                  
-                                 <!--    <ul class="dropdown-menu">
-                                       <li>
-                                          <a href="#">Baby 0-24 months</a>
-                                       </li>
-                                       <li>
-                                          <a href="#">Child 3-16 years</a>
-                                       </li>
-                                       <li>
-                                          <a href="#">Baby Boy</a>
-                                       </li>
-                                       <li>
-                                          <a href="#">Baby Girl</a>
-                                       </li>
-                                       <li>
-                                          <a href="#">Infant Boy</a>
-                                       </li>
-                                    </ul> -->
                                  </li>
                                  <li class="">
                                     <a href="#">Thư viện ảnh</a> 
@@ -925,7 +925,7 @@
       </footer>
       @yield('scrip_code')
       <script type="text/javascript">
-         function deleteItem(rowId) {
+      function deleteItem(rowId) {
          var markers = { "rowId": rowId};
 
          $.ajax({
@@ -940,7 +940,7 @@
              contentType: "application/json; charset=utf-8",
              dataType: "json",
              success: function(data){
-               
+               updateCartStatus(data);
              },
              error: function(XMLHttpRequest, textStatus, errorThrown) {
                  console.log(textStatus);
@@ -958,7 +958,7 @@
          var code = "";
          var total = 0;
          $.each( data, function( key, value ) {
-           code += "<li class=\"item\">\r\n                                       <div class=\"clearfix row\">\r\n                                          <div class=\"col-xs-10 product-details\">\r\n                                             <div class=\"clearfix row\">\r\n                                                <p class=\"col-xs-8 product-name no-margin\">"+ value.name +"<\/p>\r\n                                                <p class=\"col-xs-4 price no-margin text-right no-padding\"> "+ numberWithCommas(value.subtotal) +" VND<\/p>\r\n                                             <\/div>\r\n                                          <\/div>\r\n                                          <div class=\"col-xs-2 no-padding-left\">\r\n                                             <a type=\"button\" class=\"close\" data-dismiss=\"modal\" onclick=\"deleteItem(\'"+value.rowId+"\')\">\r\n                                             <i class=\"fa fa-times\"><\/i>\r\n                                             <\/a>\r\n                                          <\/div>\r\n                                       <\/div>\r\n                                    <\/li>";
+           code += "<li class=\"item\">\r\n                                       <div class=\"clearfix row\">\r\n                                          <div class=\"col-xs-10 product-details\">\r\n                                             <div class=\"clearfix row\">\r\n                                                <p class=\"col-xs-8 product-name no-margin\">"+ value.name + '  x' + value.qty +"<\/p>\r\n                                                <p class=\"col-xs-4 price no-margin text-right no-padding\"> "+ numberWithCommas(value.subtotal) +" VND<\/p>\r\n                                             <\/div>\r\n                                          <\/div>\r\n                                          <div class=\"col-xs-2 no-padding-left\">\r\n                                             <a type=\"button\" class=\"close\" data-dismiss=\"modal\" onclick=\"deleteItem(\'"+value.rowId+"\')\">\r\n                                             <i class=\"fa fa-times\"><\/i>\r\n                                             <\/a>\r\n                                          <\/div>\r\n                                       <\/div>\r\n                                    <\/li>";
            total += value.subtotal;
          });
          $('#cart-list-product').html(code);
