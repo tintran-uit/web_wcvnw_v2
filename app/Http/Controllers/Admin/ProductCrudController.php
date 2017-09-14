@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Image;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
+use Intervention\Image\ImageManagerStatic as Image1;
+
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ProductRequest as StoreRequest;
 use App\Http\Requests\ProductRequest as UpdateRequest;
@@ -191,8 +193,8 @@ class ProductCrudController extends CrudController
             'entity' => 'images',
             'attribute' => 'filename',
             'model' => "App\Models\Image",
-//            'upload' => true,
-//            'disk' => 'uploads',
+            //'upload' => true,
+            //'disk' => 'uploads',
             'pivot' => true,
         ]);
 
@@ -272,6 +274,7 @@ class ProductCrudController extends CrudController
                 $image->filename = "/products/"+$img;
                 $image->position = '0';
                 $image->save();
+                //$image->resize(155, 115)->save("/products/thumbs-"+$img);
                 $imagesArray[] = $image->id;
             }
         }
@@ -290,12 +293,20 @@ class ProductCrudController extends CrudController
 	public function update(UpdateRequest $request)
 	{
 		// your additional operations before save here
-        foreach ($request->images as $img) {
+       foreach ($request->images as $img) {
             if(isset($img) && !empty($img)) {
+                //upload the image
+                // open an image file
+                //return $request;
+                //$uimg = Image1::make("/uploads/products/thit-heo.png");
+                //$uimg->resize(320, 240);
+                //$uimg->save("public/uploads/products/thumbs-".$img);
+
                 $image = new Image();
-                $image->filename = "/products/"+$img;
+                //$image->filename = "products";
                 $image->position = '0';
                 $image->save();
+               // $image->resize(155, 115)->save("/products/thumbs-"+$img);
                 $imagesArray[] = $image->id;
             }
         }
