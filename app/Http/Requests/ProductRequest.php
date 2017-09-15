@@ -25,14 +25,14 @@ class ProductRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:255',
-            'slug' => 'unique:products,slug,'.\Request::get('id'),
-            'meta_title' => 'required|min:2',
-            'meta_description' => 'required|min:2',
-            'description' => 'required|min:2',
-            'price' => 'required|integer',
-            'categories' => 'required',
-            'brand_id' => 'required',
+            // 'name' => 'required|min:2|max:255',
+            // 'slug' => 'unique:products,slug,'.\Request::get('id'),
+            // 'meta_title' => 'required|min:2',
+ //           'meta_description' => 'required|min:2',
+ //           'description' => 'required|min:2',
+//            'price' => 'required|integer',
+//            'categories' => 'required',
+//            'brand_id' => 'required',
 //            'images' => 'image',
         ];
     }

@@ -24,7 +24,7 @@ class ProductCategory extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-     protected $fillable = ['name','parent_id','visible','meta_title','meta_keywords','meta_description','description'];
+     protected $fillable = ['name','visible','meta_title','meta_keywords','meta_description','description'];
     // protected $hidden = [];
     // protected $dates = [];
     protected $casts = [
@@ -58,17 +58,17 @@ class ProductCategory extends Model
 	*/
     public function parent()
     {
-        return $this->belongsTo('App\Models\ProductCategory', 'parent_id');
+        return $this->belongsTo('App\Models\ProductCategory', 'id');
     }
 
     public function children()
     {
-        return $this->hasMany('App\Models\ProductCategory', 'parent_id');
+        return $this->hasMany('App\Models\ProductCategory', 'id');
     }
 
     public function products()
     {
-        return $this->hasMany('App\Models\Product');
+        return $this->hasMany('App\Models\Product', 'category');
     }
 
     /*
