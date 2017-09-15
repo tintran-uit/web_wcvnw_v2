@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Image;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
+use Intervention\Image\ImageManagerStatic as Image1;
+
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ProductRequest as StoreRequest;
 use App\Http\Requests\ProductRequest as UpdateRequest;
@@ -18,19 +20,19 @@ class ProductCrudController extends CrudController
     {
 
         /*
-        |--------------------------------------------------------------------------
-        | BASIC CRUD INFORMATION
-        |--------------------------------------------------------------------------
-        */
+		|--------------------------------------------------------------------------
+		| BASIC CRUD INFORMATION
+		|--------------------------------------------------------------------------
+		*/
         $this->crud->setModel("App\Models\Product");
         $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/product-item');
         $this->crud->setEntityNameStrings('product', 'products');
 
         /*
-        |--------------------------------------------------------------------------
-        | BASIC CRUD INFORMATION
-        |--------------------------------------------------------------------------
-        */
+		|--------------------------------------------------------------------------
+		| BASIC CRUD INFORMATION
+		|--------------------------------------------------------------------------
+		*/
 
 //        $this->crud->setFromDb();
         $this->crud->allowAccess('reorder');
@@ -193,12 +195,16 @@ class ProductCrudController extends CrudController
             'entity' => 'images',
             'attribute' => 'filename',
             'model' => "App\Models\Image",
-            'upload' => true,
-            'disk' => 'uploads',
+<<<<<<< HEAD
+           'upload' => true,
+           'disk' => 'uploads',
             // 'pivot' => true,
+=======
+            //'upload' => true,
+            //'disk' => 'uploads',
+            'pivot' => true,
+>>>>>>> 6538d5d57eda234e795d4b4b9edab8b90f49fc44
         ]);
-
-
 
         $this->crud->enableAjaxTable();
 
@@ -267,10 +273,10 @@ class ProductCrudController extends CrudController
         // $this->crud->limit();
     }
 
-    public function store(StoreRequest $request)
-    {
+	public function store(StoreRequest $request)
+	{
 
-        // your additional operations before save here
+		// your additional operations before save here
         // foreach ($request->images as $img) {
         //     if(isset($img) && !empty($img)) {
         //         $image = new Image();
@@ -305,8 +311,9 @@ class ProductCrudController extends CrudController
                 $image->filename = $imgName;
                 $image->position = '0';
                 $image->save();
+                //$image->resize(155, 115)->save("/products/thumbs-"+$img);
                 $imagesArray[] = $image->id;
-                // $request['images'] = 1;
+
                 //them vao bang products_images
                 // DB::insert('insert into products_images (product_id, image_id) values (?, ?)', [$prodID, $image->id]);
             }
@@ -316,6 +323,7 @@ class ProductCrudController extends CrudController
        // die();
 
         $request['images'] = $imagesArray;
+
 //        var_dump($request['images']);die;
 //        $request->merge(array('images' => [$image->id]));
 //        $request['image_id'] = $image->id;
@@ -324,10 +332,11 @@ class ProductCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
-    }
+	}
 
-    public function update(UpdateRequest $request)
-    {
+	public function update(UpdateRequest $request)
+	{
+<<<<<<< HEAD
         // your additional operations before save here
         $prodID = $request['id'];
         $prodSLUG = $request['slug'];
@@ -363,6 +372,24 @@ class ProductCrudController extends CrudController
 
                 // }
                 // $affected = DB::update('update products_images set votes = 100 where product_id = ?', ['John']);
+=======
+		// your additional operations before save here
+       foreach ($request->images as $img) {
+            if(isset($img) && !empty($img)) {
+                //upload the image
+                // open an image file
+                //return $request;
+                //$uimg = Image1::make("/uploads/products/thit-heo.png");
+                //$uimg->resize(320, 240);
+                //$uimg->save("public/uploads/products/thumbs-".$img);
+
+                $image = new Image();
+                //$image->filename = "products";
+                $image->position = '0';
+                $image->save();
+               // $image->resize(155, 115)->save("/products/thumbs-"+$img);
+                $imagesArray[] = $image->id;
+>>>>>>> 6538d5d57eda234e795d4b4b9edab8b90f49fc44
             }
         }
 //        var_dump($imagesArray); var_dump($request['categories']);
@@ -372,7 +399,7 @@ class ProductCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
-    }
+	}
 
     public function attachmentThumb($input, $thumbPath, $name, $width, $height)
     {
