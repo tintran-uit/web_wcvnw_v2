@@ -67,8 +67,8 @@ class PageController extends Controller
     public function getProduct($slug)
     {
         
-        $product = DB::select('SELECT p.`id` "id", p.`name` "name", p.`slug` "slug", im.`filename` 
-            "image", i.`price_customer` "price" FROM `products` p, `prices` i, `images` im, `products_images` pi WHERE p.`price_id` = i.`id` AND p.`id` = pi.`product_id` AND pi.`image_id` = im.`id` AND p.`slug` = ? ', [$slug]);
+        $product = DB::select('SELECT p.`id` "id", p.`name` "name", p.`slug` "slug", p.`image` 
+            "image", p.`price` "price" FROM `products` p WHERE p.`slug` = ? ', [$slug]);
 
         if (!$product)
         {
