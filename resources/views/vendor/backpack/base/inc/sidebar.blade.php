@@ -53,7 +53,7 @@
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmers') }}"><i class="fa fa-user-plus"></i> <span>Lương Nông</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agents') }}"><i class="fa fa-user-o"></i> <span>Đại Lý</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shippers') }}"><i class="fa fa-address-card"></i> <span>Giao Hàng</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/orders') }}"><i class="fa fa-list-alt"></i> <span>Đơn Đặt Hàng </span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order-item') }}"><i class="fa fa-list-alt"></i> <span>Đơn Đặt Hàng </span></a></li>
             </ul>
           </li>
           <!-- Users, Roles Permissions -->
