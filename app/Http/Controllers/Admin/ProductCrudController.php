@@ -80,30 +80,6 @@ class ProductCrudController extends CrudController
             'label' => 'Đơn vị',
         ]);
 
-/*        $this->crud->addColumn([
-            'name' => 'featured',
-            'label' => 'Featured',
-            'type' => 'check',
-        ]);*/
-
-
-        // ------ CRUD FIELDS
-        /*$this->crud->addField([    // CHECKBOX
-            'name' => 'visible',
-            'label' => 'Visible Product',
-            'type' => 'checkbox',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-3'
-            ],
-        ]);
-        $this->crud->addField([    // CHECKBOX
-            'name' => 'featured',
-            'label' => 'Featured Product',
-            'type' => 'checkbox',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-3'
-            ],
-        ]);*/
          $this->crud->addField([
             'name' => 'name',
             'label' => 'Tên Sản Phẩm',
@@ -174,29 +150,6 @@ class ProductCrudController extends CrudController
                 'class' => 'form-group col-md-3'
             ],
         ]);
-        /*$this->crud->addField([
-            'name' => 'slug',
-            'label' => 'Slug (URL)',
-            'type' => 'text',
-            'hint' => 'Will be automatically generated from your name, if left empty.',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ],
-            // 'disabled' => 'disabled'
-        ]);*/
-
-        /*$this->crud->addField([    // SELECT
-            'label' => 'Product Brand',
-            'type' => 'select2',
-            'name' => 'brand_id',
-            'entity' => 'brand',
-            'attribute' => 'name',
-            'model' => "App\Models\Brand",
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ],
-        ]);*/
-
 
         $this->crud->addField([    // TEXT
             'name' => 'meta_title',
@@ -230,44 +183,6 @@ class ProductCrudController extends CrudController
             'type' => 'browse',
             'placeholder' => 'Chọn hình ảnh cho sản phẩm',
         ]);
-
-         $this->crud->addField([   // WYSIWYG
-            'name' => 'icon',
-            'label' => 'Ảnh Nho',
-            'type' => 'icon_picker',
-            'placeholder' => 'Chọn hình ảnh cho sản phẩm',
-        ]);
-
-      /* $this->crud->addField([    // Image
-            // Select2Multiple = n-n relationship (with pivot table)
-            'label' => 'Ảnh Sản Phẩm',
-            'type' => 'upload_multiple',
-            'name' => 'images',
-            //'entity' => 'products',
-           // 'attribute' => 'image',
-           // 'model' => "App\Models\Image",
-            'upload' => true,
-            'disk' => 'uploads',
-            //'pivot' => true,
-        ]);*/
-
-       /* $this->crud->addField([    // Image
-            // Select2Multiple = n-n relationship (with pivot table)
-            'label' => 'Product Images',
-            'type' => 'upload_multiple',
-            'name' => 'images',
-            'entity' => 'images',
-            'attribute' => 'filename',
-            'model' => "App\Models\Image",
-            'upload' => true,
-            'disk' => 'uploads',
-            // 'pivot' => true,
-        ]);
-            //'upload' => true,
-            //'disk' => 'uploads',
-            'pivot' => true,
-        ]);*/
-
 
 
         $this->crud->enableAjaxTable();

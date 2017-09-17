@@ -69,10 +69,35 @@ class OrderCrudController extends CrudController
             'label' => 'Thành Tiền',
         ]);
         $this->crud->addColumn([
+            'name' => 'farmer_id',
+            'label' => 'Trang Trại',
+            'type' => 'select',
+            'entity' => 'farmer',
+            'attribute' => 'name',
+            'model' => "App\Models\Farmer",
+        ]);
+        $this->crud->addColumn([
+            'name' => 'shipper_id',
+            'label' => 'Giao Hàng',
+            'type' => 'select',
+            'entity' => 'shipper',
+            'attribute' => 'name',
+            'model' => "App\Models\Shipper",
+        ]);
+
+        $this->crud->addColumn([
             'name' => 'status',
             'label' => 'Trạng Thái',
         ]);
 
+        $this->crud->addColumn([
+            'name' => 'rating_service',
+            'label' => 'Điểm Dịch Vụ',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'rating_customer',
+            'label' => 'Điểm Khách Hàng',
+        ]);
 
         // ------ CRUD FIELDS
         $this->crud->addField([
@@ -134,6 +159,45 @@ class OrderCrudController extends CrudController
             'name' => 'status',
             'label' => 'Trạng Thái',
             'type' => 'text',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'farmer_id',
+            'label' => 'Trang Trại',
+            'type' => 'select',
+            'entity' => 'farmer',
+            'attribute' => 'name',
+            'model' => "App\Models\Farmer",
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'shipper_id',
+            'label' => 'Giao Hàng',
+            'type' => 'select',
+            'entity' => 'shipper',
+            'attribute' => 'name',
+            'model' => "App\Models\Shipper",
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+
+        $this->crud->addField([
+            'name' => 'rating_service',
+            'label' => 'Điểm Dịch Vụ',
+            'type' => 'number',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'rating_customer',
+            'label' => 'Điểm Khách Hàng',
+            'type' => 'number',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],

@@ -74,16 +74,6 @@ class Order extends Model
         return $this->belongsTo('App\Models\Shipper', 'shipper_id');
     }
 
-    public function categories()
-    {
-        return $this->belongsToMany('App\Models\ProductCategory', 'products_categories','product_id','category_id');
-    }
-
-    public function images()
-    {
-        return $this->belongsToMany('App\Models\Image', 'products_images','product_id','image_id');
-    }
-
 //    public function images()
 //    {
 //        return $this->morphMany('App\Models\Image', 'imageable');

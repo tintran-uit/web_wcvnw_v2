@@ -25,10 +25,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 
     //Operation Management CRUD
     CRUD::resource('order-item', 'OrderCrudController');
-    CRUD::resource('agents', 'AgentCrudController');
-    CRUD::resource('customers', 'CustomerCrudController');
-    CRUD::resource('farmers', 'FarmerCrudController');
-    CRUD::resource('shippers', 'ShipperCrudController');
+    CRUD::resource('agent-item', 'AgentCrudController');
+    CRUD::resource('customer-item', 'CustomerCrudController');
+    CRUD::resource('farmer-item', 'FarmerCrudController');
+    CRUD::resource('shipper-item', 'ShipperCrudController');
 
 });
 

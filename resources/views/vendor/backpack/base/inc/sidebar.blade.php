@@ -49,10 +49,10 @@
           <li class="treeview">
             <a href="#"><i class="fa fa-database"></i> <span>Quản Lý Vận Hành</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/customers') }}"><i class="fa fa-user-md"></i> <span>Khách Hàng</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmers') }}"><i class="fa fa-user-plus"></i> <span>Lương Nông</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agents') }}"><i class="fa fa-user-o"></i> <span>Đại Lý</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shippers') }}"><i class="fa fa-address-card"></i> <span>Giao Hàng</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/customer-item') }}"><i class="fa fa-user-md"></i> <span>Khách Hàng</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmer-item') }}"><i class="fa fa-user-plus"></i> <span>Lương Nông</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agent-item') }}"><i class="fa fa-user-o"></i> <span>Đại Lý</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shipper-item') }}"><i class="fa fa-address-card"></i> <span>Giao Hàng</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order-item') }}"><i class="fa fa-list-alt"></i> <span>Đơn Đặt Hàng </span></a></li>
             </ul>
           </li>
