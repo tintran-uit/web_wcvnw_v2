@@ -21,7 +21,7 @@ class CustomerCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel("App\Models\Customer");
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/customer');
+        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/customer-item');
         $this->crud->setEntityNameStrings('customer', 'customers');
 
         /*
@@ -40,59 +40,51 @@ class CustomerCrudController extends CrudController
             'label' => 'Khách Hàng',
         ]);
         $this->crud->addColumn([
-            'name' => 'product',
-            'label' => 'Sản phẩm',
+            'name' => 'phone',
+            'label' => 'Điện Thoại',
         ]);
         $this->crud->addColumn([
-            'name' => 'quantity',
-            'label' => 'Số lượng',
+            'name' => 'email',
+            'label' => 'Email',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'address',
+            'label' => 'Địa chỉ',
         ]);
 
         $this->crud->addColumn([
-            'name' => 'sub_total',
-            'label' => 'Thành Tiền',
+            'name' => 'rating',
+            'label' => 'Điểm',
         ]);
         $this->crud->addColumn([
-            'name' => 'delivery_address',
-            'label' => 'Giao Hàng',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'status',
-            'label' => 'Trạng Thái',
+            'name' => 'photo',
+            'label' => 'Hình Ảnh',
         ]);
 
+        // ------ CRUD FIELDS
+       $this->crud->addField([
+            'name' => 'name',
+            'label' => 'Khách Hàng',
+        ]);
+        $this->crud->addField([
+            'name' => 'phone',
+            'label' => 'Điện Thoại',
+        ]);
+        $this->crud->addField([
+            'name' => 'email',
+            'label' => 'Email',
+        ]);
+        $this->crud->addField([
+            'name' => 'address',
+            'label' => 'Địa chỉ',
+        ]);
 
+        $this->crud->addField([
+            'name' => 'photo',
+            'label' => 'Hình Ảnh',
+            'type' => 'browse',
+        ]);
 /*
-        $this->crud->addColumn([    // SELECT
-            'label' => 'Product Brand',
-            'type' => 'select',
-            'name' => 'brand_id',
-            'entity' => 'brand',
-            'attribute' => 'name',
-            'model' => "App\Models\Brand",
-        ]);
-        $this->crud->addColumn([       // Select2Multiple = n-n relationship (with pivot table)
-            'label' => 'Product Categories',
-            'type' => 'select_multiple',
-            'name' => 'categories', // the method that defines the relationship in your Model
-            'entity' => 'categories', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\ProductCategory", // foreign key model
-        ]);
-        $this->crud->addColumn([
-            'name' => 'price',
-            'label' => 'Price',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'old_price',
-            'label' => 'Old Price',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'featured',
-            'label' => 'Featured',
-            'type' => 'check',
-        ]);
-
 
         // ------ CRUD FIELDS
         $this->crud->addField([    // CHECKBOX
@@ -285,21 +277,6 @@ class CustomerCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
-        foreach ($request->images as $img) {
-            if(isset($img) && !empty($img)) {
-                $image = new Image();
-                $image->filename = "/products/"+$img;
-                $image->position = '0';
-                $image->save();
-                $imagesArray[] = $image->id;
-            }
-        }
-//        var_dump($imagesArray); var_dump($request['categories']);
-        $request['images'] = $imagesArray;
-//        var_dump($request['images']);die;
-//        $request->merge(array('images' => [$image->id]));
-//        $request['image_id'] = $image->id;
-
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
@@ -309,18 +286,6 @@ class CustomerCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
-        foreach ($request->images as $img) {
-            if(isset($img) && !empty($img)) {
-                $image = new Image();
-                $image->filename = "/products/"+$img;
-                $image->position = '0';
-                $image->save();
-                $imagesArray[] = $image->id;
-            }
-        }
-//        var_dump($imagesArray); var_dump($request['categories']);
-        $request['images'] = $imagesArray;
-
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
