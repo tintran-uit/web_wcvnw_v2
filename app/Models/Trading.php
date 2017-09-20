@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Trading extends Model
 {
     use CrudTrait;
     use Sluggable, SluggableScopeHelpers;
@@ -20,17 +20,17 @@ class Product extends Model
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'products';
+    protected $table = 'trading';
     protected $primaryKey = 'id';
-    // public $timestamps = false;
+    public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['name','slug', 'meta_title', 'meta_keywords', 'meta_description', 'description', 'image', 'unit_quantity', 'unit', 'price', 'price_agent', 'price_farmer', 'meta_title', 'category', 'brand_id'];
+    protected $fillable = ['farmer_id','product_id','capacity', 'quantity_left', 'unit', 'status'];
     // protected $hidden = [];
     // protected $dates = [];
-    protected $casts = [
+    /*protected $casts = [
         'featured'  => 'boolean',
         'visible'   => 'boolean',
-    ];
+    ];*/
 
     /**
      * Return the sluggable configuration array for this model.
@@ -57,25 +57,20 @@ class Product extends Model
 	| RELATIONS
 	|--------------------------------------------------------------------------
 	*/
-    public function brand()
+    public function farmer()
     {
-        return $this->belongsTo('App\Models\Brand', 'brand_id');
+        return $this->belongsTo('App\Models\Farmer', 'farmer_id');
     }
-
-    public function categories()
+    public function product()
     {
-        return $this->belongsToMany('App\Models\ProductCategory', 'products_categories','product_id','category_id');
-    }
-
-    public function images()
-    {
-        return $this->belongsToMany('App\Models\Image', 'products_images','product_id','image_id');
+        return $this->belongsTo('App\Models\Product', 'product_id');
     }
 
     public function sold()
     {
-        return $this->belongsToMany('App\Models\Trading', 'product_id');
+        return ;
     }
+
 //    public function images()
 //    {
 //        return $this->morphMany('App\Models\Image', 'imageable');
