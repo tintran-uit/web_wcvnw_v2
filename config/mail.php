@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => null,
-        'name' => null,
+        'address' => 'noreply@cfarm.vn',
+        'name' => 'Robot',
     ],
 
     /*
