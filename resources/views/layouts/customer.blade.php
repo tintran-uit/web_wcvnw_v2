@@ -106,17 +106,207 @@
                      </div>
                      <div class="checkbox">
                         <label>
-                        <input type="checkbox" name="receiveEmailCus" value="1" /> Đồng ý nhận thông tin khuyến mãi!
+                        <input type="checkbox" name="receiveEmailCus" value="1" checked/> Đồng ý nhận thông tin khuyến mãi!
                         </label>
                      </div>
                      <div class="text-right">
-                     <a href="/">WE CARE VN</a>
+                     <a href="/">CFarm Việt Nam</a>
                      </div>
                   </fieldset>
                </form>
             </div>
          </div>
       </div>
+
+       <!-- Modal Signin -->
+<div class="modal fade style-base-modal" id="modal-signin" tabindex="-1" role="dialog" aria-labelledby="modalSigninLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="inner-container clearfix bg-white">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">
+              <i class="fa fa-times"></i>
+            </span>
+          </button>
+          <h4 class="modal-title email-icon" id="modalSigninLabel">Đăng nhập</h4>
+        </div>
+        <div class="modal-body clearfix">
+          <div class="col-md-7 no-padding">
+<form action="{{url('')}}/admin/login" accept-charset="UTF-8" method="post" class="form-style-base">
+  {{ csrf_field() }}
+  <fieldset>    <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                  <input type="email" class="form-control input-lg" name="email" placeholder="Enter email" value="{{ old('email') }}" />
+                  @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                </div>
+
+                <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
+                  <input type="password" class="form-control input-lg" placeholder="Password" name="password"/>
+                  @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                </div>
+
+                <div class="checkbox">
+                  <label class="btn-link small">
+                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : ''}}>Nhớ mật khẩu
+                  </label>
+                </div>
+
+</fieldset>
+<fieldset>                <button type="submit" class="btn btn-warning btn-lg btn-block">
+                  <i class="glyphicon glyphicon-log-in"></i> Đăng nhập
+                </button>
+</fieldset>
+              <div class="small text-center spacer-bottom-10">
+                <a class="btn-link" href="reset-password.html">Quên mật khẩu?</a>
+              </div>
+
+</form>
+          </div>
+          <div class="col-md-5 no-padding">
+            <div class="text-center">
+  <h4 class="no-margin-top">
+    Use your social network<br>account to signin
+  </h4>
+  <div class="socials btn-group clearfix">
+    <!--
+Exsample:
+var social = facebook, twitter, pinterest, google, linkedin or youtube
+var smaller = smaller or nil
+var link = link
+-->
+<a class="btn-social btn-facebook " href="#">  <i class="fa fa-facebook fa-1x"></i>
+</a>
+    <!--
+Exsample:
+var social = facebook, twitter, pinterest, google, linkedin or youtube
+var smaller = smaller or nil
+var link = link
+-->
+<a class="btn-social btn-twitter " href="#">  <i class="fa fa-twitter fa-1x"></i>
+</a>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+       <!-- Modal Signup -->
+<div class="modal fade style-base-modal" id="modal-signup" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modalSignupLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="inner-container clearfix">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">
+              <i class="fa fa-times"></i>
+            </span>
+          </button>
+          <h4 class="modal-title email-icon" id="modalSignupLabel">Tạo tài khoản</h4>
+        </div>
+        <div class="modal-body clearfix">
+          <div class="col-md-7 no-padding">
+<form action="{{url('')}}/admin/register" accept-charset="UTF-8" method="post" class="form-style-base">              
+{{ csrf_field() }}   
+               <div class="form-group">
+                <input type="email" class="form-control input-lg" placeholder="Email" name="email"/>
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-user"></i>
+                </span>
+                <input type="text" class="form-control input-lg" name="name" placeholder="Tên đăng nhập" />
+                 @if ($errors->has('name'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('name') }}</strong>
+                      </span>
+                  @endif
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-unlock-alt"></i>
+                </span>
+                <input type="password" class="form-control input-lg" placeholder="Mật khẩu" name="password"/>
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-unlock-alt"></i>
+                </span>
+                <input type="password" class="form-control input-lg" placeholder="Nhập lại mật khẩu" name="password_confirmation"/>
+              </div>
+
+              <div class="required-fields text-right spacer-bottom-5">
+                Vui lòng nhập thông tin
+              </div>
+
+              <div>
+                
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-warning btn-lg btn-block">
+                  <i class="fa fa-user"></i> Tạo tài khoảng
+                </button>
+              </div>
+              <p class="text-center small no-margin">
+                Bạn đã có tài khoản? <a class="btn-link" href="signin.html">Đăng nhập</a>
+              </p>
+</form>          </div>
+          <div class="col-md-5 spacer-30">
+            <div class="text-center">
+  <h4 class="no-margin-top">
+    Use your social network<br>account to signin
+  </h4>
+  <div class="socials btn-group clearfix">
+    <!--
+Exsample:
+var social = facebook, twitter, pinterest, google, linkedin or youtube
+var smaller = smaller or nil
+var link = link
+-->
+<a class="btn-social btn-facebook " href="#">  <i class="fa fa-facebook fa-1x"></i>
+</a>
+    <!--
+Exsample:
+var social = facebook, twitter, pinterest, google, linkedin or youtube
+var smaller = smaller or nil
+var link = link
+-->
+<a class="btn-social btn-twitter " href="#">  <i class="fa fa-twitter fa-1x"></i>
+</a>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
       
       <!-- modal loading -->
       <div class="modal fade style-base-modal modalLoader" id="modalLoader" tabindex="-1" role="dialog" aria-labelledby="modalResetPsw" aria-hidden="true">
@@ -135,109 +325,32 @@
                      <i class="fa fa-times"></i>
                      </span>
                      </button>
-                     <h4 class="modal-title fa fa-exclamation-triangle" id="modalMessage" style="color: #b50000; margin-left: 3px;"></h4>
+                     <h4 class="modal-title fa fa-exclamation-triangle" style="color: #b50000;"></h4>
+                     <h4 id="modalMessage" style="color: #b50000;"></h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div><!-- modal Finish-->
+       <div class="modal fade simple-modal" id="modalAlertFinish" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content" style="margin-top: 35%">
+               <div class="inner-container" style="border-color: #3399FF">
+                  <div class="modal-header text-center">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">
+                     <i class="fa fa-times"></i>
+                     </span>
+                     </button>
+                     <h4 class="modal-title fa fa-flag-checkered" style="color: #3399FF;"></h4>
+                     <h4 id="modalMessageFinish" style="color: #3399FF;"></h4>
                   </div>
                </div>
             </div>
          </div>
       </div>
       <!-- Modal buy voucher -->
-      <div class="modal fade style-base-modal" id="modal-buy-voucher" tabindex="-1" role="dialog" aria-labelledby="modalBuyVoucher" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="inner-container">
-                  <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">
-                     <i class="fa fa-times"></i>
-                     </span>
-                     </button>
-                     <h4 class="modal-title" id="modalBuyVoucher">BUY VOUCHER</h4>
-                  </div>
-                  <div class="modal-body">
-                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec fringilla diam.
-                        Quisque sed sagittis sem. Nulla ultrices tortor eu ligula pulvinar rutrum.
-                     </p>
-                     <form action="#" accept-charset="UTF-8" class="form-style-base" method="post" id="buy-voucher">
-                        <fieldset class="spacer-bottom-20">
-                           <div class="row clearfix">
-                              <div class="col-sm-6 form-group">
-                                 <select name="select-amount" class="input-lg" id="select-amount">
-                                    <option value="Select amount" selected="selected">Select amount</option>
-                                    <option value="20">$ 20,00</option>
-                                    <option value="30">$ 30,00</option>
-                                    <option value="40">$ 40,00</option>
-                                    <option value="50">$ 50,00</option>
-                                    <option value="60">$ 60,00</option>
-                                    <option value="0">Digita un altro importo</option>
-                                 </select>
-                              </div>
-                              <div class="col-sm-6 form-group">
-                                 <input type="text" class="form-control input-lg" id="input-other-amount" placeholder="$ 25,00" />
-                              </div>
-                           </div>
-                           <div class="row clearfix">
-                              <div class="col-sm-6 form-group">
-                                 <input type="email" class="form-control input-lg" placeholder="Email destinatorio" />
-                              </div>
-                              <div class="col-sm-6 form-group">
-                                 <input type="text" class="form-control input-lg" placeholder="Inserisci il tuo nome" />
-                              </div>
-                           </div>
-                           <div class="row">
-                              <div class="col-sm-12 form-group">
-                                 <textarea class="your-message" rows="3" placeholder="Message"></textarea>
-                              </div>
-                           </div>
-                           <div class="row clearfix">
-                              <div class="col-sm-5">
-                                 <div class="form-inline spacer-bottom-10">
-                                    <div class="form-group no-margin">
-                                       <p class="form-control-static">Quantity</p>
-                                    </div>
-                                    <div class="form-group no-margin">
-                                       <input type="text" class="form-control input-lg small-field" placeholder="1" />
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-sm-7">
-                                 <div class="form-inline delivery-date">
-                                    <div class="form-group no-margin">
-                                       <p class="form-control-static">Delivery date</p>
-                                    </div>
-                                    <div class="form-group no-margin">
-                                       <input type="text" class="form-control input-lg" placeholder="dd/mm/yyyy" />
-                                    </div>
-                                    <div class="form-group no-margin hidden-xs">
-                                       <a class="btn-link" href="#">              <i class="glyphicon glyphicon-calendar"></i>
-                                       </a>          
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </fieldset>
-                        <fieldset>
-                           <div class="clearfix row">
-                              <div class="col-sm-7 recap-info spacer-10">
-                                 <span class="number-voucher">2 Vouchers:</span> <span class="price">$ 40,00</span>
-                              </div>
-                              <div class="col-sm-5">
-                                 <div class="pull-right">
-                                    <input type="submit" value="purchase it" class="btn btn-warning btn-lg lg-2x" />
-                                 </div>
-                              </div>
-                           </div>
-                        </fieldset>
-                     </form>
-                     <p class="small-text no-margin-bottom">Gift certificates are subject to
-                        <a class="btn-link" href="#">Terms and Conditions</a>
-                     </p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+      
       <header class="bg-white">
          <section id="pre-header">
             <div class="container">
@@ -277,7 +390,7 @@
                               <span id="country-lang">Tiếng Việt</span>
                               <i class="fa fa-angle-down"></i>
                               </a>              
-                              <ul class="dropdown-menu list-unstyled">
+                              <!-- <ul class="dropdown-menu list-unstyled">
                                  <li>
                                     <a class="text-center" href="#">                    <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
                                     </a>                
@@ -290,7 +403,7 @@
                                     <a class="text-center" href="#">                    <img alt="France" src="{{url('')}}/assets/images/icons/flags/flag-francia.png" />
                                     </a>                
                                  </li>
-                              </ul>
+                              </ul> -->
                            </div>
                         </article>
                      </div>
@@ -388,10 +501,36 @@
                                     <a href="{{url('/')}}">Trang chủ</a>
                                  </li>
                                  <li class="{{ Request::is('thong-tin-nha-phan-phoi-we-cae-vn') ? 'active' : '' }}">
-                                    <a href="{{url('/thong-tin-nha-phan-phoi-we-cae-vn')}}">Thông tin</a>
+                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">Thông tin <i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                       <li class="clearfix row">
+                                          <div class="col-sm-12">
+                                             <ul class="list-unstyled">
+                                                <!-- <li>
+                                                   <a type="button" data-toggle="modal" data-target="#modal-subscribe-nl">
+                                                   Subscribe to Newsletter
+                                                   </a>
+                                                </li>
+                                                <li>
+                                                   <a type="button" data-toggle="modal" data-target="#modal-buy-voucher">
+                                                   Buy voucher
+                                                   </a>
+                                                </li>
+                                                <li>
+                                                   <a type="button" data-toggle="modal" data-target="#modal-buy-voucher">
+                                                   Buy voucher
+                                                   </a>
+                                                </li> -->
+                                                <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">Về chúng tôi</a> </li>     
+                                                <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">Địa chỉ liên hệ</a>      </li>
+                                                <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> Chính sách liên kết lương nông</a>  </li> 
+                                             </ul>
+                                          </div>
+                                       </li>
+                                    </ul>
                                  </li>
                                  <li class="">
-                                    <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> Mua hàng <i class="fa fa-angle-down"></i>
+                                    <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> Mua hàng
                                     </a>                  
                                  </li>
                                  <li class="">
@@ -400,135 +539,7 @@
                                  <li class="dropdown box-extended">
                                     <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">Hệ thống trang trại<i class="fa fa-angle-down"></i>
                                     </a>                  
-                                    <ul class="dropdown-menu">
-                                       <li class="clearfix row">
-                                          <div class="col-sm-4">
-                                             <ul class="list-unstyled">
-                                                <li class="dropdown-header">Modal</li>
-                                                <li>
-                                                   <button type="button" data-toggle="modal" data-target="#modal-subscribe-nl">
-                                                   Subscribe to Newsletter
-                                                   </button>
-                                                </li>
-                                                <li>
-                                                   <button type="button" data-toggle="modal" data-target="#modal-buy-voucher">
-                                                   Buy voucher
-                                                   </button>
-                                                </li>
-                                                <li>
-                                                   <button type="button" data-toggle="modal" data-target="#modal-signin">
-                                                   Signin
-                                                   </button>
-                                                </li>
-                                                <li>
-                                                   <button type="button" data-toggle="modal" data-target="#modal-simple-signin">
-                                                   Simple Signin
-                                                   </button>
-                                                </li>
-                                                <li>
-                                                   <button type="button" data-toggle="modal" data-target="#modal-signup">
-                                                   Signup
-                                                   </button>
-                                                </li>
-                                                <li>
-                                                   <button type="button" data-toggle="modal" data-target="#modal-reset-psw">
-                                                   Reset password
-                                                   </button>
-                                                </li>
-                                                <li>
-                                                   <button type="button" data-toggle="modal" data-target="#modal-abvertising">
-                                                   Modal Advertising
-                                                   </button>
-                                                </li>
-                                             </ul>
-                                          </div>
-                                          <div class="col-sm-4">
-                                             <ul class="list-unstyled">
-                                                <li class="dropdown-header">Forms</li>
-                                                <li>
-                                                   <a href="signin.html">Signin</a>
-                                                </li>
-                                                <li>
-                                                   <a href="signup.html">Signup</a>
-                                                </li>
-                                                <li>
-                                                   <a href="login.html">Login</a>
-                                                </li>
-                                                <li>
-                                                   <a href="payment.html">Payments</a>
-                                                </li>
-                                                <li>
-                                                   <a href="reset-password.html">Reset Password</a>
-                                                </li>
-                                                <li>
-                                                   <a href="buy-voucher.html">Buy Voucher</a>
-                                                </li>
-                                             </ul>
-                                          </div>
-                                          <div class="col-sm-4">
-                                             <ul class="list-unstyled">
-                                                <li class="dropdown-header">Pages</li>
-                                                <li>
-                                                   <a href="account.html">Account</a>
-                                                </li>
-                                                <li>
-                                                   <a href="info-account.html">Info Account</a>
-                                                </li>
-                                                <li>
-                                                   <a href="address.html">Address</a>
-                                                </li>
-                                                <li>
-                                                   <a href="add-address.html">Add Address</a>
-                                                </li>
-                                                <li>
-                                                   <a href="shop.html">Shop</a>
-                                                </li>
-                                                <li>
-                                                   <a href="product-details.html">Product details</a>
-                                                </li>
-                                                <li>
-                                                   <a href="wishlist.html">Wishlist</a>
-                                                </li>
-                                                <li>
-                                                   <a href="orders.html">My orders</a>
-                                                </li>
-                                                <li>
-                                                   <a href="cart.html">Cart</a>
-                                                </li>
-                                                <li>
-                                                   <a href="empty-basket.html">Empty Basket</a>
-                                                </li>
-                                                <li>
-                                                   <a href="error-404.html">Error Page</a>
-                                                </li>
-                                                <li>
-                                                   <a href="get-inspired.html">Get Inspired</a>
-                                                </li>
-                                                <li>
-                                                   <a href="contact.html">Contact us</a>
-                                                </li>
-                                                <li>
-                                                   <a href="faq.html">Faq</a>
-                                                </li>
-                                                <li>
-                                                   <a href="blog.html">Blog</a>
-                                                </li>
-                                                <li>
-                                                   <a href="post.html">Post</a>
-                                                </li>
-                                                <li>
-                                                   <a href="comments.html">Comments</a>
-                                                </li>
-                                                <li>
-                                                   <a href="about-us.html">About us</a>
-                                                </li>
-                                                <li>
-                                                   <a href="terms-conditions.html">Terms & Conditions</a>
-                                                </li>
-                                             </ul>
-                                          </div>
-                                       </li>
-                                    </ul>
+                                    
                                  </li>
                               </ul>
                            </div>
@@ -725,27 +736,27 @@
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
                            <img class="hidden-sm hidden-md" alt="tel" src="{{url('')}}/assets/images/icons/icon-tel.png" />
-                           <span data-info="text-info">+0 888 9090 909</span>
+                           <span data-info="text-info">Hotline: +0 888 9090 909</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
-                           <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-time.png" />
-                           <span data-info="text-info">Every day, 9 am to 18 pm</span>
+                           <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-shipping.png" />
+                           <span data-info="text-info">Giao hàng tận nơi</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
                            <img class="hidden-sm hidden-md" alt="email" src="{{url('')}}/assets/images/icons/icon-mail.png" />
                            <span data-info="text-info">
-                           margarita-barton@fastmail.com
+                           Hỗ trợ: support@cfarm.vn
                            </span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
                            <img class="hidden-sm hidden-md" alt="location" src="{{url('')}}/assets/images/icons/icon-location.png" />
-                           <span data-info="text-info">21 Nursary Lane, Manchester</span>
+                           <span data-info="text-info">167 Trần Trọng Cung, Q.7, TP.HCM</span>
                         </div>
                      </article>
                   </div>
@@ -757,67 +768,34 @@
                <div class="row clearfix">
                   <article class="col-xs-12 col-sm-7">
                      <div class="clearfix row">
-                        <div class="col-sm-3">
-                           <ul class="footer-widget-list list-unstyled spacer-bottom-5">
-                              <li>
-                                 <strong>About us</strong>
-                              </li>
-                              <li>
-                                 <a href="#.html">Outlet</a>
-                              </li>
-                              <li>
-                                 <a href="#.html">Bands and Waist Bags</a>
-                              </li>
-                              <li>
-                                 <a href="#.html">Our Brands</a>
-                              </li>
-                              <li>
-                                 <a href="#.html">Blog</a>
-                              </li>
-                           </ul>
+                        <div class="col-sm-5">
+                           <ul class="footer-widget-list list-unstyled"><li><strong>CFarm! </strong></li></ul>
+                           Cộng đồng phát triển thực phẩm sạch trồng hữu cơ và tự nhiên Việt Nam. Nơi kết nối những trang trại sản xuất lương thiện với những người nội trợ chăm sóc sức khỏe gia đình. Hãy tham gia cùng chúng tôi để phát triển cộng đồng mạnh mẽ hơn.
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-sm-offset-1">
                            <ul class="footer-widget-list list-unstyled spacer-bottom-5">
                               <li>
-                                 <strong>About us</strong>
+                                 <strong>Thông tin</strong>
                               </li>
-                              <li>
-                                 <a href="#.html">Outlet</a>
-                              </li>
-                              <li>
-                                 <a href="#.html">Bands and Waist Bags</a>
-                              </li>
-                              <li>
-                                 <a href="#.html">Our Brands</a>
-                              </li>
-                              <li>
-                                 <a href="#.html">Blog</a>
-                              </li>
+                           <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">Về chúng tôi</a> </li>     
+                           <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">Địa chỉ liên hệ</a>      </li>
+                           <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> Chính sách liên kết lương nông</a>  </li>    
                            </ul>
                         </div>
                         <div class="col-sm-3">
                            <ul class="footer-widget-list list-unstyled">
                               <li>
-                                 <strong>Customer service</strong>
+                                 <strong>Chăm sóc khách hàng</strong>
                               </li>
                               <li>
-                                 <a href="/about.html">Terms and conditions</a>
+                                 <a class="" href="{{url('')}}/huong-dan-mua-thuc-pham-sach">Hướng dẫn mua hàng
+                           </a>
                               </li>
                               <li>
-                                 <a href="/about.html">Privacy</a>
+                                 <a class="" href="{{url('')}}/chinh-sach-doi-tra">Chính sách đổi trả
+                           </a>
                               </li>
-                              <li>
-                                 <a href="/about.html">Refound</a>
-                              </li>
-                              <li>
-                                 <a href="/about.html">Size Guide</a>
-                              </li>
-                              <li>
-                                 <a href="/about.html">Loyalty points</a>
-                              </li>
-                              <li>
-                                 <a href="credit.html">Credit</a>
-                              </li>
+                             
                            </ul>
                         </div>
                      </div>
@@ -896,30 +874,12 @@
                   </article>
                   <article class="col-sm-5">
                      <p data-text="copyright" class="text-left no-margin">
-                        Copyright © 2014. All Rights Reserved
+                        Copyright © 2017. Designed by <b>CFarm Technical Team</b>
                      </p>
                   </article>
                </div>
                <hr>
-               <div>
-                  <ul class="clearfix creditcard pull-left list-unstyled">
-                     <li class="pull-left">
-                        <img alt="mastercard" src="{{url('')}}/assets/images/icons/credit-cards/mastercard.png" />
-                     </li>
-                     <li class="pull-left">
-                        <img alt="american express" src="{{url('')}}/assets/images/icons/credit-cards/american-express.png" />
-                     </li>
-                     <li class="pull-left">
-                        <img alt="maestro" src="{{url('')}}/assets/images/icons/credit-cards/maestro.png" />
-                     </li>
-                     <li class="pull-left">
-                        <img alt="circus" src="{{url('')}}/assets/images/icons/credit-cards/circus.png" />
-                     </li>
-                     <li class="pull-left">
-                        <img alt="visa" src="{{url('')}}/assets/images/icons/credit-cards/visa.png" />
-                     </li>
-                  </ul>
-               </div>
+               
             </div>
          </section>
       </footer>
@@ -973,14 +933,51 @@
       function addEmailCus() {
          var emailCus = $("input[name=emailCus]").val();
          var receiveEmailCus = $("input[name=receiveEmailCus]").val();
-         var url = 'api/customer/addEmailCus=' + emailCus + '&receiveEmailCus=' +receiveEmailCus;
+         if(emailCus != ''){
+            var url = '{{url('')}}/api/customer/addEmailCus=' + emailCus + '&receiveEmailCus=' +receiveEmailCus;
            $.ajaxSetup({ cache: false });
-           $.getJSON(url, function(data){ 
+           $.getJSON(url, function(data){
+
                  console.log(data);
               }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
-                  alert("Vui lòng kiểm tra kết nối internet.");
+                  console.log(textStatus);
+                  $('#modalMessage').html("Vui lòng kiểm tra kết nối Internet!");
+                  $('#modalLoader').modal('hide');
+                  $('#modalAlert').modal('show');
               });
+           }else{
+                $('#modalMessage').html("Vui lòng nhập đúng email!");
+                  $('#modalLoader').modal('hide');
+                  $('#modalAlert').modal('show');
+           }
+         
       }
+
+      //quan tam san pham
+          function interest(id) {
+            var url = '{{url('')}}/api/products/interest/product_id=' + id;
+            $.getJSON(url, function(data){
+                  $('#modalLoader').modal('hide');
+                  console.log(data);
+                  if(data.error == '1')
+                  {
+                    $('#modalMessage').html(data.status);
+                    $('#modalLoader').modal('hide');
+                    $('#modalAlert').modal('show');
+                  }else if(data.error == '0'){
+                    $('#modalMessageFinish').html(data.status);
+                    $('#modalLoader').modal('hide');
+                    $('#modalAlertFinish').modal('show');
+                  }
+                  // loadModal(data);
+                  // $('#modalChooseFarmer').modal('show');
+               }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+                  console.log(textStatus);
+                  $('#modalMessage').html("Vui lòng kiểm tra kết nối Internet!");
+                  $('#modalLoader').modal('hide');
+                  $('#modalAlert').modal('show');
+               });
+          }
       </script>
    </body>
 </html>

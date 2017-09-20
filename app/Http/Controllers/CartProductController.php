@@ -25,11 +25,12 @@ class CartProductController extends Controller
 
     public function addItem(Request $request)
     {
+        
         $data = $request->data;
         $proID = $data['id'];
         $farmerID = $data['farmerID'];
         $qty = $data['qty'];
-        $prod = DB::select('SELECT p.`id` "id", p.`name` "name", im.`filename` "image", i.`price_customer` "price" FROM `products` p, `prices` i, `images` im, `trading` td, `products_images` pi WHERE p.`price_id` = i.`id` AND p.`id` = pi.`product_id` AND pi.`image_id` = im.`id` AND p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`quantity_left` >= ?', [$proID, $farmerID, $qty]);
+        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`quantity_left` >= ?', [$proID, $farmerID, $qty]);
         if($prod)
         {
             Cart::add([
@@ -39,7 +40,7 @@ class CartProductController extends Controller
         }else{
             return response()->json([
                 'error' => 1,
-                'message' => 'Sản phẩm đã hết hàng. Vui lòng chọn nhà cung cấp khác.'
+                'status' => 'Sản lượng không đủ. Vui lòng chọn nhà cung cấp khác.'
             ]);
         }
         

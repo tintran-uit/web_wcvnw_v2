@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Auth;
 
 
 class ProductController extends Controller
@@ -65,5 +66,25 @@ class ProductController extends Controller
 		*/
 
 		return $product_detail;
+	}
+
+	public function addInterest($id)
+	{
+		return response()->json([
+		            'status' => 'Vui lòng Đăng nhập để sử dụng tính năng!',
+		            'error' => '1',
+		        ]);
+		if(Auth::check()){
+
+			return response()->json([
+		            'status' => 'Cảm ơn bạn đã quan tâm sản phẩm.',
+		            'error' => '0',
+		        ]);
+		}else{
+			return response()->json([
+		            'status' => 'Vui lòng Đăng nhập để sử dụng tính năng!',
+		            'error' => '1',
+		        ]);
+		}
 	}
 }

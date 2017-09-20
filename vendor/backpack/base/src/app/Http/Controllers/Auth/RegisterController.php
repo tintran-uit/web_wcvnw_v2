@@ -51,10 +51,11 @@ class RegisterController extends Controller
         $users_table = $user->getTable();
 
         return Validator::make($data, [
-            'name'     => 'required|max:255',
-            'email'    => 'required|email|max:255|unique:'.$users_table,
-            'password' => 'required|min:6|confirmed',
-        ]);
+                'name'     => 'required|max:255',
+                'email'    => 'required|email|max:255|unique:'.$users_table,
+                'password' => 'required|min:6|confirmed',
+            ]
+        );
     }
 
     /**
