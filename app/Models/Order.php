@@ -57,19 +57,21 @@ class Order extends Model
 	| RELATIONS
 	|--------------------------------------------------------------------------
 	*/
-    public function brand()
+    public function customer()
     {
-        return $this->belongsTo('App\Models\Brand', 'brand_id');
+        return $this->belongsTo('App\Models\Customer', 'customer_id');
     }
-
-    public function categories()
+    public function farmer()
     {
-        return $this->belongsToMany('App\Models\ProductCategory', 'products_categories','product_id','category_id');
+        return $this->belongsTo('App\Models\Farmer', 'farmer_id');
     }
-
-    public function images()
+    public function product()
     {
-        return $this->belongsToMany('App\Models\Image', 'products_images','product_id','image_id');
+        return $this->belongsTo('App\Models\Product', 'product_id');
+    }
+    public function shipper()
+    {
+        return $this->belongsTo('App\Models\Shipper', 'shipper_id');
     }
 
 //    public function images()

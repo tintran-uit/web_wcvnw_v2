@@ -24,11 +24,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin', 'role'], 'na
     CRUD::resource('product-brand', 'BrandCrudController');
 
     //Operation Management CRUD
-    CRUD::resource('orders', 'OrderCrudController');
-    CRUD::resource('agents', 'AgentCrudController');
-    CRUD::resource('customers', 'CustomerCrudController');
-    CRUD::resource('farmers', 'FarmerCrudController');
-    CRUD::resource('shippers', 'ShipperCrudController');
+    CRUD::resource('order-item', 'OrderCrudController');
+    CRUD::resource('agent-item', 'AgentCrudController');
+    CRUD::resource('customer-item', 'CustomerCrudController');
+    CRUD::resource('farmer-item', 'FarmerCrudController');
+    CRUD::resource('shipper-item', 'ShipperCrudController');
 
 });
 

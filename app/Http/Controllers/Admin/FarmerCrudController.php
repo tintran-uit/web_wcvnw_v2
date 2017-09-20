@@ -21,7 +21,7 @@ class FarmerCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel("App\Models\Farmer");
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/farmer');
+        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/farmer-item');
         $this->crud->setEntityNameStrings('farmer', 'farmers');
 
         /*
@@ -37,185 +37,74 @@ class FarmerCrudController extends CrudController
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
             'name' => 'name',
-            'label' => 'Khách Hàng',
+            'label' => 'Tên',
         ]);
         $this->crud->addColumn([
-            'name' => 'product',
-            'label' => 'Sản phẩm',
+            'name' => 'phone',
+            'label' => 'Điện Thoại',
         ]);
         $this->crud->addColumn([
-            'name' => 'quantity',
-            'label' => 'Số lượng',
-        ]);
-
-        $this->crud->addColumn([
-            'name' => 'sub_total',
-            'label' => 'Thành Tiền',
+            'name' => 'address',
+            'label' => 'Địa Chỉ',
         ]);
         $this->crud->addColumn([
-            'name' => 'delivery_address',
-            'label' => 'Giao Hàng',
+            'name' => 'rating',
+            'label' => 'Điểm',
         ]);
         $this->crud->addColumn([
-            'name' => 'status',
-            'label' => 'Trạng Thái',
-        ]);
-
-
-/*
-        $this->crud->addColumn([    // SELECT
-            'label' => 'Product Brand',
-            'type' => 'select',
-            'name' => 'brand_id',
-            'entity' => 'brand',
-            'attribute' => 'name',
-            'model' => "App\Models\Brand",
-        ]);
-        $this->crud->addColumn([       // Select2Multiple = n-n relationship (with pivot table)
-            'label' => 'Product Categories',
-            'type' => 'select_multiple',
-            'name' => 'categories', // the method that defines the relationship in your Model
-            'entity' => 'categories', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\ProductCategory", // foreign key model
+            'name' => 'rating_count',
+            'label' => 'Lượt đánh giá',
         ]);
         $this->crud->addColumn([
-            'name' => 'price',
-            'label' => 'Price',
+            'name' => 'profile_image',
+            'label' => 'Ảnh',
         ]);
-        $this->crud->addColumn([
-            'name' => 'old_price',
-            'label' => 'Old Price',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'featured',
-            'label' => 'Featured',
-            'type' => 'check',
-        ]);
-
 
         // ------ CRUD FIELDS
-        $this->crud->addField([    // CHECKBOX
-            'name' => 'visible',
-            'label' => 'Visible Product',
-            'type' => 'checkbox',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-3'
-            ],
-        ]);
-        $this->crud->addField([    // CHECKBOX
-            'name' => 'featured',
-            'label' => 'Featured Product',
-            'type' => 'checkbox',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-3'
-            ],
-        ]);
-        $this->crud->addField([    // TEXT
-            'name' => 'price',
-            'label' => 'Product Price',
-            'type' => 'number',
-            // optionals
-            'prefix' => "RUB",
-//             'suffix' => ".00",
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-3'
-            ],
-        ]);
-        $this->crud->addField([    // TEXT
-            'name' => 'old_price',
-            'label' => 'Product Old Price',
-            'type' => 'number',
-            // optionals
-            'prefix' => "RUB",
-//            'suffix' => ".00",
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-3'
-            ],
-        ]);
-        $this->crud->addField([
+         $this->crud->addField([
             'name' => 'name',
-            'label' => 'Name',
+            'label' => 'Tên',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-6'
             ],
         ]);
-        $this->crud->addField([
-            'name' => 'slug',
-            'label' => 'Slug (URL)',
+
+       $this->crud->addField([    // TEXT
+            'name' => 'phone',
+            'label' => 'Điện Thoại',
             'type' => 'text',
-            'hint' => 'Will be automatically generated from your name, if left empty.',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ],
-            // 'disabled' => 'disabled'
-        ]);
-
-        $this->crud->addField([    // SELECT
-            'label' => 'Product Brand',
-            'type' => 'select2',
-            'name' => 'brand_id',
-            'entity' => 'brand',
-            'attribute' => 'name',
-            'model' => "App\Models\Brand",
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-6'
             ],
         ]);
-
-        $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
-            'label' => 'Product Categories',
-            'type' => 'select2_multiple',
-            'name' => 'categories', // the method that defines the relationship in your Model
-            'entity' => 'categories', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\ProductCategory", // foreign key model
-            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ],
-        ]);
-
-        $this->crud->addField([    // TEXT
-            'name' => 'meta_title',
-            'label' => 'Meta Title',
+       $this->crud->addField([    // TEXT
+            'name' => 'address',
+            'label' => 'Địa Chỉ',
             'type' => 'text',
-            'placeholder' => 'Your meta title here',
-        ]);
-
-        $this->crud->addField([    // TEXT
-            'name' => 'meta_keywords',
-            'label' => 'Meta Keywords',
-            'type' => 'text',
-            'placeholder' => 'Your meta keywords here',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10'
+            ],
         ]);
         $this->crud->addField([   // WYSIWYG
-            'name' => 'meta_description',
-            'label' => 'Meta Description',
-            'type' => 'text',
-            'placeholder' => 'Your meta description here',
-        ]);
-        $this->crud->addField([   // WYSIWYG
-            'name' => 'description',
-            'label' => 'Category Description',
+            'name' => 'profile',
+            'label' => 'Thông Tin Nông Trại',
             'type' => 'ckeditor',
             'placeholder' => 'Your meta description here',
         ]);
 
-        $this->crud->addField([    // Image
-            // Select2Multiple = n-n relationship (with pivot table)
-            'label' => 'Product Images',
-            'type' => 'upload_multiple',
-            'name' => 'images',
-            'entity' => 'images',
-            'attribute' => 'filename',
-            'model' => "App\Models\Image",
-//            'upload' => true,
-//            'disk' => 'uploads',
-            'pivot' => true,
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'profile_image',
+            'label' => 'Ảnh Nông Dân',
+            'type' => 'browse',
+            'placeholder' => 'Chọn hình ảnh cho sản phẩm',
         ]);
 
-        $this->crud->enableAjaxTable();*/
+
+        $this->crud->enableAjaxTable();
+
+
+
+        // ------ CRUD FIELDS
 
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
@@ -284,22 +173,6 @@ class FarmerCrudController extends CrudController
 
     public function store(StoreRequest $request)
     {
-        // your additional operations before save here
-        foreach ($request->images as $img) {
-            if(isset($img) && !empty($img)) {
-                $image = new Image();
-                $image->filename = "/products/"+$img;
-                $image->position = '0';
-                $image->save();
-                $imagesArray[] = $image->id;
-            }
-        }
-//        var_dump($imagesArray); var_dump($request['categories']);
-        $request['images'] = $imagesArray;
-//        var_dump($request['images']);die;
-//        $request->merge(array('images' => [$image->id]));
-//        $request['image_id'] = $image->id;
-
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
@@ -309,18 +182,6 @@ class FarmerCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
-        foreach ($request->images as $img) {
-            if(isset($img) && !empty($img)) {
-                $image = new Image();
-                $image->filename = "/products/"+$img;
-                $image->position = '0';
-                $image->save();
-                $imagesArray[] = $image->id;
-            }
-        }
-//        var_dump($imagesArray); var_dump($request['categories']);
-        $request['images'] = $imagesArray;
-
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
