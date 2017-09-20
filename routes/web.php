@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin', 'role'], 'namespace' => 'Admin'], function () {
     // Backpack\MenuCRUD
     CRUD::resource('menu-item', 'MenuItemCrudController');
     // Backpack\NewsCRUD (Refactored)
@@ -44,3 +44,7 @@ Route::get('/add', 'PageController@testcart');
 Route::get('{page}/{subs?}', ['uses' => 'PageController@page'])
     ->where(['page' => '^((?!admin).)*$', 'subs' => '.*']);
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

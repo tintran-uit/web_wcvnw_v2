@@ -114,49 +114,49 @@
      
    </div>
 </section>
-<section class="purchase-benefits spacer-30 " id="ttt">
-   <div class="bg-white spacer-10">
-      <div class="container spacer-top-15">
-         <div class="row clearfix">
-            <article class="col-xs-12 col-sm-3">
-               <div class="column text-center spacer-bottom-15">
-                  <i class="fa fa-truck fa-3x"></i>
-                  <h4>Free Worldwide Shipping</h4>
-                  <p class="no-margin">
-                     Delivery throughout England<br>in 24/48 h by courier
-                  </p>
-               </div>
-            </article>
-            <article class="col-xs-12 col-sm-3">
-               <div class="column text-center spacer-bottom-15">
-                  <i class="fa fa-gift fa-3x"></i>
-                  <h4>Want to make a gift?</h4>
-                  <p class="no-margin">
-                     When ordering, <a href="#" class="btn-link">ask for gift box</a> and you'll get everything you need to be able to create
-                  </p>
-               </div>
-            </article>
-            <article class="col-xs-12 col-sm-3">
-               <div class="column text-center spacer-bottom-15">
-                  <i class="fa fa-lock fa-3x"></i>
-                  <h4>Secure Payments!</h4>
-                  <p class="no-margin">
-                     Please card payments credit in all tranquility use certified instruments
-                  </p>
-               </div>
-            </article>
-            <article class="col-xs-12 col-sm-3">
-               <div class="column text-center spacer-bottom-15">
-                  <i class="fa fa-phone fa-3x"></i>
-                  <h4>Customer Service</h4>
-                  <p class="no-margin">
-                     Our customer service is available from Monday to Saturday from 9:00 to 18:00
-                  </p>
-               </div>
-            </article>
-         </div>
+<section class="purchase-benefits spacer-30 bg-extra-light-grey">
+  <div class=" spacer-10">
+    <div class="container spacer-top-15">
+      <div class="row clearfix">
+        <article class="col-xs-12 col-sm-3">
+          <div class="column text-center spacer-bottom-15">
+            <i class="fa fa-truck fa-3x"></i>
+            <h4>Giao hàng tận nơi</h4>
+            <p class="no-margin">
+              Miễn phí với đơn hàng<br>trên 500.000 VNĐ
+            </p>
+          </div>
+        </article>
+        <article class="col-xs-12 col-sm-3">
+          <div class="column text-center spacer-bottom-15">
+            <i class="fa fa-gift fa-3x"></i>
+            <h4>Tặng quà cho người thân?</h4>
+            <p class="no-margin">
+              Hãy gửi những món quà sức khỏe và yêu thương đến người thân, đồng nghiệp, cấp trên của bạn
+            </p>
+          </div>
+        </article>
+        <article class="col-xs-12 col-sm-3">
+          <div class="column text-center spacer-bottom-15">
+            <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+            <h4>Biết rõ nguồn gốc!</h4>
+            <p class="no-margin">
+              Nguồn gốc sản phẩm rõ ràng. Khách hàng được chọn trang trại mong muốn
+            </p>
+          </div>
+        </article>
+        <article class="col-xs-12 col-sm-3">
+          <div class="column text-center spacer-bottom-15">
+            <i class="fa fa-phone fa-3x"></i>
+            <h4>Chăm sóc khách hàng</h4>
+            <p class="no-margin">
+              Hỗ trợ tư vấn, giải đáp thắc mắc khách hàng, từ thứ Hai đến thứ Bảy 8:00 to 17:00
+            </p>
+          </div>
+        </article>
       </div>
-   </div>
+    </div>
+  </div>
 </section>
 <section class="news-box spacer-bottom-30">
    <div class="container">
@@ -360,7 +360,7 @@
                   html += '<!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\">';
                   $.each(data, function(i, d){
 
-                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/uploads/products/images/'+d.image+'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\" style=\"padding-left: 0px;\">\r\n                                          <strong>'+numberWithCommas(d.price)+' VND<\/strong>\r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"pull-left\">\r\n                                             <a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-heart\"><\/i>\r\n                                             <\/a><a class=\"btn btn-info no-margin\" href=\"\">            <i class=\"fa fa-eye\"><\/i>\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                          <div class=\"pull-right\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"clickFarm(\''+d.name+'\','+d.id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
+                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/uploads/products/images/'+d.image+'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\" style=\"padding-left: 0px;\">\r\n                                          <strong>'+numberWithCommas(d.price)+' VND<\/strong>\r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"pull-left\">\r\n                                             <a class=\"btn btn-info no-margin\" onclick=\"interest('+d.id+')\">            <i class=\"fa fa-heart\"><\/i>\r\n                                             <\/a><a class=\"btn btn-info no-margin\" href=\"/product/slug='+d.slug+'\">           <i class=\"fa fa-eye\"><\/i>\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                          <div class=\"pull-right\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"clickFarm(\''+d.name+'\','+d.id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
 
                      switch (i){
                          case 0:
@@ -443,7 +443,7 @@
           function stepperDown() {
             var num = document.getElementById('stepper').value;
             num = parseInt(num);
-            if(num>0)
+            if(num>1)
             {
             document.getElementById('stepper').value = num - 1; 
             }
@@ -454,7 +454,24 @@
             console.log(prodName);
             $('#modalNameProd').html(prodName);
             jQuery("#tbSupp tbody").empty();
-            var url = '/api/products/suppliers/product_id='+id;
+            var url = '{{url('')}}/api/products/suppliers/product_id='+id;
+            $.ajaxSetup({ cache: false });
+            $('#modalLoader').modal('show');
+            $.getJSON(url, function(data){
+                  $('#modalLoader').modal('hide');
+                  loadModal(data);
+                  $('#modalChooseFarmer').modal('show');
+               }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+                  $('#modalLoader').modal('hide');
+                   alert("Vui lòng kiểm tra kết nối internet.");
+               });
+            
+          }
+
+          function clickFarm(id) {
+            prodID = id;
+            jQuery("#tbSupp tbody").empty();
+            var url = '{{url('')}}/api/products/suppliers/product_id='+id;
             $.ajaxSetup({ cache: false });
             $('#modalLoader').modal('show');
             $.getJSON(url, function(data){
@@ -506,8 +523,10 @@
                         $('#modalLoader').modal('hide');
                         if(data.error)
                         {
-                          $('#modalMessage').html(data.message);
+                          $('#modalMessage').html(data.status);
                           $('#modalAlert').modal('show');
+                          // clickFarm(prodID);
+                          // $('#modalChooseFarmer').modal('show');
                         }else{
                           updateCartStatus(data);
                         }
@@ -523,10 +542,8 @@
               $('#modalChooseFarmer').modal('hide');
           }
 
+          
 
-         function numberWithCommas(x) {
-             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-         }
       </script>
 
 @endsection

@@ -18,6 +18,8 @@ class Admin
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        // return 'a';
+        // var_dump(Auth::guard('admin')->guest());die();
         if (Auth::guard($guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response(trans('backpack::base.unauthorized'), 401);

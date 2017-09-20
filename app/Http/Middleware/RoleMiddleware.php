@@ -17,6 +17,7 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next, $role, $permission)
     {
+        // var_dump($request);die();
         if (Auth::guest()) {
             return redirect($urlOfYourLoginPage);
         }

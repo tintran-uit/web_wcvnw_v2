@@ -76,7 +76,7 @@
                         <a class="btn btn-primary btn-lg lg-2x" onclick="addCart()">
                           ADD TO CART <i class="glyphicon glyphicon-shopping-cart"></i>
                         </a>
-<a class="btn btn-info btn-lg" href="#">                          <i class="fa fa-heart"></i>
+<a class="btn btn-info btn-lg" onclick="interest({{$product[0]->id}})">                          <i class="fa fa-heart"></i>
 </a>                  </article>
                       <article class="col-sm-5">
                         <div class="clearfix product-price"> 
@@ -97,7 +97,7 @@
             </section>
           </article>
           <!-- chi tiet -->
-          <article class="col-sm-12 col-md-12" style="margin-top:-60px">
+          <article class="col-sm-12 col-md-12" style="margin-top:-10px">
             <ul class="product-tabs">
                   <li class=" active first"><a href="#product_tabs_description_contents" data-toggle="pill">Chi tiết sản phẩm</a>
                   </li>
@@ -138,36 +138,36 @@
         <article class="col-xs-12 col-sm-3">
           <div class="column text-center spacer-bottom-15">
             <i class="fa fa-truck fa-3x"></i>
-            <h4>Free Worldwide Shipping</h4>
+            <h4>Giao hàng tận nơi</h4>
             <p class="no-margin">
-              Delivery throughout England<br>in 24/48 h by courier
+              Miễn phí với đơn hàng<br>trên 500.000 VNĐ
             </p>
           </div>
         </article>
         <article class="col-xs-12 col-sm-3">
           <div class="column text-center spacer-bottom-15">
             <i class="fa fa-gift fa-3x"></i>
-            <h4>Want to make a gift?</h4>
+            <h4>Tặng quà cho người thân?</h4>
             <p class="no-margin">
-              When ordering, <a href="#" class="btn-link">ask for gift box</a> and you'll get everything you need to be able to create
+              Hãy gửi những món quà sức khỏe và yêu thương đến người thân, đồng nghiệp, cấp trên của bạn
             </p>
           </div>
         </article>
         <article class="col-xs-12 col-sm-3">
           <div class="column text-center spacer-bottom-15">
-            <i class="fa fa-lock fa-3x"></i>
-            <h4>Secure Payments!</h4>
+            <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+            <h4>Biết rõ nguồn gốc!</h4>
             <p class="no-margin">
-              Please card payments credit in all tranquility use certified instruments
+              Nguồn gốc sản phẩm rõ ràng. Khách hàng được chọn trang trại mong muốn
             </p>
           </div>
         </article>
         <article class="col-xs-12 col-sm-3">
           <div class="column text-center spacer-bottom-15">
             <i class="fa fa-phone fa-3x"></i>
-            <h4>Customer Service</h4>
+            <h4>Chăm sóc khách hàng</h4>
             <p class="no-margin">
-              Our customer service is available from Monday to Saturday from 9:00 to 18:00
+              Hỗ trợ tư vấn, giải đáp thắc mắc khách hàng, từ thứ Hai đến thứ Bảy 8:00 to 17:00
             </p>
           </div>
         </article>
@@ -238,7 +238,7 @@ function stepperUp() {
 function stepperDown() {
   var num = document.getElementById('stepper').value;
   num = parseInt(num);
-  if(num>0)
+  if(num>1)
             {
             document.getElementById('stepper').value = num - 1; 
             }
@@ -247,8 +247,10 @@ function stepperDown() {
 function addCart() {
   var id = "{{$product[0]->id}}";
   var qty = document.getElementById('stepper').value;
-  var farmerID = $('input[name="farmerID"]:checked').val();;
-  console.log(farmerID);
+  var farmerID = $('input[name="farmerID"]:checked').val();
+  if(farmerID=='')
+  {
+    console.log(farmerID);
   var data = { "id": id, "qty": qty , 'farmerID':farmerID};
   $('#modalLoader').modal('show');
       $.ajax({
@@ -266,7 +268,7 @@ function addCart() {
             $('#modalLoader').modal('hide');
             if(data.error)
             {
-              $('#modalMessage').html(data.message);
+              $('#modalMessage').html(data.status);
               $('#modalAlert').modal('show');
             }else{
               updateCartStatus(data);
@@ -280,6 +282,8 @@ function addCart() {
               $('#modalAlert').modal('show');
           }
       });
+  }
+  
 }
    
 </script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Vister;
 
 class CustomerController extends Controller
 {
@@ -36,13 +37,25 @@ class CustomerController extends Controller
 		return 0;
 	}
 
-	public function addEmai($emailCus, $receiveEmailCus)
+	public function addEmaiVister($emailCus, $receiveEmailCus)
 	{
-		return response()->json([
-            'status' => 1,
-            'ma' => $emailCus,
-            'giam' => $receiveEmailCus
-        ]);
+		$vister = Vister::where('email', $emailCus)->first(); // model or null
+		if (!$vister) {
+		    $vister = new Vister;
+			$vister->email    = $emailCus;
+			$vister->save();
+			return response()->json([
+	            'error' => 1,
+	            'status' => 'Cảm ơn bạn.',
+	        	]);
+		}else{
+			return response()->json([
+	            'error' => 2,
+	            'status' => 'Bạn đã thêm.',
+	        	]);
+		}
+		
+		
 	}
 
 }

@@ -19,6 +19,7 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/products', 'ProductController@getproducts');
 Route::get('/products/suppliers/product_id={product_id}', 'ProductController@getSuppliers');
+Route::get('/products/interest/product_id={product_id}', 'ProductController@addInterest');
 
 
 
@@ -35,5 +36,5 @@ Route::get('payment/checkMa={ma}', 'CartProductController@checkMaGiamGia');
 Route::post('payment/add', 'CartProductController@addPay');
 
 //customer
-Route::get('customer/addEmailCus={emailCus}&receiveEmailCus={receiveEmailCus}', 'CustomerController@addEmai');
+Route::get('customer/addEmailCus={emailCus}&receiveEmailCus={receiveEmailCus}', 'CustomerController@addEmaiVister');
 
