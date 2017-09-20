@@ -24,7 +24,7 @@ class Trading extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['farmer_id','product_id','capacity', 'quantity_left', 'unit', 'status'];
+    protected $fillable = ['farmer_id','product_id','capacity', 'sold', 'unit', 'status'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [

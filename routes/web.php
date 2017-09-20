@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin', 'role'], 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace' => 'Admin'], function () {
     // Backpack\MenuCRUD
     CRUD::resource('menu-item', 'MenuItemCrudController');
     // Backpack\NewsCRUD (Refactored)
