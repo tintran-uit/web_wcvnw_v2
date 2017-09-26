@@ -68,7 +68,7 @@
          <br>
          <ul class="nav nav-tabs nav-justified">
             <?php  
-                $url = 'wecarevn.com';
+                $url = 'http://wecarevn.com';
                $counter = 0; 
                
                foreach($categories as $category) {
