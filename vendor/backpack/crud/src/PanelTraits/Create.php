@@ -27,7 +27,11 @@ trait Create
         $item = $this->model->create(array_except($data, $nn_relationships));
 
         // if there are any relationships available, also sync those
+<<<<<<< HEAD
         // var_dump($data); die();
+=======
+        //var_dump($data); die();
+>>>>>>> 207e7e09f123a234196fd32c3b02d14e09c15326
         $this->syncPivot($item, $data);
 
         return $item;
