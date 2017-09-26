@@ -71,7 +71,7 @@
                $counter = 0; 
                
                foreach($categories as $category) {
-                  $img = '<img class="image-responsive" alt="Kids Store" src="http://localhost:8000/assets/images/icons/product-tab/'.$category->icon.'.png" height="25px"><br>';
+                  $img = '<img class="image-responsive" alt="Kids Store" src="{{url('')}}/assets/images/icons/product-tab/'.$category->icon.'.png" height="25px"><br>';
                  $selected = ''; 
 
                  if ( !empty($category) ) {
