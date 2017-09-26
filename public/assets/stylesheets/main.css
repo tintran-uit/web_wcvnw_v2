@@ -1693,7 +1693,8 @@ a {
       margin-right: 4px; }
       /* line 71, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_products-box.scss */
       .content-product .thumbnail .caption .button-group .btn:last-child {
-        margin-right: 0; }
+        /*margin-right: 0; */
+      }
 
 /* line 2, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_step-order.scss */
 #steps-order .nav-tabs {
