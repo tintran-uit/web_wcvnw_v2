@@ -68,10 +68,11 @@
          <br>
          <ul class="nav nav-tabs nav-justified">
             <?php  
+                $url = 'wecarevn.com';
                $counter = 0; 
                
                foreach($categories as $category) {
-                  $img = '<img class="image-responsive" alt="Kids Store" src="{{url('')}}/assets/images/icons/product-tab/'.$category->icon.'.png" height="25px"><br>';
+                  $img = '<img class="image-responsive" alt="Kids Store" src="'.$url.'/assets/images/icons/product-tab/'.$category->icon.'.png" height="25px"><br>';
                  $selected = ''; 
 
                  if ( !empty($category) ) {
