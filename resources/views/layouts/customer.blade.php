@@ -38,8 +38,8 @@
       <meta name="theme-color" content="#ffffff">
       <script src="{{url('')}}/assets/javascripts/vendor/jquery-2.1.3.min.js" type="text/javascript"></script>
       <script src="{{url('')}}/assets/javascripts/vendor/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.1/css/bootstrapValidator.min.css"/>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.1/js/bootstrapValidator.min.js"></script>
+      <link rel="stylesheet" href="{{url('')}}/assets/stylesheets/vendor/bootstrap/css/bootstrapValidator.min.css"/>
+<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/bootstrap/bootstrapValidator.min.js"></script>
       <script src="{{url('')}}/assets/javascripts/utility.js" type="text/javascript"></script>
       <script src="{{url('')}}/assets/javascripts/all.js" type="text/javascript"></script>
       <script src="{{url('')}}/assets/javascripts/load.js" type="text/javascript"></script>
@@ -62,25 +62,36 @@
             </div>
          </div>
          <div class="content" style="display: none">
-            <h4>Welcome to Kids Store live chat</h4>
-            <p>At the moment there are no operators in chat but you can send your request by email!</p>
-            <form action="#" accept-charset="UTF-8" method="post" id="form-payment" class="form-style-base">
-               <div class="form-group">
-                  <label for="name">Name: </label>
-                  <input type="text" class="form-control" id="name" placeholder="Name" />
-               </div>
-               <div class="form-group">
-                  <label for="user-email">Email: </label>
-                  <input type="email" class="form-control" id="user-email" placeholder="Enter email" />
-               </div>
-               <div class="form-group">
-                  <label>Message</label>
-                  <textarea class="your-message" rows="3" placeholder="Message"></textarea>
-               </div>
-               <div class="text-center">
-                  <button type="submit" class="btn btn-info">Submit</button>
-               </div>
-            </form>
+            <h5>CFarm sẽ trả lời yêu cầu của bạn sớm nhất!</h5>
+            <script type="text/javascript">
+              window.fbAsyncInit = function () {
+                  FB.init({
+                      appId: '657549527725084',
+                      xfbml: true,
+                      version: 'v2.6'
+                  });
+              };
+              (function (d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) {
+                      return;
+                  }
+                  js = d.createElement(s);
+                  js.id = id;
+                  js.src = "//connect.facebook.net/en_US/sdk.js";
+                  fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+          </script>
+          <div class="fb-page"
+               data-href="https://www.facebook.com/Cfarm.vn/"
+               data-tabs="messages"
+               data-width="321"
+               data-height="300"
+               data-small-header="true">
+              <div class="fb-xfbml-parse-ignore">
+                  <blockquote></blockquote>
+              </div>
+          </div>
          </div>
       </div>
       <div class="affix" id="nl-box-slider" style="right: -305px;">
@@ -129,7 +140,7 @@
               <i class="fa fa-times"></i>
             </span>
           </button>
-          <h4 class="modal-title email-icon" id="modalSigninLabel">Đăng nhập</h4>
+          <h4 class="modal-title email-icon" id="modalSigninLabel">{{ trans('head.login') }}</h4>
         </div>
         <div class="modal-body clearfix">
           <div class="col-md-7 no-padding">
@@ -161,7 +172,7 @@
 
 </fieldset>
 <fieldset>                <button type="submit" class="btn btn-warning btn-lg btn-block">
-                  <i class="glyphicon glyphicon-log-in"></i> Đăng nhập
+                  <i class="glyphicon glyphicon-log-in"></i> {{ trans('head.login') }}
                 </button>
 </fieldset>
               <div class="small text-center spacer-bottom-10">
@@ -232,7 +243,7 @@ var link = link
                 <span class="input-group-addon">
                   <i class="fa fa-user"></i>
                 </span>
-                <input type="text" class="form-control input-lg" name="name" placeholder="Tên đăng nhập" />
+                <input type="text" class="form-control input-lg" name="name" placeholder="Tên {{ trans('head.login') }}" />
                  @if ($errors->has('name'))
                       <span class="help-block">
                           <strong>{{ $errors->first('name') }}</strong>
@@ -273,7 +284,7 @@ var link = link
                 </button>
               </div>
               <p class="text-center small no-margin">
-                Bạn đã có tài khoản? <a class="btn-link" href="signin.html">Đăng nhập</a>
+                Bạn đã có tài khoản? <a class="btn-link" href="signin.html">{{ trans('head.login') }}</a>
               </p>
 </form>          </div>
           <div class="col-md-5 spacer-30">
@@ -370,40 +381,49 @@ var link = link
                                     </a>                
                                  </li>
                                  <li class="spacer-10">|</li>
+                                 @if(!isset(Auth::user()->name)) 
                                  <li>
                                     <button type="button" data-toggle="modal" data-target="#modal-signup">
-                                    Đăng ký
+                                    {{ trans('head.register') }}
                                     </button>
                                  </li>
                                  <li class="spacer-10">|</li>
                                  <li>
                                     <button type="button" data-toggle="modal" data-target="#modal-signin">
-                                    Đăng nhập
+                                    {{ trans('head.login') }}
                                     </button>
                                  </li>
+                                 @endif
                               </ul>
                            </div>
                         </nav>
                         <article class="hidden-xs pull-left">
                            <div class="dropdown language">
-                              <a data-toggle="dropdown" class="dropdown-toggle" href="#">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-vietnam.jpg" />
+                            @if(App::isLocale('vi'))
+                              <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/vi">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-vietnam.jpg" />
                               <span id="country-lang">Tiếng Việt</span>
                               <i class="fa fa-angle-down"></i>
                               </a>              
-                              <!-- <ul class="dropdown-menu list-unstyled">
+                              <ul class="dropdown-menu list-unstyled">
                                  <li>
-                                    <a class="text-center" href="#">                    <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
+                                    <a class="text-center" href="{{url('')}}/language/en"><img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
+                                      <span id="country-lang"> English</span>
                                     </a>                
                                  </li>
+                              </ul>
+                            @else
+                              <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/en">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
+                              <span id="country-lang">English</span>
+                              <i class="fa fa-angle-down"></i>
+                              </a>              
+                              <ul class="dropdown-menu list-unstyled">
                                  <li>
-                                    <a class="text-center" href="#">                    <img alt="Italy" src="{{url('')}}/assets/images/icons/flags/flag-italia.png" />
+                                    <a class="text-center" href="{{url('')}}/language/vi"><img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-vietnam.jpg" />
+                                      <span id="country-lang">Tiếng Việt</span>
                                     </a>                
                                  </li>
-                                 <li>
-                                    <a class="text-center" href="#">                    <img alt="France" src="{{url('')}}/assets/images/icons/flags/flag-francia.png" />
-                                    </a>                
-                                 </li>
-                              </ul> -->
+                              </ul>
+                            @endif
                            </div>
                         </article>
                      </div>
@@ -415,7 +435,7 @@ var link = link
             <div class="container">
                <div class="row clearfix">
                   <article class="col-sm-12 col-md-4 col-lg-3" id="logo">
-                    <a href="./">          <img class="image-responsive" alt="Kids Store" src="{{url('')}}/assets/images/baner.png" style="height: 86px" />
+                    <a href="./">          <img class="image-responsive" alt="Kids Store" src="{{url('')}}/assets/images/logo.png" style="height: 86px" />
                      </a>
                   </article>
                   <article class="col-sm-12 col-md-4 col-lg-6" >
@@ -429,7 +449,7 @@ var link = link
                                  <i class="fa fa-shopping-cart"></i>
                               </div>
                               <div class="info-basket pull-left">
-                                 <span id="cart-status" data-name="item" style="font-weight: 700; color: #008000">
+                                 <span id="cart-status" data-name="item" style="font-weight: 700; color: #fff">
                                  @if(count($cart) == 0)
                                  Giỏ hàng rỗng
                                  @else
@@ -498,46 +518,42 @@ var link = link
                            <div class="collapse navbar-collapse">
                               <ul class="nav navbar-nav" id="mainMN">
                                  <li class="{{ Request::is('/') ? 'active' : '' }}">
-                                    <a href="{{url('/')}}">Trang chủ</a>
+                                    <a href="{{url('/')}}">{{ trans('head.home') }}</a>
                                  </li>
-                                 <li class="{{ Request::is('thong-tin-nha-phan-phoi-we-cae-vn') ? 'active' : '' }}">
-                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">Thông tin <i class="fa fa-angle-down"></i></a>
+                                 <li class="{{ Request::is('thong-tin-nha-phan-phoi-we-cae-vn') ? 'active' : '' }} {{ Request::is('dia-chi-lien-he-wecarevn') ? 'active' : '' }} {{ Request::is('chinh-sach-lien-ket-nong-dan') ? 'active' : '' }}  {{ Request::is('huong-dan-mua-thuc-pham-sach') ? 'active' : '' }}  {{ Request::is('chinh-sach-doi-tra') ? 'active' : '' }}">
+                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{ trans('head.about') }} <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu">
                                        <li class="clearfix row">
                                           <div class="col-sm-12">
                                              <ul class="list-unstyled">
-                                                <!-- <li>
-                                                   <a type="button" data-toggle="modal" data-target="#modal-subscribe-nl">
-                                                   Subscribe to Newsletter
-                                                   </a>
-                                                </li>
-                                                <li>
-                                                   <a type="button" data-toggle="modal" data-target="#modal-buy-voucher">
-                                                   Buy voucher
-                                                   </a>
-                                                </li>
-                                                <li>
-                                                   <a type="button" data-toggle="modal" data-target="#modal-buy-voucher">
-                                                   Buy voucher
-                                                   </a>
-                                                </li> -->
-                                                <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">Về chúng tôi</a> </li>     
-                                                <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">Địa chỉ liên hệ</a>      </li>
-                                                <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> Chính sách liên kết lương nông</a>  </li> 
+                                                <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">{{ trans('head.about1') }}</a> </li>     
+                                                <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">{{ trans('head.about2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> {{ trans('head.about3') }}</a>  </li> 
                                              </ul>
                                           </div>
                                        </li>
                                     </ul>
                                  </li>
                                  <li class="">
-                                    <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> Mua hàng
+                                    <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> {{ trans('head.product') }}
                                     </a>                  
                                  </li>
                                  <li class="">
-                                    <a href="#">Thư viện ảnh</a> 
+                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{ trans('head.blog') }} <i class="fa fa-angle-down"></i></a> 
+                                    <ul class="dropdown-menu">
+                                       <li class="clearfix row">
+                                          <div class="col-sm-12">
+                                             <ul class="list-unstyled">
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach">{{ trans('head.blog1') }}</a> </li>     
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach">{{ trans('head.blog2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach">{{ trans('head.blog3') }}</a>  </li> 
+                                             </ul>
+                                          </div>
+                                       </li>
+                                    </ul>
                                  </li>
-                                 <li class="dropdown box-extended">
-                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">Hệ thống trang trại<i class="fa fa-angle-down"></i>
+                                 <li class="dropdown box-extended {{ Request::is('thong-tin-trang-trai-an-toan') ? 'active' : '' }}">
+                                    <a href="{{url('')}}/thong-tin-trang-trai-an-toan">{{ trans('head.farmerlist') }}
                                     </a>                  
                                     
                                  </li>
@@ -548,10 +564,11 @@ var link = link
                   </article>
                   <article class="col-xs-12 col-sm-4 col-md-4">
                      <div class="pull-right welcome-text">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">            Hello Clint! <strong>My account</strong> <i class="fa fa-chevron-down"></i>
+                      @if(isset(Auth::user()->name)) 
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down"></i>
                         </a>          
                         <ul class="dropdown-menu" role="menu">
-                           <li>
+                           <!-- <li>
                               <a href="account.html">Edit profile</a>
                            </li>
                            <li>
@@ -559,11 +576,12 @@ var link = link
                            </li>
                            <li>
                               <a href="#">Help & support</a>
-                           </li>
+                           </li> -->
                            <li>
-                              <a href="#">Log out</a>
+                              <a href="{{url('')}}/admin/logout">Log out</a>
                            </li>
                         </ul>
+                        @endif
                      </div>
                   </article>
                </div>
@@ -582,142 +600,35 @@ var link = link
                      <span class="icon-bar"></span>
                      </button>
                      <a class="navbar-brand" href="{{url('/gio-hang-thuc-pham-sach')}}">
-                     <i class="fa fa-shopping-cart"></i> <span class="badge">3</span>
+                     <i class="fa fa-shopping-cart"></i> <span class="badge">{{count($cart)}}</span>
                      </a>
                   </div>
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                      <ul class="nav navbar-nav">
-                        <li class="active">
-                           <a href="./">Home</a>
+                        <li class="{{ Request::is('/') ? 'active' : '' }}">
+                                    <a href="{{url('/')}}">{{ trans('head.home') }}</a>
                         </li>
-                        <li>
-                           <a href="about-us.html">About us</a>
-                        </li>
-                        <li class="dropdown">
-                           <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">              Shop <i class="fa fa-angle-down"></i>
-                           </a>            
-                           <ul class="dropdown-menu">
-                              <li>
-                                 <a href="#">Baby 0-24 months</a>
-                              </li>
-                              <li>
-                                 <a href="#">Child 3-16 years</a>
-                              </li>
-                              <li>
-                                 <a href="#">Baby Boy</a>
-                              </li>
-                              <li>
-                                 <a href="#">Baby Girl</a>
-                              </li>
-                              <li>
-                                 <a href="#">Infant Boy</a>
-                              </li>
-                           </ul>
-                        </li>
-                        <li>
-                           <a href="contact.html">Contact us</a>
-                        </li>
-                        <li class="dropdown">
-                           <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">              Pages <i class="fa fa-angle-down"></i>
-                           </a>            
-                           <ul class="dropdown-menu">
-                              <li>
-                                 <a data-toggle="modal" data-target="#modal-subscribe-nl" href="#">Subscribe to Newsletter</a>
-                              </li>
-                              <li>
-                                 <a data-toggle="modal" data-target="#modal-buy-voucher" href="#">Buy voucher</a>
-                              </li>
-                              <li>
-                                 <a data-toggle="modal" data-target="#modal-signin" href="#">Signin</a>
-                              </li>
-                              <li>
-                                 <a data-toggle="modal" data-target="#modal-simple-signin" href="#">Simple Signin</a>
-                              </li>
-                              <li>
-                                 <a data-toggle="modal" data-target="#modal-signup" href="#">Signup</a>
-                              </li>
-                              <li>
-                                 <a data-toggle="modal" data-target="#modal-reset-psw" href="#">Reset password</a>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                 <a href="signin.html">Page Signin</a>
-                              </li>
-                              <li>
-                                 <a href="signup.html">Page Signup</a>
-                              </li>
-                              <li>
-                                 <a href="login.html">Page Login</a>
-                              </li>
-                              <li>
-                                 <a href="payment.html">Page Payments</a>
-                              </li>
-                              <li>
-                                 <a href="reset-password.html">Page Reset Password</a>
-                              </li>
-                              <li>
-                                 <a href="buy-voucher.html">Page Buy Voucher</a>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                 <a href="account.html">Your account</a>
-                              </li>
-                              <li>
-                                 <a href="shop.html">Shop</a>
-                              </li>
-                              <li>
-                                 <a href="product-details.html">Product details</a>
-                              </li>
-                              <li>
-                                 <a href="wishlist.html">Wishlist</a>
-                              </li>
-                              <li>
-                                 <a href="orders.html">Orders</a>
-                              </li>
-                              <li>
-                                 <a href="cart.html">Cart</a>
-                              </li>
-                              <li>
-                                 <a href="empty-basket.html">Empty Basket</a>
-                              </li>
-                              <li>
-                                 <a href="get-inspired.html">Get Inspired</a>
-                              </li>
-                              <li>
-                                 <a href="contact.html">Contact us</a>
-                              </li>
-                              <li>
-                                 <a href="blog.html">Blog</a>
-                              </li>
-                              <li>
-                                 <a href="post.html">Post</a>
-                              </li>
-                              <li>
-                                 <a href="terms-conditions.html">Terms & Conditions</a>
-                              </li>
-                           </ul>
-                        </li>
-                     </ul>
-                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown welcome-text">
-                           <a class="dropdown-toggle" data-toggle="dropdown" href="#">              Hello Ilaria! <strong>My account</strong> <i class="fa fa-chevron-down"></i>
-                           </a>            
-                           <ul class="dropdown-menu" role="menu">
-                              <li>
-                                 <a href="account.html">Edit profile</a>
-                              </li>
-                              <li>
-                                 <a href="cart.html">My orders</a>
-                              </li>
-                              <li>
-                                 <a href="#">Help & support</a>
-                              </li>
-                              <li>
-                                 <a href="#">Log out</a>
-                              </li>
-                           </ul>
-                        </li>
+                        <li class="{{ Request::is('thong-tin-nha-phan-phoi-we-cae-vn') ? 'active' : '' }} {{ Request::is('dia-chi-lien-he-wecarevn') ? 'active' : '' }} {{ Request::is('chinh-sach-lien-ket-nong-dan') ? 'active' : '' }}  {{ Request::is('huong-dan-mua-thuc-pham-sach') ? 'active' : '' }}  {{ Request::is('chinh-sach-doi-tra') ? 'active' : '' }}">
+                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{ trans('head.about') }} <i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                                <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">{{ trans('head.about1') }}</a> </li>     
+                                                <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">{{ trans('head.about2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> {{ trans('head.about3') }}</a>  </li> 
+                                    </ul>
+                                 </li>
+                                 <li class="">
+                                    <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> {{ trans('head.product') }}
+                                    </a>                  
+                                 </li>
+                                 <li class="">
+                                    <a href="#">Thư viện ảnh</a> 
+                                 </li>
+                                 <li class="dropdown box-extended {{ Request::is('thong-tin-trang-trai-an-toan') ? 'active' : '' }}">
+                                    <a href="{{url('')}}/thong-tin-trang-trai-an-toan">{{ trans('head.farmerlist') }}<i class="fa fa-angle-down"></i>
+                                    </a>                  
+                                    
+                                 </li>
                      </ul>
                   </div>
                   <!-- /.navbar-collapse -->
@@ -777,9 +688,9 @@ var link = link
                               <li>
                                  <strong>Thông tin</strong>
                               </li>
-                           <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">Về chúng tôi</a> </li>     
-                           <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">Địa chỉ liên hệ</a>      </li>
-                           <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> Chính sách liên kết lương nông</a>  </li>    
+                           <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">{{ trans('head.about1') }}</a> </li>     
+                           <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">{{ trans('head.about2') }}</a>      </li>
+                           <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> {{ trans('head.about3') }}</a>  </li>    
                            </ul>
                         </div>
                         <div class="col-sm-3">
@@ -788,7 +699,7 @@ var link = link
                                  <strong>Chăm sóc khách hàng</strong>
                               </li>
                               <li>
-                                 <a class="" href="{{url('')}}/huong-dan-mua-thuc-pham-sach">Hướng dẫn mua hàng
+                                 <a class="" href="{{url('')}}/huong-dan-mua-thuc-pham-sach">Hướng dẫn {{ trans('head.product') }}
                            </a>
                               </li>
                               <li>
@@ -800,45 +711,17 @@ var link = link
                         </div>
                      </div>
                   </article>
-                  <article class="col-xs-12 col-sm-5">
-                     <div class="spacer-top-20">
-                        <ul class="follow-us clearfix list-unstyled list-inline">
-                           <li>
-                              <a class="facebook" href="#">      <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                              </span>
-                              </a>  
-                           </li>
-                           <li>
-                              <a class="linkedin" href="#">      <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                              </span>
-                              </a>  
-                           </li>
-                           <li>
-                              <a class="twitter" href="#">      <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                              </span>
-                              </a>  
-                           </li>
-                           <li>
-                              <a class="pinterest" href="#">      <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
-                              </span>
-                              </a>  
-                           </li>
-                           <li>
-                              <a class="youtube" href="#">      <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-youtube fa-stack-1x fa-inverse"></i>
-                              </span>
-                              </a>  
-                           </li>
-                        </ul>
+                  <article class="col-xs-12 col-sm-3 col-sm-offset-2">
+                     <div class="">
+                        <div class="fb-page" data-href="https://www.facebook.com/Cfarm.vn/" data-tabs="timeline" data-height="156" data-small-header="true" data-width="263" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Cfarm.vn/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Cfarm.vn/">Cfarm.vn</a></blockquote></div>
+                        <div id="fb-root"></div>
+                        <script>(function(d, s, id) {
+                          var js, fjs = d.getElementsByTagName(s)[0];
+                          if (d.getElementById(id)) return;
+                          js = d.createElement(s); js.id = id;
+                          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1820603798154432";
+                          fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
                      </div>
                   </article>
                </div>
@@ -883,6 +766,8 @@ var link = link
             </div>
          </section>
       </footer>
+
+
       @yield('scrip_code')
       <script type="text/javascript">
       function deleteItem(rowId) {

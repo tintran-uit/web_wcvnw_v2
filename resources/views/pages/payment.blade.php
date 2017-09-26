@@ -333,7 +333,7 @@ trước khi giao hàng!</p>
                            <div class="text-center">
                               <i class="fa fa-check fa-4x alert-success"></i>
                               <h3>Đặt hàng thành công!</h3>
-                              <p><b>Mã đơn đặt hàng: #34232323.</b><br>Cảm ơn bạn đã mua thực phẩm an toàn tại WeCareVN.</p>
+                              <p><b>Mã đơn đặt hàng: #34232323.</b><br>Cảm ơn bạn đã mua thực phẩm an toàn tại CFarm.vn.</p>
                            </div>
                         </div>
 
@@ -344,7 +344,7 @@ trước khi giao hàng!</p>
                   <div class="col-xs-6">
                   </div>
                   <div class="col-xs-6">
-                     <div class="pull-right">
+                     <div class="pull-right" id="btnStep">
                         <a class="btn btn-info btn-lg" onclick="backStep()">                  <i class="fa fa-angle-double-left"></i> <span class="hidden-xs">Quay lại</span>
                         </a>
                         <a class="btn btn-primary btn-lg" onclick="nextStep()" id="nextButtonStep">                  <span class="hidden-xs" id="payment-next-button">Tiếp theo</span> <i class="fa fa-angle-double-right"></i>
@@ -425,50 +425,7 @@ trước khi giao hàng!</p>
          </div>
       </div>
    </section>
-   <section class="purchase-benefits spacer-30 bg-extra-light-grey">
-      <div class=" spacer-10">
-         <div class="container spacer-top-15">
-            <div class="row clearfix">
-               <article class="col-xs-12 col-sm-3">
-                  <div class="column text-center spacer-bottom-15">
-                     <i class="fa fa-truck fa-3x"></i>
-                     <h4>Free Worldwide Shipping</h4>
-                     <p class="no-margin">
-                        Delivery throughout England<br>in 24/48 h by courier
-                     </p>
-                  </div>
-               </article>
-               <article class="col-xs-12 col-sm-3">
-                  <div class="column text-center spacer-bottom-15">
-                     <i class="fa fa-gift fa-3x"></i>
-                     <h4>Want to make a gift?</h4>
-                     <p class="no-margin">
-                        When ordering, <a href="#" class="btn-link">ask for gift box</a> and you'll get everything you need to be able to create
-                     </p>
-                  </div>
-               </article>
-               <article class="col-xs-12 col-sm-3">
-                  <div class="column text-center spacer-bottom-15">
-                     <i class="fa fa-lock fa-3x"></i>
-                     <h4>Secure Payments!</h4>
-                     <p class="no-margin">
-                        Please card payments credit in all tranquility use certified instruments
-                     </p>
-                  </div>
-               </article>
-               <article class="col-xs-12 col-sm-3">
-                  <div class="column text-center spacer-bottom-15">
-                     <i class="fa fa-phone fa-3x"></i>
-                     <h4>Customer Service</h4>
-                     <p class="no-margin">
-                        Our customer service is available from Monday to Saturday from 9:00 to 18:00
-                     </p>
-                  </div>
-               </article>
-            </div>
-         </div>
-      </div>
-   </section>
+   @include('layouts.bottom')
 </main>
 
 @endsection
@@ -626,6 +583,7 @@ trước khi giao hàng!</p>
           success: function(data){
             $('#modalLoader').modal('hide');
             $('[href="#tab-3"]').tab('show');
+            document.getElementById('btnStep').style.visibility = 'hidden';
             console.log(data);
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
