@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use CrudTrait;
-    use Sluggable, SluggableScopeHelpers;
-    use SoftDeletes;
+    //use Sluggable, SluggableScopeHelpers;
+    //use SoftDeletes;
 
      /*
 	|--------------------------------------------------------------------------
@@ -20,11 +20,11 @@ class Order extends Model
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'm_orders';
+    protected $table = 'g_orders';
     protected $primaryKey = 'id';
-    // public $timestamps = false;
+    public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id','quantity','status'];
+    protected $fillable = ['id', 'order_id', 'customer_id', 'shipper_id','rating_service', 'rating_customer', 'note','status'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [
@@ -32,19 +32,6 @@ class Order extends Model
         'visible'   => 'boolean',
     ];*/
 
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'slug_or_name',
-            ],
-        ];
-    }
 
     /*
 	|--------------------------------------------------------------------------
@@ -73,6 +60,14 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\Shipper', 'shipper_id');
     }
+    public function orderItem()
+    {
+        return $this->hasMany('App\Models\orderItem', 'order_id');
+    }
+    public function addItem()
+    {
+        return $this->hasMany('App\Models\orderItem', 'order_id');
+    }
 
 //    public function images()
 //    {
@@ -89,22 +84,6 @@ class Order extends Model
     {
         return $query->where('visible', '1')
             ->orderBy('lft', 'ASC');
-    }
-
-    /*
-	|--------------------------------------------------------------------------
-	| ACCESORS
-	|--------------------------------------------------------------------------
-	*/
-
-    // The slug is created automatically from the "name" field if no slug exists.
-    public function getSlugOrNameAttribute()
-    {
-        if ($this->slug != '') {
-            return $this->slug;
-        }
-
-        return $this->name;
     }
 
     /*

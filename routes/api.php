@@ -22,7 +22,6 @@ Route::get('/products/suppliers/product_id={product_id}', 'ProductController@get
 Route::get('/products/interest/product_id={product_id}', 'ProductController@addInterest');
 
 
-
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
 Route::get('/farmer/farmer_id={farmer_id}', 'FarmerController@getFarmerProfile');
 

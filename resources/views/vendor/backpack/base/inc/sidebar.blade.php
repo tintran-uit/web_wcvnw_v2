@@ -54,7 +54,15 @@
 
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/agent-item') }}"><i class="fa fa-user-o"></i> <span>Đại Lý</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/shipper-item') }}"><i class="fa fa-address-card"></i> <span>Giao Hàng</span></a></li>
-              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order-item') }}"><i class="fa fa-list-alt"></i> <span>Đơn Đặt Hàng </span></a></li>
+              
+              <li class="treeview">
+                <a href="#"><i class="fa fa-list-alt"></i> <span>Đơn Đặt Hàng</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order') }}"><i class="fa fa-id-card-o"></i> <span>Thông Tin Đơn Hàng</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order-item') }}"><i class="fa fa-bars"></i> <span>Thông Tin Mặt Hàng</span></a></li>
+                </ul>
+              </li>     
+              
               <li class="treeview">
                 <a href="#"><i class="fa fa-list"></i> <span>Sản Phẩm</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
