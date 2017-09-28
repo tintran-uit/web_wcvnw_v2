@@ -15,7 +15,7 @@ class OrderController extends Controller
 	  */
 
 	/**
-	 *customerInsertOrder
+	 *addOrder
 	 *
 	 * Insert an order for customer into DB
 	 * @param $cart ($product_id, $farmer_id, $product_id, $quantity)
@@ -23,10 +23,29 @@ class OrderController extends Controller
 	 * @return array of products in its categories 
 	 */
 
-	public function customerInsertOrder($customer_id, $cart)
+	public function addOrder($orders)
+	{
+		foreach ($request->images as $img) {
+		}
+		
+		return 0;
+	}
+	
+
+	/**
+	 *cancelOrder
+	 *
+	 * Insert an order for customer into DB
+	 * @param $cart ($product_id, $farmer_id, $product_id, $quantity)
+	 *        $customer_id: customer to be inserted for
+	 * @return array of products in its categories 
+	 */
+
+	public function cancelOrder($customer_id, $cart)
 	{
 		// 
 		return 0;
 	}
+	
 
 }

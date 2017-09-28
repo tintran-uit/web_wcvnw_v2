@@ -29,7 +29,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
     CRUD::resource('agent-item', 'AgentCrudController');
     CRUD::resource('customer-item', 'CustomerCrudController');
     CRUD::resource('farmer-item', 'FarmerCrudController');
-    CRUD::resource('farmer-production', 'FarmingCrudController');
     CRUD::resource('farmer-trading', 'TradingCrudController');
     CRUD::resource('shipper-item', 'ShipperCrudController');
 

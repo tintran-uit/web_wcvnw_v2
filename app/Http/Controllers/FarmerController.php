@@ -31,9 +31,16 @@ class FarmerController extends Controller
 	 */
     public function getFarmerProfile($farmer_id)
 	{
-		$farmer = DB::select('SELECT `id`, `name`, `address`, `rating`, `profile_image`, `profile` FROM `farmers` 
+		$farmer = DB::select('SELECT `id`, `name`, `address`, `rating`, `photo`, `profile` FROM `farmers` 
 			WHERE `id` = ?', [$farmer_id]);
 		
 	    return $farmer;	        
+	}
+
+    public function farmers()
+	{
+		$farmers = DB::select('SELECT `id`, `name`, `address`, `rating`, `photo`, `profile` FROM `farmers` ');
+		
+	    return $farmers;	        
 	}
 }
