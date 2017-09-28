@@ -63,22 +63,23 @@
    <div class="container">
       
       <section class="text-center spacer-bottom-20">
-         <h3 class="no-margin" style="font-size: 20px; color: #0071b6"><b>Thực phẩm sạch</b></h3>
+         <h3 class="no-margin" style="font-family: 'Reso_Regular'; font-size: 30px; color: #000000">Thực phẩm sạch</h3>
          <h5 class="no-margin"></h5>
          <br>
          <ul class="nav nav-tabs nav-justified">
             <?php  
+                $url = 'http://wecarevn.com';
                $counter = 0; 
-
+               
                foreach($categories as $category) {
-
+                  $img = '<img class="image-responsive" alt="Kids Store" src="'.$url.'/assets/images/icons/product-tab/'.$category->icon.'.png" height="25px"><br>';
                  $selected = ''; 
 
                  if ( !empty($category) ) {
                    $selected = ($counter === 0) ? 'class="active"' : ''; 
                    $output  = '';
                    $output .= '<li '. $selected .'>'; 
-                   $output .= '<a data-toggle="tab" href="#category'.$category->id.'" class="scroll">' . $category->name . '</a>';
+                   $output .= '<a data-toggle="tab" href="#category'.$category->id.'" class="scroll">' . $img . $category->name . '</a>';
                    $output .= '</li>';
                    echo($output);
                    $counter++; 
@@ -347,12 +348,12 @@
                   var length = data.length;
                   var html = '<div id=\"myCarousel'+index+'\" class=\"carousel slide\">\r\n ';
                   //thanh so
-                  html += '\r\n <ul class=\"pagination\">\r\n    <li>\r\n<a href=\"#myCarousel'+index+'\" data-slide=\"prev\">        <span aria-hidden=\"true\" class=\"fa fa-chevron-left\"><\/span>\r\n<\/a>    <\/li>\r\n';
+                  html += '\r\n <ul class=\"pagination\" >\r\n    <li>\r\n<a href=\"#myCarousel'+index+'\" data-slide=\"prev\">        <span aria-hidden=\"true\" class=\"fa fa-chevron-left\"><\/span>\r\n<\/a>    <\/li>\r\n';
                   var n = length/8;
                   var numClick = '';
                   for(var i = 0; i<=n; i++)
                     {
-                      numClick += ' <li data-target=\"#myCarousel'+index+'\" data-slide-to=\"'+i+'\" class=\"active\"><a href=\"#\">'+(i+1)+'<\/a><\/li>';
+                      numClick += ' <li data-target=\"#myCarousel'+index+'\" data-slide-to=\"'+i+'\" class=\"\"><a href=\"#\">'+(i+1)+'<\/a><\/li>';
                       }
                   html += numClick;
                   html += '<li>\r\n      <a href=\"#myCarousel'+index+'\" data-slide=\"next\">\r\n        <span aria-hidden=\"true\" class=\"fa fa-chevron-right\"><\/span>\r\n      <\/a>\r\n    <\/li>\r\n  <\/ul>';
@@ -360,7 +361,7 @@
                   html += '<!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\">';
                   $.each(data, function(i, d){
 
-                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/uploads/products/images/'+d.image+'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\" style=\"padding-left: 0px;\">\r\n                                          <strong>'+numberWithCommas(d.price)+' VND<\/strong>\r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"pull-left\">\r\n                                             <a class=\"btn btn-info no-margin\" onclick=\"interest('+d.id+')\">            <i class=\"fa fa-heart\"><\/i>\r\n                                             <\/a><a class=\"btn btn-info no-margin\" href=\"/product/slug='+d.slug+'\">           <i class=\"fa fa-eye\"><\/i>\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                          <div class=\"pull-right\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"clickFarm(\''+d.name+'\','+d.id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
+                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/uploads/products/thumbnails/thit-heo.png\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a class=\"new-price\" href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\">\r\n                                          Vườn anh Hải Đức Trọng \r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"col-sm-12 col-xs-12 col-md-6 text-center pull-left\">\r\n                                             <span class=\"span-price\">'+numberWithCommas(d.price)+' VNĐ  </span>     \r\n                                          <\/div>\r\n                                          <div class=\"col-sm-12 col-xs-12 col-md-6 pull-right\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"clickFarm(\''+d.name+'\','+d.id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
 
                      switch (i){
                          case 0:
@@ -418,7 +419,7 @@
                   var numClick2 = '';
                   for(var i = 0; i<=n; i++)
                     {
-                      numClick2 += ' <li data-target=\"#myCarousel'+index+'\" data-slide-to=\"'+i+'\" class=\"active\"><a href=\"#\">'+(i+1)+'<\/a><\/li>';
+                      numClick2 += ' <li data-target=\"#myCarousel'+index+'\" data-slide-to=\"'+i+'\" ><a href=\"#\">'+(i+1)+'<\/a><\/li>';
                       }
                   html += numClick2;
                   html += '<li>\r\n      <a href=\"#myCarousel'+index+'\" data-slide=\"next\">\r\n        <span aria-hidden=\"true\" class=\"fa fa-chevron-right\"><\/span>\r\n      <\/a>\r\n    <\/li>\r\n  <\/ul>';
@@ -543,7 +544,30 @@
           }
 
           
+          $('.pagination').on('click', 'li:not(.prev):not(.next)', function() {
+            alert('sss');
+              $('.pagination li').removeClass('active');
+              $(this).not('.prev,.next').addClass('active');
+          });
 
+          $('.pagination').on('click', 'li.prev', function() {
+              $('li.active').removeClass('active').prev().addClass('active');
+          });
+
+          $('.pagination').on('click', 'li.next', function() {
+              $('li.active').removeClass('active').next().addClass('active');
+          });
+
+          // function drawPagination(numOfPages) {
+          //     $('#pag_nav ul').empty();
+          //     $('#pag_nav ul').append('<li class=prev><a href=# aria-label=Previous><span aria-hidden=true>&laquo;</span></a></li>');
+          //    for (var i = 1; i <= numOfPages; i++) {
+          //       $('#pag_nav ul').append('<li><a href=#>' + i + '</a></li>');
+          //    }
+          //    $('#pag_nav ul').append('<li class=next><a href=# aria-label=Previous><span aria-hidden=true>&raquo;</span></a></li>');
+          // }
+
+          // drawPagination(5);
       </script>
 
 @endsection

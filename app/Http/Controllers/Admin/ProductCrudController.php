@@ -274,7 +274,7 @@ class ProductCrudController extends CrudController
         $img = $request->image;
         
         //tao thumbnails
-        $thumbName = str_replace("products/","products/thumbnails/",$img);
+        $thumbName = str_replace("images","thumbnails",$img);
         $imgThumb = $this->attachmentThumb($img, $thumbName, 155, 115);
 
         $redirect_location = parent::updateCrud($request);

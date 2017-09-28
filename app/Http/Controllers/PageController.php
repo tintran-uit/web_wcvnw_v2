@@ -8,6 +8,8 @@ use App\Models\ProductCategory;
 use App\Models\MenuItem;
 use Cart;
 use DB;
+use Session;
+use App;
 
 class PageController extends Controller
 {
@@ -18,6 +20,12 @@ class PageController extends Controller
         if (!$page)
         {
             abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
+        }
+
+        // echo(App::getLocale());die();
+
+        if (Session::has('locale')) {
+            App::setLocale(Session::get('locale'));
         }
 
         $this->data['title'] = $page->title;
@@ -41,10 +49,15 @@ class PageController extends Controller
             abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
         }
 
+        if (Session::has('locale')) {
+            App::setLocale(Session::get('locale'));
+        }
+
         $this->data['title'] = $page->title;
         $this->data['page'] = $page->withFakes();
         $this->data['menu'] = MenuItem::all();
         $this->data['cart'] = Cart::content();
+
         //danh sach san pham
         if ($slug == 'mua-thuc-pham-sach') {
             $this->data['isShop'] = '1';
@@ -59,6 +72,14 @@ class PageController extends Controller
             $this->data['about_pages'] = DB::table('pages')->where('template', 'about_us')->get();
             //chăm sóc khách hàng
             $this->data['service_pages'] = DB::table('pages')->where('template', 'services')->get();
+        }
+
+        //gio hang trong
+        if ($page->template == 'cart' && count($this->data['cart']) == 0) {
+            return view('alert.empty_basket', $this->data);
+        }
+        if ($page->template == 'payment' && count($this->data['cart']) == 0) {
+            return view('alert.empty_basket', $this->data);
         }
 
         return view('pages.'.$page->template, $this->data);
@@ -85,15 +106,5 @@ class PageController extends Controller
         return view('pages.product_details', $this->data);
     }
     
-
-    public function testcart()
-    {
-        // Cart::destroy();
-        // Cart::add([
-        //   ['id' => '1', 'name' => 'Thit heo 1', 'qty' => 1, 'price' => 20000, 'tax' => 0, 'options' => ['image' => 'http://trangtraitrungthuc.com/media/thit/thit-ba-chi.png','nd_id' => 'TG111', 'name' => 'Nông trại Bác 8 Bình D ']],
-        //   ['id' => '3', 'name' => 'rau cai huu co 2', 'qty' => 2, 'price' => 10000, 'tax' => 0,'options' => ['image' => 'http://trangtraitrungthuc.com/media/rau/cai-thao.png','nd_id' => 'TG111', 'name' => 'Nông trại Bác 8 Bình ']]
-        // ]);
-        return Cart::content();
-    }
 
 }

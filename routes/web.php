@@ -37,6 +37,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 // Route::get('/admin/order-item/additem/{order_id}', 'Admin\OrderCrudController@additem');
 /** CATCH-ALL ROUTE for Backpack/PageManager - needs to be at the end of your routes.php file  **/
 
+Route::get('language/{locale}', function ($locale) {
+    Session::put('locale', $locale);
+    return redirect()->back();
+});
+
 Route::get('/', 'PageController@index');
 
 Route::get('/product/slug={slug}', 'PageController@getProduct');
@@ -45,6 +50,8 @@ Route::get('/add', 'PageController@testcart');
 
 Route::get('{page}/{subs?}', ['uses' => 'PageController@page'])
     ->where(['page' => '^((?!admin).)*$', 'subs' => '.*']);
+
+
 
 
 Auth::routes();

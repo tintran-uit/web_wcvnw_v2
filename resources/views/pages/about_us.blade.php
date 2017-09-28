@@ -51,12 +51,7 @@
                <div class="general-info">
                   <h5 class="title">Liên hệ với chúng tôi</h5>
                   <div class="content text-center">
-                     <p>
-                        Need more help?<br>
-                        Here is how to get in touch.
-                     </p>
-                     <a class="btn btn-warning btn-sm" href="contact.html">      Contact us <i class="fa fa-arrow-circle-o-right"></i>
-                     </a>  
+                     <div class="fb-page" data-href="https://www.facebook.com/Cfarm.vn/" data-tabs="timeline" data-height="156" data-small-header="true" data-width="263" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Cfarm.vn/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Cfarm.vn/">Cfarm.vn</a></blockquote></div>  
                   </div>
                </div>
             </aside>
