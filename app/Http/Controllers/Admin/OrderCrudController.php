@@ -85,7 +85,6 @@ class OrderCrudController extends CrudController
        $this->crud->addField([
             'name' => 'order_id',
             'label' => 'Mã Order',
-            'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4'
             ],

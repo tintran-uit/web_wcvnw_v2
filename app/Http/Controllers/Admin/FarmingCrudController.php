@@ -9,7 +9,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\ProductRequest as StoreRequest;
 use App\Http\Requests\ProductRequest as UpdateRequest;
 
-class OrderItemCrudController extends CrudController
+class FarmingCrudController extends CrudController
 {
 
     public function setUp()
@@ -20,9 +20,9 @@ class OrderItemCrudController extends CrudController
 		| BASIC CRUD INFORMATION
 		|--------------------------------------------------------------------------
 		*/
-        $this->crud->setModel("App\Models\OrderItem");
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/order-item');
-        $this->crud->setEntityNameStrings('orderitem', 'orderitems');
+        $this->crud->setModel("App\Models\Farming");
+        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/farmer-production');
+        $this->crud->setEntityNameStrings('farming', 'farmings');
 
         /*
 		|--------------------------------------------------------------------------
@@ -36,31 +36,6 @@ class OrderItemCrudController extends CrudController
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
-            'name' => 'order_id',
-            'label' => 'Mã Order',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'product_id',
-            'label' => 'Sản phẩm',
-            'type' => 'select',
-            'entity' => 'product',
-            'attribute' => 'name',
-            'model' => "App\Models\Product",
-        ]);
-        $this->crud->addColumn([
-            'name' => 'quantity',
-            'label' => 'Số lượng',
-        ]);
-
-        $this->crud->addColumn([
-            'name' => 'unit',
-            'label' => 'Đơn vị',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'price',
-            'label' => 'Thành Tiền',
-        ]);
-        $this->crud->addColumn([
             'name' => 'farmer_id',
             'label' => 'Trang Trại',
             'type' => 'select',
@@ -68,15 +43,47 @@ class OrderItemCrudController extends CrudController
             'attribute' => 'name',
             'model' => "App\Models\Farmer",
         ]);
+        $this->crud->addColumn([
+            'name' => 'product_id',
+            'label' => 'Sản phẩm',
+            'type' => 'select',
+            'entity' => 'product',
+            'attribute' => 'name',
+            'model' => "App\Models\Product",
+        ]);
+        $this->crud->addColumn([
+            'name' => 'capacity',
+            'label' => 'Sản Lượng',
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'unit',
+            'label' => 'Đơn vị',
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'harvest_from',
+            'label' => 'Thu hoạch Từ',
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'harvest_to',
+            'label' => 'Thu hoạch đến',
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'status',
+            'label' => 'Trạng Thái',
+        ]);
 
         // ------ CRUD FIELDS
         $this->crud->addField([
-            'name' => 'order_id',
-            'label' => 'Mã Order',
+            'name' => 'farmer_id',
+            'label' => 'Trang Trại',
             'type' => 'select',
-            'entity' => 'order',
-            'attribute' => 'order_id',
-            'model' => "App\Models\Order",
+            'entity' => 'farmer',
+            'attribute' => 'name',
+            'model' => "App\Models\Farmer",
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
@@ -93,8 +100,8 @@ class OrderItemCrudController extends CrudController
             ],
         ]);
         $this->crud->addField([
-            'name' => 'quantity',
-            'label' => 'Số lượng',
+            'name' => 'capacity',
+            'label' => 'Sản Lượng',
             'type' => 'number',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
@@ -109,51 +116,41 @@ class OrderItemCrudController extends CrudController
                 'class' => 'form-group col-md-3'
             ],
         ]);
+
         $this->crud->addField([
-            'name' => 'price',
-            'label' => 'Thành Tiền',
-            'type' => 'number',
+            'name' => 'harvest_from',
+            'label' => 'Thu Hoạch từ',
+            'type' => 'date',
             'wrapperAttributes' => [
-                'class' => 'form-group col-md-3'
+                'class' => 'form-group col-md-4'
+            ],
+        ]);
+
+        $this->crud->addField([
+            'name' => 'harvest_to',
+            'label' => 'Thu Hoạch Đến',
+            'type' => 'date',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4'
             ],
         ]);
         $this->crud->addField([
-            'name' => 'farmer_id',
-            'label' => 'Trang Trại',
-            'type' => 'select',
-            'entity' => 'farmer',
-            'attribute' => 'name',
-            'model' => "App\Models\Farmer",
+            'name' => 'status',
+            'label' => 'Trạng Thái',
+            'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
         ]);
     }
-    /*public function additem($order_id)
-    {
-        $v_crud = new OrderItemCrudConltroller();
-        $v_crud->setup();
-        $v_crud->crud->hasAccessOrFail('create');
-
-        // prepare the fields you need to show
-        $v_crud->data['crud'] = $v_crud->crud;
-        $v_crud->data['saveAction'] = $v_crud->getSaveAction();
-        $v_crud->data['fields'] = $v_crud->crud->getCreateFields();
-        $v_crud->data['title'] = trans('backpack::crud.add').' '.$v_crud->crud->entity_name;
-
-        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
-        return view($v_crud->crud->getCreateView(), $v_crud->data);
-
-    }*/
-
-    public function store(StoreRequest $request)
-    {
-        // your additional operations before save here
+	public function store(StoreRequest $request)
+	{
+		// your additional operations before save here
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
-    }
+	}
 
 	public function update(UpdateRequest $request)
 	{

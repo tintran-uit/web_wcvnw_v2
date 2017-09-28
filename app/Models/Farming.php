@@ -8,11 +8,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OrderItem extends Model
+class Farming extends Model
 {
     use CrudTrait;
     //use Sluggable, SluggableScopeHelpers;
-    //use SoftDeletes;
+   // use SoftDeletes;
 
      /*
 	|--------------------------------------------------------------------------
@@ -20,18 +20,31 @@ class OrderItem extends Model
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'm_orders';
+    protected $table = 'farming';
     protected $primaryKey = 'id';
     public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id', 'order_id', 'farmer_id', 'product_id','quantity', 'unit', 'price', 'price_agent','price_farmer'];
-     protected $hidden = ['order_id'];
+    protected $fillable = ['id', 'farmer_id','product_id','capacity', 'harvest_from', 'harvest_to', 'rating', 'status'];
+    // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [
         'featured'  => 'boolean',
         'visible'   => 'boolean',
     ];*/
 
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'slug_or_name',
+            ],
+        ];
+    }
 
     /*
 	|--------------------------------------------------------------------------
@@ -44,10 +57,6 @@ class OrderItem extends Model
 	| RELATIONS
 	|--------------------------------------------------------------------------
 	*/
-    public function customer()
-    {
-        return $this->belongsTo('App\Models\Customer', 'customer_id');
-    }
     public function farmer()
     {
         return $this->belongsTo('App\Models\Farmer', 'farmer_id');
@@ -56,19 +65,6 @@ class OrderItem extends Model
     {
         return $this->belongsTo('App\Models\Product', 'product_id');
     }
-    public function shipper()
-    {
-        return $this->belongsTo('App\Models\Shipper', 'shipper_id');
-    }
-    public function order()
-    {
-        return $this->belongsTo('App\Models\Order', 'order_id');
-    }
-    /*public function product_price()
-    {
-        $product = $this->belongsTo('App\Models\Product', 'product_id');
-        return ($this->quantity * $product->price)/$product->unit_quantity;
-    }*/
 
 //    public function images()
 //    {
@@ -85,6 +81,22 @@ class OrderItem extends Model
     {
         return $query->where('visible', '1')
             ->orderBy('lft', 'ASC');
+    }
+
+    /*
+	|--------------------------------------------------------------------------
+	| ACCESORS
+	|--------------------------------------------------------------------------
+	*/
+
+    // The slug is created automatically from the "name" field if no slug exists.
+    public function getSlugOrNameAttribute()
+    {
+        if ($this->slug != '') {
+            return $this->slug;
+        }
+
+        return $this->name;
     }
 
     /*
