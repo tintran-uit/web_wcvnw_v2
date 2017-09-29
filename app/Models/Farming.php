@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Trading extends Model
+class Farming extends Model
 {
     use CrudTrait;
     // use Sluggable, SluggableScopeHelpers;
@@ -20,11 +20,11 @@ class Trading extends Model
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'trading';
+    protected $table = 'farming';
     protected $primaryKey = 'id';
     public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['farmer_id','product_id','capacity', 'sold', 'unit', 'status'];
+    protected $fillable = ['farmer_id','product_id','capacity', 'unit', 'harvest_period', 'status'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [
@@ -64,6 +64,11 @@ class Trading extends Model
     public function product()
     {
         return $this->belongsTo('App\Models\Product', 'product_id');
+    }
+
+    public function sold()
+    {
+        return ;
     }
 
 //    public function images()

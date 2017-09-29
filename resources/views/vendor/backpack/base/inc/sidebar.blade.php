@@ -47,6 +47,7 @@
                 <a href="#"><i class="fa fa-list"></i> <span>Lương Nông</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmer-item') }}"><i class="fa fa-star"></i> <span>Thông Tin Chung</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmer-farming') }}"><i class="fa fa-star"></i> <span>Các Mặt Hàng</span></a></li>
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/farmer-trading') }}"><i class="fa fa-newspaper-o"></i> <span>Quầy Bán Hàng</span></a></li>
                 </ul>
               </li>

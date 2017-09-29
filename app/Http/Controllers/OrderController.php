@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Cart;
 
 class OrderController extends Controller
 {
@@ -23,9 +24,13 @@ class OrderController extends Controller
 	 * @return array of products in its categories 
 	 */
 
-	public function addOrder($orders)
+	public function addOrder(Request $request)
 	{
-		foreach ($request->images as $img) {
+		
+		return Cart::content(); 
+		foreach ($request->data as $order) {
+
+
 		}
 		
 		return 0;

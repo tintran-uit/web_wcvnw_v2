@@ -78,9 +78,9 @@ class PageController extends Controller
         if ($page->template == 'cart' && count($this->data['cart']) == 0) {
             return view('alert.empty_basket', $this->data);
         }
-        if ($page->template == 'payment' && count($this->data['cart']) == 0) {
-            return view('alert.empty_basket', $this->data);
-        }
+        // if ($page->template == 'payment' && count($this->data['cart']) == 0) {
+        //     return view('alert.empty_basket', $this->data);
+        // }
 
         return view('pages.'.$page->template, $this->data);
     }

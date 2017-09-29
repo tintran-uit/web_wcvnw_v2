@@ -30,7 +30,7 @@ class CartProductController extends Controller
         $proID = $data['id'];
         $farmerID = $data['farmerID'];
         $qty = $data['qty'];
-        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`quantity_left` >= ?', [$proID, $farmerID, $qty]);
+        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`capacity` - td.`sold` >= ?', [$proID, $farmerID, $qty]);
         if($prod)
         {
             Cart::add([
@@ -64,7 +64,7 @@ class CartProductController extends Controller
 
     public function addPay(Request $request)
     {
-        
+
         return $data = $request->data;
     }
 }

@@ -33,7 +33,7 @@ Route::post('cart/add-item', 'CartProductController@addItem');
 
 //payment
 Route::get('payment/checkMa={ma}', 'CartProductController@checkMaGiamGia');
-Route::post('payment/add', 'CartProductController@addPay');
+Route::post('payment/add', 'OrderController@addOrder');
 
 //customer
 Route::get('customer/addEmailCus={emailCus}&receiveEmailCus={receiveEmailCus}', 'CustomerController@addEmaiVister');
