@@ -24,16 +24,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
     CRUD::resource('product-brand', 'BrandCrudController');
 
     //Operation Management CRUD
-    CRUD::resource('order-item', 'OrderCrudController');
+    CRUD::resource('order', 'OrderCrudController');
+    CRUD::resource('order-item', 'OrderItemCrudController');
     CRUD::resource('agent-item', 'AgentCrudController');
     CRUD::resource('customer-item', 'CustomerCrudController');
     CRUD::resource('farmer-item', 'FarmerCrudController');
+    CRUD::resource('farmer-farming', 'FarmingCrudController');
     CRUD::resource('farmer-trading', 'TradingCrudController');
     CRUD::resource('shipper-item', 'ShipperCrudController');
 
 });
 
-
+// Route::get('/admin/order-item/additem/{order_id}', 'Admin\OrderCrudController@additem');
 /** CATCH-ALL ROUTE for Backpack/PageManager - needs to be at the end of your routes.php file  **/
 
 Route::get('language/{locale}', function ($locale) {

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Farmer extends Model
 {
     use CrudTrait;
-    use Sluggable, SluggableScopeHelpers;
+    //use Sluggable, SluggableScopeHelpers;
     use SoftDeletes;
 
      /*
@@ -24,7 +24,7 @@ class Farmer extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id','name','address'];
+    protected $fillable = ['id','name','address', 'phone', 'rating', 'agent_id', 'rating_count', 'profile', 'photo'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [
@@ -77,34 +77,7 @@ class Farmer extends Model
 //        return $this->morphMany('App\Models\Image', 'imageable');
 //    }
 
-    /*
-	|--------------------------------------------------------------------------
-	| SCOPES
-	|--------------------------------------------------------------------------
-	*/
-
-    public function scopeVisible($query)
-    {
-        return $query->where('visible', '1')
-            ->orderBy('lft', 'ASC');
-    }
-
-    /*
-	|--------------------------------------------------------------------------
-	| ACCESORS
-	|--------------------------------------------------------------------------
-	*/
-
-    // The slug is created automatically from the "name" field if no slug exists.
-    public function getSlugOrNameAttribute()
-    {
-        if ($this->slug != '') {
-            return $this->slug;
-        }
-
-        return $this->name;
-    }
-
+  
     /*
 	|--------------------------------------------------------------------------
 	| MUTATORS

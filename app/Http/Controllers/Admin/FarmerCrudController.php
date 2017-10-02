@@ -56,7 +56,7 @@ class FarmerCrudController extends CrudController
             'label' => 'Lượt đánh giá',
         ]);
         $this->crud->addColumn([
-            'name' => 'profile_image',
+            'name' => 'photo',
             'label' => 'Ảnh',
         ]);
 
@@ -93,7 +93,7 @@ class FarmerCrudController extends CrudController
         ]);
 
         $this->crud->addField([   // WYSIWYG
-            'name' => 'profile_image',
+            'name' => 'photo',
             'label' => 'Ảnh Nông Dân',
             'type' => 'browse',
             'placeholder' => 'Chọn hình ảnh cho sản phẩm',

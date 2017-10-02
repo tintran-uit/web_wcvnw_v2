@@ -22,9 +22,9 @@ Route::get('/products/suppliers/product_id={product_id}', 'ProductController@get
 Route::get('/products/interest/product_id={product_id}', 'ProductController@addInterest');
 
 
-
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
 Route::get('/farmer/farmer_id={farmer_id}', 'FarmerController@getFarmerProfile');
+Route::get('/farmers', 'FarmerController@farmers');
 
 //gio hang
 Route::post('cart/update-cart', 'CartProductController@addCart');
@@ -33,7 +33,7 @@ Route::post('cart/add-item', 'CartProductController@addItem');
 
 //payment
 Route::get('payment/checkMa={ma}', 'CartProductController@checkMaGiamGia');
-Route::post('payment/add', 'CartProductController@addPay');
+Route::post('payment/add', 'OrderController@addOrder');
 
 //customer
 Route::get('customer/addEmailCus={emailCus}&receiveEmailCus={receiveEmailCus}', 'CustomerController@addEmaiVister');

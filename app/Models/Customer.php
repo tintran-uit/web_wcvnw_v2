@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Customer extends Model
 {
     use CrudTrait;
-    use Sluggable, SluggableScopeHelpers;
-    use SoftDeletes;
+    // use Sluggable, SluggableScopeHelpers;
+    // use SoftDeletes;
 
      /*
 	|--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ class Customer extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id','name','address'];
+    protected $fillable = ['id','name', 'phone', 'email','address', 'photo'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [

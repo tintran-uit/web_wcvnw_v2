@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Trading extends Model
 {
     use CrudTrait;
-    use Sluggable, SluggableScopeHelpers;
-    use SoftDeletes;
+    // use Sluggable, SluggableScopeHelpers;
+    // use SoftDeletes;
 
      /*
 	|--------------------------------------------------------------------------
@@ -64,11 +64,6 @@ class Trading extends Model
     public function product()
     {
         return $this->belongsTo('App\Models\Product', 'product_id');
-    }
-
-    public function sold()
-    {
-        return ;
     }
 
 //    public function images()

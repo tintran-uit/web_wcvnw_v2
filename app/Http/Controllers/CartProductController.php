@@ -64,6 +64,7 @@ class CartProductController extends Controller
 
     public function addPay(Request $request)
     {
+
         return $data = $request->data;
     }
 }
