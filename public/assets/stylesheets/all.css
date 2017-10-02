@@ -850,6 +850,11 @@
 .li-disabled {
     pointer-events:none; //This makes it not clickable
 }
+.vcenter {
+   display: inline-block;
+   vertical-align: middle;
+   float: none;
+}
 
 
 

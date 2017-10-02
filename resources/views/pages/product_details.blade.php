@@ -13,7 +13,7 @@
           <article class="col-sm-4 col-md-5">
             <section class="wrap internal-padding wrap-border wrap-radius bg-white">
               <div class="">
-                <img class="img-responsive big-img center-block" alt="product" src="http://product.hstatic.net/1000141988/product/upload_6a9e61e9b5484214a282855b8d9ddced_large.jpg">
+                <img class="img-responsive big-img center-block" alt="product" src="{{url('')}}/uploads/products/images/ca-chua-1.png">
                 
               </div>
               <div class="icon-shipping"> <!--icon-email, icon-discount, icon-shipping-->

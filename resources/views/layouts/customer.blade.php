@@ -757,7 +757,7 @@ var link = link
                   </article>
                   <article class="col-sm-5">
                      <p data-text="copyright" class="text-left no-margin">
-                        Copyright © 2017. Designed by <b>CFarm Technical Team</b>
+                        Copyright © 2017. Developed by <b>CFarm Technical Team</b>
                      </p>
                   </article>
                </div>

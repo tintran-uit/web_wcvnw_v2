@@ -14,21 +14,28 @@
 /*font family*/
 @font-face {
 font-family:CaviarDreams_Bold;
-src:url(‘/vendor/fonts/CaviarDreams_Bold.ttf’) format(‘truetype’);
-font-weight:normal;
- font-style:normal;
+src:url(/assets/stylesheets/vendor/fonts/CaviarDreams_Bold.ttf);
 }
 
 @font-face {
 font-family:Reso_Regular;
-src:url(‘/vendor/fonts/Reso_Regular.ttf’) format(‘truetype’);
-font-weight:normal;
- font-style:normal;
+src:url(/assets/stylesheets/vendor/fonts/Reso-Regular_VN.ttf);
+}
+
+@font-face {
+font-family:Reso_Regular_Light;
+src:url(/assets/stylesheets/vendor/fonts/Reso-Light_VN.ttf);
+}
+
+@font-face {
+font-family:Reso_Regular_Bold;
+src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
 }
 
 #mainMN {
     font-family: CaviarDreams_Bold !important;
     font-size: 15px !important;
+    /*background-image: url(/assets/images/thuc-pham-sach-banner.png);*/
 }
 /*end*/
 /*font colors*/
@@ -234,10 +241,10 @@ font-weight:normal;
 
 /* line 144, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
 .btn-light {
-  background-color: #64903E !important; }
+  background-color: #A52223 !important; }
   /* line 146, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-light:hover, .btn-light:active, .btn-light:focus {
-    background-color: #00abe9;
+    background-color: #C04724;
     color: #ffffff; }
 
 /* line 152, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
@@ -1652,6 +1659,7 @@ a {
     padding: 9px 9px 0px; }
     /* line 31, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_products-box.scss */
     .content-product .thumbnail .caption .copy {
+  font-family: "Reso_Regular_Bold";
       margin-bottom: 15px; }
       /* line 33, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_products-box.scss */
       .content-product .thumbnail .caption .copy h4 {
@@ -1668,7 +1676,10 @@ a {
       border-bottom: 1px solid #cccccc;
       padding-top: 10px;
       padding-bottom: 7px;
-      margin-bottom: 20px; }
+      margin-bottom: 20px; 
+      font-family: "Reso_Regular_Light";
+
+    }
       /* line 49, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_products-box.scss */
       .content-product .thumbnail .caption .price .new-price {
         color: #64903E;
@@ -1693,6 +1704,7 @@ a {
       margin-right: 4px; }
       /* line 71, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_products-box.scss */
       .content-product .thumbnail .caption .button-group .btn:last-child {
+          font-family: "Reso_Regular_Light";
         /*margin-right: 0; */
       }
 
@@ -2876,6 +2888,7 @@ a {
     background: #C04724;
     border: 0px solid #ddd;
     color: #ffffff;
+    font-family: 'Reso_Regular_Bold';
   }
 
 .nav.nav-tabs.nav-justified > li > a:hover {
@@ -2890,7 +2903,7 @@ a {
   padding-left: 0px;
   padding-right: 0px;
   color: #fff;
-
+  font-family: 'Reso_Regular_Bold';
 }
 
 .vcenter {
@@ -2960,9 +2973,26 @@ a {
   }
 
 .span-price{
+  font-family: "Reso_Regular_Bold";
   font-weight: 600;
+  font-size: 16px;
   }
 
 .new-price{
   color: #A52223;
+}
+
+.button-group .pull-left{
+  width: 50%;
+}
+.button-group .pull-right{
+  width: 50%;
+}
+@media only screen and (max-width: 500px) {
+    .button-group .pull-left{
+      width: 100%;
+    }
+    .button-group .pull-right{
+      width: 100%;
+    }
 }
