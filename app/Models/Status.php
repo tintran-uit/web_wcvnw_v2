@@ -8,11 +8,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Order extends Model
+class Status extends Model
 {
     use CrudTrait;
-    //use Sluggable, SluggableScopeHelpers;
-    //use SoftDeletes;
+    // use Sluggable, SluggableScopeHelpers;
+    // use SoftDeletes;
 
      /*
 	|--------------------------------------------------------------------------
@@ -20,11 +20,11 @@ class Order extends Model
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'g_orders';
+    protected $table = 'status';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+    // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id', 'order_id', 'customer_id', 'shipper_id','rating_service', 'rating_customer', 'note','status'];
+    protected $fillable = ['id','name', 'vn_name', 'description'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [
@@ -32,6 +32,19 @@ class Order extends Model
         'visible'   => 'boolean',
     ];*/
 
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'slug_or_name',
+            ],
+        ];
+    }
 
     /*
 	|--------------------------------------------------------------------------
@@ -44,34 +57,11 @@ class Order extends Model
 	| RELATIONS
 	|--------------------------------------------------------------------------
 	*/
-    public function customer()
+    public function city()
     {
-        return $this->belongsTo('App\Models\Customer', 'customer_id');
+        return $this->belongsTo('App\Models\Brand', 'city_id');
     }
-    public function status()
-    {
-        return $this->belongsTo('App\Models\Status', 'status');
-    }
-    public function farmer()
-    {
-        return $this->belongsTo('App\Models\Farmer', 'farmer_id');
-    }
-    public function product()
-    {
-        return $this->belongsTo('App\Models\Product', 'product_id');
-    }
-    public function shipper()
-    {
-        return $this->belongsTo('App\Models\Shipper', 'shipper_id');
-    }
-    public function orderItem()
-    {
-        return $this->hasMany('App\Models\orderItem', 'order_id');
-    }
-    public function addItem()
-    {
-        return $this->hasMany('App\Models\orderItem', 'order_id');
-    }
+
 
 //    public function images()
 //    {
@@ -89,6 +79,12 @@ class Order extends Model
         return $query->where('visible', '1')
             ->orderBy('lft', 'ASC');
     }
+
+    /*
+	|--------------------------------------------------------------------------
+	| ACCESORS
+	|--------------------------------------------------------------------------
+	*/
 
     /*
 	|--------------------------------------------------------------------------
