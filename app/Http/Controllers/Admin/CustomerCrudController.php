@@ -78,6 +78,17 @@ class CustomerCrudController extends CrudController
             'name' => 'address',
             'label' => 'Địa chỉ',
         ]);
+        $this->crud->addField([
+            'name' => 'district',
+            'label' => 'Quận/Huyện',
+            'type' => 'select2',
+            'entity' => 'district', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\District", // foreign key model
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
 
         $this->crud->addField([
             'name' => 'photo',

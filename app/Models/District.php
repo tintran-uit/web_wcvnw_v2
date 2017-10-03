@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Customer extends Model
+class District extends Model
 {
     use CrudTrait;
     // use Sluggable, SluggableScopeHelpers;
@@ -20,11 +20,11 @@ class Customer extends Model
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'customers';
+    protected $table = 'district';
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id','name', 'phone', 'email','address', 'district', 'photo'];
+    protected $fillable = ['id','name', 'city_id'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [
@@ -57,24 +57,11 @@ class Customer extends Model
 	| RELATIONS
 	|--------------------------------------------------------------------------
 	*/
-    public function brand()
+    public function city()
     {
-        return $this->belongsTo('App\Models\Brand', 'brand_id');
-    }
-    public function district()
-    {
-        return $this->belongsTo('App\Models\District', 'district');
+        return $this->belongsTo('App\Models\Brand', 'city_id');
     }
 
-    public function categories()
-    {
-        return $this->belongsToMany('App\Models\ProductCategory', 'products_categories','product_id','category_id');
-    }
-
-    public function images()
-    {
-        return $this->belongsToMany('App\Models\Image', 'products_images','product_id','image_id');
-    }
 
 //    public function images()
 //    {

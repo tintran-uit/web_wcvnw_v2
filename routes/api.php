@@ -21,10 +21,13 @@ Route::get('/products', 'ProductController@getproducts');
 Route::get('/products/suppliers/product_id={product_id}', 'ProductController@getSuppliers');
 Route::get('/products/interest/product_id={product_id}', 'ProductController@addInterest');
 
+Route::get('/order/items/order_id={order_id}', 'CustomerController@orderContent');
 
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
 Route::get('/farmer/farmer_id={farmer_id}', 'FarmerController@getFarmerProfile');
+Route::get('/farmer/trading/farmer_id={farmer_id}', 'FarmerController@farmerOrderList');
 Route::get('/farmers', 'FarmerController@farmers');
+
 
 //gio hang
 Route::post('cart/update-cart', 'CartProductController@addCart');
