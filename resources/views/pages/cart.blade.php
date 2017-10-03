@@ -10,7 +10,7 @@
             <aside class="col-sm-12 col-md-3">
                <div class="block block-nav spacer-15">
                   <div class="title">
-                     <h4 class="text-uppercase no-margin">Đơn hàng</h4>
+                     <h4 class="text-uppercase no-margin">Giỏ hàng</h4>
                   </div>
                   <div class="content">
                      <ul class="list-unstyled">
@@ -101,121 +101,10 @@
                </div>
             </article>
          </div>
-         <div class="row">
-            <div class="col-sm-4">
-               <section class="single-block bg-white wrap-radius">
-                  <div class="icon-email">
-                     <!--icon-email, icon-discount, icon-shipping-->
-                     <h4 class="title-box text-uppercase no-margin-top">
-                        SUBSCRIBE TO NEWSLETTER
-                     </h4>
-                     <p class="copy-box no-margin-top">
-                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                     </p>
-                     <div class="text-center">
-                        <a class="btn btn-link no-margin" href="#">SHOW MORE</a>
-                     </div>
-                  </div>
-               </section>
-            </div>
-            <div class="col-sm-4">
-               <section class="single-block bg-white wrap-radius">
-                  <div class="icon-discount">
-                     <!--icon-email, icon-discount, icon-shipping-->
-                     <h4 class="title-box text-uppercase no-margin-top">
-                        Have a Coupon?
-                     </h4>
-                     <p class="copy-box no-margin-top">
-                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                     </p>
-                     <div class="text-center">
-                        <a class="btn btn-link no-margin" href="#">SHOW MORE</a>
-                     </div>
-                  </div>
-               </section>
-            </div>
-            <div class="col-sm-4">
-               <section class="wrap wrap-border internal-padding spacer-bottom-15">
-                  <h4 class="text-uppercase no-margin">Summary order</h4>
-                  <div class="spacer-top-5">
-                     <div class="row spacer-bottom-5">
-                        <div class="col-xs-6">Articles:</div>
-                        <div class="col-xs-6 text-right">$ 45,00</div>
-                     </div>
-                     <div class="row spacer-bottom-5">
-                        <div class="col-xs-6">Shipping costs:</div>
-                        <div class="col-xs-6 text-right">
-                           <b>GRATIS</b>
-                        </div>
-                     </div>
-                     <div class="row spacer-bottom-5">
-                        <div class="col-xs-6 highlighted">
-                           <strong>Gift Certificate:</strong>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                           <b>- $ 45,00</b>
-                        </div>
-                     </div>
-                     <div class="row spacer-bottom-5">
-                        <div class="col-xs-6">Total order:</div>
-                        <div class="col-xs-6 text-right">$ 0,00</div>
-                     </div>
-                     <p class="small no-margin spacer-top-15">
-                        Your order includes VAT.
-                        <a href="terms-conditions.html">
-                        <u>Details</u>
-                        </a>
-                     </p>
-                  </div>
-               </section>
-            </div>
-         </div>
+         
       </div>
    </section>
-   <section class="purchase-benefits spacer-30 bg-extra-light-grey">
-      <div class=" spacer-10">
-         <div class="container spacer-top-15">
-            <div class="row clearfix">
-               <article class="col-xs-12 col-sm-3">
-                  <div class="column text-center spacer-bottom-15">
-                     <i class="fa fa-truck fa-3x"></i>
-                     <h4>Free Worldwide Shipping</h4>
-                     <p class="no-margin">
-                        Delivery throughout England<br>in 24/48 h by courier
-                     </p>
-                  </div>
-               </article>
-               <article class="col-xs-12 col-sm-3">
-                  <div class="column text-center spacer-bottom-15">
-                     <i class="fa fa-gift fa-3x"></i>
-                     <h4>Want to make a gift?</h4>
-                     <p class="no-margin">
-                        When ordering, <a href="#" class="btn-link">ask for gift box</a> and you'll get everything you need to be able to create
-                     </p>
-                  </div>
-               </article>
-               <article class="col-xs-12 col-sm-3">
-                  <div class="column text-center spacer-bottom-15">
-                     <i class="fa fa-lock fa-3x"></i>
-                     <h4>Secure Payments!</h4>
-                     <p class="no-margin">
-                        Please card payments credit in all tranquility use certified instruments
-                     </p>
-                  </div>
-               </article>
-               <article class="col-xs-12 col-sm-3">
-                  <div class="column text-center spacer-bottom-15">
-                     <i class="fa fa-phone fa-3x"></i>
-                     <h4>Customer Service</h4>
-                     <p class="no-margin">
-                        Our customer service is available from Monday to Saturday from 9:00 to 18:00
-                     </p>
-                  </div>
-               </article>
-            </div>
-         </div>
-      </div>
-   </section>
+   @include('layouts.banner_bottom')
 </main>
 @endsection
 

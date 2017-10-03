@@ -124,11 +124,11 @@
 nên mẹ luôn thương yêu và muốn đền bù tất cả cho các con.</p></div>
           <div class="content col-md-12">
             <div class="col-md-6">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/X0m6Rdhs1Nw" frameborder="0" allowfullscreen></iframe>
+              <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/X0m6Rdhs1Nw" frameborder="0" allowfullscreen></iframe></div>
             </div>
-            <div class="col-md-5 col-md-offset-1">
+            <div class="col-md-6">
               <h2 class="title-font-handwritten"> C-FARM CUỘC SỐNG TỐT ĐẸP HƠN</h2>
-              <p>Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ...............</p>
+              <p>Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ...............</p>
               <a href="{{url('')}}/xem-chi-tiet" class="btn btn-success">Chi tiết</a>
             </div>
           </div>

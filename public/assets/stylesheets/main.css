@@ -322,10 +322,10 @@ ul, ol {
 
 /* line 14, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_common-style.scss */
 a {
-  color: #9CCB3B; }
+  color: #000; }
   /* line 16, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_common-style.scss */
   a:hover {
-    color: #9CCB3B; }
+    color: #000; }
 
 /* line 21, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_common-style.scss */
 .highlighted {
@@ -1114,7 +1114,7 @@ a {
   /* line 43, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/footer/_footer.scss */
   .footer-widget-list li a {
     font-size: 13px;
-    color: #9CCB3B; }
+    color: #000; }
 
 /* line 3, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/footer/_contact-footer.scss */
 #contact-footer .info-box .info-col {
