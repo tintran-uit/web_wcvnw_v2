@@ -79,6 +79,7 @@ class OrderCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'status',
             'label' => 'Trạng Thái',
+            'type' => 'text',
         ]);
 
         // ------ CRUD FIELDS
@@ -123,15 +124,18 @@ class OrderCrudController extends CrudController
         $this->crud->addField([
             'name' => 'status',
             'label' => 'Trạng Thái',
-            'type' => 'text',
+            'type' => 'select',
+            'entity' => 'status',
+            'attribute' => 'vn_name',
+            'model' => "App\Models\Status",
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4'
             ],
         ]);
 
         // ------ CRUD DETAILS ROW
-        $this->crud->enableDetailsRow();
-        $this->crud->allowAccess('details_row');
+        // $this->crud->enableDetailsRow();
+        // $this->crud->allowAccess('details_row');
         // $this->crud->setColumnDetails('column_name', ['attribute' => 'value']);
         // $this->crud->setDetailsRowView('orders_list.');
         
