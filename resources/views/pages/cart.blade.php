@@ -93,8 +93,8 @@
                      <hr>
                      <fieldset class="buttons">
                         <div class="pull-right">
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="shop.html">Tiếp tục mua hàng</a>
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="payment.html">Thanh toán</a>
+                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/mua-thuc-pham-sach')}}">Tiếp tục mua hàng</a>
+                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/thanh-toan')}}">Thanh toán</a>
                         </div>
                      </fieldset>
                   </form>

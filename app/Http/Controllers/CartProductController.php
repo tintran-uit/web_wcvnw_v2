@@ -34,13 +34,13 @@ class CartProductController extends Controller
         if($prod)
         {
             Cart::add([
-              'id' => $proID, 'name' => $prod[0]->name, 'qty' => $qty, 'price' => $prod[0]->price, 'options' => ['image' => $prod[0]->image,'nd_id' => 'TG111', 'name' => 'Nông trại Bác 8 Bình D ']
+              'id' => $proID, 'name' => $prod[0]->name, 'qty' => $qty, 'price' => $prod[0]->price, 'options' => ['image' => $prod[0]->image,'farmer_id' => $farmerID]
             ]);
             return Cart::content();
         }else{
             return response()->json([
                 'error' => 1,
-                'status' => 'Sản lượng không đủ. Vui lòng chọn nhà cung cấp khác.'
+                'status' => 'Sản lượng không đủ. Vui lòng chọn sản phẩm khác.'
             ]);
         }
         

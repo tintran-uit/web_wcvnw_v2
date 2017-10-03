@@ -2893,7 +2893,11 @@ a {
   padding: 5px 10px; }
   /* line 11, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/_block-aside.scss */
   .block.block-nav .content dl dt {
+    font-weight: 500;
     margin-bottom: 6px; }
+    .block.block-nav .content dl dt a.current {
+      font-weight: bold;
+      color: #64903E; }
   /* line 14, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/_block-aside.scss */
   .block.block-nav .content dl dd {
     margin-bottom: 3px;

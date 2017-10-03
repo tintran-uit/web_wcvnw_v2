@@ -518,7 +518,7 @@ var link = link
                         <div class="nav-bar navbar-default dropdown-main-nav">
                            <div class="collapse navbar-collapse">
                               <ul class="nav nav-justified" id="mainMN">
-                                 <li class="{{ Request::is('/') ? 'active' : '' }}">
+                                 <li id="litrangchu" class="{{ Request::is('/') ? 'active' : '' }}">
                                     <a href="{{url('/')}}">{{ trans('head.home') }}</a>
                                  </li>
                                  <li class="{{ Request::is('thong-tin-nha-phan-phoi-we-cae-vn') ? 'active' : '' }} {{ Request::is('dia-chi-lien-he-wecarevn') ? 'active' : '' }} {{ Request::is('chinh-sach-lien-ket-nong-dan') ? 'active' : '' }}  {{ Request::is('huong-dan-mua-thuc-pham-sach') ? 'active' : '' }}  {{ Request::is('chinh-sach-doi-tra') ? 'active' : '' }}">
@@ -771,6 +771,7 @@ var link = link
 
       @yield('scrip_code')
       <script type="text/javascript">
+        checkActiveMenu();
       function deleteItem(rowId) {
          var markers = { "rowId": rowId};
 
@@ -864,6 +865,15 @@ var link = link
                   $('#modalAlert').modal('show');
                });
           }
+
+      function checkActiveMenu() {
+        // var interest = $('ul#mainMN').find('li.active');
+        var interest = $('ul#mainMN li.active a').html();
+        console.log(interest);
+        if(interest == null){
+          $('#litrangchu').addClass("active");
+        }
+      }
       </script>
    </body>
 </html>

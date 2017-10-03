@@ -58,7 +58,7 @@
                             <div class="row clearfix">
                               <div class="col-xs-12">
                                 <h4 class="media-heading">
-                                  <a class="btn-link" href="post.html">Thực phẩm hữu cơ organic là gì?</a>
+                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">Thực phẩm hữu cơ organic là gì?</a>
                                 </h4>
                               </div>
                               <!-- <div class="col-xs-4">
@@ -71,7 +71,7 @@
                             </div>
                             <div class="media spacer-bottom-10">
                               <div class="media-left media-top">
-                          <a href="post.html">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
+                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
                           </a>    </div>
                               <div class="media-body">
                                 <p class="copy">
@@ -101,7 +101,7 @@
                             <div class="row clearfix">
                               <div class="col-xs-12">
                                 <h4 class="media-heading">
-                                  <a class="btn-link" href="post.html">Thực phẩm hữu cơ organic là gì?</a>
+                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">Thực phẩm hữu cơ organic là gì?</a>
                                 </h4>
                               </div>
                               <!-- <div class="col-xs-4">
@@ -114,7 +114,7 @@
                             </div>
                             <div class="media spacer-bottom-10">
                               <div class="media-left media-top">
-                          <a href="post.html">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
+                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
                           </a>    </div>
                               <div class="media-body">
                                 <p class="copy">
@@ -144,7 +144,7 @@
                             <div class="row clearfix">
                               <div class="col-xs-12">
                                 <h4 class="media-heading">
-                                  <a class="btn-link" href="post.html">Thực phẩm hữu cơ organic là gì?</a>
+                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">Thực phẩm hữu cơ organic là gì?</a>
                                 </h4>
                               </div>
                               <!-- <div class="col-xs-4">
@@ -157,7 +157,7 @@
                             </div>
                             <div class="media spacer-bottom-10">
                               <div class="media-left media-top">
-                          <a href="post.html">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
+                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
                           </a>    </div>
                               <div class="media-body">
                                 <p class="copy">
@@ -187,7 +187,7 @@
                             <div class="row clearfix">
                               <div class="col-xs-12">
                                 <h4 class="media-heading">
-                                  <a class="btn-link" href="post.html">Thực phẩm hữu cơ organic là gì?</a>
+                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">Thực phẩm hữu cơ organic là gì?</a>
                                 </h4>
                               </div>
                               <!-- <div class="col-xs-4">
@@ -200,7 +200,7 @@
                             </div>
                             <div class="media spacer-bottom-10">
                               <div class="media-left media-top">
-                          <a href="post.html">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
+                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
                           </a>    </div>
                               <div class="media-body">
                                 <p class="copy">

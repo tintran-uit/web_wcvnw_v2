@@ -354,75 +354,7 @@ trước khi giao hàng!</p>
                </section>
             </article>
          </div>
-         <div class="row">
-            <div class="col-sm-4">
-               <section class="single-block bg-white wrap-radius">
-                  <div class="icon-email">
-                     <!--icon-email, icon-discount, icon-shipping-->
-                     <h4 class="title-box text-uppercase no-margin-top">
-                        SUBSCRIBE TO NEWSLETTER
-                     </h4>
-                     <p class="copy-box no-margin-top">
-                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                     </p>
-                     <div class="text-center">
-                        <a class="btn btn-link no-margin" href="#">SHOW MORE</a>
-                     </div>
-                  </div>
-               </section>
-            </div>
-            <div class="col-sm-4">
-               <section class="single-block bg-white wrap-radius">
-                  <div class="icon-discount">
-                     <!--icon-email, icon-discount, icon-shipping-->
-                     <h4 class="title-box text-uppercase no-margin-top">
-                        Have a Coupon?
-                     </h4>
-                     <p class="copy-box no-margin-top">
-                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                     </p>
-                     <div class="text-center">
-                        <a class="btn btn-link no-margin" href="#">SHOW MORE</a>
-                     </div>
-                  </div>
-               </section>
-            </div>
-            <div class="col-sm-4">
-               <section class="wrap wrap-border internal-padding spacer-bottom-15">
-                  <h4 class="text-uppercase no-margin">Summary order</h4>
-                  <div class="spacer-top-5">
-                     <div class="row spacer-bottom-5">
-                        <div class="col-xs-6">Articles:</div>
-                        <div class="col-xs-6 text-right">$ 45,00</div>
-                     </div>
-                     <div class="row spacer-bottom-5">
-                        <div class="col-xs-6">Shipping costs:</div>
-                        <div class="col-xs-6 text-right">
-                           <b>GRATIS</b>
-                        </div>
-                     </div>
-                     <div class="row spacer-bottom-5">
-                        <div class="col-xs-6 highlighted">
-                           <strong>Gift Certificate:</strong>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                           <b>- $ 45,00</b>
-                        </div>
-                     </div>
-                     <div class="row spacer-bottom-5">
-                        <div class="col-xs-6">Total order:</div>
-                        <div class="col-xs-6 text-right">$ 0,00</div>
-                     </div>
-                     <p class="small no-margin spacer-top-15">
-                        Your order includes VAT.
-                        <a href="terms-conditions.html">
-                        <u>Details</u>
-                        </a>
-                     </p>
-                  </div>
-               </section>
-            </div>
-         </div>
+         
       </div>
    </section>
    @include('layouts.banner_bottom')
