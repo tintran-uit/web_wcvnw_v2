@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Vister;
+use DB;
 
 class CustomerController extends Controller
 {
@@ -17,11 +18,25 @@ class CustomerController extends Controller
 	 * @return array of products in its categories 
 	 */
 
-	public function customerRateOrder($order_id)
+	public function orderContent($order_id)
 	{
-		return 0;
+		$items = DB::select('SELECT p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name" FROM `m_orders` m, `products` p, `farmers` f  
+			WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ?', [$order_id]);
+		
+	    return $items;
 	}
 
+	public function orders($customer_id)
+	{
+		$orders = DB::select('SELECT g.`order_id` "order_id", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`note` "note" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`status` ASC', [$customer_id]);
+	    return $orders;
+	}
+
+	public function createOrder($customer_id)
+	{
+		$orders = DB::select('SELECT g.`order_id` "order_id", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`note` "note" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`status` ASC', [$customer_id]);
+	    return $orders;
+	}
 
 	/**
 	 *customerCart
