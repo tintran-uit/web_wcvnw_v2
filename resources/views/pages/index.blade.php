@@ -480,7 +480,6 @@ nên mẹ luôn thương yêu và muốn đền bù tất cả cho các con.</p>
           }
 
           function addCart(prodID, farmerID) {
-            alert('sss');
               var qty = 1;
               // var farmerID = $('input[name="farmerID"]:checked').val();;
               console.log(farmerID);
@@ -507,6 +506,9 @@ nên mẹ luôn thương yêu và muốn đền bù tất cả cho các con.</p>
                           // $('#modalChooseFarmer').modal('show');
                         }else{
                           updateCartStatus(data);
+                          $('#modalMessageFinish').html('Thêm thành công!');
+                          $('#modalAlertFinish').modal('show');
+                          setTimeout(function(){ $('#modalAlertFinish').modal('hide'); }, 800);
                         }
                         console.log(data);
                       },

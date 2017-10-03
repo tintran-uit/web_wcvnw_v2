@@ -213,7 +213,7 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
   border-color: none; }
   /* line 107, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-info:hover {
-    background-color: #00abe9; }
+    background-color: #9CCB3B; }
   /* line 114, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-info.open .dropdown-toggle.btn-info {
     color: #ffffff;
@@ -226,7 +226,7 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
   background-color: #64903E !important; }
   /* line 128, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-super-light:hover, .btn-super-light:active, .btn-super-light:focus {
-    background-color: #00abe9;
+    background-color: #9CCB3B;
     color: #ffffff; }
 
 /* line 134, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
@@ -299,7 +299,7 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
   color: #64903E; }
   /* line 204, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-link:hover, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a:hover, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button:hover, #copyright .footer-links ul li a:hover, .footer-widget-list li a:hover, .group-filters .content li a:hover, .listbar .listbox li a:hover, .general-info .content dl dd a:hover, .breadcrumb > li a:hover, .block.block-nav .content dl dd a:hover, .block.block-nav .content ul li a:hover, .btn-link:active, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a:active, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button:active, #copyright .footer-links ul li a:active:hover, .footer-widget-list li a:active:hover, .group-filters .content li a:active:hover, .listbar .listbox li a:active:hover, .general-info .content dl dd a:active:hover, .breadcrumb > li a:active:hover, .block.block-nav .content dl dd a:active:hover, .block.block-nav .content ul li a:active:hover, .btn-link:focus, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a:focus, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button:focus, #copyright .footer-links ul li a:focus:hover, .footer-widget-list li a:focus:hover, .group-filters .content li a:focus:hover, .listbar .listbox li a:focus:hover, .general-info .content dl dd a:focus:hover, .breadcrumb > li a:focus:hover, .block.block-nav .content dl dd a:focus:hover, .block.block-nav .content ul li a:focus:hover {
-    color: #00abe9;
+    color: #9CCB3B;
     text-decoration: none; }
 
 /*end*/
@@ -307,7 +307,7 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
 body {
   font-size: 14px;
   line-height: 20px;
-  color: #9CCB3B;
+  color: #000;
   font-weight: normal;
   text-shadow: none;
   font-family: "Myriad Pro", "PT Sans", arial, helvetica, sans-serif;
@@ -848,7 +848,7 @@ a {
   margin: 0;
   padding: 0;
   background: #f5f5f5;
-  color: #9CCB3B; }
+  color: #000; }
 
 /* line 8, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/header/_header.scss */
 #button-nav-mobile .navbar-toggle {
@@ -1590,7 +1590,7 @@ a {
         font-size: 1.1em; }
       /* line 23, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_news-box.scss */
       .content-new .thumbnail .caption.top figure:hover .title {
-        background-color: #00abe9; }
+        background-color: #9CCB3B; }
     /* line 28, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_news-box.scss */
     .content-new .thumbnail .caption.top .copy {
       padding: 15px 10px 0;
@@ -2425,7 +2425,7 @@ a {
     background-image: -o-linear-gradient(left, #64903E, #0f587d 50%, #64903E);
     background-image: linear-gradient(to right, #64903E, #0f587d 50%, #64903E);
     background-repeat: no-repeat;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF00abe9', endColorstr='#FF00abe9', GradientType=1); }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF9CCB3B', endColorstr='#FF9CCB3B', GradientType=1); }
     /* line 34, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/banner/_editable-voucher-banner.scss */
     .voucher-banner .decorative-band .circle {
       width: 50px;
@@ -2724,7 +2724,7 @@ a {
     /* line 10, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/_style-pagination.scss */
     .pagination > li a {
       border: none;
-      color: #9CCB3B;
+      color: #000;
       padding: 0px 8px;
       background: transparent;
       -webkit-transition-duration: 0.4s;
