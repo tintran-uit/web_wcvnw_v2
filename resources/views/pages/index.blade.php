@@ -152,8 +152,8 @@ nên mẹ luôn thương yêu và muốn đền bù tất cả cho các con.</p>
                   <section class="caption top">
                      <figure>
                         <a href="post.html">
-                           <img class="img-responsive" alt="img" src="assets/images/photo/photo4.jpg" />
-                           <h4 class="title">Mẹo vặt đi chợ</h4>
+                           <img class="img-responsive" alt="img" src="assets/images/photo/photo4.png" />
+                           <h4 class="title">Góc nhà bếp</h4>
                         </a>
                      </figure>
                   </section>
@@ -166,8 +166,8 @@ nên mẹ luôn thương yêu và muốn đền bù tất cả cho các con.</p>
                   <section class="caption top">
                      <figure>
                         <a href="post.html">
-                           <img class="img-responsive" alt="img" src="assets/images/photo/photo5.jpg" />
-                           <h4 class="title">Phân biệt thực phẩm sạch</h4>
+                           <img class="img-responsive" alt="img" src="assets/images/photo/photo5.png" />
+                           <h4 class="title">Ẩm thực & Sức khỏe</h4>
                         </a>
                      </figure>
                   </section>
@@ -180,8 +180,8 @@ nên mẹ luôn thương yêu và muốn đền bù tất cả cho các con.</p>
                   <section class="caption top">
                      <figure>
                         <a href="post.html">
-                           <img class="img-responsive" alt="img" src="assets/images/photo/photo6.jpg" />
-                           <h4 class="title">Kinh nghiệm nhà nông</h4>
+                           <img class="img-responsive" alt="img" src="assets/images/photo/photo6.png" />
+                           <h4 class="title">Câu chuyện nhà nông</h4>
                         </a>
                      </figure>
                   </section>

@@ -889,7 +889,7 @@ a {
   /* line 8, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/header/_nav.scss */
   .dropdown-main-nav .dropdown-menu li a, .dropdown-main-nav .dropdown-menu li button {
     text-align: left;
-    color: #9CCB3B;
+    color: #000;
     display: inline-block;
     padding: 0 0 5px;
     -webkit-transition-duration: 0.4s;
