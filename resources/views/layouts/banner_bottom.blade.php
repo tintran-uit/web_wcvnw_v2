@@ -1,5 +1,5 @@
 <section class="purchase-benefits spacer-30 bg-extra-light-grey" style="background-color: rgba(106,184,69, 0.5); color: #ffffff; margin: 20px 0px">
-  <div class=" spacer-10">
+  <div class=" spacer-10" style="background-image: url(/assets/images/thuc-pham-sach-banner.png);">
     <div class="container spacer-top-15">
       <div class="row clearfix">
         <article class="col-xs-12 col-sm-3">

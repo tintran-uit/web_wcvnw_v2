@@ -47,7 +47,7 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
 
 /* line 7, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_backgrounds.scss */
 .bg-super-light {
-  background-color: #64903E !important; }
+  background-color: #A52223 !important; }
 
 /* line 11, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_backgrounds.scss */
 .bg-light {
@@ -295,13 +295,15 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
   padding: 3px 5px; }
 
 /* line 201, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
-.btn-link, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button, #copyright .footer-links ul li a:hover, .footer-widget-list li a:hover, .group-filters .content li a:hover, .listbar .listbox li a:hover, .general-info .content dl dd a:hover, .breadcrumb > li a:hover, .block.block-nav .content dl dd a:hover, .block.block-nav .content ul li a:hover {
+.btn-link, #main-nav .navbar-default .navbar-collapse .nav-justified > li.active a, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button, #copyright .footer-links ul li a:hover, .footer-widget-list li a:hover, .group-filters .content li a:hover, .listbar .listbox li a:hover, .general-info .content dl dd a:hover, .breadcrumb > li a:hover, .block.block-nav .content dl dd a:hover, .block.block-nav .content ul li a:hover {
   color: #64903E; }
   /* line 204, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-link:hover, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a:hover, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button:hover, #copyright .footer-links ul li a:hover, .footer-widget-list li a:hover, .group-filters .content li a:hover, .listbar .listbox li a:hover, .general-info .content dl dd a:hover, .breadcrumb > li a:hover, .block.block-nav .content dl dd a:hover, .block.block-nav .content ul li a:hover, .btn-link:active, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a:active, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button:active, #copyright .footer-links ul li a:active:hover, .footer-widget-list li a:active:hover, .group-filters .content li a:active:hover, .listbar .listbox li a:active:hover, .general-info .content dl dd a:active:hover, .breadcrumb > li a:active:hover, .block.block-nav .content dl dd a:active:hover, .block.block-nav .content ul li a:active:hover, .btn-link:focus, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a:focus, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button:focus, #copyright .footer-links ul li a:focus:hover, .footer-widget-list li a:focus:hover, .group-filters .content li a:focus:hover, .listbar .listbox li a:focus:hover, .general-info .content dl dd a:focus:hover, .breadcrumb > li a:focus:hover, .block.block-nav .content dl dd a:focus:hover, .block.block-nav .content ul li a:focus:hover {
     color: #9CCB3B;
     text-decoration: none; }
-
+.nav-justified > li > a:hover{
+  background-color: rgba(156,203,59,0.4);
+}
 /*end*/
 /* line 1, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_common-style.scss */
 body {
@@ -393,7 +395,7 @@ a {
 .subscribe-type-one .intro{
   color: #000;
   font-family: "CaviarDreams_Bold";
-  padding: 10px 0px 30px;
+  padding: 10px 20px 30px;
 }
 
 .subscribe-type-one .content{
@@ -434,7 +436,7 @@ a {
 .spacer-10 {
   padding-top: 10px;
   padding-bottom: 10px; 
-  background-image: url(/assets/images/thuc-pham-sach-banner.png);
+  /*background-image: url(/assets/images/thuc-pham-sach-banner.png);*/
   /*opacity: 0.42;*/
 }
 
@@ -928,7 +930,7 @@ a {
       /* line 49, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/header/_nav.scss */
       #nav-sign .nav > li > button, #nav-sign .nav > li > a {
         font-size: 0.9em;
-        color: #9CCB3B;
+        color: #000;
         margin: 0;
         padding: 10px;
         border-radius: 0;
@@ -956,7 +958,7 @@ a {
 /* line 80, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/header/_nav.scss */
 .language > a {
   font-size: 0.9em;
-  color: #9CCB3B;
+  color: #000;
   margin: 0 0 0 20px;
   padding: 10px;
   display: block;
@@ -969,8 +971,33 @@ a {
 
 /* line 93, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/header/_nav.scss */
 #main-nav-bar {
-  padding: 20px 0 10px;
-  border-bottom: 1px solid #ebebeb; }
+  margin-top: 0px;
+  padding: 0px 0 5px;
+  border-bottom: 1px solid #ebebeb; 
+  /*border-top: 2px solid rgba(93,94,94,0.42);*/
+}
+
+.navbar{
+  margin-bottom: 0;
+}
+
+.navbar-default {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+#main-nav-bar .nav-justified > li > a{
+  font-family: 'CaviarDreams_Bold';
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+#main-nav-bar > hr {
+  background-color: rgba(93,94,94,0.42);
+  height: 2px;
+  width: 96%;
+}
+
   /* line 96, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/header/_nav.scss */
   #main-nav-bar .container {
     position: relative; }
@@ -995,7 +1022,7 @@ a {
         font-weight: 600; }
       /* line 122, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/header/_nav.scss */
       #main-nav .navbar-default .navbar-collapse .navbar-nav > li > a, #main-nav .navbar-default .navbar-collapse .navbar-nav > li > button {
-        color: #9CCB3B;
+        color: #000;
         padding: 0 15px 0 0;
         font-weight: 600;
         text-transform: uppercase;
@@ -1123,7 +1150,7 @@ a {
   color: #ffffff; }
   /* line 7, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/footer/_contact-footer.scss */
   #contact-footer .info-box .info-col span[data-info='text-info'] {
-    padding-left: 10px; }
+    padding-left: 0px; }
     /* line 9, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/footer/_contact-footer.scss */
     #contact-footer .info-box .info-col span[data-info='text-info'] a[href^=tel]:link {
       color: #ffffff; }
@@ -1207,7 +1234,7 @@ a {
       border-width: 1px;
       border-style: solid;
       border-color: #e6e6e6;
-      color: #9CCB3B;
+      color: #000;
       -webkit-transition-duration: 0.4s;
       transition-duration: 0.4s; }
       /* line 64, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_style-form.scss */
@@ -1224,7 +1251,7 @@ a {
     /* line 78, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_style-form.scss */
     .form-style-base .form-group .selecter .selecter-options .selecter-item {
       border-color: #cdcdcd;
-      color: #9CCB3B; }
+      color: #000; }
       /* line 81, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_style-form.scss */
       .form-style-base .form-group .selecter .selecter-options .selecter-item:hover {
         background-color: #e6e6e6; }
@@ -3019,3 +3046,13 @@ a {
       width: 100%;
     }
 }
+
+.title-index {
+  font-family: 'Reso_Regular_Light'; 
+  font-size: 33px; 
+  color: #000000;
+  margin-top: 33px;
+}
+
+
+

@@ -445,7 +445,7 @@ var link = link
                      <div class="dropdown bg-white" id="basket">
                         <div class="shadow-wrap-box">
                            <a href="#" class="checkout-basket dropdown-toggle btn-block clearfix" data-toggle="dropdown" aria-expanded="true">
-                              <div class="pull-left bg-super-light">
+                              <div class="pull-left bg-super-light" style="background-color: #64903E !important">
                                  <i class="fa fa-shopping-cart"></i>
                               </div>
                               <div class="info-basket pull-left">
@@ -510,13 +510,14 @@ var link = link
             </div>
          </section>
          <section id="main-nav-bar" class="hidden-xs">
+          <hr>
             <div class="container">
                <div class="row">
-                  <article class="col-sm-8 col-md-8">
-                     <nav id="main-nav">
+                  <article class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+                     <nav class="navbar navbar-default" id="main-nav">
                         <div class="nav-bar navbar-default dropdown-main-nav">
                            <div class="collapse navbar-collapse">
-                              <ul class="nav navbar-nav" id="mainMN">
+                              <ul class="nav nav-justified" id="mainMN">
                                  <li class="{{ Request::is('/') ? 'active' : '' }}">
                                     <a href="{{url('/')}}">{{ trans('head.home') }}</a>
                                  </li>
@@ -646,19 +647,19 @@ var link = link
                   <div class="row">
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
-                           <img class="hidden-sm hidden-md" alt="tel" src="{{url('')}}/assets/images/icons/icon-tel.png" />
+                           <img class="hidden-sm hidden-md" alt="tel" src="{{url('')}}/assets/images/icons/icon-tel.png" height="39" />
                            <span data-info="text-info">Hotline: +0 888 9090 909</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
-                           <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-shipping.png" />
+                           <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-shipping.png" height="39" />
                            <span data-info="text-info">Giao hàng tận nơi</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
-                           <img class="hidden-sm hidden-md" alt="email" src="{{url('')}}/assets/images/icons/icon-mail.png" />
+                           <img class="hidden-sm hidden-md" alt="email" src="{{url('')}}/assets/images/icons/icon-mail.png" height="39" />
                            <span data-info="text-info">
                            Hỗ trợ: support@cfarm.vn
                            </span>
@@ -666,8 +667,8 @@ var link = link
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
-                           <img class="hidden-sm hidden-md" alt="location" src="{{url('')}}/assets/images/icons/icon-location.png" />
-                           <span data-info="text-info">167 Trần Trọng Cung, Q.7, TP.HCM</span>
+                           <img class="hidden-sm hidden-md" alt="location" src="{{url('')}}/assets/images/icons/icon-location.png" height="39" />
+                           <span data-info="text-info">167 Trần Trọng Cung, Q.7, HCM</span>
                         </div>
                      </article>
                   </div>
@@ -730,7 +731,7 @@ var link = link
          <section id="copyright" class="bg-white">
             <div class="container">
                <div class="row clearfix">
-                  <article class="col-sm-7">
+                  <!-- <article class="col-sm-7">
                      <nav class="footer-links">
                         <ul class="clearfix list-unstyled">
                            <li class="pull-left">
@@ -754,7 +755,7 @@ var link = link
                            </li>
                         </ul>
                      </nav>
-                  </article>
+                  </article> -->
                   <article class="col-sm-5">
                      <p data-text="copyright" class="text-left no-margin">
                         Copyright © 2017. Developed by <b>CFarm Technical Team</b>

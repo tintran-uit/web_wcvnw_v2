@@ -56,14 +56,14 @@
 <!-- insert background-color bg-light in the section container and class space-divider -->
 <section class="subscribe-type-one spacer-30">
    <div class="container">
-      <!--     <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2> -->
+          <!-- <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2> -->
    </div>
 </section>
 <section id="category-content">
    <div class="container">
       
       <section class="text-center spacer-bottom-20">
-         <h3 class="no-margin" style="font-family: 'Reso_Regular_Light'; font-size: 30px; color: #000000">Thực phẩm sạch</h3>
+         <h3 class="no-margin title-index" style="">Thực phẩm sạch</h3>
          <h5 class="no-margin"></h5>
          <br>
          <ul class="nav nav-tabs nav-justified">
@@ -115,6 +115,7 @@
      
    </div>
 </section>
+
 @include('layouts.banner_bottom')
 
 <section class="subscribe-type-one spacer-30">
@@ -135,11 +136,15 @@ nên mẹ luôn thương yêu và muốn đền bù tất cả cho các con.</p>
    </div>
 </section>
 
+<!-- <section class="subscribe-type-one spacer-30">
+   <div class="container">
+          <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2>
+   </div>
+</section> -->
+
 <section class="news-box spacer-bottom-30">
    <div class="container">
-      <h3 class="text-uppercase text-center spacer-bottom-20 no-margin">
-         Góc kinh nghiệm
-      </h3>
+      <h2 class="title-font-handwritten text-center space-only-bottom">Góc kinh nghiệm</h2>
       <div class="row">
          <article class="col-xs-12 col-sm-6 col-md-4">
             <div class="content-new bg-white">
