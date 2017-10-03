@@ -115,50 +115,26 @@
      
    </div>
 </section>
-<section class="purchase-benefits spacer-30 bg-extra-light-grey">
-  <div class=" spacer-10">
-    <div class="container spacer-top-15">
-      <div class="row clearfix">
-        <article class="col-xs-12 col-sm-3">
-          <div class="column text-center spacer-bottom-15">
-            <i class="fa fa-truck fa-3x"></i>
-            <h4>Giao hàng tận nơi</h4>
-            <p class="no-margin">
-              Miễn phí với đơn hàng<br>trên 500.000 VNĐ
-            </p>
+@include('layouts.banner_bottom')
+
+<section class="subscribe-type-one spacer-30">
+   <div class="container">
+          <h2 class="title-font-handwritten text-center space-only-bottom">WELCOME TO OUR HEATHY STORE!</h2>
+          <div class="intro col-md-6 col-md-offset-3 text-center"><p>Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, 
+nên mẹ luôn thương yêu và muốn đền bù tất cả cho các con.</p></div>
+          <div class="content col-md-12">
+            <div class="col-md-6">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/X0m6Rdhs1Nw" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+              <h2 class="title-font-handwritten"> C-FARM CUỘC SỐNG TỐT ĐẸP HƠN</h2>
+              <p>Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ...............</p>
+              <a href="{{url('')}}/xem-chi-tiet" class="btn btn-success">Chi tiết</a>
+            </div>
           </div>
-        </article>
-        <article class="col-xs-12 col-sm-3">
-          <div class="column text-center spacer-bottom-15">
-            <i class="fa fa-gift fa-3x"></i>
-            <h4>Tặng quà cho người thân?</h4>
-            <p class="no-margin">
-              Hãy gửi những món quà sức khỏe và yêu thương đến người thân, đồng nghiệp, cấp trên của bạn
-            </p>
-          </div>
-        </article>
-        <article class="col-xs-12 col-sm-3">
-          <div class="column text-center spacer-bottom-15">
-            <i class="fa fa-users fa-3x" aria-hidden="true"></i>
-            <h4>Biết rõ nguồn gốc!</h4>
-            <p class="no-margin">
-              Nguồn gốc sản phẩm rõ ràng. Khách hàng được chọn trang trại mong muốn
-            </p>
-          </div>
-        </article>
-        <article class="col-xs-12 col-sm-3">
-          <div class="column text-center spacer-bottom-15">
-            <i class="fa fa-phone fa-3x"></i>
-            <h4>Chăm sóc khách hàng</h4>
-            <p class="no-margin">
-              Hỗ trợ tư vấn, giải đáp thắc mắc khách hàng, từ thứ Hai đến thứ Bảy 8:00 to 17:00
-            </p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </div>
+   </div>
 </section>
+
 <section class="news-box spacer-bottom-30">
    <div class="container">
       <h3 class="text-uppercase text-center spacer-bottom-20 no-margin">
@@ -361,7 +337,7 @@
                   html += '<!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\">';
                   $.each(data, function(i, d){
 
-                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/uploads/products/images/ca-chua-1.png\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a class=\"new-price\" href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <span class=\"new-price\">\r\n                                          Vườn anh Hải Đức Trọng \r\n                                          <\/span>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                          <div class=\"text-center pull-right vcenter\">\r\n                                             <span class=\"span-price\">'+numberWithCommas(d.price)+' VNĐ  </span>     \r\n                                          <\/div>\r\n                                          <div class=\"pull-left vcenter\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"clickFarm(\''+d.name+'\','+d.id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n                                       <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
+                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/uploads/products/images/ca-chua-1.png\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a class=\"new-price\" href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <a href=\"{{url('')}}/farmer/id='+d.farmer_id+'\"><span class=\"new-price\"> '+d.farmer_name+'                                          <\/span></a>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                           <div class=\"pull-left vcenter\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"addCart(\''+d.id+'\','+d.farmer_id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n    <div class=\"pull-right vcenter\">\r\n                                             <span class=\"span-price\">'+numberWithCommas(d.price)+' VNĐ  </span>     \r\n                                          <\/div>\r\n                                                                            <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
 
                      switch (i){
                          case 0:
@@ -503,9 +479,10 @@
             });
           }
 
-          function addCart() {
-              var qty = document.getElementById('stepper').value;
-              var farmerID = $('input[name="farmerID"]:checked').val();;
+          function addCart(prodID, farmerID) {
+            alert('sss');
+              var qty = 1;
+              // var farmerID = $('input[name="farmerID"]:checked').val();;
               console.log(farmerID);
               var data = { "id": prodID, "qty": qty , 'farmerID':farmerID};
               $('#modalLoader').modal('show');

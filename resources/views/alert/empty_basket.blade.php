@@ -22,7 +22,7 @@
   </section>
   
 
-  @include('layouts.bottom')
+  @include('layouts.banner_bottom')
 
 </main>
 @endsection
