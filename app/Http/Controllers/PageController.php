@@ -106,6 +106,31 @@ class PageController extends Controller
         return view('pages.product_details', $this->data);
     }
 
+    public function getBlog($blog_id)
+    {
+        $page = Page::findBySlug('kinh-nghiem-mua-thuc-pham-sach');
+
+        if (!$page)
+        {
+            abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
+        }
+
+        // echo(App::getLocale());die();
+
+        if (Session::has('locale')) {
+            App::setLocale(Session::get('locale'));
+        }
+
+        $this->data['title'] = $page->title;
+        $this->data['page'] = $page->withFakes();
+        $this->data['menu'] = MenuItem::all();
+        $this->data['cart'] = Cart::content();
+
+        $categories = ProductCategory::where('visible', 1)->orderBy('id', 'asc')->get();
+        $this->data['categories'] = $categories;
+        return view('pages.blog_post', $this->data);
+    }
+
     public function getPost($post_id)
     {
         $page = Page::findBySlug('kinh-nghiem-mua-thuc-pham-sach');
