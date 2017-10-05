@@ -9,7 +9,7 @@ return [
 	'product' => 'Sản phẩm',
 	'blog' => 'Góc kinh nghiệm',
 	'blog1' => 'Góc nhà bếp',
-	'blog2' => 'Ẩm thực & sức khỏe',
+	'blog2' => 'Dinh dưỡng & sức khỏe',
 	'blog3' => 'Câu chuyện nhà nông',
 	'farmerlist' => 'Hệ thống nông trại',
 	'login' => 'Đăng nhập',

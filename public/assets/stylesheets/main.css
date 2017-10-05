@@ -299,6 +299,10 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
   color: #64903E; 
   font-weight: 800;
 }
+
+.list-unstyled >a{
+  color: #000;
+}
   /* line 204, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-link:hover, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a:hover, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button:hover, #copyright .footer-links ul li a:hover, .footer-widget-list li a:hover, .group-filters .content li a:hover, .listbar .listbox li a:hover, .general-info .content dl dd a:hover, .breadcrumb > li a:hover, .block.block-nav .content dl dd a:hover, .block.block-nav .content ul li a:hover, .btn-link:active, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a:active, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button:active, #copyright .footer-links ul li a:active:hover, .footer-widget-list li a:active:hover, .group-filters .content li a:active:hover, .listbar .listbox li a:active:hover, .general-info .content dl dd a:active:hover, .breadcrumb > li a:active:hover, .block.block-nav .content dl dd a:active:hover, .block.block-nav .content ul li a:active:hover, .btn-link:focus, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active a:focus, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button:focus, #copyright .footer-links ul li a:focus:hover, .footer-widget-list li a:focus:hover, .group-filters .content li a:focus:hover, .listbar .listbox li a:focus:hover, .general-info .content dl dd a:focus:hover, .breadcrumb > li a:focus:hover, .block.block-nav .content dl dd a:focus:hover, .block.block-nav .content ul li a:focus:hover {
     color: #9CCB3B;

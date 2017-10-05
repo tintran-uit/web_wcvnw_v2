@@ -82,6 +82,16 @@ class PageController extends Controller
         //     return view('alert.empty_basket', $this->data);
         // }
 
+        //thanh toan
+        if ($page->template == 'payment')
+        {
+            if (count($this->data['cart']) == 0) {
+                return view('alert.empty_basket', $this->data);
+            }
+
+            $this->data['districts'] = DB::table('district')->where('city_id', 1)->get();
+        }
+
         return view('pages.'.$page->template, $this->data);
     }
 
@@ -126,9 +136,9 @@ class PageController extends Controller
         $this->data['menu'] = MenuItem::all();
         $this->data['cart'] = Cart::content();
 
-        $categories = ProductCategory::where('visible', 1)->orderBy('id', 'asc')->get();
-        $this->data['categories'] = $categories;
-        return view('pages.blog_post', $this->data);
+        $this->data['articles'] = DB::table('articles')->where('category_id', $blog_id)->get();
+        
+        return view('pages.blog', $this->data);
     }
 
     public function getPost($post_id)
@@ -151,8 +161,7 @@ class PageController extends Controller
         $this->data['menu'] = MenuItem::all();
         $this->data['cart'] = Cart::content();
 
-        $categories = ProductCategory::where('visible', 1)->orderBy('id', 'asc')->get();
-        $this->data['categories'] = $categories;
+         
         return view('pages.blog_post', $this->data);
     }
     

@@ -53,55 +53,14 @@
             </aside>
             <aside id="article" class="col-md-9">
               <div class="row clearfix">
-                <article class="col-md-6">
-                       <div class="wrap wrap-border internal-padding wrap-radius bg-white style-post">
-                            <div class="row clearfix">
-                              <div class="col-xs-12">
-                                <h4 class="media-heading">
-                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">Thực phẩm hữu cơ organic là gì?</a>
-                                </h4>
-                              </div>
-                              <!-- <div class="col-xs-4">
-                                <time class="pull-right">
-                                  <b>
-                                    Sat Aug 30, 2003
-                                  </b>
-                                </time>
-                              </div> -->
-                            </div>
-                            <div class="media spacer-bottom-10">
-                              <div class="media-left media-top">
-                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
-                          </a>    </div>
-                              <div class="media-body">
-                                <p class="copy">
-                                  Thực phẩm organic hay còn gọi là thực phẩm hữu cơ đang ngày một phổ biến và tạo một cơn sốt trên thị trường hiện nay. Nhưng những thông tin về thực phẩm organic, nhãn thực phẩm organic hay lợi ích của loại thực phẩm này đang ngày càng nhiều và trở hỗn loạn khiến nhiều người tiêu dùng hoang mang...
-                                  <a class="btn-link" href="#">[Chi tiết]</a>
-                                </p>
-                              </div>
-                            </div>
-                            <div class="row clearfix">
-                              <div class="col-xs-8">
-                                <span>Tag: </span>
-                                <a class="btn-link" href="#">exercitationem</a>,
-                                <a class="btn-link" href="#">unde</a>,
-                                <a class="btn-link" href="#">vel</a>
-                              </div>
-                              <div class="col-xs-4">
-                                <div class="pull-right like">
-                                  <span>10</span> <i class="fa fa-heart"></i>
-                                </div>
-                              </div>
-                            </div>
-                      </div>
-                </article>
 
+                @foreach($articles as $article)
                 <article class="col-md-6">
                        <div class="wrap wrap-border internal-padding wrap-radius bg-white style-post">
                             <div class="row clearfix">
                               <div class="col-xs-12">
                                 <h4 class="media-heading">
-                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">Thực phẩm hữu cơ organic là gì?</a>
+                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">{{$article->title}}</a>
                                 </h4>
                               </div>
                               <!-- <div class="col-xs-4">
@@ -118,7 +77,11 @@
                           </a>    </div>
                               <div class="media-body">
                                 <p class="copy">
-                                  Thực phẩm organic hay còn gọi là thực phẩm hữu cơ đang ngày một phổ biến và tạo một cơn sốt trên thị trường hiện nay. Nhưng những thông tin về thực phẩm organic, nhãn thực phẩm organic hay lợi ích của loại thực phẩm này đang ngày càng nhiều và trở hỗn loạn khiến nhiều người tiêu dùng hoang mang...
+                                  <?php 
+                                      $intro = strip_tags($article->content);
+                                      $intro = substr($intro, 0, 360);
+                                      echo $intro.'...'; 
+                                  ?>
                                   <a class="btn-link" href="#">[Chi tiết]</a>
                                 </p>
                               </div>
@@ -138,92 +101,7 @@
                             </div>
                       </div>
                 </article>
-
-                <article class="col-md-6">
-                       <div class="wrap wrap-border internal-padding wrap-radius bg-white style-post">
-                            <div class="row clearfix">
-                              <div class="col-xs-12">
-                                <h4 class="media-heading">
-                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">Thực phẩm hữu cơ organic là gì?</a>
-                                </h4>
-                              </div>
-                              <!-- <div class="col-xs-4">
-                                <time class="pull-right">
-                                  <b>
-                                    Sat Aug 30, 2003
-                                  </b>
-                                </time>
-                              </div> -->
-                            </div>
-                            <div class="media spacer-bottom-10">
-                              <div class="media-left media-top">
-                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
-                          </a>    </div>
-                              <div class="media-body">
-                                <p class="copy">
-                                  Thực phẩm organic hay còn gọi là thực phẩm hữu cơ đang ngày một phổ biến và tạo một cơn sốt trên thị trường hiện nay. Nhưng những thông tin về thực phẩm organic, nhãn thực phẩm organic hay lợi ích của loại thực phẩm này đang ngày càng nhiều và trở hỗn loạn khiến nhiều người tiêu dùng hoang mang...
-                                  <a class="btn-link" href="#">[Chi tiết]</a>
-                                </p>
-                              </div>
-                            </div>
-                            <div class="row clearfix">
-                              <div class="col-xs-8">
-                                <span>Tag: </span>
-                                <a class="btn-link" href="#">exercitationem</a>,
-                                <a class="btn-link" href="#">unde</a>,
-                                <a class="btn-link" href="#">vel</a>
-                              </div>
-                              <div class="col-xs-4">
-                                <div class="pull-right like">
-                                  <span>10</span> <i class="fa fa-heart"></i>
-                                </div>
-                              </div>
-                            </div>
-                      </div>
-                </article>
-
-                <article class="col-md-6">
-                       <div class="wrap wrap-border internal-padding wrap-radius bg-white style-post">
-                            <div class="row clearfix">
-                              <div class="col-xs-12">
-                                <h4 class="media-heading">
-                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">Thực phẩm hữu cơ organic là gì?</a>
-                                </h4>
-                              </div>
-                              <!-- <div class="col-xs-4">
-                                <time class="pull-right">
-                                  <b>
-                                    Sat Aug 30, 2003
-                                  </b>
-                                </time>
-                              </div> -->
-                            </div>
-                            <div class="media spacer-bottom-10">
-                              <div class="media-left media-top">
-                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
-                          </a>    </div>
-                              <div class="media-body">
-                                <p class="copy">
-                                  Thực phẩm organic hay còn gọi là thực phẩm hữu cơ đang ngày một phổ biến và tạo một cơn sốt trên thị trường hiện nay. Nhưng những thông tin về thực phẩm organic, nhãn thực phẩm organic hay lợi ích của loại thực phẩm này đang ngày càng nhiều và trở hỗn loạn khiến nhiều người tiêu dùng hoang mang...
-                                  <a class="btn-link" href="#">[Chi tiết]</a>
-                                </p>
-                              </div>
-                            </div>
-                            <div class="row clearfix">
-                              <div class="col-xs-8">
-                                <span>Tag: </span>
-                                <a class="btn-link" href="#">exercitationem</a>,
-                                <a class="btn-link" href="#">unde</a>,
-                                <a class="btn-link" href="#">vel</a>
-                              </div>
-                              <div class="col-xs-4">
-                                <div class="pull-right like">
-                                  <span>10</span> <i class="fa fa-heart"></i>
-                                </div>
-                              </div>
-                            </div>
-                      </div>
-                </article>
+                @endforeach
              
               </div>
             </aside>

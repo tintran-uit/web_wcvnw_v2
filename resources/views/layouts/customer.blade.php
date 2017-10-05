@@ -393,6 +393,25 @@ var link = link
                                     {{ trans('head.login') }}
                                     </button>
                                  </li>
+                                 @else
+                                 <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down"></i>
+                                    </a>          
+                                    <ul class="dropdown-menu" role="menu">
+                                       <!-- <li>
+                                          <a href="account.html">Edit profile</a>
+                                       </li>
+                                       <li>
+                                          <a href="cart.html">My orders</a>
+                                       </li>
+                                       <li>
+                                          <a href="#">Help & support</a>
+                                       </li> -->
+                                       <li>
+                                          <a href="{{url('')}}/admin/logout">Log out</a>
+                                       </li>
+                                    </ul>
+                                  </li>
                                  @endif
                               </ul>
                            </div>
@@ -440,27 +459,7 @@ var link = link
                   </article>
                   
                   <article class="col-sm-12 col-md-4 col-lg-3 hidden-xs col-md-offset-6">
-                     <div class="pull-left welcome-text">
-                      @if(isset(Auth::user()->name)) 
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong><!--  <i class="fa fa-chevron-down"></i> -->
-                        </a>          
-                        <ul class="dropdown-menu" role="menu">
-                           <!-- <li>
-                              <a href="account.html">Edit profile</a>
-                           </li>
-                           <li>
-                              <a href="cart.html">My orders</a>
-                           </li>
-                           <li>
-                              <a href="#">Help & support</a>
-                           </li> -->
-                           <li>
-                              <a href="{{url('')}}/admin/logout">Log out</a>
-                           </li>
-                        </ul>
-                        @endif
-                     </div>
-                     <br>
+                     
                      <div class="dropdown bg-white" id="basket">
                         <div class="shadow-wrap-box">
                            <a href="#" class="checkout-basket dropdown-toggle btn-block clearfix" data-toggle="dropdown" aria-expanded="true">
@@ -564,9 +563,9 @@ var link = link
                                        <li class="clearfix row">
                                           <div class="col-sm-12">
                                              <ul class="list-unstyled">
-                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/1">{{ trans('head.blog1') }}</a> </li>     
-                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach">{{ trans('head.blog2') }}</a>      </li>
-                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach">{{ trans('head.blog3') }}</a>  </li> 
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">{{ trans('head.blog1') }}</a> </li>     
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=2">{{ trans('head.blog2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">{{ trans('head.blog3') }}</a>  </li> 
                                              </ul>
                                           </div>
                                        </li>
