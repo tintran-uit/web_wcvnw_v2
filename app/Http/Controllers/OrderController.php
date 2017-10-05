@@ -80,10 +80,11 @@ class OrderController extends Controller
          	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `unit`, `price`, `price_farmer`, `created_at`) VALUES(?,?,?,?,?,?,?, CURRENT_TIMESTAMP)', [$order_id, $farmer_id, $product_id, $quantity, $unit, $price, $price_farmer]);
 
          	//update trading table
+         	//Check if product available
         	DB::statement('UPDATE `trading` SET `sold_count` = `sold_count`+ ?, `sold` = `sold` + ? WHERE `farmer_id` = ? AND `product_id` = ?', [$item->qty, $quantity, $farmer_id, $product_id]);
 
 		}
- 		Cart::destroy();
+ 		// Cart::destroy();
        return $order_id;
 	}
 	
