@@ -495,6 +495,7 @@ trước khi giao hàng!</p>
             $('[href="#tab-3"]').tab('show');
             document.getElementById('btnStep').style.visibility = 'hidden';
             console.log(data);
+            
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
               $('#modalLoader').modal('hide');

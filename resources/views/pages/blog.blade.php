@@ -11,37 +11,33 @@
             <aside class="col-md-3">
                <div class="block block-nav">
                   <div class="title">
-                     <h4 class="text-uppercase no-margin">Thông Tin</h4>
+                     <h4 class="text-uppercase no-margin">Góc kinh nghiệm</h4>
                   </div>
-                  <div class="content">
+                  <div class="content" style="padding-top: 10px;">
                      <dl class="list-unstyled">
-                        <dt>
-                           <strong>
-                           <i class="fa fa-angle-down"></i> Kiến thức tiêu dùng an toàn
-                           </strong>
-                        </dt>
                         <dd>
-                           <a class="current" href="">          <i class="fa fa-angle-right"></i> 
-                           </a>      
-                        </dd>
-                        
-                        <!-- <dd>
-                           <a class="current" href="terms-conditions.html">          <i class="fa fa-angle-right"></i> Terms and Conditions
-                           </a>      
-                        </dd> -->
-                     </dl>
-                     <dl class="list-unstyled">
-                        <dt>
+                          <a class="current">
                            <strong>
-                           <i class="fa fa-angle-down"></i> Kiến thức nuôi trồng sạch
+                           <i class="fa fa-angle-right"></i> Kiến thức tiêu dùng an toàn
                            </strong>
-                        </dt>
-                        <dd>
-                           <a class="" href="">          <i class="fa fa-angle-right"></i>
-                           </a>      
+                         </a>
                         </dd>
-                        
+                        <dd>
+                          <a>
+                           <strong>
+                           <i class="fa fa-angle-right"></i> Kiến thức nuôi trồng sạch
+                           </strong>
+                         </a>
+                        </dd>
+                        <dd>
+                          <a>
+                           <strong>
+                           <i class="fa fa-angle-right"></i> Kiến thức nuôi trồng sạch
+                           </strong>
+                         </a>
+                        </dd>
                      </dl>
+                     
                   </div>
                </div>
                <div class="general-info">
@@ -79,7 +75,7 @@
                                 <p class="copy">
                                   <?php 
                                       $intro = strip_tags($article->content);
-                                      $intro = substr($intro, 0, 360);
+                                      $intro = substr($intro, 0, 320);
                                       echo $intro.'...'; 
                                   ?>
                                   <a class="btn-link" href="#">[Chi tiết]</a>

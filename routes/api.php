@@ -31,7 +31,7 @@ Route::get('/farmers', 'FarmerController@farmers');
 
 
 //gio hang
-Route::post('cart/update-cart', 'CartProductController@addCart');
+Route::post('cart/update-cart', 'CartProductController@updateCart');
 Route::post('cart/delete-item', 'CartProductController@deleteItem');
 Route::post('cart/add-item', 'CartProductController@addItem');
 

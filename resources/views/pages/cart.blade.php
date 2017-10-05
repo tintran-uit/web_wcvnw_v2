@@ -51,20 +51,22 @@
                                     <th class="bg-extra-light-grey">Tổng</th>
                                     <th class="bg-extra-light-grey"></th>
                                     <th style="display:none;"></th>
+                                    <th style="display:none;"></th>
+                                    <th style="display:none;"></th>
                                  </tr>
                               </thead>
                               <tbody>
                               @foreach($cart as $item)
                                  <tr>
                                     <td class="align-middle">
-                                       <img class="img-responsive center-block extra-small-img" alt="product" src="http://wecarevn.com/uploads{{$item->options->image}}">
+                                       <img class="img-responsive center-block extra-small-img" alt="product" src="{{url('')}}/{{$item->options->image}}">
                                                          
                                     </td>
                                     <td class="align-middle">
                                        <div style="width: auto;">{{$item->name}}</div>
                                     </td>
                                     <td class="align-middle">
-                                       <div class="stepper "><input type="number" class="form-control stepper-input" value="{{$item->qty}}" min="1" max="20" step="1"><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
+                                       <div class="stepper "><input type="text" class="form-control stepper-input text-center" value="{{$item->qty*$item->options['unit_quantity']}} {{$item->options['unit']}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
                                     </td>
                                     <td class="align-middle text-center">
                                        {{number_format($item->price)}} VND
@@ -77,6 +79,8 @@
                                        </a>                        
                                     </td>
                                     <td style="display:none;">{{$item->rowId}}</td>
+                                    <td style="display:none;">{{$item->options['unit_quantity']}}</td>
+                                    <td style="display:none;">{{$item->options['unit']}}</td>
                                  </tr>
                                  @endforeach
                                  
@@ -109,7 +113,7 @@
 @endsection
 
 @section('scrip_code')
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
 
@@ -149,35 +153,42 @@ $(document).ready(function() {
         }});
 
     table.on( 'click', 'span.up' , function () {
-         var msg = '';
+         var msg;
+         var row = $(this).closest('tr').index();
+         var unit_quantity = table.row(row).data()[7];
+         var unit = table.row(row).data()[8];
          $(this).closest('tr').find(':input').each(function() {
-            msg +=  $(this).val();
-            msg = parseInt(msg) + 1;
+            
+            msg =  parseFloat($(this).val());
+            msg = stepperUp(msg, unit_quantity, unit); 
+
             $(this).val(msg);
          });
-         var row = $(this).closest('tr').index();
+         msg = converQty(msg, unit_quantity, unit);
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
          var rowId = table.row(row).data()[6];
-         updateCart(rowId, msg);
+         updateCart(rowId, msg, unit_quantity, unit);
       });
     table.on( 'click', 'span.down' , function () {
-         var msg = 0;
-         $(this).closest('tr').find(':input').each(function() {
-            msg +=  $(this).val();
-            msg = parseInt(msg) - 1;
-            if(msg > 0 )
-            {
-               $(this).val(msg);
-            }
-         });
+         var msg;
          var row = $(this).closest('tr').index();
+         var unit_quantity = table.row(row).data()[7];
+         var unit = table.row(row).data()[8];
+         $(this).closest('tr').find(':input').each(function() {
+            
+            msg =  parseFloat($(this).val());
+            msg = stepperDown(msg, unit_quantity, unit); 
+
+            $(this).val(msg);
+         });
+         msg = converQty(msg, unit_quantity, unit);
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
          var rowId = table.row(row).data()[6];
-         updateCart(rowId, msg);
+         updateCart(rowId, msg, unit_quantity, unit);
       });
    
    table.on( 'click', 'a.item-delete' , function () {
@@ -190,7 +201,10 @@ $(document).ready(function() {
         .draw();
    });
 
-    function updateCart(rowId, qty) {
+    function updateCart(rowId, qty, unit_quantity, unit) {
+      console.log(qty)
+
+
       var markers = { "rowId": rowId, "qty": qty };
 
       $.ajax({
@@ -240,17 +254,58 @@ $(document).ready(function() {
    }
 
 
+   function stepperUp(num, unit_quantity, unit) {
+      num = parseFloat(num);
+      unit_quantity = parseFloat(unit_quantity);
+      console.log(unit);
+      if(unit != 'kg')
+      {
+        num = num + unit_quantity;
+        
+      }else {
+        num = (num + unit_quantity).toFixed(1);
+      }
+      num = num + ' ' + unit;
+      return num;
+   }
+
+   function stepperDown(num, unit_quantity, unit) {
+      num = parseFloat(num);
+      unit_quantity = parseFloat(unit_quantity);
+      console.log(unit);
+      if(unit != 'kg')
+      {
+        num = num - unit_quantity;
+        
+      }else {
+        num = (num - unit_quantity).toFixed(1);
+      }
+      num = num + ' ' + unit;
+      return num;
+   }
+
+   function converQty(qty, unit_quantity, unit) {
+      if(unit = 'kg'){
+        qty = parseFloat(qty);
+        qty = qty/unit_quantity;
+      }
+        
+      return parseInt(qty);
+      
+   }
+
+
 });
 
 
 
-function stepperUp() {
+// function stepperUp() {
   
-}
+// }
 
-function stepperDown() {
+// function stepperDown() {
   
-}
+// }
    
 </script>
 

@@ -16,14 +16,14 @@
                 <img class="img-responsive big-img center-block" alt="product" src="{{url('')}}/uploads/products/images/ca-chua-1.png">
                 
               </div>
-              <div class="icon-shipping"> <!--icon-email, icon-discount, icon-shipping-->
-  <h4 class="title-box text-uppercase no-margin-top">
-    GIAO HÀNG TẬN NƠI
-  </h4>
-  <p class="copy-box no-margin">
-    Miễn phí giao hàng cho đơn hàng trên 500.000 VNĐ.
-  </p>
-</div>
+              <div class="icon-shipping" style="margin-top: 30px"> <!--icon-email, icon-discount, icon-shipping-->
+                <h4 class="title-box text-uppercase no-margin-top">
+                  GIAO HÀNG TẬN NƠI
+                </h4>
+                <p class="copy-box no-margin">
+                  Miễn phí giao hàng cho đơn hàng trên 500.000 VNĐ.
+                </p>
+              </div>
 
             </section>
 
@@ -68,13 +68,14 @@
                       <b>Số lượng:</b>
                     </h5>
                     </div>
-                    <div class="stepper col-sm-5 vcenter"><input type="number" class="form-control stepper-input" id="stepper" value="1" min="1" max="20" step="1"><span class="stepper-arrow up" onclick="stepperUp()">Up</span><span class="stepper-arrow down" onclick="stepperDown()">Down</span></div>
+                    <div class="stepper col-sm-5 vcenter"><input type="text" class="form-control stepper-input text-center" id="stepper" value="{{$product[0]->unit_quantity}} {{$product[0]->unit}}" min="1" max="1000"><span class="stepper-arrow up" onclick="stepperUp()">Up</span><span class="stepper-arrow down" onclick="stepperDown()">Down</span></div>  
+                    <div class="vcenter">
                   </section>
                   <section>
                     <div class="row">
                       <article class="col-sm-7 button-group">
-                        <a class="btn btn-primary btn-lg lg-2x" onclick="addCart()">
-                          ADD TO CART <i class="glyphicon glyphicon-shopping-cart"></i>
+                        <a class="btn btn-primary btn-lg lg-2x" onclick="addCartProd()">
+                          Thêm vào giỏ <i class="glyphicon glyphicon-shopping-cart"></i>
                         </a>
 <a class="btn btn-info btn-lg" onclick="interest({{$product[0]->id}})">                          <i class="fa fa-heart"></i>
 </a>                  </article>
@@ -157,7 +158,8 @@
 @section('scrip_code')
 
 <script type="text/javascript">
-var cou
+var unit_quantity = parseFloat('{{$product[0]->unit_quantity}}');
+var unit = '{{$product[0]->unit}}';
 loadsuppliers();
 
 function loadsuppliers() {
@@ -186,62 +188,82 @@ function loadsuppliers() {
   // setTimeout(loadsuppliers, 45000);
 }
 
+
+function addCartProd() {
+  var id = "{{$product[0]->id}}";
+  var qty = parseFloat(document.getElementById('stepper').value);
+  if(unit = 'kg'){
+    qty = qty/unit_quantity;
+  }
+  var farmerID = $('input[name="farmerID"]:checked').val();
+    console.log(farmerID);
+
+  if(farmerID)
+  {
+    var data = { "id": id, "qty": qty , 'farmerID':farmerID};
+    $('#modalLoader').modal('show');
+    $.ajax({
+
+        type: "POST",
+        url: "{{url('')}}/api/cart/add-item",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+        },
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify({ data: data }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(data){
+          $('#modalLoader').modal('hide');
+          if(data.error)
+          {
+            $('#modalMessage').html(data.status);
+            $('#modalAlert').modal('show');
+          }else{
+            updateCartStatus(data);
+          }
+          console.log(data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus);
+            $('#modalMessage').html("Vui lòng kiểm tra kết nối Internet!");
+            $('#modalLoader').modal('hide');
+            $('#modalAlert').modal('show');
+        }
+    });
+  }
+  
+}
+
+
 function stepperUp() {
   var num = document.getElementById('stepper').value;
-  num = parseInt(num);
-  document.getElementById('stepper').value = num + 1; 
+  num = parseFloat(num);
+  if(unit != 'kg')
+  {
+    num = num + unit_quantity;
+  }else {
+    num = (num + unit_quantity).toFixed(1);
+  }
+
+  document.getElementById('stepper').value = num + ' ' + unit; 
 
 }
 
 function stepperDown() {
   var num = document.getElementById('stepper').value;
-  num = parseInt(num);
-  if(num>1)
-            {
-            document.getElementById('stepper').value = num - 1; 
-            }
-}
-
-function addCart() {
-  var id = "{{$product[0]->id}}";
-  var qty = document.getElementById('stepper').value;
-  var farmerID = $('input[name="farmerID"]:checked').val();
-  if(farmerID=='')
+  num = parseFloat(num);
+  if(num>unit_quantity)
   {
-    console.log(farmerID);
-  var data = { "id": id, "qty": qty , 'farmerID':farmerID};
-  $('#modalLoader').modal('show');
-      $.ajax({
+    if(unit != 'kg')
+    {
+      num = num - unit_quantity;
+    }else {
+      num = (num - unit_quantity).toFixed(1);
+    }
 
-          type: "POST",
-          url: "{{url('')}}/api/cart/add-item",
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-          },
-          // The key needs to match your method's input parameter (case-sensitive).
-          data: JSON.stringify({ data: data }),
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          success: function(data){
-            $('#modalLoader').modal('hide');
-            if(data.error)
-            {
-              $('#modalMessage').html(data.status);
-              $('#modalAlert').modal('show');
-            }else{
-              updateCartStatus(data);
-            }
-            console.log(data);
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-              console.log(textStatus);
-              $('#modalMessage').html("Vui lòng kiểm tra kết nối Internet!");
-              $('#modalLoader').modal('hide');
-              $('#modalAlert').modal('show');
-          }
-      });
+    document.getElementById('stepper').value = num + ' ' + unit;
   }
-  
 }
    
 </script>

@@ -871,6 +871,23 @@ var link = link
           $('#litrangchu').addClass("active");
         }
       }
+
+      // function converUnit(quantity, unit) {
+      //   if(unit != 'g'){
+      //     return quantity + ' ' + unit;
+      //   }
+      //   else if (quantity >= 1000) {
+      //     quantity = quantity/1000;
+      //     return quantity + ' kg';
+      //   }
+      //   else if(quantity < 100){
+      //     return quantity + ' kg';
+      //   }
+      //   else{
+      //     return quantity + ' g';
+      //   }
+
+      // }
       </script>
    </body>
 </html>
