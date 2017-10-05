@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use CrudTrait;
-    use Sluggable, SluggableScopeHelpers;
-    use SoftDeletes;
+    // use Sluggable, SluggableScopeHelpers;
+    // use SoftDeletes;
 
      /*
 	|--------------------------------------------------------------------------
@@ -27,10 +27,10 @@ class Product extends Model
     protected $fillable = ['name','slug', 'meta_title', 'meta_keywords', 'meta_description', 'description', 'image', 'unit_quantity', 'unit', 'price', 'price_agent', 'price_farmer', 'meta_title', 'category', 'brand_id', 'lft', 'rgt', 'depth'];
     // protected $hidden = [];
     // protected $dates = [];
-    protected $casts = [
-        'featured'  => 'boolean',
-        'visible'   => 'boolean',
-    ];
+    // protected $casts = [
+    //     'featured'  => 'boolean',
+    //     'visible'   => 'boolean',
+    // ];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -62,9 +62,9 @@ class Product extends Model
         return $this->belongsTo('App\Models\Brand', 'brand_id');
     }
 
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany('App\Models\ProductCategory', 'products_categories','product_id','category_id');
+        return $this->belongsTo('App\Models\Category', 'category');
     }
 
     public function images()
