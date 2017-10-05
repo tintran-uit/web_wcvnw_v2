@@ -33,6 +33,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // var_dump($this); die();
         $this->middleware('guest', ['except' => 'logout']);
 
         // ----------------------------------
@@ -43,8 +44,8 @@ class LoginController extends Controller
             : config('backpack.base.route_prefix', 'admin').'/login';
 
         // Redirect here after successful login.
-        $this->redirectTo = property_exists($this, 'redirectTo') ? $this->redirectTo
-            : '';
+        $this->redirectTo = property_exists($this, 'redirectTo') ? $this->redirectTo 
+             : config('backpack.base.route_prefix', 'admin').'/dashboard';
 
         // Redirect here after logout.
         $this->redirectAfterLogout = property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout

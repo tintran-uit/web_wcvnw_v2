@@ -56,14 +56,11 @@ class TradingCrudController extends CrudController
             'label' => 'Sản Lượng',
         ]);
 
-/*        $this->crud->addColumn([
-            'name' => 'sold',
-            'label' => 'Đã Bán',
-            'type' => 'select',
-            'entity' => 'product',
-            'attribute' => 'sold',
-            'model' => "App\Models\Product",
-        ]);*/
+        $this->crud->addColumn([
+            'name' => 'price_farmer',
+            'label' => 'Giá thu mua',
+            'type' => 'number',
+        ]);
 
         $this->crud->addColumn([
             'name' => 'sold',
@@ -106,6 +103,14 @@ class TradingCrudController extends CrudController
         $this->crud->addField([
             'name' => 'capacity',
             'label' => 'Sản Lượng',
+            'type' => 'number',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'price_farmer',
+            'label' => 'Giá thu mua',
             'type' => 'number',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'

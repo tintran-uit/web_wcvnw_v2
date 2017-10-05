@@ -42,19 +42,11 @@ class ProductCrudController extends CrudController
             'label' => 'Tên SP',
         ]);
 
-       /* $this->crud->addColumn([    // SELECT
-            'label' => 'Loại Hàng',
-            'type' => 'select',
-            'name' => 'brand_id',
-            'entity' => 'brand',
-            'attribute' => 'name',
-            'model' => "App\Models\Brand",
-        ]);*/
         $this->crud->addColumn([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => 'Nhóm Sản Phẩm',
-            'type' => 'select2',
+            'type' => 'select',
             'name' => 'category', // the method that defines the relationship in your Model
-            'entity' => 'categories', // the method that defines the relationship in your Model
+            'entity' => 'category', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model' => "App\Models\Category", // foreign key model
             'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
@@ -62,14 +54,6 @@ class ProductCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'price',
             'label' => 'Giá Bán',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'price_agent',
-            'label' => 'Giá Đại Lý',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'price_farmer',
-            'label' => 'Giá Trang Trại',
         ]);
         $this->crud->addColumn([
             'name' => 'unit_quantity',
@@ -80,7 +64,8 @@ class ProductCrudController extends CrudController
             'label' => 'Đơn vị',
         ]);
 
-         $this->crud->addField([
+//--------CRUD Fields
+        $this->crud->addField([
             'name' => 'name',
             'label' => 'Tên Sản Phẩm',
             'wrapperAttributes' => [
@@ -111,28 +96,6 @@ class ProductCrudController extends CrudController
                 'class' => 'form-group col-md-4'
             ],
         ]);
-        $this->crud->addField([    // TEXT
-            'name' => 'price_agent',
-            'label' => 'Giá Đại Lý',
-            'type' => 'number',
-            // optionals
-            'prefix' => "VND",
-//            'suffix' => ".00",
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-4'
-            ],
-        ]);
-        $this->crud->addField([    // TEXT
-            'name' => 'price_farmer',
-            'label' => 'Giá Trang Trại',
-            'type' => 'number',
-            // optionals
-            'prefix' => "VND",
-//            'suffix' => ".00",
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-4'
-            ],
-        ]);
 
         $this->crud->addField([    // TEXT
             'name' => 'unit_quantity',
@@ -151,30 +114,17 @@ class ProductCrudController extends CrudController
             ],
         ]);
 
-        $this->crud->addField([    // TEXT
-            'name' => 'meta_title',
-            'label' => 'Meta Title',
-            'type' => 'text',
-            'placeholder' => 'Your meta title here',
-        ]);
-
-        $this->crud->addField([    // TEXT
-            'name' => 'meta_keywords',
-            'label' => 'Meta Keywords',
-            'type' => 'text',
-            'placeholder' => 'Your meta keywords here',
-        ]);
         $this->crud->addField([   // WYSIWYG
-            'name' => 'meta_description',
-            'label' => 'Meta Description',
+            'name' => 'short_description',
+            'label' => 'Mô Tả Ngắn',
             'type' => 'text',
-            'placeholder' => 'Your meta description here',
+            'placeholder' => 'Mô Tả ngắn sản phẩm',
         ]);
         $this->crud->addField([   // WYSIWYG
             'name' => 'description',
-            'label' => 'Category Description',
+            'label' => 'Mô Tả chi tiết',
             'type' => 'ckeditor',
-            'placeholder' => 'Your meta description here',
+            'placeholder' => 'Liệt kê những mô tả chi tiết sản phẩm',
         ]);
 
         $this->crud->addField([   // WYSIWYG
@@ -184,6 +134,11 @@ class ProductCrudController extends CrudController
             'placeholder' => 'Chọn hình ảnh cho sản phẩm',
         ]);
 
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'thumbnail',
+            'label' => 'thumbnail',
+            'type' => 'hidden',
+        ]);
 
         $this->crud->enableAjaxTable();
 
@@ -259,9 +214,11 @@ class ProductCrudController extends CrudController
         $img = $request->image;
         
         //tao thumbnails
-        $thumbName = str_replace("images","thumbnails",$img);
+        $thumbName = str_replace("products","thumbnails",$img);
         $imgThumb = $this->attachmentThumb($img, $thumbName, 155, 115);
        
+        $request->thumbnail = $thumbName;
+
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
@@ -274,8 +231,10 @@ class ProductCrudController extends CrudController
         $img = $request->image;
         
         //tao thumbnails
-        $thumbName = str_replace("images","thumbnails",$img);
+        $thumbName = str_replace("products","thumbnails",$img);
         $imgThumb = $this->attachmentThumb($img, $thumbName, 155, 115);
+
+        $request->thumbnail = $thumbName;
 
         $redirect_location = parent::updateCrud($request);
         return $redirect_location;
