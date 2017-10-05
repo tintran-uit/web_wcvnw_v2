@@ -5,6 +5,7 @@ namespace Backpack\Base\app\Http\Controllers\Auth;
 use Backpack\Base\app\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -22,6 +23,7 @@ class LoginController extends Controller
     */
     use AuthenticatesUsers {
         logout as defaultLogout;
+        login as defaultLogin;
     }
 
     /**
@@ -47,7 +49,7 @@ class LoginController extends Controller
 
         // Redirect here after logout.
         $this->redirectAfterLogout = property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout
-            : config('backpack.base.route_prefix', 'admin');
+            : '';
         // ----------------------------------
     }
 
@@ -81,5 +83,18 @@ class LoginController extends Controller
 
         // And redirect to custom location
         return redirect($this->redirectAfterLogout);
+    }
+
+    public function login(Request $request)
+    {
+        // echo "string"; die();
+        // Do the default logout procedure
+        // $this->defaultLogout($request);
+        $this->defaultLogin($request);
+
+        $user = Auth::id();
+        // return $user;
+        // And redirect to custom location
+        return redirect($this->redirectTo);
     }
 }

@@ -191,31 +191,9 @@
                                           <!-- <label>State</label>-->
                                              <select name="selectQuan" class="form-control">
                                                 <option value="">Chọn Quận/Huyện (*)</option>
-                                               <option value="Quận 1">Quận 1</option>
-                                               <option value="Quận 2">Quận 2</option>
-                                               <option value="Quận 3">Quận 3</option>
-                                               <option value="Quận 4">Quận 4</option>
-                                               <option value="Quận 5">Quận 5</option>
-                                               <option value="Quận 6">Quận 6</option>
-                                               <option value="490">Quận 7</option>
-                                               <option value="491">Quận 8</option>
-                                               <option value="492">Quận 9</option>
-                                               <option value="493">Quận 10</option>
-                                               <option value="494">Quận 11</option>
-                                               <option value="495">Quận 12</option>
-                                               <option value="496">Quận Bình Tân</option>
-                                               <option value="497">Quận Bình Thạnh</option>
-                                               <option value="498">Quận Gò Vấp</option>
-                                               <option value="499">Quận Phú Nhuận</option>
-                                               <option value="500">Quận Tân Bình</option>
-                                               <option value="501">Quận Tân Phú</option>
-                                               <option value="502">Quận Thủ Đức</option>
-                                               <option value="503">Huyện Bình Chánh</option>
-                                               <option value="504">Huyện Cần Giờ</option>
-                                               <option value="505">Huyện Củ Chi</option>
-                                               <option value="506">Huyện Hóc Môn</option>
-                                               <option value="507">Huyện Nhà Bè</option>
-                       
+                                                @foreach($districts as $district)
+                                                <option value="{{$district->id}}">{{$district->name}}</option>
+                                                @endforeach
                                              </select>
                                        </div>
                                        <div class="form-group">

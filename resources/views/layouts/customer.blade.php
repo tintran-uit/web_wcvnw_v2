@@ -393,6 +393,25 @@ var link = link
                                     {{ trans('head.login') }}
                                     </button>
                                  </li>
+                                 @else
+                                 <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down"></i>
+                                    </a>          
+                                    <ul class="dropdown-menu" role="menu">
+                                       <!-- <li>
+                                          <a href="account.html">Edit profile</a>
+                                       </li>
+                                       <li>
+                                          <a href="cart.html">My orders</a>
+                                       </li>
+                                       <li>
+                                          <a href="#">Help & support</a>
+                                       </li> -->
+                                       <li>
+                                          <a href="{{url('')}}/admin/logout">Log out</a>
+                                       </li>
+                                    </ul>
+                                  </li>
                                  @endif
                               </ul>
                            </div>
@@ -438,10 +457,9 @@ var link = link
                     <a href="./">          <img class="image-responsive" alt="Kids Store" src="{{url('')}}/assets/images/logo.png" style="height: 86px" />
                      </a>
                   </article>
-                  <article class="col-sm-12 col-md-4 col-lg-6" >
-                           
-                  </article>
-                  <article class="col-sm-12 col-md-4 col-lg-3 hidden-xs">
+                  
+                  <article class="col-sm-12 col-md-4 col-lg-3 hidden-xs col-md-offset-6">
+                     
                      <div class="dropdown bg-white" id="basket">
                         <div class="shadow-wrap-box">
                            <a href="#" class="checkout-basket dropdown-toggle btn-block clearfix" data-toggle="dropdown" aria-expanded="true">
@@ -545,9 +563,9 @@ var link = link
                                        <li class="clearfix row">
                                           <div class="col-sm-12">
                                              <ul class="list-unstyled">
-                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach">{{ trans('head.blog1') }}</a> </li>     
-                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach">{{ trans('head.blog2') }}</a>      </li>
-                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach">{{ trans('head.blog3') }}</a>  </li> 
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">{{ trans('head.blog1') }}</a> </li>     
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=2">{{ trans('head.blog2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">{{ trans('head.blog3') }}</a>  </li> 
                                              </ul>
                                           </div>
                                        </li>
@@ -563,34 +581,13 @@ var link = link
                         </div>
                      </nav>
                   </article>
-                  <article class="col-xs-12 col-sm-4 col-md-4">
-                     <div class="pull-right welcome-text">
-                      @if(isset(Auth::user()->name)) 
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down"></i>
-                        </a>          
-                        <ul class="dropdown-menu" role="menu">
-                           <!-- <li>
-                              <a href="account.html">Edit profile</a>
-                           </li>
-                           <li>
-                              <a href="cart.html">My orders</a>
-                           </li>
-                           <li>
-                              <a href="#">Help & support</a>
-                           </li> -->
-                           <li>
-                              <a href="{{url('')}}/admin/logout">Log out</a>
-                           </li>
-                        </ul>
-                        @endif
-                     </div>
-                  </article>
+                  
                </div>
             </div>
          </section>
          <!--Menu responsive-->
          <section class="visible-xs">
-            <nav class="navbar navbar-default navbar-fixed-top">
+            <nav class="navbar navbar-default navbar-fixed-top" style="    background-color: #f8f8f8; border-color: #e7e7e7;">
                <div class="container">
                   <!-- Brand and toggle get grouped for better mobile display -->
                   <div class="navbar-header">
@@ -668,7 +665,7 @@ var link = link
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light">
                            <img class="hidden-sm hidden-md" alt="location" src="{{url('')}}/assets/images/icons/icon-location.png" height="39" />
-                           <span data-info="text-info">167 Trần Trọng Cung, Q.7, HCM</span>
+                           <span data-info="text-info">167 Trần Trọng Cung, Q.7</span>
                         </div>
                      </article>
                   </div>
@@ -681,8 +678,8 @@ var link = link
                   <article class="col-xs-12 col-sm-7">
                      <div class="clearfix row">
                         <div class="col-sm-5">
-                           <ul class="footer-widget-list list-unstyled"><li><strong>CFarm! </strong></li></ul>
-                           Cộng đồng phát triển thực phẩm sạch trồng hữu cơ và tự nhiên Việt Nam. Nơi kết nối những trang trại sản xuất lương thiện với những người nội trợ chăm sóc sức khỏe gia đình. Hãy tham gia cùng chúng tôi để phát triển cộng đồng mạnh mẽ hơn.
+                           <ul class="footer-widget-list list-unstyled"><li><strong>C-farm! </strong></li></ul>
+                           Kết nối người tiêu dùng với những lương nông trên nền tảng công nghệ. Bạn có thể đặt mua thực phẩm sạch hoặc hữu cơ trực tiếp từ những trang trại thông qua <a href="{{url('')}}">www.cfarm.vn</a> hoặc (Android & iOS App)
                         </div>
                         <div class="col-sm-3 col-sm-offset-1">
                            <ul class="footer-widget-list list-unstyled spacer-bottom-5">

@@ -11,6 +11,8 @@
 |
 */
 
+Auth::routes();
+
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace' => 'Admin'], function () {
     // Backpack\MenuCRUD
     CRUD::resource('menu-item', 'MenuItemCrudController');
@@ -45,6 +47,8 @@ Route::get('language/{locale}', function ($locale) {
 
 Route::get('/kinh-nghiem-mua-thuc-pham-sach/post_id={post_id}', 'PageController@getPost');
 
+Route::get('/kinh-nghiem-mua-thuc-pham-sach/blog_id={blog_id}', 'PageController@getBlog');
+
 Route::get('/', 'PageController@index');
 
 Route::get('/product/slug={slug}', 'PageController@getProduct');
@@ -57,6 +61,5 @@ Route::get('{page}/{subs?}', ['uses' => 'PageController@page'])
 
 
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index');
