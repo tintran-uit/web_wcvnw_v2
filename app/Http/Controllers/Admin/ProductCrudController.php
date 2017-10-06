@@ -38,26 +38,21 @@ class ProductCrudController extends CrudController
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
+            'name' => 'id',
+            'label' => 'ID',
+        ]);
+        $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Tên SP',
         ]);
 
-        $this->crud->addColumn([       // Select2Multiple = n-n relationship (with pivot table)
-            'label' => 'Nhóm Sản Phẩm',
-            'type' => 'select',
-            'name' => 'category', // the method that defines the relationship in your Model
-            'entity' => 'category', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\Category", // foreign key model
-            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-        ]);
         $this->crud->addColumn([
             'name' => 'price',
             'label' => 'Giá Bán',
         ]);
         $this->crud->addColumn([
             'name' => 'unit_quantity',
-            'label' => 'Lượng tính cơ bản',
+            'label' => 'ĐVT cơ bản',
         ]);
         $this->crud->addColumn([
             'name' => 'unit',
@@ -79,7 +74,7 @@ class ProductCrudController extends CrudController
             'entity' => 'categories', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model' => "App\Models\Category", // foreign key model
-            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+            // 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-5'
             ],
@@ -99,7 +94,7 @@ class ProductCrudController extends CrudController
 
         $this->crud->addField([    // TEXT
             'name' => 'unit_quantity',
-            'label' => 'Lượng Tính Cơ Bản',
+            'label' => 'ĐVT Cơ Bản',
             'type' => 'number',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4'
