@@ -208,11 +208,13 @@ class ProductCrudController extends CrudController
         // your additional operations before save here
         $img = $request->image;
         
-        //tao thumbnails
-        $thumbName = str_replace("products","thumbnails",$img);
+        //create thumbnails
+        $thumbName = str_replace("images","thumbnails",$img);
+        $request->request->set('thumbnail', $thumbName);
+
         $imgThumb = $this->attachmentThumb($img, $thumbName, 155, 115);
        
-        $request->thumbnail = $thumbName;
+        $this->data['thumbnail'] = $thumbName;
 
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
@@ -225,11 +227,10 @@ class ProductCrudController extends CrudController
         // your additional operations before save here
         $img = $request->image;
         
-        //tao thumbnails
-        $thumbName = str_replace("products","thumbnails",$img);
+        //create thumbnails
+        $thumbName = str_replace("images","thumbnails",$img);
+        $request->request->set('thumbnail', $thumbName);
         $imgThumb = $this->attachmentThumb($img, $thumbName, 155, 115);
-
-        $request->thumbnail = $thumbName;
 
         $redirect_location = parent::updateCrud($request);
         return $redirect_location;
