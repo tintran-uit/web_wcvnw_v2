@@ -163,8 +163,9 @@ class PageController extends Controller
         $this->data['page'] = $page->withFakes();
         $this->data['menu'] = MenuItem::all();
         $this->data['cart'] = Cart::content();
+        $this->data['article'] = DB::table('articles')->where('id', $post_id)->first();
+        $this->data['blog_id'] = $this->data['article']->category_id;
 
-         
         return view('pages.blog_post', $this->data);
     }
     

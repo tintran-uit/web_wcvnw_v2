@@ -3,17 +3,19 @@
 {{$title}}
 @endsection
 @section('headInput')
+
+<!-- Le styles -->
 <style type="text/css">
    .profile_view {
     margin-bottom: 20px;
     display: inline-block;
     width: 100%;
-        -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.3);
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.3);
+        -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.3);
 }
 .profile_view:hover {
-    -webkit-box-shadow: 0 14px 12px 0 rgba(0,0,0,0.17),0 20px 40px 0 rgba(0,0,0,0.3);
-    box-shadow: 0 14px 12px 0 rgba(0,0,0,0.17),0 20px 40px 0 rgba(0,0,0,0.3);    
+    -webkit-box-shadow: 0 14px 12px 0 rgba(0,0,0,0.17),0 10px 20px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 14px 12px 0 rgba(0,0,0,0.17),0 10px 20px 0 rgba(0,0,0,0.3);    
 }
 .well.profile_view {
     padding: 10px 0 0;
@@ -88,6 +90,15 @@
 .profile_left {
     background: white;
 }
+
+body .popover {
+  max-width: 590px;
+}
+
+.popover-content >img {
+  width: 100%;
+}
+
 </style>
 @endsection
 @section('main class')
@@ -102,102 +113,15 @@
                      <h4 class="title-box text-uppercase no-margin-top" style="font-size: 16px;">
                         QUY TRÌNH TUYỂN CHỌN LƯƠNG NÔNG <img class="img_nhanchungnhan" style="height: 25px; margin-left: 10px;" src="{{url('')}}/assets/images/icons/icon-tick.png">
                      </h4>
+                     <a href="#" data-toggle="popover2" data-full="{{url('')}}/assets/images/banner/banner-nong-dan san suat-sach-cfarm.png">
                      <img class="img-responsive" src="{{url('')}}/assets/images/banner/banner-nong-dan san suat-sach-cfarm.png">
+                   </a>
                      <div class="text-center">
                       <br>
                         <a class="btn btn-link no-margin" href="#">CHI TIẾT</a>
                      </div>
                   </div>
                </section>
-               <div class="hidden-lg hidden-xs">
-                  <section class="single-block bg-white wrap-radius">
-                     <div class="icon-discount">
-                        <!--icon-email, icon-discount, icon-shipping-->
-                        <h4 class="title-box text-uppercase no-margin-top">
-                           HAVE A COUPON?
-                        </h4>
-                        <p class="copy-box no-margin-top">
-                           Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                        </p>
-                        <div class="text-center">
-                           <a class="btn btn-link no-margin" href="#">SHOW MORE</a>
-                        </div>
-                     </div>
-                  </section>
-                  <section class="single-block bg-white wrap-radius">
-                     <div class="icon-email">
-                        <!--icon-email, icon-discount, icon-shipping-->
-                        <h4 class="title-box text-uppercase no-margin-top">
-                           SUBSCRIBE TO NEWSLETTER
-                        </h4>
-                        <p class="copy-box no-margin-top">
-                           Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                        </p>
-                        <div class="text-center">
-                           <a class="btn btn-link no-margin" href="#">SHOW MORE</a>
-                        </div>
-                     </div>
-                  </section>
-                  <section class="wrap wrap-border internal-padding bg-white wrap-radius">
-                     <h4 class="text-center no-margin-top spacer-bottom-10">Our photos on Instragram</h4>
-                     <div class="row clearfix frame-photo">
-                        <div class="col-xs-6">
-                           <div class="spacer-bottom-10">
-                              <!--Image width and hight should be the same -->
-                              <div class="shadow-wrap-box bg-white photo-frame">
-                                 <a href="#">    <img class="img-responsive" alt="img" src="assets/images/photo/photo1.jpg">
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xs-6">
-                           <div class="spacer-bottom-10">
-                              <!--Image width and hight should be the same -->
-                              <div class="shadow-wrap-box bg-white photo-frame">
-                                 <a href="#">    <img class="img-responsive" alt="img" src="assets/images/photo/photo2.jpg">
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xs-6">
-                           <div class="spacer-bottom-10">
-                              <!--Image width and hight should be the same -->
-                              <div class="shadow-wrap-box bg-white photo-frame">
-                                 <a href="#">    <img class="img-responsive" alt="img" src="assets/images/photo/photo3.jpg">
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xs-6">
-                           <div class="spacer-bottom-10">
-                              <!--Image width and hight should be the same -->
-                              <div class="shadow-wrap-box bg-white photo-frame">
-                                 <a href="#">    <img class="img-responsive" alt="img" src="assets/images/photo/photo1.jpg">
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xs-6">
-                           <div class="spacer-bottom-10">
-                              <!--Image width and hight should be the same -->
-                              <div class="shadow-wrap-box bg-white photo-frame">
-                                 <a href="#">    <img class="img-responsive" alt="img" src="assets/images/photo/photo2.jpg">
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xs-6">
-                           <div class="spacer-bottom-10">
-                              <!--Image width and hight should be the same -->
-                              <div class="shadow-wrap-box bg-white photo-frame">
-                                 <a href="#">    <img class="img-responsive" alt="img" src="assets/images/photo/photo3.jpg">
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </section>
-               </div>
             </aside>
             <section class="col-sm-7 col-md-8 col-lg-6">
                <article class="internal-padding wrap-radius bg-white style-post animated fadeInDown">
@@ -244,7 +168,7 @@
                      </div>
                </article>
                
-               <nav class="spacer-bottom-10">
+               <nav class="spacer-bottom-10" style="margin-bottom: 25px">
                   <ul class="pagination">
                      <li>
                         <a href="#">        <span aria-hidden="true" class="fa fa-chevron-left"></span>
@@ -271,7 +195,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_1.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_1.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_1.jpg">
                               </a>
                            </div>
                         </div>
@@ -280,7 +204,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_2.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_2.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_2.jpg">
                               </a>
                            </div>
                         </div>
@@ -289,7 +213,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_3.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_3.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_3.jpg">
                               </a>
                            </div>
                         </div>
@@ -298,7 +222,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_4.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_4.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_4.jpg">
                               </a>
                            </div>
                         </div>
@@ -307,7 +231,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_5.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_5.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_5.jpg">
                               </a>
                            </div>
                         </div>
@@ -316,7 +240,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_6.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_6.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_6.jpg">
                               </a>
                            </div>
                         </div>
@@ -325,7 +249,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_7.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_7.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_7.jpg">
                               </a>
                            </div>
                         </div>
@@ -334,7 +258,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_8.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_8.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_8.jpg">
                               </a>
                            </div>
                         </div>
@@ -343,7 +267,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_9.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_9.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_9.jpg">
                               </a>
                            </div>
                         </div>
@@ -352,7 +276,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_10.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_10.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_10.jpg">
                               </a>
                            </div>
                         </div>
@@ -361,7 +285,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_11.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_11.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_11.jpg">
                               </a>
                            </div>
                         </div>
@@ -370,7 +294,7 @@
                         <div class="spacer-bottom-10">
                            <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_12.jpg">
+                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_12.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_12.jpg">
                               </a>
                            </div>
                         </div>
@@ -385,4 +309,34 @@
 </main>
 @endsection
 @section('scrip_code')
+<script type="text/javascript">
+  // Wait for the web page to be ready
+$(document).ready(function() {
+  // grab all thumbnails and add bootstrap popovers
+  // https://getbootstrap.com/javascript/#popovers
+  $('[data-toggle="popover"]').popover({
+    container: 'body',
+    html: true,
+    placement: 'left',
+    trigger: 'hover',
+    content: function() {
+      // get the url for the full size img
+      var url = $(this).data('full');
+      return '<img src="' + url + '">'
+    }
+  });
+
+  $('[data-toggle="popover2"]').popover({
+    container: 'body',
+    html: true,
+    placement: 'right',
+    trigger: 'hover',
+    content: function() {
+      // get the url for the full size img
+      var url = $(this).data('full');
+      return '<img src="' + url + '">'
+    }
+  });
+});
+</script>
 @endsection

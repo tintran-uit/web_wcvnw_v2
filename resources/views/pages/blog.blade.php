@@ -9,37 +9,7 @@
       <div class="container">
          <div class="row">
             <aside class="col-md-3">
-               <div class="block block-nav">
-                  <div class="title">
-                     <h4 class="text-uppercase no-margin">Góc kinh nghiệm</h4>
-                  </div>
-                  <div class="content" style="padding-top: 10px;">
-                     <dl class="list-unstyled">
-                        <dd>
-                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3" class="@if($blog_id == '3') current @endif">
-                           <strong>
-                           <i class="fa fa-angle-right"></i> {{ trans('head.blog1') }}
-                           </strong>
-                         </a>
-                        </dd>
-                        <dd>
-                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=4" class="@if($blog_id == '4') current @endif">
-                           <strong>
-                           <i class="fa fa-angle-right"></i> {{ trans('head.blog2') }}
-                           </strong>
-                         </a>
-                        </dd>
-                        <dd>
-                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=5" class="@if($blog_id == '5') current @endif">
-                           <strong>
-                           <i class="fa fa-angle-right"></i> {{ trans('head.blog3') }}
-                           </strong>
-                         </a>
-                        </dd>
-                     </dl>
-                     
-                  </div>
-               </div>
+               @include('layouts.menu_blog')
                <div class="general-info">
                   <h5 class="title">Liên hệ với chúng tôi</h5>
                   <div class="content text-center">
@@ -56,26 +26,20 @@
                             <div class="row clearfix">
                               <div class="col-xs-12">
                                 <h4 class="media-heading">
-                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">{{$article->title}}</a>
+                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">{{$article->title}}</a>
                                 </h4>
                               </div>
-                              <!-- <div class="col-xs-4">
-                                <time class="pull-right">
-                                  <b>
-                                    Sat Aug 30, 2003
-                                  </b>
-                                </time>
-                              </div> -->
+                              
                             </div>
                             <div class="media spacer-bottom-10">
                               <div class="media-left media-top">
-                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id=1">        <img class="small-img" alt="post" src="http://placehold.it/300x400">
+                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">        <img class="small-img" alt="post" src="{{url('')}}/{{$article->image}}" width="190">
                           </a>    </div>
                               <div class="media-body">
                                 <p class="copy">
                                   <?php 
                                       $intro = strip_tags($article->content);
-                                      $intro = substr($intro, 0, 360);
+                                      $intro = substr($intro, 0, 380);
                                       echo $intro.'...'; 
                                   ?>
                                   <a class="btn-link" href="#">[Chi tiết]</a>
