@@ -47,7 +47,7 @@ Route::get('language/{locale}', function ($locale) {
 
 Route::get('/kinh-nghiem-mua-thuc-pham-sach/post_id={post_id}', 'PageController@getPost');
 
-Route::get('/kinh-nghiem-mua-thuc-pham-sach/blog_id={blog_id}', 'PageController@getBlog');
+Route::get('/kinh-nghiem-mua-thuc-pham-sach/blog_id={blog_id}', 'PageController@showBlog');
 
 Route::get('/', 'PageController@index');
 

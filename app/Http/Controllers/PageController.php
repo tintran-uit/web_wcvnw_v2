@@ -116,7 +116,7 @@ class PageController extends Controller
         return view('pages.product_details', $this->data);
     }
 
-    public function getBlog($blog_id)
+    public function showBlog($blog_id)
     {
         $page = Page::findBySlug('kinh-nghiem-mua-thuc-pham-sach');
 
@@ -137,6 +137,9 @@ class PageController extends Controller
         $this->data['cart'] = Cart::content();
 
         $this->data['articles'] = DB::table('articles')->where('category_id', $blog_id)->get();
+        $this->data['blog_id'] = $blog_id;
+
+        // return $this->data['articles'] = DB::select('SELECT a.`title` "title", a.`slug` "slug", a.`content` "content", a.`image` "image", a.`status` "status", a.`date` "date", t.`name` "tag_name", t.`slug` "tag_slug" FROM `articles` a, `article_tag` at, `tags` t WHERE at.`article_id` = a.`id` AND t.`id` = at.`tag_id` AND a.`category_id` = ? ', [$blog_id]);
         
         return view('pages.blog', $this->data);
     }

@@ -557,15 +557,15 @@ var link = link
                                     <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> {{ trans('head.product') }}
                                     </a>                  
                                  </li>
-                                 <li class="">
+                                 <li class="@if($page->template == 'blog') active @endif">
                                     <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{ trans('head.blog') }} <i class="fa fa-angle-down"></i></a> 
                                     <ul class="dropdown-menu">
                                        <li class="clearfix row">
                                           <div class="col-sm-12">
                                              <ul class="list-unstyled">
                                                 <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">{{ trans('head.blog1') }}</a> </li>     
-                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=2">{{ trans('head.blog2') }}</a>      </li>
-                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">{{ trans('head.blog3') }}</a>  </li> 
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=4">{{ trans('head.blog2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=5">{{ trans('head.blog3') }}</a>  </li> 
                                              </ul>
                                           </div>
                                        </li>

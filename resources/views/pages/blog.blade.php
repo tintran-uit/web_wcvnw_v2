@@ -16,23 +16,23 @@
                   <div class="content" style="padding-top: 10px;">
                      <dl class="list-unstyled">
                         <dd>
-                          <a class="current">
+                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3" class="@if($blog_id == '3') current @endif">
                            <strong>
-                           <i class="fa fa-angle-right"></i> Kiến thức tiêu dùng an toàn
+                           <i class="fa fa-angle-right"></i> {{ trans('head.blog1') }}
                            </strong>
                          </a>
                         </dd>
                         <dd>
-                          <a>
+                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=4" class="@if($blog_id == '4') current @endif">
                            <strong>
-                           <i class="fa fa-angle-right"></i> Kiến thức nuôi trồng sạch
+                           <i class="fa fa-angle-right"></i> {{ trans('head.blog2') }}
                            </strong>
                          </a>
                         </dd>
                         <dd>
-                          <a>
+                          <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=5" class="@if($blog_id == '5') current @endif">
                            <strong>
-                           <i class="fa fa-angle-right"></i> Kiến thức nuôi trồng sạch
+                           <i class="fa fa-angle-right"></i> {{ trans('head.blog3') }}
                            </strong>
                          </a>
                         </dd>
@@ -75,7 +75,7 @@
                                 <p class="copy">
                                   <?php 
                                       $intro = strip_tags($article->content);
-                                      $intro = substr($intro, 0, 320);
+                                      $intro = substr($intro, 0, 360);
                                       echo $intro.'...'; 
                                   ?>
                                   <a class="btn-link" href="#">[Chi tiết]</a>
@@ -85,13 +85,16 @@
                             <div class="row clearfix">
                               <div class="col-xs-8">
                                 <span>Tag: </span>
-                                <a class="btn-link" href="#">exercitationem</a>,
-                                <a class="btn-link" href="#">unde</a>,
-                                <a class="btn-link" href="#">vel</a>
+                                <?php 
+                                    $tags = DB::select('SELECT t.`name` "tag_name", t.`slug` "tag_slug" FROM `article_tag` at, `tags` t WHERE t.`id` = at.`tag_id` AND at.`article_id` = ? ', [$article->id]);
+                                ?>
+                                @foreach($tags as $tag)
+                                <a class="btn-link" href="{{url('')}}/article_tag/tag_slug={{$tag->tag_slug}}">{{$tag->tag_name}}</a>,
+                                @endforeach
                               </div>
                               <div class="col-xs-4">
                                 <div class="pull-right like">
-                                  <span>10</span> <i class="fa fa-heart"></i>
+                                  <span>{{$article->date}}</span>
                                 </div>
                               </div>
                             </div>
