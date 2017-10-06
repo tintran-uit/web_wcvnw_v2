@@ -113,7 +113,7 @@ class ProductCrudController extends CrudController
         $this->crud->addField([   // WYSIWYG
             'name' => 'short_description',
             'label' => 'Mô Tả Ngắn',
-            'type' => 'text',
+            'type' => 'textarea',
             'placeholder' => 'Mô Tả ngắn sản phẩm',
         ]);
         $this->crud->addField([   // WYSIWYG
