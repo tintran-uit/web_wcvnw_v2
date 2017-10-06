@@ -33,7 +33,7 @@ class PageController extends Controller
         $this->data['menu'] = MenuItem::all();
         $this->data['cart'] = Cart::content();
 
-        $categories = ProductCategory::where('visible', 1)->orderBy('id', 'asc')->get();
+        $categories = ProductCategory::orderBy('id', 'asc')->get();
         $this->data['categories'] = $categories;
         return view('pages.index', $this->data);
     }
