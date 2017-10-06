@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 use Closure;
 
@@ -15,7 +16,16 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        // var_dump($request->user()); die();
-        return $next($request);
+        if(Auth::check())
+        {
+            $user = $request->user();
+            if($user->account_type == 'Admin')
+            {
+                return $next($request);
+            }
+        }
+         
+        return redirect('/');
+        
     }
 }
