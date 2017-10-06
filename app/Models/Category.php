@@ -12,7 +12,7 @@ class Category extends Model
 {
     use CrudTrait;
     use Sluggable, SluggableScopeHelpers;
-    use SoftDeletes;
+    // use SoftDeletes;
 
      /*
 	|--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ class Category extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-      protected $fillable = ['name','visible','meta_title','meta_keywords','meta_description','description'];
+      protected $fillable = ['id', 'name','short_description','description', 'slug', 'icon'];
    // protected $hidden = [];
     // protected $dates = [];
     protected $casts = [

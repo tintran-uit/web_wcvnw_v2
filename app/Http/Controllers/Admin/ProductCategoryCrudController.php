@@ -19,9 +19,9 @@ class ProductCategoryCrudController extends CrudController
 		| BASIC CRUD INFORMATION
 		|--------------------------------------------------------------------------
 		*/
-        $this->crud->setModel("App\Models\ProductCategory");
+        $this->crud->setModel("App\Models\Category");
         $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/product-category');
-        $this->crud->setEntityNameStrings('product category', 'product categories');
+        $this->crud->setEntityNameStrings('category', 'categories');
 
         /*
 		|--------------------------------------------------------------------------
@@ -31,74 +31,66 @@ class ProductCategoryCrudController extends CrudController
 
 //        $this->crud->setFromDb();
         $this->crud->allowAccess('reorder');
-        $this->crud->enableReorder('name', 2);
+        $this->crud->enableReorder('name', 1);
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
+            'name' => 'id',
+            'label' => 'ID',
+            'type' => 'number',            
+        ]);
+        $this->crud->addColumn([
             'name' => 'name',
-            'label' => 'Name',
+            'label' => 'Danh mục',
+            'type' => 'text',            
         ]);
         $this->crud->addColumn([
-            'name' => 'slug',
-            'label' => 'Slug',
+            'name' => 'short_description',
+            'label' => 'Mô Tả Ngắn',
+            'type' => 'text',            
         ]);
         $this->crud->addColumn([
-            'label' => 'Parent',
-            'type' => 'select',
-            'name' => 'parent_id',
-            'entity' => 'parent',
-            'attribute' => 'name',
-            'model' => "App\Models\ProductCategory",
+            'name' => 'icon',
+            'label' => 'Icon',
+            'type' => 'image',
         ]);
-        $this->crud->addField([    // CHECKBOX
-            'name' => 'visible',
-            'label' => 'Visible category',
-            'type' => 'checkbox',
-        ]);
+        // $this->crud->addField([    // CHECKBOX
+        //     'name' => 'visible',
+        //     'label' => 'Visible category',
+        //     'type' => 'checkbox',
+        // ]);
 
         // ------ CRUD FIELDS
         $this->crud->addField([
             'name' => 'name',
             'label' => 'Name',
-        ]);
-        $this->crud->addField([
-            'name' => 'slug',
-            'label' => 'Slug (URL)',
             'type' => 'text',
-            'hint' => 'Will be automatically generated from your name, if left empty.',
-            // 'disabled' => 'disabled'
-        ]);
-        $this->crud->addField([
-            'label' => 'Parent',
-            'type' => 'select',
-            'name' => 'parent_id',
-            'entity' => 'parent',
-            'attribute' => 'name',
-            'model' => "App\Models\ProductCategory",
-        ]);
-        $this->crud->addField([    // TEXT
-            'name' => 'meta_title',
-            'label' => 'Meta Title',
-            'type' => 'text',
-            'placeholder' => 'Your meta title here',
-        ]);
-        $this->crud->addField([    // TEXT
-            'name' => 'meta_keywords',
-            'label' => 'Meta Keywords',
-            'type' => 'text',
-            'placeholder' => 'Your meta keywords here',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4'
+            ],
         ]);
         $this->crud->addField([   // WYSIWYG
-            'name' => 'meta_description',
-            'label' => 'Meta Description',
-            'type' => 'text',
-            'placeholder' => 'Your meta description here',
+            'name' => 'short_description',
+            'label' => 'Mô tả ngắn',
+            'type' => 'textarea',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4'
+            ],
         ]);
         $this->crud->addField([   // WYSIWYG
             'name' => 'description',
-            'label' => 'Category Description',
+            'label' => 'Mô tả chi tiết',
             'type' => 'ckeditor',
-            'placeholder' => 'Your meta description here',
+            'placeholder' => 'Viết mô tả chi tiết cho danh mục ở đây',
+        ]);
+
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'icon',
+            'label' => 'Icon',
+            'type' => 'browse',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4'
+            ],
         ]);
 
         $this->crud->enableAjaxTable();

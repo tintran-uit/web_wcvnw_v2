@@ -12,20 +12,20 @@ class ProductCategory extends Model
 {
     use CrudTrait;
     use Sluggable, SluggableScopeHelpers;
-    use SoftDeletes;
+    // use SoftDeletes;
 
      /*
-	|--------------------------------------------------------------------------
-	| GLOBAL VARIABLES
-	|--------------------------------------------------------------------------
-	*/
+    |--------------------------------------------------------------------------
+    | GLOBAL VARIABLES
+    |--------------------------------------------------------------------------
+    */
 
     protected $table = 'categories';
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-     protected $fillable = ['name','visible','meta_title','meta_keywords','meta_description','description'];
-    // protected $hidden = [];
+      protected $fillable = ['id', 'name','short_description','description', 'slug', 'icon'];
+   // protected $hidden = [];
     // protected $dates = [];
     protected $casts = [
         'visible'  => 'boolean'
@@ -46,54 +46,39 @@ class ProductCategory extends Model
     }
 
     /*
-	|--------------------------------------------------------------------------
-	| FUNCTIONS
-	|--------------------------------------------------------------------------
-	*/
+    |--------------------------------------------------------------------------
+    | FUNCTIONS
+    |--------------------------------------------------------------------------
+    */
 
     /*
-	|--------------------------------------------------------------------------
-	| RELATIONS
-	|--------------------------------------------------------------------------
-	*/
-    public function parent()
-    {
-        return $this->belongsTo('App\Models\ProductCategory', 'id');
-    }
-
-    public function children()
-    {
-        return $this->hasMany('App\Models\ProductCategory', 'id');
-    }
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
 
     public function products()
     {
-        return $this->hasMany('App\Models\Product', 'category');
+        return $this->hasMany('App\Models\Product');
     }
 
     /*
-	|--------------------------------------------------------------------------
-	| SCOPES
-	|--------------------------------------------------------------------------
-	*/
-    public function scopeFirstLevelItems($query)
-    {
-        return $query->where('depth', '1')
-            ->orWhere('depth', null)
-            ->orderBy('lft', 'ASC');
-    }
+    |--------------------------------------------------------------------------
+    | SCOPES
+    |--------------------------------------------------------------------------
+    */
 
     public function scopeVisible($query)
     {
         return $query->where('visible', '1')
             ->orderBy('lft', 'ASC');
     }
-
+    
     /*
-	|--------------------------------------------------------------------------
-	| ACCESORS
-	|--------------------------------------------------------------------------
-	*/
+    |--------------------------------------------------------------------------
+    | ACCESORS
+    |--------------------------------------------------------------------------
+    */
 
     // The slug is created automatically from the "name" field if no slug exists.
     public function getSlugOrNameAttribute()
@@ -106,8 +91,8 @@ class ProductCategory extends Model
     }
 
     /*
-	|--------------------------------------------------------------------------
-	| MUTATORS
-	|--------------------------------------------------------------------------
-	*/
+    |--------------------------------------------------------------------------
+    | MUTATORS
+    |--------------------------------------------------------------------------
+    */
 }
