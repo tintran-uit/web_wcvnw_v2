@@ -15,4 +15,6 @@ return [
 	'login' => 'Đăng nhập',
 	'logout' => 'Đăng xuất',
 	'register' => 'Đăng kí',
+	'slogan1' => 'Liên kết lương nông',
+	'slogan2' => 'An Lòng nội trợ',
 ];
