@@ -96,6 +96,7 @@ class ProductCrudController extends CrudController
             'name' => 'unit_quantity',
             'label' => 'ĐVT Cơ Bản',
             'type' => 'number',
+            'attributes' => ["step" => "any"],
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4'
             ],
