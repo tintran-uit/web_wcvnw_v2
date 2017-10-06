@@ -36,7 +36,7 @@ class ProductController extends Controller
 	 */
     public function getProductDetail($product_id)
 	{
-		$product_detail = DB::select('SELECT f.`id` "farmer_id", f.`name` "farmer_name", f.`rating` "farmer_rating", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `farmers` f, `trading` tr, `products` p WHERE p.`id` = tr.`product_id` AND tr.`product_id` = ? AND tr.`farmer_id` = f.`id` ', [$product_id]);
+		$product_detail = DB::select('SELECT f.`id` "id", f.`name` "name", f.`rating` "rating", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `farmers` f, `trading` tr, `products` p WHERE p.`id` = tr.`product_id` AND tr.`product_id` = ? AND tr.`farmer_id` = f.`id` ', [$product_id]);
 
 		return $product_detail;
 	}
