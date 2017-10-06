@@ -49,7 +49,7 @@
                                     <th class="bg-extra-light-grey">Số Lượng</th>
                                     <th class="bg-extra-light-grey">Giá</th>
                                     <th class="bg-extra-light-grey">Tổng</th>
-                                    <th class="bg-extra-light-grey"></th>
+                                    <th class="bg-extra-light-grey">Xóa</th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>

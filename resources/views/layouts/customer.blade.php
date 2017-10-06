@@ -143,7 +143,7 @@
           <h4 class="modal-title email-icon" id="modalSigninLabel">{{ trans('head.login') }}</h4>
         </div>
         <div class="modal-body clearfix">
-          <div class="col-md-7 no-padding">
+          <div class="col-md-7 vcenter">
 <form action="{{url('')}}/admin/login" accept-charset="UTF-8" method="post" class="form-style-base">
   {{ csrf_field() }}
   <fieldset>    <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
@@ -181,30 +181,24 @@
 
 </form>
           </div>
-          <div class="col-md-5 no-padding">
+          <div class="col-md-5 vcenter">
             <div class="text-center">
-  <h4 class="no-margin-top">
-    Use your social network<br>account to signin
-  </h4>
-  <div class="socials btn-group clearfix">
-    <!--
-Exsample:
-var social = facebook, twitter, pinterest, google, linkedin or youtube
-var smaller = smaller or nil
-var link = link
--->
-<a class="btn-social btn-facebook " href="#">  <i class="fa fa-facebook fa-1x"></i>
-</a>
-    <!--
-Exsample:
-var social = facebook, twitter, pinterest, google, linkedin or youtube
-var smaller = smaller or nil
-var link = link
--->
-<a class="btn-social btn-twitter " href="#">  <i class="fa fa-twitter fa-1x"></i>
-</a>
-  </div>
-</div>
+            <!-- <h4 class="no-margin-top">
+              Use your social network<br>account to signin
+            </h4>
+            <div class="socials btn-group clearfix">
+              
+          <a class="btn-social btn-facebook " href="#">  <i class="fa fa-facebook fa-1x"></i>
+          </a>
+              
+          <a class="btn-social btn-twitter " href="#">  <i class="fa fa-twitter fa-1x"></i>
+          </a>
+            </div> -->
+            <h5 class="no-margin-top">
+              {{ trans('head.slogan1') }} <br>
+              {{ trans('head.slogan2') }}
+            </h5>
+          </div>
 
           </div>
         </div>
@@ -227,7 +221,7 @@ var link = link
           <h4 class="modal-title email-icon" id="modalSignupLabel">Tạo tài khoản</h4>
         </div>
         <div class="modal-body clearfix">
-          <div class="col-md-7 no-padding">
+          <div class="col-md-12 no-padding">
 <form action="{{url('')}}/admin/register" accept-charset="UTF-8" method="post" class="form-style-base">              
 {{ csrf_field() }}   
                <div class="form-group">
@@ -280,39 +274,29 @@ var link = link
 
               <div>
                 <button type="submit" class="btn btn-warning btn-lg btn-block">
-                  <i class="fa fa-user"></i> Tạo tài khoảng
+                  <i class="fa fa-user"></i> Tạo tài khoản
                 </button>
               </div>
               <p class="text-center small no-margin">
                 Bạn đã có tài khoản? <a class="btn-link" href="signin.html">{{ trans('head.login') }}</a>
               </p>
 </form>          </div>
-          <div class="col-md-5 spacer-30">
+          <!-- <div class="col-md-5 spacer-30">
             <div class="text-center">
-  <h4 class="no-margin-top">
-    Use your social network<br>account to signin
-  </h4>
-  <div class="socials btn-group clearfix">
-    <!--
-Exsample:
-var social = facebook, twitter, pinterest, google, linkedin or youtube
-var smaller = smaller or nil
-var link = link
--->
-<a class="btn-social btn-facebook " href="#">  <i class="fa fa-facebook fa-1x"></i>
-</a>
-    <!--
-Exsample:
-var social = facebook, twitter, pinterest, google, linkedin or youtube
-var smaller = smaller or nil
-var link = link
--->
-<a class="btn-social btn-twitter " href="#">  <i class="fa fa-twitter fa-1x"></i>
-</a>
-  </div>
-</div>
+              <h4 class="no-margin-top">
+                Use your social network<br>account to signin
+              </h4>
+              <div class="socials btn-group clearfix">
+                
+            <a class="btn-social btn-facebook " href="#">  <i class="fa fa-facebook fa-1x"></i>
+            </a>
+                
+            <a class="btn-social btn-twitter " href="#">  <i class="fa fa-twitter fa-1x"></i>
+            </a>
+              </div>
+            </div>
 
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

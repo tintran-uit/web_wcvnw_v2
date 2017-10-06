@@ -15,6 +15,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
+        var_dump($request->user()); die();
         return $next($request);
     }
 }
