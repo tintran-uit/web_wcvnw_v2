@@ -40,9 +40,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 
 Route::group(['prefix' => 'farmer', 'middleware' => ['web', 'farmer'], 'namespace' => 'Farmer'], function () {
     // Backpack\MenuCRUD
-    CRUD::resource('farmer-item', 'FarmerCrudController');
-    CRUD::resource('farmer-farming', 'FarmingCrudController');
-    CRUD::resource('farmer-trading', 'TradingCrudController');
+    CRUD::resource('farmer-item', 'OrderItemCrudController');
 
 });
 
