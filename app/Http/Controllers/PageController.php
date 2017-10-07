@@ -61,7 +61,7 @@ class PageController extends Controller
         //danh sach san pham
         if ($slug == 'mua-thuc-pham-sach') {
             $this->data['isShop'] = '1';
-            $categories = ProductCategory::where('visible', 1)->get();
+            $categories = ProductCategory::get();
             $this->data['categories'] = $categories;
             return view('pages.index', $this->data);
         }
