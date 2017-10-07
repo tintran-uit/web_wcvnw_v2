@@ -13,7 +13,7 @@
           <article class="col-sm-4 col-md-5">
             <section class="wrap internal-padding wrap-border wrap-radius bg-white">
               <div class="">
-                <img class="img-responsive big-img center-block" alt="product" src="{{url('')}}/uploads/products/images/ca-chua-1.png">
+                <img class="img-responsive big-img center-block" alt="product" src="{{url('')}}/{{$product[0]->image}}">
                 
               </div>
               <div class="icon-shipping" style="margin-top: 30px"> <!--icon-email, icon-discount, icon-shipping-->
@@ -34,9 +34,7 @@
                   {{$product[0]->name}}
                 </h2>
                 <br>
-                <p class="copy-box no-margin">
-                  Mỗi miếng tầm: 200 - 300gram. + Thịt đông lạnh ngay sau khi giết mổ.------------------------------------+ ĐẠT TIÊU CHUẨN HỮU CƠ CỦA HIỆP HỘI HỮU CƠ CANADA+ Từ Nông Trại Ausfarm...
-                </p>
+                {{$product[0]->short_description}}
                 <div class="product-options">
                   <section class="choose">
                     <h5 class="col-sm-12">
@@ -113,18 +111,9 @@
                 </ul>
             <section class="wrap internal-padding wrap-border wrap-radius bg-white">
                 <article>
-                   <h3 class="text-uppercase no-margin-top">
-                      Về chúng tôi
-                   </h3>
-                   <p>Thực phẩm bẩn trong tôi đã trở thành một nỗi ám ảnh thường trực. Tháng 4/2016, tôi bắt đầu dự án đầu tiên của mình về GREEN (sạch), đó là một trang trại toàn diện nhỏ, cung ứng&nbsp;<a href="http://trangtraitrungthuc.com/"><strong>thực phẩm sạch</strong></a>&nbsp;cơ bản cho 50-100 hộ gia đình, quy mô 3 tấn&nbsp;<a href="http://trangtraitrungthuc.com/">rau sạch&nbsp;</a>/tháng, 300 con gà, 100 con lợn và 5 tạ cá. Tôi mong muốn mỗi người dân Việt Nam sẽ được sử dụng những thực phẩm, vật phẩm, trang thiết bị, đồ dùng thực sự sạch.</p>
-
-                  <p><img alt="" src="http://localhost:8000/uploads/1402088_993182534032142_8516326759306743892_o.jpg" style="height: auto; width: 548px;" class="img-responsive"></p>
-
-                  <p>Và đó cũng chính là lý do tôi xây dựng nên Trang Trại Trung Thực. Tiêu chí của chúng tôi là mỗi sản phẩm được bán ra sẽ có nguồn gốc rõ ràng, được nuôi, trồng bằng những nguồn thức ăn sạch, không sử dụng chất bảo quản, các loại hoá chất độc hại, thuốc trừ sâu, có kiểm định rõ ràng về chất lượng, đảm bảo không độc hại.</p>
-
-                  <p>Để đạt được những tiêu chí trên, trong tháng 4-5/2016, tôi đã đi thăm quan và học tập ở rất nhiều các trang trại khắp miền Bắc, miền Nam Việt Nam, cuối cùng, tôi quyết định chọn mô hình về một trang trại toàn diện, tự cung tự cấp. Cái gốc và xuất phát điểm tự cung tự cấp của trang trại sẽ là con giun quế. Giun quế là một loại giun có tốc độ sinh trưởng nhanh, có hàm lượng đạm cực cao, cao hơn cả cá biển. Và giun quế có thể sử dụng để làm nguồn thức ăn để nuôi gà, nuôi cá, lợn. Ngoài ra, phân của giun quế là loại phân vi sinh rất tốt cho cây trồng. Sử dụng phân giun quế sẽ có hàm lượng chất dinh dưỡng trong cây tốt, tránh được việc sử dụng các loại phân hoá học đang bán trên thị trường. Giun quế giống được nuôi ở Trang Trại Trung Thực có nguồn gốc từ châu Phi.</p>
-
-                  <p>Để xử lý môi trường, tôi đã tìm hiểu và quyết định xây hệ thống biogas. Toàn bộ chất thải từ lợn, gà sẽ được lắng qua bể lắng và đưa xuống hầm biogas. Hầm biogas sẽ sinh ra năng lượng đủ để nấu cám thức ăn cho gà, lợn và các nhu cầu chế biến thiết yếu khác của trang trại.</p>
+                   <?php
+                   echo ($product[0]->description);
+                  ?>
             </article>
             </section>
           </article>
@@ -164,6 +153,7 @@ loadsuppliers();
 
 function loadsuppliers() {
   jQuery("#tbSupp tbody").empty();
+  var unit = '{{$product[0]->unit}}';
   var id = {{$product[0]->id}};
   var url = '/api/products/suppliers/product_id='+id;
   $.ajaxSetup({ cache: false });
@@ -178,7 +168,7 @@ function loadsuppliers() {
                 newRowContent = newRowContent = '<tr>\r\n <td><input type=\"radio\" value=\"'+data.id+'\" name=\"farmerID\"><\/td>\r\n';
               }
 
-                                           newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+data.quantity_left+' kg<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem ngu\u1ED3n g\u1ED1c<\/a><\/td>\r\n                            <\/tr>';
+                                           newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+data.quantity_left+' '+unit+'<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem ngu\u1ED3n g\u1ED1c<\/a><\/td>\r\n                            <\/tr>';
               jQuery("#tbSupp tbody").append(newRowContent);
             });
      }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */

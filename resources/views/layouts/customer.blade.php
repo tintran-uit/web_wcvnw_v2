@@ -143,8 +143,8 @@
           <h4 class="modal-title email-icon" id="modalSigninLabel">{{ trans('head.login') }}</h4>
         </div>
         <div class="modal-body clearfix">
-          <div class="col-md-7 vcenter">
-<form action="{{url('')}}/admin/login" accept-charset="UTF-8" method="post" class="form-style-base">
+          <div class="col-xs-12 col-md-7 vcenter">
+<form action="{{url('')}}/admin/login" accept-charset="UTF-8" method="post" class="form-style-base" style="margin-top: 15px">
   {{ csrf_field() }}
   <fieldset>    <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                   <input type="email" class="form-control input-lg" name="email" placeholder="Enter email" value="{{ old('email') }}" />
@@ -181,7 +181,7 @@
 
 </form>
           </div>
-          <div class="col-md-5 vcenter">
+          <div class="hidden-xs col-md-5 vcenter" style="width:40%">
             <div class="text-center">
             <!-- <h4 class="no-margin-top">
               Use your social network<br>account to signin
@@ -194,10 +194,12 @@
           <a class="btn-social btn-twitter " href="#">  <i class="fa fa-twitter fa-1x"></i>
           </a>
             </div> -->
+            <img class="image-responsive" alt="Kids Store" src="{{url('')}}/assets/images/logo.png" style="height: 56px">
             <h5 class="no-margin-top">
               {{ trans('head.slogan1') }} <br>
               {{ trans('head.slogan2') }}
             </h5>
+
           </div>
 
           </div>
@@ -361,7 +363,7 @@
                            <div id="nav-sign" class="collapse navbar-collapse">
                               <ul class="nav navbar-nav">
                                  <li>
-                                    <a href="wishlist.html">                    <i class="fa fa-heart"></i>
+                                    <a>                    <i class="fa fa-heart"></i>
                                     </a>                
                                  </li>
                                  <li class="spacer-10">|</li>
@@ -385,12 +387,7 @@
                                        <!-- <li>
                                           <a href="account.html">Edit profile</a>
                                        </li>
-                                       <li>
-                                          <a href="cart.html">My orders</a>
-                                       </li>
-                                       <li>
-                                          <a href="#">Help & support</a>
-                                       </li> -->
+                                        -->
                                        <li>
                                           <a href="{{url('')}}/admin/logout">Log out</a>
                                        </li>
@@ -571,7 +568,64 @@
          </section>
          <!--Menu responsive-->
          <section class="visible-xs">
-            <nav class="navbar navbar-default navbar-fixed-top" style="    background-color: #f8f8f8; border-color: #e7e7e7;">
+            <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #f8f8f8; border-color: #e7e7e7;">
+              <div class="container" style="background-color: rgba(106,184,69, 0.5);">
+                <div class="col-xs-6 vcenter" style="font-style: 12px; color: #777">
+                 @if(!isset(Auth::user()->name)) 
+                    <button type="button" data-toggle="modal" data-target="#modal-signup">
+                    {{ trans('head.register') }}
+                    </button>
+                   <span class="spacer-10">|</span>
+                      <button type="button" data-toggle="modal" data-target="#modal-signin">
+                      {{ trans('head.login') }}
+                      </button>
+                   @else
+                   <li>
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down"></i>
+                      </a>          
+                      <ul class="dropdown-menu" role="menu">
+                         <!-- <li>
+                            <a href="account.html">Edit profile</a>
+                         </li>
+                          -->
+                         <li>
+                            <a href="{{url('')}}/admin/logout">Log out</a>
+                         </li>
+                      </ul>
+                  </li>
+                 @endif
+                 </div>
+                <div class="col-xs-5 vcenter">
+                  <div style="float: right; font-style: 12px; color: #777">
+                            @if(App::isLocale('vi'))
+                              <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/vi">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-vietnam.jpg" />
+                              <span id="country-lang">Tiếng Việt</span>
+                              <i class="fa fa-angle-down"></i>
+                              </a>              
+                              <ul class="dropdown-menu list-unstyled">
+                                 <li>
+                                    <a class="text-center" href="{{url('')}}/language/en"><img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
+                                      <span id="country-lang"> English</span>
+                                    </a>                
+                                 </li>
+                              </ul>
+                            @else
+                              <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/en">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
+                              <span id="country-lang">English</span>
+                              <i class="fa fa-angle-down"></i>
+                              </a>              
+                              <ul class="dropdown-menu list-unstyled">
+                                 <li>
+                                    <a class="text-center" href="{{url('')}}/language/vi"><img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-vietnam.jpg" />
+                                      <span id="country-lang">Tiếng Việt</span>
+                                    </a>                
+                                 </li>
+                              </ul>
+                            @endif
+                           </div>
+                </div>
+              </ul>
+              </div>
                <div class="container">
                   <!-- Brand and toggle get grouped for better mobile display -->
                   <div class="navbar-header">

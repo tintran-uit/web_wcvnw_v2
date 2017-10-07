@@ -92,9 +92,14 @@ class LoginController extends Controller
         // $this->defaultLogout($request);
         $this->defaultLogin($request);
 
-        $user = Auth::id();
+        $user = Auth::user();
+        if ($user['account_type'] == 'Admin') {
+            return redirect($this->redirectTo);
+        }elseif ($user['account_type'] == 'Farmer') {
+            return redirect('farmer/farmer-acc-item');
+        }
         // return $user;
         // And redirect to custom location
-        return redirect($this->redirectTo);
+        return redirect('/');
     }
 }

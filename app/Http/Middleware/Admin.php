@@ -19,7 +19,7 @@ class Admin
         if(Auth::check())
         {
             $user = $request->user();
-            if($user->account_type == 'Admin' || $user->account_type == 'Farmer')
+            if($user->account_type == 'Admin')
             {
                 return $next($request);
             }
