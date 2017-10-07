@@ -1,33 +1,34 @@
- <?php
+<?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Farmer;
 
+use App\Models\Image;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\BrandRequest as StoreRequest;
-use App\Http\Requests\BrandRequest as UpdateRequest;
+use App\Http\Requests\ProductRequest as StoreRequest;
+use App\Http\Requests\ProductRequest as UpdateRequest;
 
-class BrandCrudController extends CrudController
+class FarmerAccCrudController extends CrudController
 {
 
     public function setUp()
     {
 
         /*
-		|--------------------------------------------------------------------------
-		| BASIC CRUD INFORMATION
-		|--------------------------------------------------------------------------
-		*/
-        $this->crud->setModel("App\Models\Brand");
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/product-brand');
-        $this->crud->setEntityNameStrings('product brand', 'product brands');
+        |--------------------------------------------------------------------------
+        | BASIC CRUD INFORMATION
+        |--------------------------------------------------------------------------
+        */
+        $this->crud->setModel("App\Models\Farmer");
+        $this->crud->setRoute(config('backpack.base.route_prefix', 'farmer').'/farmer-acc-item');
+        $this->crud->setEntityNameStrings('farmer', 'farmers');
 
         /*
-		|--------------------------------------------------------------------------
-		| BASIC CRUD INFORMATION
-		|--------------------------------------------------------------------------
-		*/
+        |--------------------------------------------------------------------------
+        | BASIC CRUD INFORMATION
+        |--------------------------------------------------------------------------
+        */
 
 //        $this->crud->setFromDb();
         $this->crud->allowAccess('reorder');
@@ -36,59 +37,75 @@ class BrandCrudController extends CrudController
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
             'name' => 'name',
-            'label' => 'Name',
+            'label' => 'Tên',
         ]);
         $this->crud->addColumn([
-            'name' => 'slug',
-            'label' => 'Slug',
+            'name' => 'phone',
+            'label' => 'Điện Thoại',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'address',
+            'label' => 'Địa Chỉ',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'rating',
+            'label' => 'Điểm',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'rating_count',
+            'label' => 'Lượt đánh giá',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'photo',
+            'label' => 'Ảnh',
         ]);
 
         // ------ CRUD FIELDS
-        $this->crud->addField([
+         $this->crud->addField([
             'name' => 'name',
-            'label' => 'Name',
+            'label' => 'Tên',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ],
         ]);
-        $this->crud->addField([
-            'name' => 'slug',
-            'label' => 'Slug (URL)',
+
+       $this->crud->addField([    // TEXT
+            'name' => 'phone',
+            'label' => 'Điện Thoại',
             'type' => 'text',
-            'hint' => 'Will be automatically generated from your name, if left empty.',
-            // 'disabled' => 'disabled'
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ],
         ]);
-        
-        $this->crud->addField([    // TEXT
-            'name' => 'meta_title',
-            'label' => 'Meta Title',
+       $this->crud->addField([    // TEXT
+            'name' => 'address',
+            'label' => 'Địa Chỉ',
             'type' => 'text',
-            'placeholder' => 'Your meta title here',
-        ]);
-        $this->crud->addField([    // TEXT
-            'name' => 'meta_keywords',
-            'label' => 'Meta Keywords',
-            'type' => 'text',
-            'placeholder' => 'Your meta keywords here',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10'
+            ],
         ]);
         $this->crud->addField([   // WYSIWYG
-            'name' => 'meta_description',
-            'label' => 'Meta Description',
-            'type' => 'text',
-            'placeholder' => 'Your meta description here',
-        ]);
-        $this->crud->addField([   // WYSIWYG
-            'name' => 'description',
-            'label' => 'Category Description',
+            'name' => 'profile',
+            'label' => 'Thông Tin Nông Trại',
             'type' => 'ckeditor',
             'placeholder' => 'Your meta description here',
         ]);
 
-        $this->crud->addField([    // Image
-            'name' => 'image',
-            'label' => 'Image',
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'photo',
+            'label' => 'Ảnh Nông Dân',
             'type' => 'browse',
+            'placeholder' => 'Chọn hình ảnh cho sản phẩm',
         ]);
-        
+
+
         $this->crud->enableAjaxTable();
-        
+
+
+
+        // ------ CRUD FIELDS
+
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
@@ -154,21 +171,20 @@ class BrandCrudController extends CrudController
         // $this->crud->limit();
     }
 
-	public function store(StoreRequest $request)
-	{
-		// your additional operations before save here
-        $redirect_location = parent::storeCrud();
+    public function store(StoreRequest $request)
+    {
+        $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
-	}
+    }
 
-	public function update(UpdateRequest $request)
-	{
-		// your additional operations before save here
-        $redirect_location = parent::updateCrud();
+    public function update(UpdateRequest $request)
+    {
+        // your additional operations before save here
+        $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
-	}
+    }
 }
