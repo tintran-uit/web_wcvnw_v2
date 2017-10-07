@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Closure;
 
-class Admin
+class Farmer
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class Admin
         if(Auth::check())
         {
             $user = $request->user();
-            if($user->account_type == 'Admin' || $user->account_type == 'Farmer')
+            if($user->account_type == 'Farmer')
             {
                 return $next($request);
             }

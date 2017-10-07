@@ -37,6 +37,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 
 });
 
+
+Route::group(['prefix' => 'farmer', 'middleware' => ['web', 'farmer'], 'namespace' => 'Farmer'], function () {
+    // Backpack\MenuCRUD
+    CRUD::resource('farmer-acc-item', 'FarmerAccCrudController');
+    CRUD::resource('farmer-acc-farming', 'FarmingAccCrudController');
+    CRUD::resource('farmer-acc-trading', 'TradingAccCrudController');
+
+
+});
+
 // Route::get('/admin/order-item/additem/{order_id}', 'Admin\OrderCrudController@additem');
 /** CATCH-ALL ROUTE for Backpack/PageManager - needs to be at the end of your routes.php file  **/
 
