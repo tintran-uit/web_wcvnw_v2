@@ -910,6 +910,9 @@
         }
       }
 
+      function isFloat(n){
+          return Number(n) === n && n % 1 !== 0;
+      }
       // function converUnit(quantity, unit) {
       //   if(unit != 'g'){
       //     return quantity + ' ' + unit;
