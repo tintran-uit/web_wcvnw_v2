@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Farmer;
 
 use App\Models\Image;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Auth;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ProductRequest as StoreRequest;
@@ -33,27 +34,20 @@ class FarmerAccCrudController extends CrudController
 //        $this->crud->setFromDb();
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('name', 1);
+        $this->crud->addClause('where', 'id', Auth::user()->connected_id);
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Tên',
         ]);
-        $this->crud->addColumn([
+       $this->crud->addColumn([
             'name' => 'phone',
             'label' => 'Điện Thoại',
         ]);
         $this->crud->addColumn([
             'name' => 'address',
             'label' => 'Địa Chỉ',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'rating',
-            'label' => 'Điểm',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'rating_count',
-            'label' => 'Lượt đánh giá',
         ]);
         $this->crud->addColumn([
             'name' => 'photo',
@@ -66,8 +60,8 @@ class FarmerAccCrudController extends CrudController
             'label' => 'Tên',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-6'
-            ],
-        ]);
+            ]
+        ], 'update');
 
        $this->crud->addField([    // TEXT
             'name' => 'phone',
@@ -75,32 +69,32 @@ class FarmerAccCrudController extends CrudController
             'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-6'
-            ],
-        ]);
+            ]
+        ], 'update');
        $this->crud->addField([    // TEXT
             'name' => 'address',
             'label' => 'Địa Chỉ',
             'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-10'
-            ],
-        ]);
+            ]
+        ], 'update');
         $this->crud->addField([   // WYSIWYG
             'name' => 'profile',
             'label' => 'Thông Tin Nông Trại',
             'type' => 'ckeditor',
             'placeholder' => 'Your meta description here',
-        ]);
+        ], 'update');
 
         $this->crud->addField([   // WYSIWYG
             'name' => 'photo',
             'label' => 'Ảnh Nông Dân',
             'type' => 'browse',
             'placeholder' => 'Chọn hình ảnh cho sản phẩm',
-        ]);
+        ], 'update');
 
 
-        $this->crud->enableAjaxTable();
+        // $this->crud->enableAjaxTable();
 
 
 

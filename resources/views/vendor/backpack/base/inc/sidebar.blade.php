@@ -126,13 +126,13 @@
         <a href="#"><i class="fa fa-list"></i> <span>Tài Khoản Lương Nông</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
           <li><a href="{{url('')}}/farmer/farmer-acc-item"><i class="fa fa-star"></i> <span>Thông Tin Chung</span></a></li>
-          <li><a href="{{ url(config('backpack.base.route_prefix', 'farmer') . '/farmer-acc-farming') }}"><i class="fa fa-star"></i> <span>Các Mặt Hàng</span></a></li>
-          <li><a href="{{ url(config('backpack.base.route_prefix', 'farmer') . '/farmer-acc-trading') }}"><i class="fa fa-newspaper-o"></i> <span>Quầy Bán Hàng</span></a></li>
+          <li><a href="{{url('')}}/farmer/farmer-acc-farming"><i class="fa fa-star"></i> <span>Các Mặt Hàng</span></a></li>
+          <li><a href="{{url('')}}/farmer/farmer-acc-trading"><i class="fa fa-newspaper-o"></i> <span>Quầy Bán Hàng</span></a></li>
         </ul>
       </li>
           <!-- ======================================= -->
           <li class="header">{{ trans('backpack::base.user') }}</li>
-          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/logout') }}"><i class="fa fa-sign-out"></i> <span>Đăng Xuất</span></a></li>
+          <li><a href="{{url('')}}/farmer/logout') }}"><i class="fa fa-sign-out"></i> <span>Đăng Xuất</span></a></li>
         </ul>
       </section>
       <!-- /.sidebar -->
