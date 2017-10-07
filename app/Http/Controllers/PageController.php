@@ -99,7 +99,7 @@ class PageController extends Controller
     {
         
         $product = DB::select('SELECT p.`id` "id", p.`name` "name", p.`slug` "slug", p.`image` 
-            "image", p.`price` "price", p.`unit_quantity` "unit_quantity", p.`unit` "unit" FROM `products` p WHERE p.`slug` = ? ', [$slug]);
+            "image", p.`price` "price", p.`unit_quantity` "unit_quantity", p.`unit` "unit", p.`short_description` "short_description", p.`description` "description" FROM `products` p WHERE p.`slug` = ? ', [$slug]);
 
         if (!$product)
         {
