@@ -42,11 +42,6 @@ class BrandCrudController extends CrudController
             'name' => 'slug',
             'label' => 'Slug',
         ]);
-        $this->crud->addField([    // CHECKBOX
-            'name' => 'visible',
-            'label' => 'Visible Brand',
-            'type' => 'checkbox',
-        ]);
 
         // ------ CRUD FIELDS
         $this->crud->addField([

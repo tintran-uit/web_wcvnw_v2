@@ -34,7 +34,7 @@ class CartProductController extends Controller
         if($prod)
         {
             Cart::add([
-              'id' => $proID, 'name' => $prod[0]->name, 'qty' => $qty, 'price' => $prod[0]->price, 'options' => ['image' => $prod[0]->image,'farmer_id' => $farmerID, 'unit_quantity' => $prod[0]->unit_quantity, 'unit' => $prod[0]->unit]
+              'id' => $proID, 'name' => $prod[0]->name, 'qty' => $qty, 'price' => $prod[0]->price, 'options' => ['image' => $prod[0]->image,'farmer_id' => $farmerID, 'unit_quantity' => $prod[0]->unit_quantity, 'unit' => $prod[0]->unit, 'error' => 0]
             ]);
             return Cart::content();
         }else{
