@@ -98,7 +98,7 @@ class OrderController extends Controller
          	
 
 		}
-		// Cart::destroy();
+		Cart::destroy();
  		$msg['Cart'] = Cart::content();
        // return $order_id;
        	return response()->json($msg);

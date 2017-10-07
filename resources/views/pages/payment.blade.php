@@ -311,7 +311,7 @@ trước khi giao hàng!</p>
                            <div class="text-center">
                               <i class="fa fa-check fa-4x alert-success"></i>
                               <h3>Đặt hàng thành công!</h3>
-                              <p><b>Mã đơn đặt hàng: #34232323.</b><br>Cảm ơn bạn đã mua thực phẩm an toàn tại CFarm.vn.</p>
+                              <p><b>Mã đơn đặt hàng: #<span id="order_id"></span>.</b><br>Cảm ơn bạn đã mua thực phẩm an toàn tại CFarm.vn.</p>
                            </div>
                         </div>
 
@@ -495,6 +495,8 @@ trước khi giao hàng!</p>
             $('[href="#tab-3"]').tab('show');
             document.getElementById('btnStep').style.visibility = 'hidden';
             console.log(data);
+            document.getElementById("order_id").textContent=data.order_id;
+            updateCartStatus(data.Cart);
             
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
