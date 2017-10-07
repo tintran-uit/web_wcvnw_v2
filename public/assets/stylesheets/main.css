@@ -861,7 +861,15 @@ a {
   margin: 0;
   padding: 0;
   background: #f5f5f5;
-  color: #000; }
+  color: #808080 ; }
+
+#pre-header #nav-sign .nav > li > button, #pre-header #nav-sign .nav > li > a{
+    color: #808080 ;
+  }
+
+#pre-header .language > a{
+    color: #808080 ;
+  }
 
 /* line 8, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/header/_header.scss */
 #button-nav-mobile .navbar-toggle {
