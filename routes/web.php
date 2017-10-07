@@ -56,6 +56,10 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->back();
 });
 
+Route::get('s', function () {
+    Session::flush();
+});
+
 Route::get('/kinh-nghiem-mua-thuc-pham-sach/post_id={post_id}', 'PageController@getPost');
 
 Route::get('/kinh-nghiem-mua-thuc-pham-sach/blog_id={blog_id}', 'PageController@showBlog');
