@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             // \App\Http\Middleware\RedirectIfAuthenticated::class,
+            \App\Http\Middleware\RoleMiddleware::class,
         ],
 
         'api' => [
@@ -41,6 +42,10 @@ class Kernel extends HttpKernel
 
         'role' => [
             \App\Http\Middleware\RoleMiddleware::class,
+        ],
+
+        'admin' => [
+            \App\Http\Middleware\Admin::class,
         ],
         
     ];
