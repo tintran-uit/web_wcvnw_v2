@@ -154,6 +154,7 @@ $style = [
                                                         </p>
 
                                                         <p style="{{ $style['paragraph-sub'] }}">
+                                                            <?php $actionUrl = trim($actionUrl,"admin/"); ?>
                                                             <a style="{{ $style['anchor'] }}" href="{{ $actionUrl }}" target="_blank">
                                                                 {{ $actionUrl }}
                                                             </a>
