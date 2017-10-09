@@ -58,6 +58,16 @@ class PageController extends Controller
         $this->data['menu'] = MenuItem::all();
         $this->data['cart'] = Cart::content();
 
+        // foreach ($this->data['cart'] as $item) {
+        //     if($item->rowId == '82912d227e2689bd28dfe27b449abc2a')
+        //     {
+        //         $item->options["error"] = 1;
+        //         Cart::update($item->rowId, $item->options["error"]);
+        //     }
+            
+        // }
+
+
         //danh sach san pham
         if ($slug == 'mua-thuc-pham-sach') {
             $this->data['isShop'] = '1';
