@@ -104,6 +104,7 @@ $style = [
 
                                         <!-- Action Button -->
                                         @if (isset($actionText))
+                                        <?php $actionUrl = str_replace("admin/","",$actionUrl);?>
                                             <table style="{{ $style['body_action'] }}" align="center" width="100%" cellpadding="0" cellspacing="0">
                                                 <tr>
                                                     <td align="center">
@@ -154,7 +155,7 @@ $style = [
                                                         </p>
 
                                                         <p style="{{ $style['paragraph-sub'] }}">
-                                                            <?php $actionUrl = str_replace("admin/","",$actionUrl);?>
+
                                                             <a style="{{ $style['anchor'] }}" href="{{ $actionUrl }}" target="_blank">
                                                                 {{ $actionUrl }}
                                                             </a>
