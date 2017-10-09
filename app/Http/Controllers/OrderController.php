@@ -78,12 +78,12 @@ class OrderController extends Controller
 			
 			//receive numbers and check if quantity_left is >= order quantity
 			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
-			var_dump($qty);die();
+			
 			if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
 			{
 				$item->options["error"] = 1;
-				var_dump($item);die();
-				Cart::update($item->rowId, $item);
+				// var_dump($item);die();
+				Cart::update($item->rowId, $item->options["error"]);
 			}
 			else{
 				$quantity = $qty * $numbers[0]->unit_quantity;
@@ -98,7 +98,7 @@ class OrderController extends Controller
          	
 
 		}
-		// Cart::destroy();
+		Cart::destroy();
  		$msg['Cart'] = Cart::content();
        // return $order_id;
        	return response()->json($msg);

@@ -21,7 +21,7 @@ class FarmingAccCrudController extends CrudController
 		|--------------------------------------------------------------------------
 		*/
         $this->crud->setModel("App\Models\Farming");
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'farmer').'/farmer-acc-farming');
+        $this->crud->setRoute('farmer'.'/farmer-acc-farming');
         $this->crud->setEntityNameStrings('farming', 'farmings');
 
         /*
