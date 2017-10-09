@@ -3099,6 +3099,10 @@ a.dropdown-toggle:hover{
   /*color: #A52223;*/
 }
 
+.row-error{
+  background-color: #C04724;
+}
+
 
 
 

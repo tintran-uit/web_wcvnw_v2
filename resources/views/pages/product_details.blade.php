@@ -34,7 +34,7 @@
                   {{$product[0]->name}}
                 </h2>
                 <br>
-                {{$product[0]->short_description}}
+                <?php echo($product[0]->short_description); ?>
                 <div class="product-options">
                   <section class="choose">
                     <h5 class="col-sm-12">

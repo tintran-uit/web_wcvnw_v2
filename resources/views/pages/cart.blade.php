@@ -57,7 +57,7 @@
                               </thead>
                               <tbody>
                               @foreach($cart as $item)
-                                 <tr>
+                                 <tr class="@if($item->options['error'] == '1'){{'row-error'}}@endif">
                                     <td class="align-middle">
                                        <img class="img-responsive center-block extra-small-img" alt="product" src="{{url('')}}/{{$item->options->image}}">
                                                          

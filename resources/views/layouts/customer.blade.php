@@ -176,7 +176,7 @@
                 </button>
 </fieldset>
               <div class="small text-center spacer-bottom-10">
-                <a class="btn-link" href="reset-password.html">Quên mật khẩu?</a>
+                <a class="btn-link" href="">Quên mật khẩu?</a>
               </div>
 
 </form>
