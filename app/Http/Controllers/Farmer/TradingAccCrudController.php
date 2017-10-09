@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Farmer;
 
 use App\Models\Image;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Auth;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ProductRequest as StoreRequest;
@@ -21,7 +22,7 @@ class TradingAccCrudController extends CrudController
 		|--------------------------------------------------------------------------
 		*/
         $this->crud->setModel("App\Models\Trading");
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'farmer').'/farmer-acc-trading');
+        $this->crud->setRoute('farmer'.'/farmer-acc-trading');
         $this->crud->setEntityNameStrings('trading', 'tradings');
 
         /*
@@ -31,8 +32,9 @@ class TradingAccCrudController extends CrudController
 		*/
 
 //        $this->crud->setFromDb();
-        $this->crud->allowAccess('reorder');
-        $this->crud->enableReorder('name', 1);
+        // $this->crud->allowAccess('reorder');
+        // $this->crud->enableReorder('name', 1);
+        $this->crud->addClause('where', 'farmer_id', Auth::user()->connected_id);
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
