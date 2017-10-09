@@ -12,8 +12,19 @@ class CartProductController extends Controller
     public function updateCart(Request $request)
     {
         $data = $request->data;
-        Cart::update($data['rowId'], $data['qty']);
-        return Cart::content();
+        $prodID = $data['prodID'];
+        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image", p.`unit_quantity` "unit_quantity", p.`unit` "unit" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`capacity` - td.`sold` >= ?', [$proID, $farmerID, $qty]);
+        if($prod)
+        {
+            Cart::update($data['rowId'], $data['qty']);
+            return Cart::content();
+        }else{
+            return response()->json([
+                'error' => 1,
+                'status' => 'Sản lượng không đủ. Vui lòng chọn sản phẩm khác.'
+            ]);
+        }
+        
     }
 
     public function deleteItem(Request $request)

@@ -169,7 +169,7 @@ $(document).ready(function() {
          price = parseInt(price)*msg;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
          var rowId = table.row(row).data()[6];
-         updateCart(rowId, msg, unit_quantity, unit);
+         updateCart(rowId, msg, prodID, unit_quantity, unit);
       });
     table.on( 'click', 'span.down' , function () {
          var msg;
@@ -188,7 +188,7 @@ $(document).ready(function() {
          price = parseInt(price)*msg;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
          var rowId = table.row(row).data()[6];
-         updateCart(rowId, msg, unit_quantity, unit);
+         updateCart(rowId, msg, prodID, unit_quantity, unit);
       });
    
    table.on( 'click', 'a.item-delete' , function () {
@@ -201,11 +201,11 @@ $(document).ready(function() {
         .draw();
    });
 
-    function updateCart(rowId, qty, unit_quantity, unit) {
+    function updateCart(rowId, qty, prodID, unit_quantity, unit) {
       console.log(qty)
 
 
-      var markers = { "rowId": rowId, "qty": qty };
+      var markers = { "rowId": rowId, "qty": qty, "prodID": prodID };
 
       $.ajax({
 
