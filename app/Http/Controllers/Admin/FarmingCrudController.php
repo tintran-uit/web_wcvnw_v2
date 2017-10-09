@@ -58,6 +58,7 @@ class FarmingCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'unit',
             'label' => 'Đơn vị',
+            'default'    => 'kg',
         ]);
 
         $this->crud->addColumn([
@@ -106,6 +107,7 @@ class FarmingCrudController extends CrudController
             'name' => 'unit',
             'label' => 'Đơn vị',
             'type' => 'text',
+            'default'    => 'kg',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
@@ -124,6 +126,7 @@ class FarmingCrudController extends CrudController
             'name' => 'status',
             'label' => 'Trạng Thái',
             'type' => 'text',
+            'default'    => '0',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
