@@ -176,7 +176,7 @@
                 </button>
 </fieldset>
               <div class="small text-center spacer-bottom-10">
-                <a class="btn-link" href="">Quên mật khẩu?</a>
+                <a class="btn-link" data-toggle="modal" data-target="#modal-reset-psw" href="" data-dismiss="modal">Quên mật khẩu?</a>
               </div>
 
 </form>
@@ -280,7 +280,7 @@
                 </button>
               </div>
               <p class="text-center small no-margin">
-                Bạn đã có tài khoản? <a class="btn-link" href="signin.html">{{ trans('head.login') }}</a>
+                Bạn đã có tài khoản? <a class="btn-link" data-toggle="modal" data-target="#modal-signin" href="" data-dismiss="modal">{{ trans('head.login') }}</a>
               </p>
 </form>          </div>
           <!-- <div class="col-md-5 spacer-30">
@@ -300,6 +300,37 @@
 
           </div> -->
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal reset psw -->
+<div class="modal fade style-base-modal" id="modal-reset-psw" tabindex="-1" role="dialog" aria-labelledby="modalResetPsw" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="inner-container">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">
+              <i class="fa fa-times"></i>
+            </span>
+          </button>
+          <h4 class="modal-title email-icon" id="modalResetPsw">{{ trans('head.reswtpass') }}</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            {{ trans('head.reswtpass_status') }}
+          </p>
+<form action="{{ url('admin/password/email') }}" role="form" method="POST" class="form-style-base">{{ csrf_field() }}  <fieldset>              <div class="row clearfix">
+                <div class="form-group col-sm-9">
+                  <input type="email" class="form-control input-lg" placeholder="Enter email" name="email" value="{{ old('email') }}"/>
+                </div>
+                <div class="col-sm-3">
+                  <input type="submit" value="SEND" class="btn btn-warning no-margin btn-block" />
+                </div>
+              </div>
+</fieldset></form>        </div>
       </div>
     </div>
   </div>

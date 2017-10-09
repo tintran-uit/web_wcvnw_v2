@@ -11,6 +11,10 @@
 |
 */
 
+// Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function () {
+//     Route::post('email', 'ResetPasswordController');
+// });
+
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace' => 'Admin'], function () {
@@ -76,5 +80,7 @@ Route::get('{page}/{subs?}', ['uses' => 'PageController@page'])
 
 
 
+
+Route::get('/home', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index');
