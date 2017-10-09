@@ -105,6 +105,7 @@ class ProductCrudController extends CrudController
             'name' => 'unit',
             'label' => 'Đơn Vị Tính',
             'type' => 'text',
+            'default'    => 'kg',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
