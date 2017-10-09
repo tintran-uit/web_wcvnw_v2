@@ -144,7 +144,7 @@
         </div>
         <div class="modal-body clearfix">
           <div class="col-xs-12 col-md-7 vcenter">
-<form action="{{url('')}}/login" accept-charset="UTF-8" method="post" class="form-style-base" style="margin-top: 15px">
+<form action="{{url('')}}/admin/login" accept-charset="UTF-8" method="post" class="form-style-base" style="margin-top: 15px">
   {{ csrf_field() }}
   <fieldset>    <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                   <input type="email" class="form-control input-lg" name="email" placeholder="Enter email" value="{{ old('email') }}" />
@@ -224,7 +224,7 @@
         </div>
         <div class="modal-body clearfix">
           <div class="col-md-12 no-padding">
-<form action="{{url('')}}/register" accept-charset="UTF-8" method="post" class="form-style-base">              
+<form action="{{url('')}}/admin/register" accept-charset="UTF-8" method="post" class="form-style-base">              
 {{ csrf_field() }}   
                <div class="form-group">
                 <input type="email" class="form-control input-lg" placeholder="Email" name="email"/>
@@ -322,7 +322,7 @@
           <p>
             {{ trans('head.reswtpass_status') }}
           </p>
-<form action="{{ url('password/email') }}" role="form" method="POST" class="form-style-base">{{ csrf_field() }}  <fieldset>              <div class="row clearfix">
+<form action="{{ url('admin/password/email') }}" role="form" method="POST" class="form-style-base">{{ csrf_field() }}  <fieldset>              <div class="row clearfix">
                 <div class="form-group col-sm-9">
                   <input type="email" class="form-control input-lg" placeholder="Enter email" name="email" value="{{ old('email') }}"/>
                 </div>
