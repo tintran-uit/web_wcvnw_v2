@@ -22,7 +22,7 @@ class TradingAccCrudController extends CrudController
 		|--------------------------------------------------------------------------
 		*/
         $this->crud->setModel("App\Models\Trading");
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'farmer').'/farmer-acc-trading');
+        $this->crud->setRoute('farmer'.'/farmer-acc-trading');
         $this->crud->setEntityNameStrings('trading', 'tradings');
 
         /*
@@ -34,7 +34,6 @@ class TradingAccCrudController extends CrudController
 //        $this->crud->setFromDb();
         // $this->crud->allowAccess('reorder');
         // $this->crud->enableReorder('name', 1);
-        $this->crud->denyAccess(['create']);
         $this->crud->addClause('where', 'farmer_id', Auth::user()->connected_id);
 
         // ------ CRUD COLUMNS

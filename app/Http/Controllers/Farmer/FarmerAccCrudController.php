@@ -22,7 +22,7 @@ class FarmerAccCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel("App\Models\Farmer");
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'farmer').'/farmer-acc-item');
+        $this->crud->setRoute('farmer'.'/farmer-acc-item');
         $this->crud->setEntityNameStrings('farmer', 'farmers');
 
         /*
@@ -32,9 +32,11 @@ class FarmerAccCrudController extends CrudController
         */
 
 //        $this->crud->setFromDb();
-        $this->crud->allowAccess('reorder');
-        $this->crud->enableReorder('name', 1);
+        // $this->crud->allowAccess('reorder');
+        // $this->crud->enableReorder('name', 1);
         $this->crud->addClause('where', 'id', Auth::user()->connected_id);
+        $this->crud->denyAccess(['create']);
+
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
