@@ -51,6 +51,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       @yield('headInput')
+       
    </head>
    <body class="index">
       <div id="chat" class="box-chat col-sm-5 col-md-4 col-lg-2 hidden-xs">
@@ -935,7 +936,7 @@
       function checkActiveMenu() {
         // var interest = $('ul#mainMN').find('li.active');
         var interest = $('ul#mainMN li.active a').html();
-        console.log(interest);
+        // console.log(interest);
         if(interest == null){
           $('#litrangchu').addClass("active");
         }

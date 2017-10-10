@@ -54,12 +54,12 @@
    </div>
 </section>
 <!-- insert background-color bg-light in the section container and class space-divider -->
-<section class="subscribe-type-one spacer-30">
+<!-- <section class="subscribe-type-one spacer-30">
    <div class="container">
-          <!-- <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2> -->
+          <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2>
    </div>
-</section>
-<section id="category-content">
+</section> -->
+<section id="category-content" style="margin-top: 25px">
    <div class="container">
       
       <section class="text-center spacer-bottom-20">

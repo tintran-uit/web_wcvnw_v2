@@ -87,6 +87,8 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        // return $request->data['email'];
+        // var_dump($this->data);die();
         // echo "string"; die();
         // Do the default logout procedure
         // $this->defaultLogout($request);

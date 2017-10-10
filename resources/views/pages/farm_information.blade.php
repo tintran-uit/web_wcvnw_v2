@@ -149,19 +149,19 @@ body .popover {
                <article class="internal-padding wrap-radius bg-white style-post animated fadeInDown">
                      <div class="well profile_view">
                         <div class="col-sm-12">
-                           <h4 class="brief"><i>Nông trại chị Yến Mạnh Bạo</i><img class="img_nhanchungnhan" style="height: 25px; margin-left: 10px;" src="{{url('')}}/assets/images/icons/icon-tick.png"></h4>
+                           <h4 class="brief"><i>Nông trại anh Nam Bảo Lộc</i><img class="img_nhanchungnhan" style="height: 25px; margin-left: 10px;" src="{{url('')}}/assets/images/icons/icon-tick.png"></h4>
                            <div class="left col-xs-7">
                               <h2>Thông tin lương nông</h2>
-                              <p><i class="fa fa-stack-overflow" aria-hidden="true"></i> <strong>Sản Phẩm: </strong> Gà thả vườn, rau hữu cơ</p>
+                              <p><i class="fa fa-stack-overflow" aria-hidden="true"></i> <strong>Sản Phẩm: </strong> Rau hữu cơ</p>
                               <ul class="list-unstyled">
-                                 <li><i class="fa fa-phone"></i> <strong>Địa chỉ: </strong>Huyện Gò Công - Tỉnh Tiền Giang</li><li><i class="fa fa-heart" aria-hidden="true"></i> <strong>Cam kết: </strong>Bất chấp nuôi trồng sạch</li>
+                                 <li><i class="fa fa-phone"></i> <strong>Địa chỉ: </strong>Huyện Bảo Lộc - Tỉnh Lâm Đồng</li><li><i class="fa fa-heart" aria-hidden="true"></i> <strong>Cam kết: </strong>Luôn như vậy</li>
                               </ul>
                            </div>
-                           <div class="right col-xs-5 text-center"> <img src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.0-9/21730818_1954726744807818_4698076099882093378_n.jpg?oh=4a69e9ef072b33cfa065529bbe0d51c0&oe=5A3EBE54" alt="" class="img-circle img-responsive"></div>
+                           <div class="right col-xs-5 text-center"> <img src="{{url('')}}/uploads/farmers/IMG_7027.jpg?_=1507628697" alt="" class="img-circle img-responsive"></div>
                         </div>
                         <div class="col-xs-12 bottom text-center">
                            <div class="col-xs-12 col-sm-7 emphasis">
-                              <div id="colorstar" class="starrr ratable"><p class="ratings"> <a style="color: #ee8b2d; font-weight: 800;">4.65</a> <a href="#"><span class="glyphicon glyphicon-star fa-lg" style="color: #ee8b2d"></span></a></p></div>
+                              <div id="colorstar" class="starrr ratable"><p class="ratings"> <a style="color: #ee8b2d; font-weight: 800;">4.25</a> <a href="#"><span class="glyphicon glyphicon-star fa-lg" style="color: #ee8b2d"></span></a></p></div>
                            </div>
                            <div class="col-xs-12 col-sm-5 emphasis"> <button type="button" class="btn btn-success btn-xs"> <i class="fa fa-heart"></i> </button> <button type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user"></i> Xem nông trại </button></div>
                         </div>
@@ -174,8 +174,8 @@ body .popover {
                         <a href="#">        <span aria-hidden="true" class="fa fa-chevron-left"></span>
                         </a>    
                      </li>
-                     <li><a href="#">1</a></li>
-                     <li class="active"><a href="#">2</a></li>
+                     <li><a href="active">1</a></li>
+                     <li class="#"><a href="#">2</a></li>
                      <li><a href="#">3</a></li>
                      <li><a href="#">4</a></li>
                      <li><a href="#">5</a></li>
