@@ -989,8 +989,8 @@
               $('#modal-reset-psw').modal('show');
             @endif
           @endif
-              $('#modal-reset-psw').modal('show');
           @if (session('status'))
+              $('#modal-reset-psw').modal('show');
                         
           @endif
        </script>
