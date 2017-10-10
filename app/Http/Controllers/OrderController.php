@@ -95,10 +95,6 @@ class OrderController extends Controller
 			$farmer_id = $item->options["farmer_id"];
 			$price = $item->price;
 			$qty = $item->qty;
- 		// var_dump($qty);die();
-
-			// $quantity = $item->qty;
-			// $unit, quantity;
 			
 			//receive numbers and check if quantity_left is >= order quantity
 			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
