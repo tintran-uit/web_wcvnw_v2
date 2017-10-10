@@ -6,6 +6,7 @@ use Backpack\Base\app\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use Session;
 
 class LoginController extends Controller
 {
@@ -87,8 +88,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        // return $request->data['email'];
-        // var_dump($this->data);die();
+        Session::set('modal', 'login');
         // echo "string"; die();
         // Do the default logout procedure
         // $this->defaultLogout($request);

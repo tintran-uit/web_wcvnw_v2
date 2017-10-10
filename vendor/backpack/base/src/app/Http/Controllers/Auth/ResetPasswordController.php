@@ -5,6 +5,7 @@ namespace Backpack\Base\app\Http\Controllers\Auth;
 use Backpack\Base\app\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
+use Session
 
 class ResetPasswordController extends Controller
 {
@@ -31,7 +32,6 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-
         // where to redirect after password was reset
         $this->redirectTo = property_exists($this, 'redirectTo') ? $this->redirectTo : config('backpack.base.route_prefix', 'admin').'/dashboard';
     }

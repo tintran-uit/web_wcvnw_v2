@@ -5,6 +5,7 @@ namespace Backpack\Base\app\Http\Controllers\Auth;
 use Backpack\Base\app\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Session;
 use Validator;
 
 class RegisterController extends Controller
@@ -31,7 +32,6 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-
         // Where to redirect users after login / registration.
         $this->redirectTo = property_exists($this, 'redirectTo') ? $this->redirectTo
             : config('backpack.base.route_prefix', 'dashboard');
@@ -49,7 +49,8 @@ class RegisterController extends Controller
         $user_model_fqn = config('backpack.base.user_model_fqn');
         $user = new $user_model_fqn();
         $users_table = $user->getTable();
-
+        Session::set('modal', 'register');
+        
         return Validator::make($data, [
                 'name'     => 'required|max:255',
                 'email'    => 'required|email|max:255|unique:'.$users_table,

@@ -4,6 +4,7 @@ namespace Backpack\Base\app\Http\Controllers\Auth;
 
 use Backpack\Base\app\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Session;
 
 class ForgotPasswordController extends Controller
 {
@@ -29,6 +30,9 @@ class ForgotPasswordController extends Controller
      */
     public function __construct()
     {
+    Session::set('modal', 'resetspasswords');
+        
+        // die();
         $this->middleware('guest');
     }
 
@@ -43,6 +47,7 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
+
         $this->data['title'] = trans('backpack::base.reset_password'); // set the page title
 
         return view('backpack::auth.passwords.email', $this->data);

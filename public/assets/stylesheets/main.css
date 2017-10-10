@@ -1234,9 +1234,11 @@ a {
       background-color: #f7f7f7; }
   /* line 46, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_style-form.scss */
   .form-style-base .form-group.has-error .form-control {
-    border-color: #b50000; }
+    border-color: #b50000 !important; }
     .form-style-base .form-group.has-error .selecter .selecter-selected{
-    border-color: #b50000; }
+    border-color: #b50000 !important; }
+    .form-style-base .form-group.has-error .input-group .input-group-addon{
+    border-color: #b50000 !important; }
   /* line 50, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_style-form.scss */
   .form-style-base .form-group .selecter {
     max-width: 100%;
