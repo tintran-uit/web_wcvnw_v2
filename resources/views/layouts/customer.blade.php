@@ -51,7 +51,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       @yield('headInput')
-       
+
    </head>
    <body class="index">
       <div id="chat" class="box-chat col-sm-5 col-md-4 col-lg-2 hidden-xs">
@@ -227,7 +227,7 @@
           <div class="col-md-12 no-padding">
 <form action="{{url('')}}/admin/register" accept-charset="UTF-8" method="post" class="form-style-base">              
 {{ csrf_field() }}   
-               <div class="form-group">
+               <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                 <input type="email" class="form-control input-lg" placeholder="Email" name="email"/>
                 @if ($errors->has('email'))
                     <span class="help-block">
@@ -236,37 +236,40 @@
                 @endif
               </div>
 
+              <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="fa fa-user"></i>
                 </span>
                 <input type="text" class="form-control input-lg" name="name" placeholder="Tên {{ trans('head.login') }}" />
-                 @if ($errors->has('name'))
+              </div>
+              @if ($errors->has('name'))
                       <span class="help-block">
                           <strong>{{ $errors->first('name') }}</strong>
                       </span>
                   @endif
-              </div>
-
+            </div>
+            <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="fa fa-unlock-alt"></i>
                 </span>
                 <input type="password" class="form-control input-lg" placeholder="Mật khẩu" name="password"/>
-                @if ($errors->has('password'))
+              </div>
+              @if ($errors->has('password'))
                     <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif
-              </div>
-
+            </div>
+            <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="fa fa-unlock-alt"></i>
                 </span>
                 <input type="password" class="form-control input-lg" placeholder="Nhập lại mật khẩu" name="password_confirmation"/>
               </div>
-
+            </div>
               <div class="required-fields text-right spacer-bottom-5">
                 Vui lòng nhập thông tin
               </div>
@@ -323,9 +326,19 @@
           <p>
             {{ trans('head.reswtpass_status') }}
           </p>
+          @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 <form action="{{ url('admin/password/email') }}" role="form" method="POST" class="form-style-base">{{ csrf_field() }}  <fieldset>              <div class="row clearfix">
-                <div class="form-group col-sm-9">
+                <div class="form-group col-sm-9{{ $errors->has('email') ? ' has-error' : '' }}">
                   <input type="email" class="form-control input-lg" placeholder="Enter email" name="email" value="{{ old('email') }}"/>
+                  @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                 </div>
                 <div class="col-sm-3">
                   <input type="submit" value="SEND" class="btn btn-warning no-margin btn-block" />
@@ -962,5 +975,16 @@
 
       // }
       </script>
+      <script type="text/javascript">
+         @if ($errors->has('email'))
+            @if(Session::get('modal')=='login')
+              $('#modal-signin').modal('show');
+            @elseif(Session::get('modal')=='register')
+              $('#modal-signup').modal('show');
+            @elseif(Session::get('modal')=='resetspasswords')
+              $('#modal-reset-psw').modal('show');
+            @endif
+          @endif
+       </script>
    </body>
 </html>
