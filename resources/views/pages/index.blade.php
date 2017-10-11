@@ -10,11 +10,11 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
          <div class="item active">
-            <a href="#">          <img alt="slide" src="assets/images/slides/slide1.jpg" />
+            <a href="#">          <img alt="slide" src="assets/images/slides/Artboard1.png" />
             </a>      
          </div>
          <div class="item">
-            <a href="#">          <img alt="slide" src="assets/images/slides/slide3.jpg" />
+            <a href="#">          <img alt="slide" src="assets/images/slides/Artboard2.png" />
             </a>        
             <div class="label-slide hidden-sm hidden-xs slideInDown animated">
                <div>
@@ -26,14 +26,14 @@
             </div>
          </div>
          
-         <div class="item">
+         <!-- <div class="item">
             <a href="#">          <img alt="slide" src="assets/images/slides/slide2.jpg" />
             </a>        
             <div class="carousel-caption">
                <h3>Didascalia</h3>
                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             </div>
-         </div>
+         </div> -->
       </div>
       <!-- end -->
       <!-- Indicatori di posizione -->
@@ -54,12 +54,12 @@
    </div>
 </section>
 <!-- insert background-color bg-light in the section container and class space-divider -->
-<section class="subscribe-type-one spacer-30">
+<!-- <section class="subscribe-type-one spacer-30">
    <div class="container">
-          <!-- <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2> -->
+          <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2>
    </div>
-</section>
-<section id="category-content">
+</section> -->
+<section id="category-content" style="margin-top: 25px">
    <div class="container">
       
       <section class="text-center spacer-bottom-20">
