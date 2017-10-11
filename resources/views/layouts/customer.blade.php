@@ -323,14 +323,15 @@
           <h4 class="modal-title email-icon" id="modalResetPsw">{{ trans('head.reswtpass') }}</h4>
         </div>
         <div class="modal-body">
-          <p>
-            {{ trans('head.reswtpass_status') }}
-          </p>
+          
           @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
-                    @endif
+          @else
+          <p>
+            {{ trans('head.reswtpass_status') }}
+          </p>
 <form action="{{ url('admin/password/email') }}" role="form" method="POST" class="form-style-base">{{ csrf_field() }}  <fieldset>              <div class="row clearfix">
                 <div class="form-group col-sm-9{{ $errors->has('email') ? ' has-error' : '' }}">
                   <input type="email" class="form-control input-lg" placeholder="Enter email" name="email" value="{{ old('email') }}"/>
@@ -344,7 +345,10 @@
                   <input type="submit" value="SEND" class="btn btn-warning no-margin btn-block" />
                 </div>
               </div>
-</fieldset></form>        </div>
+</fieldset></form>    
+          @endif
+    
+</div>
       </div>
     </div>
   </div>
@@ -984,6 +988,10 @@
             @elseif(Session::get('modal')=='resetspasswords')
               $('#modal-reset-psw').modal('show');
             @endif
+          @endif
+              $('#modal-reset-psw').modal('show');
+          @if (session('status'))
+                        
           @endif
        </script>
    </body>
