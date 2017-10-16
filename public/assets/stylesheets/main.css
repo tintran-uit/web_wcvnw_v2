@@ -33,7 +33,7 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
 }
 
 #mainMN {
-    font-family: CaviarDreams_Bold !important;
+    /*font-family: CaviarDreams_Bold !important;*/
     font-size: 15px !important;
     /*background-image: url(/assets/images/thuc-pham-sach-banner.png);*/
 }
@@ -909,6 +909,8 @@ a {
   left: 0; }
   /* line 8, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/header/_nav.scss */
   .dropdown-main-nav .dropdown-menu li a, .dropdown-main-nav .dropdown-menu li button {
+    font-family: Reso_Regular;
+    font-size: 16px;
     text-align: left;
     color: #000;
     display: inline-block;
@@ -2391,8 +2393,9 @@ a {
   border-color: #eeeeee; }
   /* line 5, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/banner/_style-block.scss */
   .single-block .title-box {
-    font-size: 19px;
-    margin-bottom: 13px; }
+    font-size: 16px;
+    margin-bottom: 13px;
+    font-weight: 600; }
   /* line 11, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/banner/_style-block.scss */
   .single-block .copy-box {
     color: #9CCB3B; }
@@ -3107,6 +3110,13 @@ a.dropdown-toggle:hover{
   background-color: #C04724;
 }
 
+.content{
+  padding: 10px 30px;
+}
+.content h2{
+  color: #A52223;
+  /*margin: 15px;*/
+}
 
 
 

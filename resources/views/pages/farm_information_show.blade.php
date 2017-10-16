@@ -13,10 +13,7 @@
         -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.3);
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.3);
 }
-.profile_view:hover {
-    -webkit-box-shadow: 0 14px 12px 0 rgba(0,0,0,0.17),0 10px 20px 0 rgba(0,0,0,0.3);
-    box-shadow: 0 14px 12px 0 rgba(0,0,0,0.17),0 10px 20px 0 rgba(0,0,0,0.3);    
-}
+
 .well.profile_view {
     padding: 10px 0 0;
 }
@@ -72,9 +69,10 @@
 }
 
 .well.profile_view h2 {
-    margin: 5px 0;
-    font-size:14px;
+    margin: 5px 0px 20px;
+    font-size:16px;
     font-weight:bold;
+    padding: 10px 0px 20px;
 }
 
 .well.profile_view .ratings {
@@ -107,11 +105,29 @@ body .popover {
    <section class="spacer-20">
       <div class="container">
          <div class="row">
-            <aside class="col-sm-5 col-md-4 col-lg-3">
-              <section class="single-block bg-white wrap-radius">
+            
+            <section class="col-md-10 col-lg-9">
+               <article class="internal-padding wrap-radius bg-white style-post animated fadeInDown">
+                     <div class="well profile_view">
+
+                        <div class="content">
+                          <h2 class="title-box no-margin" style="">
+                          {{$farmer[0]->name}}
+                          <div id="colorstar" class="starrr ratable"><p class="ratings"> <a style="color: #ee8b2d; font-weight: 800;"><?php echo sprintf("%.2f", $farmer[0]->rating/100); ?></a> <a href="#"><span class="glyphicon glyphicon-star fa-lg" style="color: #ee8b2d"></span></a></p></div>
+                        </h2>
+                        <div id="article" style="padding: 0">
+                          <?php echo($farmer[0]->profile);  ?>
+                        </div>
+                        </div>
+                        
+                     </div>
+               </article>
+               
+            </section>
+            <aside class="col-lg-3 hidden-sm hidden-md">
+              <!-- <section class="single-block bg-white wrap-radius">
                   <div class="">
-                     <!--icon-email, icon-discount, icon-shipping-->
-                     <h4 class="title-box text-uppercase no-margin-top" style="">
+                     <h4 class="title-box text-uppercase no-margin-top" style="font-size: 16px;">
                         QUY TRÌNH TUYỂN CHỌN LƯƠNG NÔNG <img class="img_nhanchungnhan" style="height: 25px; margin-left: 10px;" src="{{url('')}}/assets/images/icons/icon-tick.png">
                      </h4>
                      <a href="#" data-toggle="popover2" data-full="{{url('')}}/assets/images/banner/banner-nong-dan san suat-sach-cfarm.png">
@@ -122,53 +138,7 @@ body .popover {
                         <a class="btn btn-link no-margin" href="#">CHI TIẾT</a>
                      </div>
                   </div>
-               </section>
-            </aside>
-            <section class="col-sm-7 col-md-8 col-lg-6">
-              @foreach($farmers as $farmer)
-               <article class="internal-padding wrap-radius bg-white style-post animated fadeInDown">
-                     <div class="well profile_view">
-                        <div class="col-sm-12">
-                           <h4 class="brief"><i>{{$farmer->name}}</i><img class="img_nhanchungnhan" style="height: 25px; margin-left: 10px;" src="{{url('')}}/assets/images/icons/icon-tick.png"></h4>
-                           <div class="left col-xs-7">
-                              <h2>Thông tin lương nông</h2>
-                              <p><i class="fa fa-stack-overflow" aria-hidden="true"></i> <strong>Sản Phẩm: </strong>{{$farmer->product_list}}</p>
-                              <p><i class="fa fa-home"></i> <strong>Địa chỉ: </strong>{{$farmer->short_address}}</p>
-                              <p><i class="fa fa-heart" aria-hidden="true"></i> <strong>Cam kết: </strong>{{$farmer->quality}}</p>
-                           </div>
-                           <div class="right col-xs-5 text-center"> <img src="{{url('')}}/{{$farmer->photo}}" alt="Nông dân nuôi trồng sạch hữu cơ" class="img-circle img-responsive"></div>
-                        </div>
-                        <div class="col-xs-12 bottom text-center">
-                           <div class="col-xs-12 col-sm-7 emphasis">
-                              <div id="colorstar" class="starrr ratable"><p class="ratings"> <a style="color: #ee8b2d; font-weight: 800;"><?php echo sprintf("%.2f", $farmer->rating/100); ?></a> <a href="#"><span class="glyphicon glyphicon-star fa-lg" style="color: #ee8b2d"></span></a></p></div>
-                           </div>
-                           <div class="col-xs-12 col-sm-5 emphasis"> 
-                            <a class="btn btn-success btn-xs disabled" style="background-color: #64903E; opacity: 1"> <i class="fa fa-heart"></i> </a> 
-                            <a class="btn btn-primary btn-xs" href="{{url('')}}/nong-trai-sach/farmer_id={{$farmer->id}}"> <i class="fa fa-user"></i> Xem nông trại </a></div>
-                        </div>
-                     </div>
-               </article>
-               @endforeach
-               <!-- <nav class="spacer-bottom-10" style="margin-bottom: 25px">
-                  <ul class="pagination">
-                     <li>
-                        <a href="#">        <span aria-hidden="true" class="fa fa-chevron-left"></span>
-                        </a>    
-                     </li>
-                     <li><a href="active">1</a></li>
-                     <li class="#"><a href="#">2</a></li>
-                     <li><a href="#">3</a></li>
-                     <li><a href="#">4</a></li>
-                     <li><a href="#">5</a></li>
-                     <li>
-                        <a href="#" aria-label="Next">
-                        <span aria-hidden="true" class="fa fa-chevron-right"></span>
-                        </a>
-                     </li>
-                  </ul>
-               </nav> -->
-            </section>
-            <aside class="col-lg-3 hidden-sm hidden-md">
+               </section> -->
                <section class="wrap wrap-border internal-padding bg-white wrap-radius">
                   <h4 class="text-center no-margin-top spacer-bottom-10">Hình ảnh thực tế nông trại</h4>
                   <div class="row clearfix frame-photo">

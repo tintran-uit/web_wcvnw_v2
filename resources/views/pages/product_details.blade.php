@@ -16,7 +16,7 @@
                 <img class="img-responsive big-img center-block" alt="product" src="{{url('')}}/{{$product[0]->image}}">
                 
               </div>
-              <div class="icon-shipping" style="margin-top: 30px"> <!--icon-email, icon-discount, icon-shipping-->
+              <div class="icon-shipping" style="margin-top: 30px;margin-bottom: 10px;"> <!--icon-email, icon-discount, icon-shipping-->
                 <h4 class="title-box text-uppercase no-margin-top">
                   GIAO HÀNG TẬN NƠI
                 </h4>
@@ -79,7 +79,7 @@
 </a>                  </article>
                       <article class="col-sm-5">
                         <div class="clearfix product-price"> 
-                          <p class="discounted-price pull-left">
+                          <p class="discounted-price pull-left" id="dis_price">
                             {{number_format($product[0]->price)}} VND
                           </p>
                         </div>
@@ -149,6 +149,8 @@
 <script type="text/javascript">
 var unit_quantity = parseFloat('{{$product[0]->unit_quantity}}');
 var unit = '{{$product[0]->unit}}';
+var dis_price = '{{$product[0]->price}}';
+
 loadsuppliers();
 
 function loadsuppliers() {
@@ -239,7 +241,11 @@ function stepperUp() {
   }else {
     num = (num + unit_quantity).toFixed(1);
   }
-
+  var qty = num;
+  if(unit = 'kg'){
+    qty = qty/unit_quantity;
+  }
+  document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
   document.getElementById('stepper').value = num + ' ' + unit; 
 
 }
@@ -255,7 +261,11 @@ function stepperDown() {
     }else {
       num = (num - unit_quantity).toFixed(1);
     }
-
+    var qty = num;
+    if(unit = 'kg'){
+      qty = qty/unit_quantity;
+    }
+    document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
     document.getElementById('stepper').value = num + ' ' + unit;
   }
 }
