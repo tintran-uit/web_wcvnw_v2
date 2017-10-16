@@ -67,8 +67,8 @@
                                     <td class="align-middle">
                                        <div style="width: auto;">{{$item->name}}</div>
                                     </td>
-                                    <td class="align-middle">
-                                       <div class="stepper "><input type="text" class="form-control stepper-input text-center" value="{{$item->qty*$item->options['unit_quantity']}} {{$item->options['unit']}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
+                                    <td class="align-middle text-center" style="text-align: center; ">
+                                       <div class="stepper" style="width: 100%"><input type="text" class="form-control stepper-input text-center" value="{{$item->qty*$item->options['unit_quantity']}} {{$item->options['unit']}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
                                     </td>
                                     <td class="align-middle text-center">
                                        {{number_format($item->price)}} VND
@@ -162,7 +162,7 @@ $(document).ready(function() {
          var unit_quantity = table.row(row).data()[7];
          var unit = table.row(row).data()[8];
          var prodID = table.row(row).data()[9];
-         var prodID = table.row(row).data()[10];
+         var farmerID = table.row(row).data()[10];
          $(this).closest('tr').find(':input').each(function() {
             
             msg =  parseFloat($(this).val());

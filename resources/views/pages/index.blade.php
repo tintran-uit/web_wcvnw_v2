@@ -120,17 +120,23 @@
 
 <section class="subscribe-type-one spacer-30">
    <div class="container">
-          <h2 class="title-font-handwritten text-center space-only-bottom">WELCOME TO OUR HEATHY STORE!</h2>
-          <div class="intro col-md-6 col-md-offset-3 text-center"><p>Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, 
-nên mẹ luôn thương yêu và muốn đền bù tất cả cho các con.</p></div>
+          <h2 class="title-font-handwritten text-center space-only-bottom">Hành trình khảo sát và kết nối lương nông</h2>
+          <div class="intro col-md-6 col-md-offset-3 text-center"><p>"...một tương lai lành mạnh cho những em bé và sức khỏe ngày càng cải thiện của một thế hệ người tiêu dùng đang dự phần vào nền nông nghiệp sạch hữu cơ..."</p></div>
           <div class="content col-md-12">
             <div class="col-md-6">
               <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/X0m6Rdhs1Nw" frameborder="0" allowfullscreen></iframe></div>
             </div>
             <div class="col-md-6">
-              <h2 class="title-font-handwritten"> C-FARM CUỘC SỐNG TỐT ĐẸP HƠN</h2>
-              <p>Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các Tôi không được may mắn như những đứa trẻ khác, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ, ba mẹ chia tay từ khi còn nhỏ, nên mẹ luôn thương yêu và muốn đền bù tất cả cho các cokhi còn nhỏ...............</p>
-              <a href="{{url('')}}/xem-chi-tiet" class="btn btn-success">Chi tiết</a>
+              <h2 class="title-font-handwritten"> C-FARM AN TÂM NỘI TRỢ</h2>
+              <div id="introCfarm">
+              <p>Để chạm đến ước mơ và đạt được mục tiêu đòi hỏi một quá trình, nhiều nỗ lực bền bỉ và đặc biệt là những người cộng sự đồng lòng. Cuộc hành trình của Cfarm bắt đầu từ những buổi thảo luận, gặp gỡ và tìm hiểu thông tin từ các bạn bè, anh chị, và những bậc tiền bối trong lĩnh vực nuôi trồng và phân phối nông sản hữu cơ tại Sài Gòn, Lâm Đồng và một số tỉnh miền Tây. 
+              </p>
+
+              <p>Cùng đồng điệu và chia sẻ sự trăn trở về nguồn thực phẩm sạch mà ai cũng có quyền sử dụng khiến câu chuyện về sự ra đời của Cfarm ngày càng trở nên rõ rệt và cháy bỏng. Từ đó, chúng tôi được giới thiệu đến nhiều khu vườn khác nhau và cuộc hành trình khảo sát kết nối lương nông được bắt đầu.
+              </p>
+              <p>Từ đồng bằng Tây Nam Bộ trù phú với vườn cây trái xanh tươi và những cánh đồng lúa chín vàng đến cao nguyên Lâm Viên đất đỏ ba-zan, chúng tôi đã vinh dự gặp gỡ những người nông dân đáng mến, cần cù.........</p>
+              </div>
+              <a href="{{url('')}}/hanh-trinh-khao-sat-va-ket-noi-luong-nong" class="btn btn-success">Chi tiết</a>
             </div>
           </div>
    </div>

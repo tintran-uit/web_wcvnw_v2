@@ -419,7 +419,7 @@ a {
 .subscribe-type-one .content .title-font-handwritten{
   color: #000;
   font-family: "Reso_Regular_Bold";
-  font-size: 28px;
+  font-size: 19px;
   padding:0; margin:0;
 }
 
@@ -1556,7 +1556,8 @@ a {
 #nl-box-slider {
   right: 0;
   top: 10%;
-  z-index: 999; }
+  z-index: 999; 
+}
   /* line 5, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_nl-box-slider.scss */
   #nl-box-slider .content {
     background: #ffffff;
@@ -1569,7 +1570,11 @@ a {
       font-weight: bold;
       font-size: 0.9em; }
 
-    #nl-box-slider .content a.btn {
+    #nl-box-slider .content a.btn{
+      color: #ffffff;
+    }
+
+    #nl-box-slider .content a. {
       color: #ffffff;
     }
     /* line 15, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_nl-box-slider.scss */
@@ -3138,6 +3143,13 @@ a.dropdown-toggle:hover{
   /*margin: 15px;*/
 }
 
+.title h4.text-uppercase{
+  color: #A52223;
+}
+#introCfarm{
+  font-family: 'Reso_Regular_Light'; 
+  font-size: 15px; 
+}
 
 
 

@@ -84,7 +84,7 @@ class PageController extends Controller
         }
 
         // thong tin 
-        if ($page->template == 'about_us' || $page->template == 'services'){
+        if ($page->template == 'about_us' || $page->template == 'services' || $page->template == 'index_info'){
             //thông tin
             $this->data['about_pages'] = DB::table('pages')->where('template', 'about_us')->get();
             //chăm sóc khách hàng

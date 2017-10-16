@@ -1,7 +1,7 @@
 <aside class="col-md-3">
                <div class="block block-nav">
                   <div class="title">
-                     <h4 class="text-uppercase no-margin" style="color: #64903E">Thông Tin</h4>
+                     <h4 class="text-uppercase no-margin">Thông Tin</h4>
                   </div>
                   <div class="content">
                      <dl class="list-unstyled">

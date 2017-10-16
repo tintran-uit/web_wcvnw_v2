@@ -13,7 +13,7 @@
                <h3 class="text-uppercase no-margin-top">
                   {{$page->name}}
                </h3>
-               <p><strong>Văn phòng đại diện: </strong> 167 Trần Trọng Cung, Tân Thuận Đông, Quận 7, Hồ Chí Minh, Việt Nam</p>
+               
                <?php
                   echo($page->content); 
                ?>

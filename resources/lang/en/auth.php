@@ -22,5 +22,6 @@ return [
     'register' => 'Register',
     'haveAcc' => 'Do you have an account?',
     'required' => 'Required',
+    'logout' => 'Log out',
 
 ];

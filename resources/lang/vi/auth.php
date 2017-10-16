@@ -22,5 +22,5 @@ return [
     'register' => 'Tạo tài khoản',
     'haveAcc' => 'Bạn đã có tài ',
     'required' => 'Vui lòng nhập thông tin',
-
+    'logout' => 'Đăng xuất',
 ];
