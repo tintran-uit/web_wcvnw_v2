@@ -564,7 +564,7 @@ a {
 
 /* line 5, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_style-wraps.scss */
 .wrap {
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   position: relative; }
   /* line 8, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_style-wraps.scss */
   .wrap.wrap-border {
@@ -576,7 +576,9 @@ a {
     border-radius: 3px; }
   /* line 14, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_style-wraps.scss */
   .wrap.internal-padding {
-    padding: 20px; }
+    padding: 20px; 
+    padding-bottom: 0px;
+  }
   /* line 18, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_style-wraps.scss */
   .wrap .internal-box .title {
     border-bottom: 1px solid #eeeeee;
@@ -1006,8 +1008,8 @@ a {
 }
 
 #main-nav-bar .nav-justified > li > a{
-  font-family: 'CaviarDreams_Bold';
-  font-size: 14px;
+  font-family: 'Reso_Regular_Bold';
+  font-size: 18px;
   text-transform: uppercase;
 }
 
@@ -1734,8 +1736,8 @@ a {
       margin-bottom: 15px; }
       /* line 33, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_products-box.scss */
       .content-product .thumbnail .caption .copy h4 {
-        margin-bottom: 10px;
-        font-size: 20px;
+        margin-bottom: 0px !important;
+        /*font-size: 20px;*/
         color: #9CCB3B; }
       /* line 38, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_products-box.scss */
       .content-product .thumbnail .caption .copy p {
@@ -3031,8 +3033,8 @@ a {
 }
 
 .product-tabs li.active a {
-    color: #3fb4fb;
-    border-bottom: 2px solid #3fb4fb;
+    color: #A52223;
+    border-bottom: 2px solid #A52223;
     padding: 5px 0;
     bottom: -2px;
 }

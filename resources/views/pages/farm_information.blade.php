@@ -132,7 +132,7 @@ body .popover {
                               <h2>Thông tin lương nông</h2>
                               <p><i class="fa fa-stack-overflow" aria-hidden="true"></i> <strong>Sản Phẩm: </strong> Gà thả vườn, rau hữu cơ</p>
                               <ul class="list-unstyled">
-                                 <li><i class="fa fa-phone"></i> <strong>Địa chỉ: </strong>Huyện Gò Công - Tỉnh Tiền Giang</li><li><i class="fa fa-heart" aria-hidden="true"></i> <strong>Cam kết: </strong>Bất chấp nuôi trồng sạch</li>
+                                 <li><i class="fa fa-home"></i> <strong>Địa chỉ: </strong>Huyện Gò Công - Tỉnh Tiền Giang</li><li><i class="fa fa-heart" aria-hidden="true"></i> <strong>Cam kết: </strong>Bất chấp nuôi trồng sạch</li>
                               </ul>
                            </div>
                            <div class="right col-xs-5 text-center"> <img src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.0-9/21730818_1954726744807818_4698076099882093378_n.jpg?oh=4a69e9ef072b33cfa065529bbe0d51c0&oe=5A3EBE54" alt="" class="img-circle img-responsive"></div>
@@ -154,7 +154,7 @@ body .popover {
                               <h2>Thông tin lương nông</h2>
                               <p><i class="fa fa-stack-overflow" aria-hidden="true"></i> <strong>Sản Phẩm: </strong> Rau hữu cơ</p>
                               <ul class="list-unstyled">
-                                 <li><i class="fa fa-phone"></i> <strong>Địa chỉ: </strong>Huyện Bảo Lộc - Tỉnh Lâm Đồng</li><li><i class="fa fa-heart" aria-hidden="true"></i> <strong>Cam kết: </strong>Luôn như vậy</li>
+                                 <li><i class="fa fa-home"></i> <strong>Địa chỉ: </strong>Huyện Bảo Lộc - Tỉnh Lâm Đồng</li><li><i class="fa fa-heart" aria-hidden="true"></i> <strong>Cam kết: </strong>Luôn như vậy</li>
                               </ul>
                            </div>
                            <div class="right col-xs-5 text-center"> <img src="{{url('')}}/uploads/farmers/IMG_7027.jpg?_=1507628697" alt="" class="img-circle img-responsive"></div>

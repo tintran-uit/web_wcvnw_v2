@@ -765,7 +765,7 @@
                   <article class="col-xs-12 col-sm-7">
                      <div class="clearfix row">
                         <div class="col-sm-5">
-                           <ul class="footer-widget-list list-unstyled"><li><strong>C-farm! </strong></li></ul>
+                           <ul class="footer-widget-list list-unstyled"><li><strong>Cfarm! </strong></li></ul>
                            Kết nối người tiêu dùng với những lương nông trên nền tảng công nghệ. Bạn có thể đặt mua thực phẩm sạch hoặc hữu cơ trực tiếp từ những trang trại thông qua <a href="{{url('')}}">www.cfarm.vn</a> hoặc (Android & iOS App)
                         </div>
                         <div class="col-sm-3 col-sm-offset-1">
