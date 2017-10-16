@@ -3060,8 +3060,18 @@ a {
   font-size: 16px;
   }
 
-.new-price{
+a.new-price{
   color: #A52223;
+}
+
+a.new-price:hover{
+  color: #C04724;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration-color: #64903E;
+  color: #64903E;
 }
 
 .button-group .pull-left{
