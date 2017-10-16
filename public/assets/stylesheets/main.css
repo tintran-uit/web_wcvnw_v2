@@ -14,7 +14,8 @@
 /*font family*/
 @font-face {
 font-family:CaviarDreams_Bold;
-src:url(/assets/stylesheets/vendor/fonts/CaviarDreams_Bold.ttf);
+/*src:url(/assets/stylesheets/vendor/fonts/CaviarDreams_Bold.ttf);*/
+src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
 }
 
 @font-face {

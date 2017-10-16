@@ -102,7 +102,7 @@
                </a>    
             </div>
             <div class="content pull-left hidden" id="subscribe-nl">
-               <h2 class="no-margin-top"  id="cart-status2">@if(count($cart) == 0)
+               <h2 class="no-margin-top"  id="cart-status2" style="color: #B62029">@if(count($cart) == 0)
                                  Giỏ hàng rỗng
                                  @else
                                  Bạn có {{count($cart)}} nông sản sạch!
@@ -134,9 +134,14 @@
                           </li>
                           <?php $total += $item->subtotal; ?>
                        @endforeach
+                       <li class="subtotale pull-right no-margin">
+                           Tổng:&nbsp;&nbsp;&nbsp;<span class="price" id="cart-status-total2">{{number_format($total)}} VND</span>
+                        </li>
                        </ul>
+                       
                      <div class="text-right">
-                     <a href="/">CFarm Việt Nam</a>
+                      <br>
+                      <a href="/">CFarm Việt Nam</a>
                      </div>
                   </fieldset>
                </form>
@@ -744,18 +749,18 @@
                <div class="container">
                   <div class="row">
                      <article class="col col-xs-12 col-sm-3">
-                        <div class="info-col bg-super-light">
+                        <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="tel" src="{{url('')}}/assets/images/icons/icon-tel.png" height="39" />
                            <span data-info="text-info">Hotline: +0 888 9090 909</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
-                        <div class="info-col bg-super-light">
+                        <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-shipping.png" height="39" />
                            <span data-info="text-info">Giao hàng tận nơi</span>
                         </div>
                      </article>
-                     <article class="col col-xs-12 col-sm-3">
+                     <article class="col col-xs-12 col-sm-3 text-center">
                         <div class="info-col bg-super-light">
                            <img class="hidden-sm hidden-md" alt="email" src="{{url('')}}/assets/images/icons/icon-mail.png" height="39" />
                            <span data-info="text-info">
@@ -764,7 +769,7 @@
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
-                        <div class="info-col bg-super-light">
+                        <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="location" src="{{url('')}}/assets/images/icons/icon-location.png" height="39" />
                            <span data-info="text-info">167 Trần Trọng Cung, Q.7</span>
                         </div>
@@ -913,6 +918,7 @@
             $('#cart-status').html("Giỏ hàng rỗng");
          else
             $('#cart-status').html("bạn có " + length + " nông sản sạch!");
+            $('#cart-status2').html("bạn có " + length + " nông sản sạch!");
 
          var code = "";
          var total = 0;
@@ -921,8 +927,10 @@
            total += value.subtotal;
          });
          $('#cart-list-product').html(code);
+         $('#cart-list-product2').html(code);
 
          $('#cart-status-total').html(numberWithCommas(total) + " VND");
+         $('#cart-status-total2').html(numberWithCommas(total) + " VND");
       }
 
       function numberWithCommas(x) {

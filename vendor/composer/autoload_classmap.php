@@ -26,6 +26,7 @@ return array(
     'CreateSettingsTable' => $baseDir . '/database/migrations/2015_08_04_131614_create_settings_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2015_08_04_131626_create_tags_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
+    'CreateVistersTable' => $baseDir . '/database/migrations/2017_09_18_082026_create_visters_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
