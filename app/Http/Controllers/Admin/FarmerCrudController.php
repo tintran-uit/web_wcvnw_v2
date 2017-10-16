@@ -45,7 +45,11 @@ class FarmerCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'name' => 'address',
-            'label' => 'Địa Chỉ',
+            'label' => 'Địa Chỉ Dài',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'short_address',
+            'label' => 'Địa Chỉ Ngắn',
         ]);
         $this->crud->addColumn([
             'name' => 'rating',
@@ -85,6 +89,22 @@ class FarmerCrudController extends CrudController
                 'class' => 'form-group col-md-10'
             ],
         ]);
+       $this->crud->addField([    // TEXT
+            'name' => 'short_address',
+            'label' => 'Địa Chỉ Ngắn',
+            'type' => 'text',
+            'placeholder' => 'Địa chỉ này sẽ hiển thị cho người dùng',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10'
+            ],
+        ]);
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'quality',
+            'label' => 'Cam kết chất lượng',
+            'type' => 'summernote',
+            'placeholder' => 'Cam kết chất lượng',
+        ]);
+
         $this->crud->addField([   // WYSIWYG
             'name' => 'profile',
             'label' => 'Thông Tin Nông Trại',
