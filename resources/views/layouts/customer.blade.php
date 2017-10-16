@@ -732,11 +732,16 @@
                                     <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> {{ trans('head.product') }}
                                     </a>                  
                                  </li>
-                                 <li class="">
-                                    <a href="#">Thư viện ảnh</a> 
+                                 <li class="@if($page->template == 'blog') active @endif">
+                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{ trans('head.blog') }} <i class="fa fa-angle-down"></i></a> 
+                                    <ul class="dropdown-menu">
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">{{ trans('head.blog1') }}</a> </li>     
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=4">{{ trans('head.blog2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=5">{{ trans('head.blog3') }}</a>  </li> 
+                                    </ul>
                                  </li>
-                                 <li class="dropdown box-extended {{ Request::is('thong-tin-trang-trai-an-toan') ? 'active' : '' }}">
-                                    <a href="{{url('')}}/thong-tin-trang-trai-an-toan">{{ trans('head.farmerlist') }}<i class="fa fa-angle-down"></i>
+                                 <li class="dropdown box-extended @if($page->template=='farm_information') active @endif">
+                                    <a href="{{url('')}}/thong-tin-trang-trai-an-toan">{{ trans('head.farmerlist') }}
                                     </a>                  
                                     
                                  </li>

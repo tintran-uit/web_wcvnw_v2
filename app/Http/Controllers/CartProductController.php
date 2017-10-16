@@ -13,7 +13,9 @@ class CartProductController extends Controller
     {
         $data = $request->data;
         $prodID = $data['prodID'];
-        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image", p.`unit_quantity` "unit_quantity", p.`unit` "unit" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`capacity` - td.`sold` >= ?', [$proID, $farmerID, $qty]);
+        $farmerID = $data['farmerID'];
+        $qty = $data['qty'];
+        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image", p.`unit_quantity` "unit_quantity", p.`unit` "unit" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`capacity` - td.`sold` >= ?', [$prodID, $farmerID, $qty]);
         if($prod)
         {
             Cart::update($data['rowId'], $data['qty']);
