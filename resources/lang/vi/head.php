@@ -20,4 +20,5 @@ return [
 	'reswtpass' => 'Reset your password',
 	'reswtpass_status' => 'To reset your password, enter the email address you use to sign in to site.
             We will then send you a new password.',
+    'productTab' => 'Thực phẩm sạch',
 ];

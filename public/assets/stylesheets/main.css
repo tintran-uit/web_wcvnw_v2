@@ -1568,6 +1568,10 @@ a {
       color: #64903E;
       font-weight: bold;
       font-size: 0.9em; }
+
+    #nl-box-slider .content a.btn {
+      color: #ffffff;
+    }
     /* line 15, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_nl-box-slider.scss */
     #nl-box-slider .content h2 {
       font-size: 1.6em;
@@ -1575,37 +1579,37 @@ a {
       color: #64903E;
       margin-bottom: 15px; }
     /* line 22, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_nl-box-slider.scss */
-    #nl-box-slider .content form label {
+    /*#nl-box-slider .content form label {
       color: #9c9c9c;
       font-size: 1em;
-      font-weight: normal; }
+      font-weight: normal; }*/
     /* line 27, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_nl-box-slider.scss */
-    #nl-box-slider .content form .form-control {
+    /*#nl-box-slider .content form .form-control {
       border: none;
       border-radius: 0;
       background-color: #f0efee;
       -webkit-box-shadow: none;
       box-shadow: none;
-      min-width: 200px; }
+      min-width: 200px; }*/
     /* line 34, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_nl-box-slider.scss */
-    #nl-box-slider .content form .checkbox {
+    /*#nl-box-slider .content form .checkbox {
       margin-top: 20px;
-      margin-bottom: 20px; }
+      margin-bottom: 20px; }*/
       /* line 37, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_nl-box-slider.scss */
-      #nl-box-slider .content form .checkbox label {
+      /*#nl-box-slider .content form .checkbox label {
         font-size: 0.8em;
-        color: #9c9c9c; }
+        color: #9c9c9c; }*/
     /* line 42, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_nl-box-slider.scss */
-    #nl-box-slider .content form .btn {
+   /* #nl-box-slider .content form .btn {
       border: none;
       border-radius: 50%;
       width: 30px;
       height: 30px;
       padding: 7px 11px;
-      margin-left: 20px; }
+      margin-left: 20px; }*/
       /* line 48, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_nl-box-slider.scss */
-      #nl-box-slider .content form .btn .glyphicon, #nl-box-slider .content form .btn .fa {
-        color: #ffffff; }
+     /* #nl-box-slider .content form .btn .glyphicon, #nl-box-slider .content form .btn .fa {
+        color: #ffffff; }*/
 
 /* line 1, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_chat.scss */
 .box-chat {
@@ -3096,6 +3100,11 @@ a:hover{
     margin-bottom: 50px;
     margin-top: -20px;
   }
+}
+
+#article img.img-responsive{
+  display: block;
+    margin: 0 auto;
 }
 
 @media only screen and (min-width: 500px) {

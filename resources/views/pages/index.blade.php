@@ -63,7 +63,7 @@
    <div class="container">
       
       <section class="text-center spacer-bottom-20">
-         <h3 class="no-margin title-index" style="">Thực phẩm sạch</h3>
+         <h3 class="no-margin title-index" style="">{{ trans('head.productTab') }}</h3>
          <h5 class="no-margin"></h5>
          <br>
          <ul class="nav nav-tabs nav-justified">

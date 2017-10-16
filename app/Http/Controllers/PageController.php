@@ -10,6 +10,7 @@ use Cart;
 use DB;
 use Session;
 use App;
+use Auth;
 
 class PageController extends Controller
 {
@@ -47,6 +48,12 @@ class PageController extends Controller
         if (!$page)
         {
             abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
+        }
+
+        if(Auth::check()){
+                $this->data['auth'] = true;
+        }else{
+            $this->data['auth'] = false;
         }
 
         if (Session::has('locale')) {
@@ -98,7 +105,9 @@ class PageController extends Controller
             if (count($this->data['cart']) == 0) {
                 return view('alert.empty_basket', $this->data);
             }
-
+            if($this->data['auth']){
+                $this->data['customer'] = DB::table('customers')->where('id', Auth::user()->connected_id)->first();
+            }
             $this->data['districts'] = DB::table('district')->where('city_id', 1)->get();
         }
 

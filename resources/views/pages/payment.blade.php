@@ -173,11 +173,13 @@
                               <div class="row clearfix">
                                  <article class="col-sm-12">
                                  <div class="col-sm-6">
+                                  @if(!Auth::check())
                                     <p>Bạn đã có tài khoản? <a style="color: #0071b6; font-weight: 700;" href="{{url('/login')}}">Đăng nhập</a></p>
                                     <p>Vui lòng nhập địa chỉ! <a style="color: #0071b6; font-weight: 700;" href="{{url('/register')}}">Đăng ký tài khoản</a> để nhận ưu đãi và mua hàng nhanh chóng hơn!</p>
+                                  @endif
                                     <div class="form-group">
                                        <!-- <label>First and Last Name</label> -->
-                                       <input name="ten" type="text" class="form-control input-lg" placeholder="Họ tên khách hàng (*)">
+                                       <input name="ten" type="text" value="@if($auth) {{$customer->name}} @endif" class="form-control input-lg" placeholder="Họ tên khách hàng (*)">
                                     </div>
                                  </div>
                                  </article>
@@ -185,16 +187,20 @@
                                  <article class="col-sm-6">
                                        <div class="form-group">
                                           <label>Địa chỉ giao hàng</label>
-                                          <input name="diaChi" type="text" class="form-control input-lg" placeholder="Nhập địa chỉ (*)">
+                                          <input name="diaChi" type="text" class="form-control input-lg" value="@if($auth) {{$customer->address}} @endif" placeholder="Nhập địa chỉ (*)">
                                        </div>
                                        <div class="form-group">
                                           <!-- <label>State</label>-->
-                                             <select name="selectQuan" class="form-control">
+                                             <select id="selectQuan" name="selectQuan" class="form-control" onchange="setShipping()">
                                                 <option value="">Chọn Quận/Huyện (*)</option>
                                                 @foreach($districts as $district)
-                                                <option value="{{$district->id}}">{{$district->name}}</option>
+                                                <option value="{{$district->id}}"@if($auth) @if($district->id == $customer->district)
+                                                    selected="selected"
+                                                @endif @endif>{{$district->name}} 
+                                                </option>
                                                 @endforeach
                                              </select>
+
                                        </div>
                                        <div class="form-group">
                                           <!-- <label>State</label>-->
@@ -218,7 +224,7 @@
                                                 </div>
                                              </div>
                                              <div class="col-sm-8">
-                                                <input name="sdt" type="text" class="form-control input-lg">
+                                                <input name="sdt" value="@if($auth) {{$customer->phone}} @endif" type="text" class="form-control input-lg">
                                              </div>
                                           </div>
                                           <div class="form-group row clearfix">
@@ -230,7 +236,7 @@
                                                 </div>
                                              </div>
                                              <div class="col-sm-8">
-                                                <input name="email" type="text" class="form-control input-lg">
+                                                <input name="email" type="text" value="@if($auth) {{$customer->email}} @endif" class="form-control input-lg">
                                              </div>
                                           </div>
                                    </article>
@@ -342,6 +348,8 @@ trước khi giao hàng!</p>
 @section('scrip_code')
 
 <script type="text/javascript">
+      var spacerToal = '{{$subtotal}}';
+      spacerToal = parseInt(spacerToal);
       var dataPost = {};
       dataPost['thanhToan'] = 1;
       isMobilePayment();
@@ -421,6 +429,11 @@ trước khi giao hàng!</p>
          }
 
       function checkForm(ntab) {
+          var auth = {{$auth}};
+          if(auth)
+          {
+            return true;
+          }
           return $(ntab).data('bootstrapValidator').isValid();
       }
 
@@ -506,6 +519,49 @@ trước khi giao hàng!</p>
           }
         });
       }
-      
+    function setShipping() {
+      var idDitris = document.getElementById("selectQuan").value;
+      // idDitris = fr idDitris;
+      var text;
+      var spacerToalNow = spacerToal;
+      console.log(idDitris);
+      switch(idDitris) {
+          case '1':
+          case '3':
+          case '4':
+          case '5':
+          case '7':
+          case '8':
+          case '10':
+              text = "20.000 VNĐ";
+              spacerToalNow = spacerToal + 20000;
+              break;
+          case '2':
+          case '6':
+          case '11':
+          case '17':
+          case '16':
+          case '14':
+              text = "25.000 VNĐ";
+              spacerToalNow = spacerToal + 25000;
+              break;
+          case '9':
+          case '12':
+          case '15':
+          case '19':
+              text = "30.000 VNĐ";
+              spacerToalNow = spacerToal + 30000;
+              break;
+          default:
+              text = "35.000 VNĐ";
+              spacerToalNow = spacerToal + 35000;
+              break;
+          
+      }
+      console.log(spacerToalNow);
+      spacerToalNow = spacerToalNow + '';
+      document.getElementById("spacer-ship").innerHTML = text;
+      $('#spacer-toal').html(numberWithCommas(spacerToalNow) + ' VN');
+    }
 </script>
 @endsection
