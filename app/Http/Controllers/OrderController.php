@@ -59,11 +59,24 @@ class OrderController extends Controller
         if($orderPossible == 0){
          	$msg['Cart'] = Cart::content();
        		return response()->json($msg); 
-         }
+        }
+        
 
          if(Auth::check()) {
          	$user = Auth::user();
          	$customer_id = $user->connected_id;
+         	if(!$customer_id) {
+         		//check if data exist in db (email and phone)
+	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ? OR `email` = ?', [$phone, $email]);
+	         	//if not yet in db, create customer into db
+	         	if(!$customer_id) {
+	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $email, $address, $district]);
+	         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ? OR `email` = ?', [$phone, $email]);
+	         	}
+	         	$customer_id = $customer_id[0]->id;
+
+	         	DB::statement('UPDATE `users` SET `account_type` = "Customer", `connnected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);
+         	}
          }
          else 
          {
@@ -121,8 +134,12 @@ class OrderController extends Controller
        // return $order_id;
        	return response()->json($msg);
 
-	}
+}
 	
+	public function addPackage(Request $request)
+	{
+
+	}
 
 	/**
 	 *cancelOrder

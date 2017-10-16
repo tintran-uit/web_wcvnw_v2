@@ -121,7 +121,7 @@ class TradingCrudController extends CrudController
         $this->crud->addField([
             'name' => 'sold',
             'label' => 'Đã Bán',
-            'type' => 'number',
+            'type' => 'text',
             'default'    => 0,
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'

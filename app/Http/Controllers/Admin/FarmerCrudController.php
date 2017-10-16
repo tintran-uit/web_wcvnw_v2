@@ -85,6 +85,31 @@ class FarmerCrudController extends CrudController
                 'class' => 'form-group col-md-10'
             ],
         ]);
+       $this->crud->addField([    // TEXT
+            'name' => 'short_address',
+            'label' => 'Địa Chỉ Ngắn',
+            'type' => 'text',
+            'placeholder' => 'Địa chỉ này sẽ hiển thị cho người dùng',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10'
+            ],
+        ]);
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'product_list',
+            'label' => 'Các sản phẩm nuôi trồng',
+            'type' => 'textarea',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10'
+            ],
+            'placeholder' => 'Các sản phẩm nuôi trồng',
+        ]);
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'quality',
+            'label' => 'Cam kết chất lượng',
+            'type' => 'textarea',
+            'placeholder' => 'Cam kết chất lượng',
+        ]);
+
         $this->crud->addField([   // WYSIWYG
             'name' => 'profile',
             'label' => 'Thông Tin Nông Trại',
