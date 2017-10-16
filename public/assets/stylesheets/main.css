@@ -296,7 +296,7 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
   padding: 3px 5px; }
 
 /* line 201, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
-.btn-link, #main-nav .navbar-default .navbar-collapse .nav-justified > li.active a, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button, #copyright .footer-links ul li a:hover, .footer-widget-list li a:hover, .group-filters .content li a:hover, .listbar .listbox li a:hover, .general-info .content dl dd a:hover, .breadcrumb > li a:hover, .block.block-nav .content dl dd a:hover, .block.block-nav .content ul li a:hover {
+.btn-link, #main-nav .navbar-default .navbar-collapse .nav-justified > li.active >a, #main-nav .navbar-default .navbar-collapse .navbar-nav > li.active button, #copyright .footer-links ul li a:hover, .footer-widget-list li a:hover, .group-filters .content li a:hover, .listbar .listbox li a:hover, .general-info .content dl dd a:hover, .breadcrumb > li a:hover, .block.block-nav .content dl dd a:hover, .block.block-nav .content ul li a:hover {
   color: #64903E; 
   font-weight: 800;
 }
