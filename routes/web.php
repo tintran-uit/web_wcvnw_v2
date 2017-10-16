@@ -68,6 +68,8 @@ Route::get('/kinh-nghiem-mua-thuc-pham-sach/post_id={post_id}', 'PageController@
 
 Route::get('/kinh-nghiem-mua-thuc-pham-sach/blog_id={blog_id}', 'PageController@showBlog');
 
+Route::get('/nong-trai-sach/farmer_id={farmer_id}', 'PageController@showFarmer');
+
 Route::get('/', 'PageController@index');
 
 Route::get('/product/slug={slug}', 'PageController@getProduct');

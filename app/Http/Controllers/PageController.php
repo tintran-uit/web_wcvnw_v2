@@ -102,6 +102,11 @@ class PageController extends Controller
             $this->data['districts'] = DB::table('district')->where('city_id', 1)->get();
         }
 
+        //he thong nong trai
+        if ($page->template == 'farm_information') {
+            $this->data['farmers'] = DB::select('SELECT f.`id` "id", f.`name` "name", f.`photo` "photo", f.`short_address` "short_address", f.`rating` "rating", f.`rating_count` "rating_count", f.`quality` "quality", f.`product_list` "product_list" FROM `farmers` f WHERE 1');
+        }
+
         return view('pages.'.$page->template, $this->data);
     }
 
@@ -179,5 +184,28 @@ class PageController extends Controller
         return view('pages.blog_post', $this->data);
     }
     
+    public function showFarmer($farmer_id)
+    {
+        $page = Page::findBySlug('thong-tin-trang-trai-an-toan');
 
+        if (!$page)
+        {
+            abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
+        }
+
+        // echo(App::getLocale());die();
+
+        if (Session::has('locale')) {
+            App::setLocale(Session::get('locale'));
+        }
+
+        $this->data['title'] = $page->title;
+        $this->data['page'] = $page->withFakes();
+        $this->data['menu'] = MenuItem::all();
+        $this->data['cart'] = Cart::content();
+
+        $this->data['farmer'] = DB::select('SELECT f.`id` "id", f.`name` "name", f.`photo` "photo", f.`short_address` "short_address", f.`rating` "rating", f.`rating_count` "rating_count", f.`profile` "profile" FROM `farmers` f WHERE f.`id` = ? ', [$farmer_id]);
+
+        return view('pages.farm_information_show', $this->data);
+    }
 }

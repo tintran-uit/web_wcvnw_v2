@@ -601,7 +601,7 @@
                                        </li>
                                     </ul>
                                  </li>
-                                 <li class="dropdown box-extended {{ Request::is('thong-tin-trang-trai-an-toan') ? 'active' : '' }}">
+                                 <li class="dropdown box-extended @if($page->template=='farm_information') active @endif">
                                     <a href="{{url('')}}/thong-tin-trang-trai-an-toan">{{ trans('head.farmerlist') }}
                                     </a>                  
                                     
@@ -855,6 +855,19 @@
 
       @yield('scrip_code')
       <script type="text/javascript">
+        $(document).ready(function(){
+         $('#article').children('p').children('img').each(function(){
+           $(this).addClass('img-responsive');
+           $(this).css("height", "auto");
+         });
+         $('#article').children('img').each(function(){
+           $(this).addClass('img-responsive');
+           $(this).css("height", "auto");
+           
+         });
+       });
+      </script>
+      <script type="text/javascript">
         checkActiveMenu();
       function deleteItem(rowId) {
          var markers = { "rowId": rowId};
@@ -899,6 +912,10 @@
 
       function numberWithCommas(x) {
              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         }
+
+      function floatWithCommas(x) {
+             return parseFloat(x).toFixed(2);
          }
 
       function addEmailCus() {
