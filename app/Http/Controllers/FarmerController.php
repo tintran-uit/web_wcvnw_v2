@@ -46,4 +46,13 @@ class FarmerController extends Controller
 		
 	    return $farmers;	        
 	}
+
+	public function customerComment($farmer_id)
+	{
+		$comments = DB::select('SELECT DISTINCT c.`name` AS "customer_name", g.`comment` AS "comment" FROM `g_orders` g, `m_orders` m, `customers` c  WHERE g.`comment` IS NOT NULL AND m.`order_id` = g.`order_id` AND m.`farmer_id` = ?', [$farmer_id]);
+		
+		return $comments;
+	}
+
+
 }
