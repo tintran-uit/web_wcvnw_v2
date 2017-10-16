@@ -45,11 +45,7 @@ class FarmerCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'name' => 'address',
-            'label' => 'Địa Chỉ Dài',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'short_address',
-            'label' => 'Địa Chỉ Ngắn',
+            'label' => 'Địa Chỉ',
         ]);
         $this->crud->addColumn([
             'name' => 'rating',

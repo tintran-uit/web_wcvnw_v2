@@ -59,7 +59,8 @@ class OrderController extends Controller
         if($orderPossible == 0){
          	$msg['Cart'] = Cart::content();
        		return response()->json($msg); 
-         }
+        }
+        
 
          if(Auth::check()) {
          	$user = Auth::user();
