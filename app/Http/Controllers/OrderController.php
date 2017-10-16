@@ -39,33 +39,27 @@ class OrderController extends Controller
          $items = Cart::content();
          $orderPossible = 1;
          $counter = 1;
-         foreach ($items as $item) {
-         	$combine[$counter++] = $item->id;
-         	$combine[$counter++] = $item->options["farmer_id"];
-         	$combine[$counter++] = $item->qty;
+		foreach ($items as $item) {
+
+			$product_id = $item->id;
+			$farmer_id = $item->options["farmer_id"];
+			$price = $item->price;
+			$qty = $item->qty;
+			
+			//receive numbers and check if quantity_left is >= order quantity
+			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
+			
+			if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
+			{
+				$item->options["error"] = 1;
+				$orderPossible = 0;
+				Cart::update($item->rowId, $item->options["error"]);
+			}
 		}
-
-		$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`status` = '1' AND tr.`farmer_id` = ? AND p.`id` = ? AND (tr.`capacity` - tr.`sold`)/p.`unit_quantity` >= ?', [$combine]);
-
-		return response()->json($numbers);
-
-		// foreach ($numbers as $number) {
-		// 	if($number->quantity_left < $qty * $numbers[0]->unit_quantity)
-		// 	{
-		// 		$item->options["error"] = 1;
-		// 		$orderPossible = 0;
-		// 		// var_dump($item);die();
-		// 		Cart::update($item->rowId, $item->options["error"]);
-		// 	}
-		// }
-
-         }
-         if($orderPossible == 0){
+        if($orderPossible == 0){
          	$msg['Cart'] = Cart::content();
        		return response()->json($msg); 
          }
-
-		 // var_dump($items);var_dump($phone);die();
 
          if(Auth::check()) {
          	$user = Auth::user();
@@ -107,7 +101,6 @@ class OrderController extends Controller
 			if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
 			{
 				$item->options["error"] = 1;
-				// var_dump($item);die();
 				Cart::update($item->rowId, $item->options["error"]);
 			}
 			else{
