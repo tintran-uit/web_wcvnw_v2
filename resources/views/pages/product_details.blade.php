@@ -30,7 +30,7 @@
           </article>
           <article class="col-sm-8 col-md-7">
             <section class="wrap internal-padding wrap-radius bg-white">
-<form action="#" accept-charset="UTF-8" id="product_addtocart_form" method="post">                <h2 class="title-box no-margin">
+<form action="#" accept-charset="UTF-8" id="product_addtocart_form" method="post">                <h2 class="title-box no-margin" style="color: #A52223">
                   {{$product[0]->name}}
                 </h2>
                 <br>
@@ -172,7 +172,7 @@ function loadsuppliers() {
                 newRowContent = newRowContent = '<tr>\r\n <td><input type=\"radio\" value=\"'+data.id+'\" name=\"farmerID\"><\/td>\r\n';
               }
 
-                                           newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+quantity_left+' '+unit+'<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem ngu\u1ED3n g\u1ED1c<\/a><\/td>\r\n                            <\/tr>';
+                                           newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+quantity_left+' '+unit+'<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem đánh giá<\/a><\/td>\r\n                            <\/tr>';
               jQuery("#tbSupp tbody").append(newRowContent);
             });
      }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
