@@ -7,31 +7,7 @@
    <section class="spacer-20">
       <div class="container">
          <div class="row">
-            <aside class="col-sm-12 col-md-3">
-               <div class="block block-nav spacer-15">
-                  <div class="title">
-                     <h4 class="text-uppercase no-margin">Tài khoản</h4>
-                  </div>
-                  <div class="content">
-                     <ul class="list-unstyled">
-                        <li>
-                           <a href="account.html">          <i class="fa fa-angle-right"></i> Tài khoản
-                           </a>      
-                        </li>
-                        <li>
-                           <a class="current" href="{{url('gio-hang-thuc-pham-sach')}}">          <i class="fa fa-angle-right"></i> Đơn hàng
-                           </a>      
-                        </li>
-                        <li>
-                           <a class="" href="{{url('thanh-toan')}}">          <i class="fa fa-angle-right"></i> Thông tin giao hàng
-                           </a>      
-                        </li>
-                        
-                     </ul>
-                  </div>
-               </div>
-               
-            </aside>
+            @include('layouts.menu_user')
             <article class="col-sm-12 col-md-9">
                <div class="spacer-bottom-25">
                   <h3 class="no-margin-top text-uppercase spacer-10 text-center">
@@ -102,7 +78,7 @@
                      <fieldset class="buttons">
                         <div class="pull-right">
                            <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/mua-thuc-pham-sach')}}">Tiếp tục mua hàng</a>
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/thanh-toan')}}">Thanh toán</a>
+                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/thanh-toan')}}">Đặt hàng</a>
                         </div>
                      </fieldset>
                   </form>

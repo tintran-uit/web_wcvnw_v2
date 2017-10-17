@@ -97,8 +97,6 @@ class CustomerController extends Controller
 	            abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
 	        }
 
-	        // echo(App::getLocale());die();
-
 	        if (Session::has('locale')) {
 	            App::setLocale(Session::get('locale'));
 	        }
@@ -108,6 +106,7 @@ class CustomerController extends Controller
 	        $this->data['menu'] = MenuItem::all();
 	        $this->data['cart'] = Cart::content();
 
+	        // $this->data['cartOld'] = DB::table('articles')->where('id', $post_id)->first();
 	        return view('pages.user', $this->data);
 		}
 		return redirect()->back();

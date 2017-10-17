@@ -819,7 +819,7 @@
                                  <strong>Chăm sóc khách hàng</strong>
                               </li>
                               <li>
-                                 <a class="" href="{{url('')}}/huong-dan-mua-thuc-pham-sach">Hướng dẫn {{ trans('head.product') }}
+                                 <a class="" href="{{url('')}}/huong-dan-mua-thuc-pham-sach">Hướng dẫn mua hàng
                            </a>
                               </li>
                               <li>
