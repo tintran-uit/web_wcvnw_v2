@@ -10,7 +10,7 @@
             <aside class="col-sm-12 col-md-3">
                <div class="block block-nav spacer-15">
                   <div class="title">
-                     <h4 class="text-uppercase no-margin">Giỏ hàng</h4>
+                     <h4 class="text-uppercase no-margin">Tài khoản</h4>
                   </div>
                   <div class="content">
                      <ul class="list-unstyled">

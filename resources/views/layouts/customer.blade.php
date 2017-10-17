@@ -97,11 +97,11 @@
       </div>
       <div class="affix" id="nl-box-slider" style="right: -305px;">
          <div class="clearfix">
-            <div class="pull-left">
+            <div class="pull-left" style="position: sticky;">
                <a class="btn-block" id="label-subscribe" href="#">        <img alt="subscribe newsletter" src="{{url('')}}/assets/images/icons/btn-cart.png" />
                </a>    
             </div>
-            <div class="content pull-left hidden" id="subscribe-nl">
+            <div class="content pull-left hidden" id="subscribe-nl" >
                <h2 class="no-margin-top"  id="cart-status2" style="color: #B62029">@if(count($cart) == 0)
                                  Giỏ hàng rỗng
                                  @else
@@ -483,13 +483,13 @@
                               <span id="country-lang">Tiếng Việt</span>
                               <i class="fa fa-angle-down"></i>
                               </a>              
-                              <ul class="dropdown-menu list-unstyled">
+                              <!-- <ul class="dropdown-menu list-unstyled">
                                  <li>
                                     <a class="text-center" href="{{url('')}}/language/en"><img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
                                       <span id="country-lang"> English</span>
                                     </a>                
                                  </li>
-                              </ul>
+                              </ul> -->
                             @else
                               <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/en">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
                               <span id="country-lang">English</span>
@@ -649,7 +649,7 @@
          <section class="visible-xs">
             <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #f8f8f8; border-color: #e7e7e7;">
               <div class="container" style="background-color: rgba(106,184,69, 0.5);">
-                <div class="col-xs-6 vcenter" style="font-style: 12px; color: #777">
+                <div class="col-xs-7 vcenter" style="font-style: 12px; color: #777;width: 56%;">
                  @if(!isset(Auth::user()->name)) 
                     <button type="button" data-toggle="modal" data-target="#modal-signup">
                     {{ trans('head.register') }}
@@ -715,7 +715,7 @@
                      <span class="icon-bar"></span>
                      </button>
                      <a class="navbar-brand" href="{{url('/gio-hang-thuc-pham-sach')}}">
-                     <i class="fa fa-shopping-cart"></i> <span class="badge">{{count($cart)}}</span>
+                     <i class="fa fa-shopping-cart"></i> <span class="badge" id="cartMobile" >{{count($cart)}}</span>
                      </a>
                   </div>
                   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -934,11 +934,14 @@
          }
       function updateCartStatus(data) {
          var length = Object.keys(data).length;
-         if(length == 0)
+         if(length == 0){
             $('#cart-status').html("Giỏ hàng rỗng");
-         else
-            $('#cart-status').html("bạn có " + length + " nông sản sạch!");
+         }
+         else{
+          $('#cart-status').html("bạn có " + length + " nông sản sạch!");
             $('#cart-status2').html("bạn có " + length + " nông sản sạch!");
+         $('#cartMobile').html(length);
+         }
 
          var code = "";
          var total = 0;
@@ -952,8 +955,11 @@
          $('#cart-status-total').html(numberWithCommas(total) + " VND");
          $('#cart-status-totalz').html(numberWithCommas(total) + " VND");
 
-         Slide.run("#nl-box-slider", {right: 0}, 300);
-         setTimeout(function(){ Slide.run("#nl-box-slider", {right: -305}, 300); }, 2000);
+         if(!detectmob()){
+          Slide.run("#nl-box-slider", {right: 0}, 300);
+         setTimeout(function(){ Slide.run("#nl-box-slider", {right: -305}, 300); }, 2300);
+         }
+         
       }
 
 
@@ -1064,6 +1070,13 @@
 
           return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
       }
+      function detectmob() {
+         if(window.innerWidth <= 720) {
+           return true;
+         } else {
+           return false;
+         }
+      }
       </script>
       <script type="text/javascript">
          @if ($errors->has('email'))
@@ -1080,5 +1093,6 @@
                         
           @endif
        </script>
+       
    </body>
 </html>
