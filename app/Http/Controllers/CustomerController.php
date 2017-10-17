@@ -105,7 +105,7 @@ class CustomerController extends Controller
 	        $this->data['page'] = $page->withFakes();
 	        $this->data['menu'] = MenuItem::all();
 	        $this->data['cart'] = Cart::content();
-
+	        $this->data['cartOld'] = Cart::content();
 	        // $this->data['cartOld'] = DB::table('articles')->where('id', $post_id)->first();
 	        return view('pages.user', $this->data);
 		}

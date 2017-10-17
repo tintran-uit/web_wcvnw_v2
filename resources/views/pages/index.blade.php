@@ -173,7 +173,7 @@
                      <figure>
                         <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=4">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo5.png" />
-                           <h4 class="title">Ẩm thực & Sức khỏe</h4>
+                           <h4 class="title">Dinh dưỡng & Sức khỏe</h4>
                         </a>
                      </figure>
                   </section>

@@ -44,9 +44,11 @@
                        </div>
                        <div class="col-sm-9 listbar">
                          <div class="listbox">
-                           <p>Đánh giá sản phẩm để xây dựng cộng đồng lương <br>Bạn có thể đánh giá chất lượng đơn hàng ngày 21/10/2017</p>
-         <a class="btn btn-info btn-lg lg-2x" data-toggle="modal" data-target="#modal-rate"> Xem đơn hàng <i class="fa fa-angle-double-right"></i>
-         </a>                </div>
+                           <p>Đánh giá sản phẩm để xây dựng cộng đồng lương nông<br>Mời bạn đánh giá chất lượng đơn hàng ngày <b><i>21/10/2017</i></b></p>
+         <!-- <a class="btn btn-info btn-lg lg-2x" data-toggle="modal" data-target="#modal-rate"> Xem lại đơn hàng <i class="fa fa-angle-double-right"></i>
+         </a>    -->            
+          </div>
+          <form id="formRate">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                              <div class="panel panel-default">
                                <div class="panel-heading" role="tab" id="headingOne">
@@ -57,8 +59,11 @@
                                  </h4>
                                </div>
                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                               <div class="modal-body">
-                                        <div class="form-group">
+                                 <div class="panel-body">
+                                   <p><b>Bạn có thể đánh giá sản phẩm mua trong vòng một tuần, kể từ ngày nhận được hàng.</b></p>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="form-group" style="padding-left: 10px">
                                           <!-- <label for="input-1" class="control-label">Chấm điểm:</label> -->
                                            <input id="input-4" name="input-4" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
                                         </div>
@@ -69,13 +74,26 @@
                                <div class="panel-heading" role="tab" id="headingTwo">
                                  <h4 class="panel-title">
                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                     <i class="fa fa-angle-down btn-link"></i> Collapsible Group Item #2
+                                     <i class="fa fa-angle-down btn-link"></i> Chọn sản phẩm <span class="prod"></span> 
                                    </a>
                                  </h4>
                                </div>
                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                  <div class="panel-body">
-                                   Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                   <p><b>Vui lòng tích vào sản phẩm nào khiến bạn <span class="prod"></span></b></p>
+                                   <!-- <table style="width: 100%;">
+                                      <tr>
+                                          <td style="width:33%">
+                                          <label class="checkbox-inline"><input type="checkbox" value="0" name="elements">Tất cả sản phẩm</label>
+                                          </td>
+                                         
+                                      </tr>
+                                   </table> -->
+                                      <div class="col-md-4"><label><input type="checkbox" value="0" name="elements">Tất cả sản phẩm</label></div>
+                                    @foreach($cartOld as $item)
+                                      <div class="col-md-4"><label><input type="checkbox" value="{{$item->id}}" name="elements">{{$item->name}}</label></div>
+                                    @endforeach
+                                    
                                  </div>
                                </div>
                              </div>
@@ -83,17 +101,26 @@
                                <div class="panel-heading" role="tab" id="headingThree">
                                  <h4 class="panel-title">
                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                     <i class="fa fa-angle-down btn-link"></i> Collapsible Group Item #3
+                                     <i class="fa fa-angle-down btn-link"></i> Bình luận
                                    </a>
                                  </h4>
                                </div>
                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                  <div class="panel-body">
-                                   Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                   <div class="form-group">
+                                      <label for="comment">Vui lòng nhập bình luận để xây dựng cồng đồng nuôi trồng sạch:</label>
+                                      <textarea class="form-control" rows="5" name="comment"></textarea>
+                                    </div>
                                  </div>
                                </div>
                              </div>
                            </div>
+                        </form>
+
+                           <a class="btn btn-info btn-lg lg-2x" onclick="sentRate()"> Gửi đánh giá <i class="fa fa-angle-double-right"></i>
+                           </a>
+
+
                        </div>
                      </div>
                    </section>
@@ -146,6 +173,9 @@
 <script type="text/javascript">
    initRatingStar();
    var rate = 0;
+   var dataPost = {};
+   getFormValue('#formRate');
+
    function initRatingStar() {
       var $rate = $('input[type="number"]');
       $rate.rating({
@@ -156,15 +186,60 @@
          });
       };
 $(document).on('ready', function () {
-   $('.rating,.kv-gly-star,.kv-gly-heart,.kv-uni-star,.kv-uni-rook,.kv-fa,.kv-fa-heart,.kv-svg,.kv-svg-heart').on(
+         $('.rating,.kv-gly-star,.kv-gly-heart,.kv-uni-star,.kv-uni-rook,.kv-fa,.kv-fa-heart,.kv-svg,.kv-svg-heart').on(
                 'change', function () {
                     rate = $(this).val();
+                    if(rate>3){
+                        $('.prod').html('ưng ý');
+                    }else{
+                        $('.prod').html('không hài lòng');
+                    }
                     next1();
+                });
+         $('input[type="checkbox"]').on(
+                'change', function () {
+                    rate = $(this).val();
+                    if(rate>3){
+                        $('.prod').html('ưng ý');
+                    }else{
+                        $('.prod').html('không hài lòng');
+                    }
+                    next2();
                 });
     });
 
 function next1() {
-   $('#next1').html('aaaa');
+   $("#collapseTwo").collapse("show");
+   $("#collapseOne").collapse("hide");
+
+}
+function next2() {
+   $("#collapseThree").collapse("show");
+}
+function getFormValue(formID) {
+  var $inputs = $(formID+' :input');
+  var txt ='a';
+  $inputs.each(function() {
+      dataPost[this.name] = $(this).val();
+      
+  });
+  myFunction();
+}
+function myFunction() {
+      var coffee = document.forms[0];
+    var txt = "";
+    var i;
+    for (i = 0; i < coffee.length; i++) {
+        if (coffee[i].checked) {
+            txt = txt + coffee[i].value + " ";
+        }
+    }
+  console.log(txt);
+    
+
+}
+function sentRate() {
+   getFormValue('#formRate');
 }
 </script>
 
