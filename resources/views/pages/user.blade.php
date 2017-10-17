@@ -26,7 +26,7 @@
                        </div>
                        <div class="col-sm-9 listbar">
                          <div class="listbox">
-                           <p>Bạn có thể đánh giá đơn hàng ngày 21/10/2017</p>
+                           <p>Bạn có thể đánh giá chất lượng đơn hàng ngày 21/10/2017</p>
          <a class="btn btn-info btn-lg lg-2x" data-toggle="modal" data-target="#modal-rate"> Đánh giá <i class="fa fa-angle-double-right"></i>
          </a>                </div>
                        </div>

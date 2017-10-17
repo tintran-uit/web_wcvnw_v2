@@ -2353,7 +2353,6 @@ box-shadow: -4px 5px 10px -2px rgba(209,209,209,1);
 
 /* line 25, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/pages/_account.scss */
 .listbar .listbox {
-  color: #9CCB3B;
   font-size: 1em;
   margin-bottom: 20px; }
   /* line 29, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/pages/_account.scss */
@@ -2681,8 +2680,8 @@ box-shadow: -4px 5px 10px -2px rgba(209,209,209,1);
   /* line 12, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/ribbons/_ribbon.scss */
   .ribbon .ribbonBadge {
     width: auto;
-    height: 35px;
-    padding: 9px 10px;
+    height: 28px;
+    padding: 5px 10px;
     position: absolute;
     left: 0;
     color: #ffffff;
@@ -2695,7 +2694,7 @@ box-shadow: -4px 5px 10px -2px rgba(209,209,209,1);
       border-top: 7px solid;
       border-left: 7px solid transparent;
       position: absolute;
-      top: 35px;
+      top: 28px;
       left: 0;
       z-index: -1; }
     /* line 28, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/ribbons/_ribbon.scss */
@@ -2707,8 +2706,12 @@ box-shadow: -4px 5px 10px -2px rgba(209,209,209,1);
     /* line 34, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/ribbons/_ribbon.scss */
     .ribbon .ribbonBadge.new {
       background-color: #64903E; }
+      .ribbon .ribbonBadge.new2 {
+      background-color: #C04724; }
       /* line 36, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/ribbons/_ribbon.scss */
       .ribbon .ribbonBadge.new::after {
+        border-top-color: #000000; }
+        .ribbon .ribbonBadge.new2::after {
         border-top-color: #000000; }
 
 /* line 1, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/_zoom.scss */
