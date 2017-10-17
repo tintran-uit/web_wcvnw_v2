@@ -110,7 +110,7 @@ class FarmerCrudController extends CrudController
         $this->crud->addField([   // WYSIWYG
             'name' => 'quality',
             'label' => 'Cam kết chất lượng',
-            'type' => 'summernote',
+            'type' => 'textarea',
             'placeholder' => 'Cam kết chất lượng',
         ]);
 
