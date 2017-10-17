@@ -122,6 +122,45 @@ class OrderCrudController extends CrudController
         ]);
 
         $this->crud->addField([
+            'name' => 'shipping_cost',
+            'label' => 'Phí Giao Hàng',
+            'type' => 'number',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4'
+            ],
+        ]);
+
+        $this->crud->addField([
+            'name' => 'delivery_address',
+            'label' => 'Địa Chỉ Giao Hàng',
+            'type' => 'text',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10'
+            ],
+        ]);
+
+        $this->crud->addField([
+            'name' => 'delivery_phone',
+            'label' => 'Phí Giao Hàng',
+            'type' => 'text',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'delivery_district',
+            'label' => 'Quận Giao Hàng',
+            'type' => 'select',
+            'entity' => 'district',
+            'attribute' => 'name',
+            'model' => "App\Models\District",
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4'
+            ],
+        ]);
+
+
+        $this->crud->addField([
             'name' => 'status',
             'label' => 'Trạng Thái',
             'type' => 'select',
