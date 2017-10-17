@@ -24,7 +24,7 @@ class Product extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['name', 'short_description', 'description', 'image', 'thumbnail', 'unit_quantity', 'unit', 'price', 'category', 'created_at', 'updated_at', 'slug'];
+    protected $fillable = ['name', 'short_description', 'description', 'image', 'thumbnail', 'unit_quantity', 'unit', 'price', 'category', 'created_at', 'updated_at', 'slug', 'brand_id'];
     // protected $hidden = [];
     // protected $dates = [];
     // protected $casts = [
@@ -60,6 +60,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\Category', 'category');
+    }
+    public function brand()
+    {
+        return $this->belongsTo('App\Models\Brand', 'brand_id');
     }
 
     public function sold()
