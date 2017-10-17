@@ -767,7 +767,7 @@
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="tel" src="{{url('')}}/assets/images/icons/icon-tel.png" height="39" />
-                           <span data-info="text-info">Hotline: +0 888 9090 909</span>
+                           <span data-info="text-info">Hotline: +84 919 616 054</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
@@ -951,7 +951,11 @@
 
          $('#cart-status-total').html(numberWithCommas(total) + " VND");
          $('#cart-status-totalz').html(numberWithCommas(total) + " VND");
+
+         Slide.run("#nl-box-slider", {right: 0}, 300);
+         setTimeout(function(){ Slide.run("#nl-box-slider", {right: -305}, 300); }, 2000);
       }
+
 
       function numberWithCommas(x) {
              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

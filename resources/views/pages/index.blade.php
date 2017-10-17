@@ -14,15 +14,15 @@
             </a>      
          </div>
          <div class="item">
-            <a href="#">          <img alt="slide" src="assets/images/slides/Artboard2.png" />
+            <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="assets/images/slides/Artboard2.png" />
             </a>        
             <div class="label-slide hidden-sm hidden-xs slideInDown animated">
                <div>
-                  <h2 class="no-margin-bottom">NEW</h2>
-                  <h5 class="no-margin-top">COLLECTION</h5>
+                  <h2 class="no-margin-bottom">GÓI</h2>
+                  <h5 class="no-margin-top">SẢN PHẨM</h5>
                </div>
-               <p class="text-center">SPRING<BR>SUMMER</p>
-               <h1 class="text-right">‘15</h1>
+               <p class="text-center">TIỆN DỤNG<BR>DINH DƯỠNG<BR>TIẾT KIỆM</p>
+               <h1 class="text-right">5-10%</h1>
             </div>
          </div>
          
@@ -157,7 +157,7 @@
                <div class="thumbnail">
                   <section class="caption top">
                      <figure>
-                        <a href="post.html">
+                        <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo4.png" />
                            <h4 class="title">Góc nhà bếp</h4>
                         </a>
@@ -171,7 +171,7 @@
                <div class="thumbnail">
                   <section class="caption top">
                      <figure>
-                        <a href="post.html">
+                        <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=4">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo5.png" />
                            <h4 class="title">Ẩm thực & Sức khỏe</h4>
                         </a>
@@ -185,7 +185,7 @@
                <div class="thumbnail">
                   <section class="caption top">
                      <figure>
-                        <a href="post.html">
+                        <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=5">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo6.png" />
                            <h4 class="title">Câu chuyện nhà nông</h4>
                         </a>
@@ -493,7 +493,7 @@
           function addCart(prodID, farmerID) {
               var qty = 1;
               // var farmerID = $('input[name="farmerID"]:checked').val();;
-              console.log(farmerID);
+              // console.log(farmerID);
               var data = { "id": prodID, "qty": qty , 'farmerID':farmerID};
               $('#modalLoader').modal('show');
                   $.ajax({
@@ -517,9 +517,9 @@
                           // $('#modalChooseFarmer').modal('show');
                         }else{
                           updateCartStatus(data);
-                          $('#modalMessageFinish').html('Thêm thành công!');
-                          $('#modalAlertFinish').modal('show');
-                          setTimeout(function(){ $('#modalAlertFinish').modal('hide'); }, 800);
+                          // $('#modalMessageFinish').html('Thêm thành công!');
+                          // $('#modalAlertFinish').modal('show');
+                          // setTimeout(function(){ $('#modalAlertFinish').modal('hide'); }, 800);
                         }
                         console.log(data);
                       },

@@ -9,7 +9,7 @@
       <div class="container">
          <div class="row">
             @include('layouts.menu_child')
-            <article id="article" class="col-md-8">
+            <article id="article" class="col-md-8 wrap wrap-border internal-padding wrap-radius bg-white style-post">
                <h3 class="text-uppercase no-margin-top">
                   {{$page->name}}
                </h3>

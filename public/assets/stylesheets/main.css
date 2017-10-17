@@ -720,14 +720,14 @@ a {
   /* line 67, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_media.scss */
   #main-header {
     padding-top: 70px; } }
-@media (min-width: 1335px) {
+@media (min-width: 768px ) {
   /* line 73, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_media.scss */
   #nl-box-slider {
     display: block; } }
 @media (max-width: 1334px) {
   /* line 79, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_media.scss */
   #nl-box-slider {
-    display: none; } }
+     } }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   /* line 87, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_media.scss */
@@ -1937,12 +1937,12 @@ a {
 
 /* line 28, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_style-carousel.scss */
 .label-slide {
-  background-color: #536f94;
+  background-color: #C04724;
   position: absolute;
   top: 0;
   right: 5%;
   padding: 5px 20px 10px;
-  color: #a4d8cb; }
+  color: #f5f9f8; }
 
 /* line 39, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/blocks/_style-carousel.scss */
 .carousel-fade .carousel-inner .item {
