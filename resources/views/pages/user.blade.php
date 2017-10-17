@@ -44,6 +44,7 @@
                        </div>
                        <div class="col-sm-9 listbar">
                          <div class="listbox">
+                           <p>Đánh giá sản phẩm để xây</p>
                            <p>Bạn có thể đánh giá chất lượng đơn hàng ngày 21/10/2017</p>
          <a class="btn btn-info btn-lg lg-2x" data-toggle="modal" data-target="#modal-rate"> Đánh giá <i class="fa fa-angle-double-right"></i>
          </a>                </div>
@@ -78,7 +79,7 @@
           </p>
 
           <label for="input-1" class="control-label">Chấm điểm</label>
-            <input id="input-4" name="input-4" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
+             <input id="input-4" name="input-4" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
 
         </div>
       </div>
@@ -91,21 +92,23 @@
 <script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
-initRatingStar();
-(function(){
-setTimeout(initRatingStar, 4000);
-})();
-
-function initRatingStar() {
-   var $element1 = $('input[type="number"]');
-      $element1.rating({
-      clearCaption: '',
-      step: 1,
-      starCaptions: {1: 'Rất kém', 2: 'Kém', 3: 'Được', 4: 'Tốt', 5: 'Đáng khen'},
-      starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'}
-      });
+   initRatingStar();
+   var rate = 0;
+   function initRatingStar() {
+      var $rate = $('input[type="number"]');
+      $rate.rating({
+         clearCaption: '',
+         step: 1,
+         starCaptions: {1: 'Rất kém', 2: 'Kém', 3: 'Được', 4: 'Tốt', 5: 'Đáng khen'},
+         starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'}
+         });
       };
-   
+$(document).on('ready', function () {
+   $('.rating,.kv-gly-star,.kv-gly-heart,.kv-uni-star,.kv-uni-rook,.kv-fa,.kv-fa-heart,.kv-svg,.kv-svg-heart').on(
+                'change', function () {
+                    rate = $(this).val();
+                });
+    });
 </script>
 
 @endsection

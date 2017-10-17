@@ -773,7 +773,7 @@
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-shipping.png" height="39" />
-                           <span data-info="text-info">Giao hàng tận nơi</span>
+                           <span data-info="text-info">Giao hàng đến tận nhà</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3 text-center">
