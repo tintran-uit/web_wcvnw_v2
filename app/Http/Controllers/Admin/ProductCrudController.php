@@ -80,6 +80,19 @@ class ProductCrudController extends CrudController
             ],
         ]);
 
+        $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
+            'label' => 'Nhãn Sản Phẩm',
+            'type' => 'select2',
+            'name' => 'brand_id', // the method that defines the relationship in your Model
+            'entity' => 'brand', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\Brand", // foreign key model
+            // 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-5'
+            ],
+        ]);
+
        $this->crud->addField([    // TEXT
             'name' => 'price',
             'label' => 'Giá Bán',
