@@ -3168,4 +3168,14 @@ a.item-delete:hover{
   background-color: #C04724;
 }
 
+.panel-title > a{
+  color: #A52223;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.panel-title > a:hover{
+  color: #C04724;
+  text-decoration: none;
+}
 

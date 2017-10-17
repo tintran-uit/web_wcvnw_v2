@@ -44,10 +44,56 @@
                        </div>
                        <div class="col-sm-9 listbar">
                          <div class="listbox">
-                           <p>Đánh giá sản phẩm để xây</p>
-                           <p>Bạn có thể đánh giá chất lượng đơn hàng ngày 21/10/2017</p>
-         <a class="btn btn-info btn-lg lg-2x" data-toggle="modal" data-target="#modal-rate"> Đánh giá <i class="fa fa-angle-double-right"></i>
+                           <p>Đánh giá sản phẩm để xây dựng cộng đồng lương <br>Bạn có thể đánh giá chất lượng đơn hàng ngày 21/10/2017</p>
+         <a class="btn btn-info btn-lg lg-2x" data-toggle="modal" data-target="#modal-rate"> Xem đơn hàng <i class="fa fa-angle-double-right"></i>
          </a>                </div>
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                             <div class="panel panel-default">
+                               <div class="panel-heading" role="tab" id="headingOne">
+                                 <h4 class="panel-title">
+                                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                     <i class="fa fa-angle-down btn-link"></i> Chấm điểm
+                                   </a>
+                                 </h4>
+                               </div>
+                               <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                               <div class="modal-body">
+                                        <div class="form-group">
+                                          <!-- <label for="input-1" class="control-label">Chấm điểm:</label> -->
+                                           <input id="input-4" name="input-4" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
+                                        </div>
+                                 </div>
+                               </div>
+                             </div>
+                             <div class="panel panel-default">
+                               <div class="panel-heading" role="tab" id="headingTwo">
+                                 <h4 class="panel-title">
+                                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                     <i class="fa fa-angle-down btn-link"></i> Collapsible Group Item #2
+                                   </a>
+                                 </h4>
+                               </div>
+                               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                 <div class="panel-body">
+                                   Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                 </div>
+                               </div>
+                             </div>
+                             <div class="panel panel-default">
+                               <div class="panel-heading" role="tab" id="headingThree">
+                                 <h4 class="panel-title">
+                                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                     <i class="fa fa-angle-down btn-link"></i> Collapsible Group Item #3
+                                   </a>
+                                 </h4>
+                               </div>
+                               <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                 <div class="panel-body">
+                                   Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
                        </div>
                      </div>
                    </section>
@@ -78,8 +124,14 @@
             Bạn có thể đánh giá sản phẩm mua trong vòng một tuần, kể từ ngày nhận được hàng.
           </p>
 
-          <label for="input-1" class="control-label">Chấm điểm</label>
+          <div class="form-group">
+            <label for="input-1" class="control-label">Chấm điểm</label>
              <input id="input-4" name="input-4" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
+          </div>
+          <div class="form-group" id="next1">
+
+          </div>
+
 
         </div>
       </div>
@@ -107,8 +159,13 @@ $(document).on('ready', function () {
    $('.rating,.kv-gly-star,.kv-gly-heart,.kv-uni-star,.kv-uni-rook,.kv-fa,.kv-fa-heart,.kv-svg,.kv-svg-heart').on(
                 'change', function () {
                     rate = $(this).val();
+                    next1();
                 });
     });
+
+function next1() {
+   $('#next1').html('aaaa');
+}
 </script>
 
 @endsection
