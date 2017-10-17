@@ -98,31 +98,50 @@
       <div class="affix" id="nl-box-slider" style="right: -305px;">
          <div class="clearfix">
             <div class="pull-left">
-               <a class="btn-block" id="label-subscribe" href="#">        <img alt="subscribe newsletter" src="{{url('')}}/assets/images/icons/btn-nl.png" />
+               <a class="btn-block" id="label-subscribe" href="#">        <img alt="subscribe newsletter" src="{{url('')}}/assets/images/icons/btn-cart.png" />
                </a>    
             </div>
-            <div class="content pull-left" id="subscribe-nl">
-               <h2 class="no-margin-top">Cơ hội nhận nhiều ưu đãi</h2>
-               <form action="/#" accept-charset="UTF-8" method="post">
+            <div class="content pull-left hidden" id="subscribe-nl">
+               <h2 class="no-margin-top"  id="cart-status2" style="color: #B62029">@if(count($cart) == 0)
+                                 Giỏ hàng rỗng
+                                 @else
+                                 Bạn có {{count($cart)}} nông sản sạch!
+                                 @endif</h2>
+               <form action="/#" accept-charset="UTF-8" method="post" style="width:253px;">
                   <fieldset>
-                     <div>
-                        <label for="email_address">Nhập email: </label>
-                     </div>
-                     <div class="form-inline">
-                        <div class="form-group">
-                           <input type="email" class="form-control" name="emailCus" />
-                        </div>
-                        <a onclick="addEmailCus()" class="btn btn-light no-margin">
-                        <i class="fa fa-chevron-right"></i>
-                        </a>
-                     </div>
-                     <div class="checkbox">
-                        <label>
-                        <input type="checkbox" name="receiveEmailCus" value="1" checked/> Đồng ý nhận thông tin khuyến mãi!
-                        </label>
-                     </div>
+                     
+                     <ul id='cart-list-product2' class="products-list list-unstyled">
+                       <?php $total = 0;?>
+                       @foreach($cart as $item)
+                          <li class="item">
+                             <div class="clearfix row">
+                                <div class="col-xs-10 product-details">
+                                   <div class="clearfix row">
+                                      <p class="col-xs-8 product-name no-margin">
+                                         {{$item->name}}  x{{$item->qty}}
+                                      </p>
+                                      <p class="col-xs-4 price no-margin text-right no-padding">
+                                         {{number_format($item->subtotal)}} VND
+                                      </p>
+                                   </div>
+                                </div>
+                                <div class="col-xs-2 no-padding-left">
+                                   <a type="button" class="close" data-dismiss="modal" onclick="deleteItem('{{$item->rowId}}')">
+                                   <i class="fa fa-times"></i>
+                                   </a>
+                                </div>
+                             </div>
+                          </li>
+                          <?php $total += $item->subtotal; ?>
+                       @endforeach
+                       <li class="subtotale pull-right no-margin">
+                           Tổng:&nbsp;&nbsp;&nbsp;<span class="price" id="cart-status-total2">{{number_format($total)}} VND</span>
+                        </li>
+                       </ul>
+                       
                      <div class="text-right">
-                     <a href="/">CFarm Việt Nam</a>
+                      <br>
+                      <a href="/">CFarm Việt Nam</a>
                      </div>
                   </fieldset>
                </form>
@@ -508,7 +527,7 @@
                                  <strong></strong>
                                  </span>
                               </div>
-                              <div class="pull-right arrow">
+                              <div class="pull-right arrow" id="check_show_cart">
                                  <i class="glyphicon glyphicon-chevron-down"></i>
                               </div>
                            </a>
@@ -730,18 +749,18 @@
                <div class="container">
                   <div class="row">
                      <article class="col col-xs-12 col-sm-3">
-                        <div class="info-col bg-super-light">
+                        <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="tel" src="{{url('')}}/assets/images/icons/icon-tel.png" height="39" />
                            <span data-info="text-info">Hotline: +0 888 9090 909</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
-                        <div class="info-col bg-super-light">
+                        <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-shipping.png" height="39" />
                            <span data-info="text-info">Giao hàng tận nơi</span>
                         </div>
                      </article>
-                     <article class="col col-xs-12 col-sm-3">
+                     <article class="col col-xs-12 col-sm-3 text-center">
                         <div class="info-col bg-super-light">
                            <img class="hidden-sm hidden-md" alt="email" src="{{url('')}}/assets/images/icons/icon-mail.png" height="39" />
                            <span data-info="text-info">
@@ -750,7 +769,7 @@
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
-                        <div class="info-col bg-super-light">
+                        <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="location" src="{{url('')}}/assets/images/icons/icon-location.png" height="39" />
                            <span data-info="text-info">167 Trần Trọng Cung, Q.7</span>
                         </div>
@@ -863,12 +882,13 @@
          $('#article').children('img').each(function(){
            $(this).addClass('img-responsive');
            $(this).css("height", "auto");
-           
+
          });
        });
       </script>
       <script type="text/javascript">
         checkActiveMenu();
+        showCart();
       function deleteItem(rowId) {
          var markers = { "rowId": rowId};
 
@@ -898,6 +918,7 @@
             $('#cart-status').html("Giỏ hàng rỗng");
          else
             $('#cart-status').html("bạn có " + length + " nông sản sạch!");
+            $('#cart-status2').html("bạn có " + length + " nông sản sạch!");
 
          var code = "";
          var total = 0;
@@ -906,8 +927,10 @@
            total += value.subtotal;
          });
          $('#cart-list-product').html(code);
+         $('#cart-list-product2').html(code);
 
          $('#cart-status-total').html(numberWithCommas(total) + " VND");
+         $('#cart-status-total2').html(numberWithCommas(total) + " VND");
       }
 
       function numberWithCommas(x) {
@@ -995,6 +1018,28 @@
       //   }
 
       // }
+
+      function showCart() {
+        window.addEventListener('scroll', function(e) {
+          var check = isScrolledIntoView('#check_show_cart');
+          // console.log(check);
+          if(check){
+            $("#subscribe-nl").addClass('hidden');
+          }else{
+            $("#subscribe-nl").removeClass('hidden');
+          }
+        });
+      }
+      function isScrolledIntoView(elem)
+      {
+          var docViewTop = $(window).scrollTop();
+          var docViewBottom = docViewTop + $(window).height();
+
+          var elemTop = $(elem).offset().top;
+          var elemBottom = elemTop + $(elem).height();
+
+          return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+      }
       </script>
       <script type="text/javascript">
          @if ($errors->has('email'))

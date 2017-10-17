@@ -121,8 +121,12 @@ class OrderController extends Controller
        // return $order_id;
        	return response()->json($msg);
 
-	}
+}
 	
+	public function addPackage(Request $request)
+	{
+
+	}
 
 	/**
 	 *cancelOrder

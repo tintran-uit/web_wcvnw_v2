@@ -66,6 +66,11 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Trading', 'product_id');
     }
+    // public function package()
+    // {
+    //     $packages = App\Models\Product::where('category', 0)->get();
+    //    return $packages;
+    // }
 //    public function images()
 //    {
 //        return $this->morphMany('App\Models\Image', 'imageable');
