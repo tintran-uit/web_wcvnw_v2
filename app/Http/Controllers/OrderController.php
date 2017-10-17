@@ -100,7 +100,7 @@ class OrderController extends Controller
         $order_id = $order_id[0]->order_id;
         DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`) VALUES(?,?,?,?,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district]);
+         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`) VALUES(?,?,?,?,?,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
@@ -113,7 +113,7 @@ class OrderController extends Controller
 			$qty = $item->qty;
 			
 			//receive numbers and check if quantity_left is >= order quantity
-			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
+			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left", p.`category` "category" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
 			
 			if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
 			{
@@ -124,15 +124,26 @@ class OrderController extends Controller
 				$quantity = $qty * $numbers[0]->unit_quantity;
 				$price_farmer = $qty * $numbers[0]->price_farmer;
 				$unit = $numbers[0]->unit;
+				$category = $numbers[0]->category;
 
 	         	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `unit`, `price`, `price_farmer`, `created_at`) VALUES(?,?,?,?,?,?,?, CURRENT_TIMESTAMP)', [$order_id, $farmer_id, $product_id, $quantity, $unit, $price, $price_farmer]);
 
 	         	//update trading table
 	        	DB::statement('UPDATE `trading` SET `sold_count` = `sold_count`+ ?, `sold` = `sold` + ? WHERE `farmer_id` = ? AND `product_id` = ?', [$qty, $quantity, $farmer_id, $product_id]);
+
+	        	//Proccess the elements in case package is order
+	        	if($capacity == 0) //package
+	        	{
+		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
+		        		              SET t.`sold` = t.`sold` + m.`quantity` 
+ 									WHERE t.`farmer_id` = m.`farmer_id`
+   									  AND t.`product_id` = m.`product_id` 
+   									  AND m.`package_id` = ?', [$product_id]);
+
+	        	}
 			}
          	
-
-		}
+        }
 		Cart::destroy();
  		$msg['Cart'] = Cart::content();
        // return $order_id;
