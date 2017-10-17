@@ -39,12 +39,15 @@ class OrderController extends Controller
          $items = Cart::content();
          $orderPossible = 1;
          $counter = 1;
+         $total = 0;
+         $promotion = 0;
 		foreach ($items as $item) {
 
 			$product_id = $item->id;
 			$farmer_id = $item->options["farmer_id"];
 			$price = $item->price;
 			$qty = $item->qty;
+			$total = $total + ($price * $qty);
 			
 			//receive numbers and check if quantity_left is >= order quantity
 			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
@@ -62,9 +65,11 @@ class OrderController extends Controller
         }
         
         $shipping_cost = DB::select('SELECT `shipping_cost` FROM `district` WHERE `id` = ?', [$district]);
-        $msg['shipping_cost'] = $shipping_cost[0]->shipping_cost;
 
-        $msg['promotion'] = 0;
+        $shipping_cost = $shipping_cost[0]->shipping_cost;
+        $msg['shipping_cost'] = $shipping_cost;
+
+        $msg['promotion'] = $promotion;
 
          if(Auth::check()) {
          	$user = Auth::user();
@@ -96,11 +101,18 @@ class OrderController extends Controller
         
 // Create Order_id and return after adding the order successfully.
         //#34256789
+        if($total < 500000) {
+         	$total = $total - ROUND(($promotion * $total)/100, 0) + $shipping_cost;
+        }
+        else {
+        	//free ship
+        	$total = $total - ROUND(($promotion * $total)/100, 0);
+        }
         $order_id = DB::select('SELECT `order_id` "order_id" FROM `uniqueids` WHERE `id` = 1');
         $order_id = $order_id[0]->order_id;
         DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`) VALUES(?,?,?,?,?,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost]);
+         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`) VALUES(?,?,?,?,?,?,?,?, ?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
@@ -132,7 +144,7 @@ class OrderController extends Controller
 	        	DB::statement('UPDATE `trading` SET `sold_count` = `sold_count`+ ?, `sold` = `sold` + ? WHERE `farmer_id` = ? AND `product_id` = ?', [$qty, $quantity, $farmer_id, $product_id]);
 
 	        	//Proccess the elements in case package is order
-	        	if($capacity == 0) //package
+	        	if($category == 0) //package
 	        	{
 		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
 		        		              SET t.`sold` = t.`sold` + m.`quantity` 
@@ -151,8 +163,32 @@ class OrderController extends Controller
 
 }
 	
-	public function addPackage(Request $request)
+	public function rateOrder(Request $request)
 	{
+		$rate = $request->rate;
+		$comment = $request->comment;
+		$elements = $request->elements;
+
+		if(Auth::check()) {
+         	$user = Auth::user();
+         	$customer_id = $user->connected_id;
+         	if(strcmp($user->account_type, "Customer") == 0)
+         	{
+         		if($elements[0] == 0) {
+         			//rate the package as whole
+
+         		}
+         		else
+         		{
+         			foreach ($elements as $element) {
+         				//
+         			}
+         		}
+         	}
+         }
+         else {
+         	return redirect()->back();
+         }
 
 	}
 
@@ -165,11 +201,13 @@ class OrderController extends Controller
 	 * @return array of products in its categories 
 	 */
 
-	public function cancelOrder($customer_id, $cart)
+	public function cancelOrder($customer_id, $order_id, $rat)
 	{
 		// 
 		return 0;
 	}
+
+
 	
 
 }
