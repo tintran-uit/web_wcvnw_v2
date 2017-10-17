@@ -99,6 +99,15 @@ class FarmerCrudController extends CrudController
             ],
         ]);
         $this->crud->addField([   // WYSIWYG
+            'name' => 'product_list',
+            'label' => 'Các sản phẩm nuôi trồng',
+            'type' => 'textarea',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10'
+            ],
+            'placeholder' => 'Các sản phẩm nuôi trồng',
+        ]);
+        $this->crud->addField([   // WYSIWYG
             'name' => 'quality',
             'label' => 'Cam kết chất lượng',
             'type' => 'summernote',
