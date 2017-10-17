@@ -61,6 +61,10 @@ class OrderController extends Controller
        		return response()->json($msg); 
         }
         
+        $shipping_cost = DB::select('SELECT `shipping_cost` FROM `district` WHERE `id` = ?', [$district]);
+        $msg['shipping_cost'] = $shipping_cost[0]->shipping_cost;
+
+        $msg['promotion'] = 0;
 
          if(Auth::check()) {
          	$user = Auth::user();
