@@ -5,7 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Vister;
+use Backpack\PageManager\app\Models\Page;
 use DB;
+use Auth;
+use Session;
+use App;
+use App\Models\MenuItem;
+use Cart;
 
 class CustomerController extends Controller
 {
@@ -71,6 +77,40 @@ class CustomerController extends Controller
 		}
 		
 		
+	}
+
+	public function editProfile()
+	{
+		if (Auth::check()) {
+			
+		}
+		return redirect()->back();
+	}
+
+	public function rate()
+	{
+		if (Auth::check()) {
+			$page = Page::findBySlug('index');
+
+	        if (!$page)
+	        {
+	            abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
+	        }
+
+	        // echo(App::getLocale());die();
+
+	        if (Session::has('locale')) {
+	            App::setLocale(Session::get('locale'));
+	        }
+
+	        $this->data['title'] = $page->title;
+	        $this->data['page'] = $page->withFakes();
+	        $this->data['menu'] = MenuItem::all();
+	        $this->data['cart'] = Cart::content();
+
+	        return view('pages.user', $this->data);
+		}
+		return redirect()->back();
 	}
 
 }

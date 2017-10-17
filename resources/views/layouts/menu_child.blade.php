@@ -40,7 +40,7 @@
                </div>
                <div class="general-info">
                   <h5 class="title">Liên hệ với chúng tôi</h5>
-                  <div class="content text-center" id="fanpageFB">
+                  <div class="text-center" id="fanpageFB">
                      <div class="fb-page" data-href="https://www.facebook.com/Cfarm.vn/" data-tabs="timeline" data-height="156" data-small-header="true" data-width="263" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Cfarm.vn/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Cfarm.vn/">Cfarm.vn</a></blockquote></div>  
                   </div>
                </div>

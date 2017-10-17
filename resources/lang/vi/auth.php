@@ -15,5 +15,12 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'name' => 'Họ tên',
+    'email' => 'Nhập ',
+    'password' => 'Mật khẩu',
+    're_password' => 'Nhập lại ật khẩu',
+    'register' => 'Tạo tài khoản',
+    'haveAcc' => 'Bạn đã có tài ',
+    'required' => 'Vui lòng nhập thông tin',
+    'logout' => 'Đăng xuất',
 ];

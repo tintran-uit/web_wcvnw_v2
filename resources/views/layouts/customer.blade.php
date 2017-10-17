@@ -134,12 +134,19 @@
                           </li>
                           <?php $total += $item->subtotal; ?>
                        @endforeach
-                       <li class="subtotale pull-right no-margin">
-                           Tổng:&nbsp;&nbsp;&nbsp;<span class="price" id="cart-status-total2">{{number_format($total)}} VND</span>
-                        </li>
+
                        </ul>
-                       
+                       <hr>
+                       <div class="subtotale pull-right no-margin" style="margin-right: 32px">
+                           Tổng: &nbsp;&nbsp;&nbsp;<span class="price" id="cart-status-totalz">{{number_format($total)}} VND</span>
+                        </div>
+                       <br><br>
+                       <div class="button-basket text-right">
+                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/gio-hang-thuc-pham-sach')}}">Xem giỏ hàng</a>
+                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/thanh-toan')}}">Thanh toán</a>
+                        </div>
                      <div class="text-right">
+                      <br>
                       <br>
                       <a href="/">CFarm Việt Nam</a>
                      </div>
@@ -240,14 +247,14 @@
               <i class="fa fa-times"></i>
             </span>
           </button>
-          <h4 class="modal-title email-icon" id="modalSignupLabel">Tạo tài khoản</h4>
+          <h4 class="modal-title email-icon" id="modalSignupLabel">{{ trans('auth.register') }}</h4>
         </div>
         <div class="modal-body clearfix">
           <div class="col-md-12 no-padding">
 <form action="{{url('')}}/admin/register" accept-charset="UTF-8" method="post" class="form-style-base">              
 {{ csrf_field() }}   
                <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" class="form-control input-lg" placeholder="Email" name="email"/>
+                <input type="email" class="form-control input-lg" placeholder="{{ trans('auth.email') }}" name="email"/>
                 @if ($errors->has('email'))
                     <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -255,12 +262,12 @@
                 @endif
               </div>
 
-              <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+              <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="fa fa-user"></i>
                 </span>
-                <input type="text" class="form-control input-lg" name="name" placeholder="Tên {{ trans('head.login') }}" />
+                <input type="text" class="form-control input-lg" name="name" placeholder="{{ trans('auth.name') }}" />
               </div>
               @if ($errors->has('name'))
                       <span class="help-block">
@@ -268,12 +275,12 @@
                       </span>
                   @endif
             </div>
-            <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+            <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="fa fa-unlock-alt"></i>
                 </span>
-                <input type="password" class="form-control input-lg" placeholder="Mật khẩu" name="password"/>
+                <input type="password" class="form-control input-lg" placeholder="{{ trans('auth.password') }}" name="password"/>
               </div>
               @if ($errors->has('password'))
                     <span class="help-block">
@@ -281,16 +288,16 @@
                     </span>
                 @endif
             </div>
-            <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+            <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="fa fa-unlock-alt"></i>
                 </span>
-                <input type="password" class="form-control input-lg" placeholder="Nhập lại mật khẩu" name="password_confirmation"/>
+                <input type="password" class="form-control input-lg" placeholder="{{ trans('auth.re_password') }}" name="password_confirmation"/>
               </div>
             </div>
               <div class="required-fields text-right spacer-bottom-5">
-                Vui lòng nhập thông tin
+                * {{ trans('auth.required') }}
               </div>
 
               <div>
@@ -299,11 +306,11 @@
 
               <div>
                 <button type="submit" class="btn btn-warning btn-lg btn-block">
-                  <i class="fa fa-user"></i> Tạo tài khoản
+                  <i class="fa fa-user"></i> {{ trans('auth.register') }}
                 </button>
               </div>
               <p class="text-center small no-margin">
-                Bạn đã có tài khoản? <a class="btn-link" data-toggle="modal" data-target="#modal-signin" href="" data-dismiss="modal">{{ trans('head.login') }}</a>
+                {{ trans('auth.haveAcc') }} <a class="btn-link" data-toggle="modal" data-target="#modal-signin" href="" data-dismiss="modal">{{ trans('head.login') }}</a>
               </p>
 </form>          </div>
           <!-- <div class="col-md-5 spacer-30">
@@ -449,15 +456,19 @@
                                  </li>
                                  @else
                                  <li>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down"></i>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ trans('head.hello') }} <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down"></i>
                                     </a>          
                                     <ul class="dropdown-menu" role="menu">
                                        <!-- <li>
-                                          <a href="account.html">Edit profile</a>
-                                       </li>
-                                        -->
+                                          <a href="{{url('')}}/user/edit">{{ trans('head.editProfile') }}</a>
+                                       </li> -->
+
                                        <li>
-                                          <a href="{{url('')}}/admin/logout">Log out</a>
+                                          <a href="{{url('')}}/user/rate">{{ trans('head.rate') }}</a>
+                                       </li>
+                                       
+                                       <li>
+                                          <a href="{{url('')}}/admin/logout">{{ trans('auth.logout') }} </a>
                                        </li>
                                     </ul>
                                   </li>
@@ -588,14 +599,14 @@
                                  <li id="litrangchu" class="{{ Request::is('/') ? 'active' : '' }}">
                                     <a href="{{url('/')}}">{{ trans('head.home') }}</a>
                                  </li>
-                                 <li class="{{ Request::is('thong-tin-nha-phan-phoi-we-cae-vn') ? 'active' : '' }} {{ Request::is('dia-chi-lien-he-wecarevn') ? 'active' : '' }} {{ Request::is('chinh-sach-lien-ket-nong-dan') ? 'active' : '' }}  {{ Request::is('huong-dan-mua-thuc-pham-sach') ? 'active' : '' }}  {{ Request::is('chinh-sach-doi-tra') ? 'active' : '' }}">
+                                 <li class="@if($page->template=='about_us' || $page->template=='services') active @endif">
                                     <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{ trans('head.about') }} <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu">
                                        <li class="clearfix row">
                                           <div class="col-sm-12">
                                              <ul class="list-unstyled">
-                                                <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">{{ trans('head.about1') }}</a> </li>     
-                                                <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">{{ trans('head.about2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-thuc-pham-sach-Cfarm">{{ trans('head.about1') }}</a> </li>     
+                                                <li><a href="{{url('')}}/dia-chi-lien-he-Cfarm">{{ trans('head.about2') }}</a>      </li>
                                                 <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> {{ trans('head.about3') }}</a>  </li> 
                                              </ul>
                                           </div>
@@ -713,11 +724,11 @@
                         <li class="{{ Request::is('/') ? 'active' : '' }}">
                                     <a href="{{url('/')}}">{{ trans('head.home') }}</a>
                         </li>
-                        <li class="{{ Request::is('thong-tin-nha-phan-phoi-we-cae-vn') ? 'active' : '' }} {{ Request::is('dia-chi-lien-he-wecarevn') ? 'active' : '' }} {{ Request::is('chinh-sach-lien-ket-nong-dan') ? 'active' : '' }}  {{ Request::is('huong-dan-mua-thuc-pham-sach') ? 'active' : '' }}  {{ Request::is('chinh-sach-doi-tra') ? 'active' : '' }}">
+                        <li class="{{ Request::is('thong-tin-nha-phan-phoi-thuc-pham-sach-Cfarm') ? 'active' : '' }} {{ Request::is('dia-chi-lien-he-Cfarm') ? 'active' : '' }} {{ Request::is('chinh-sach-lien-ket-nong-dan') ? 'active' : '' }}  {{ Request::is('huong-dan-mua-thuc-pham-sach') ? 'active' : '' }}  {{ Request::is('chinh-sach-doi-tra') ? 'active' : '' }}">
                                     <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{ trans('head.about') }} <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu">
-                                                <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">{{ trans('head.about1') }}</a> </li>     
-                                                <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">{{ trans('head.about2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-thuc-pham-sach-Cfarm">{{ trans('head.about1') }}</a> </li>     
+                                                <li><a href="{{url('')}}/dia-chi-lien-he-Cfarm">{{ trans('head.about2') }}</a>      </li>
                                                 <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> {{ trans('head.about3') }}</a>  </li> 
                                     </ul>
                                  </li>
@@ -725,11 +736,16 @@
                                     <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> {{ trans('head.product') }}
                                     </a>                  
                                  </li>
-                                 <li class="">
-                                    <a href="#">Thư viện ảnh</a> 
+                                 <li class="@if($page->template == 'blog') active @endif">
+                                    <a role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{ trans('head.blog') }} <i class="fa fa-angle-down"></i></a> 
+                                    <ul class="dropdown-menu">
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">{{ trans('head.blog1') }}</a> </li>     
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=4">{{ trans('head.blog2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=5">{{ trans('head.blog3') }}</a>  </li> 
+                                    </ul>
                                  </li>
-                                 <li class="dropdown box-extended {{ Request::is('thong-tin-trang-trai-an-toan') ? 'active' : '' }}">
-                                    <a href="{{url('')}}/thong-tin-trang-trai-an-toan">{{ trans('head.farmerlist') }}<i class="fa fa-angle-down"></i>
+                                 <li class="dropdown box-extended @if($page->template=='farm_information') active @endif">
+                                    <a href="{{url('')}}/thong-tin-trang-trai-an-toan">{{ trans('head.farmerlist') }}
                                     </a>                  
                                     
                                  </li>
@@ -792,8 +808,8 @@
                               <li>
                                  <strong>Thông tin</strong>
                               </li>
-                           <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-we-cae-vn">{{ trans('head.about1') }}</a> </li>     
-                           <li><a href="{{url('')}}/dia-chi-lien-he-wecarevn">{{ trans('head.about2') }}</a>      </li>
+                           <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-thuc-pham-sach-Cfarm">{{ trans('head.about1') }}</a> </li>     
+                           <li><a href="{{url('')}}/dia-chi-lien-he-Cfarm">{{ trans('head.about2') }}</a>      </li>
                            <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> {{ trans('head.about3') }}</a>  </li>    
                            </ul>
                         </div>
@@ -808,6 +824,10 @@
                               </li>
                               <li>
                                  <a class="" href="{{url('')}}/chinh-sach-doi-tra">Chính sách đổi trả
+                           </a>
+                              </li>
+                              <li>
+                                 <a class="" href="{{url('')}}/chinh-sach-giao-hang">Chính sách giao hàng
                            </a>
                               </li>
                              
@@ -861,7 +881,7 @@
                   </article> -->
                   <article class="col-sm-5">
                      <p data-text="copyright" class="text-left no-margin">
-                        Copyright © 2017. Developed by <b>CFarm Technical Team</b>
+                        Copyright © 2017. Developed by <b style="color: #B62029">CFarm Technical Team</b>
                      </p>
                   </article>
                </div>
@@ -930,7 +950,7 @@
          $('#cart-list-product2').html(code);
 
          $('#cart-status-total').html(numberWithCommas(total) + " VND");
-         $('#cart-status-total2').html(numberWithCommas(total) + " VND");
+         $('#cart-status-totalz').html(numberWithCommas(total) + " VND");
       }
 
       function numberWithCommas(x) {

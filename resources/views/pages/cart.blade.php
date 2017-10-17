@@ -46,10 +46,12 @@
                                  <tr>
                                     <th class="bg-extra-light-grey col-md-2 col-xs-1">Hình ảnh</th>
                                     <th class="bg-extra-light-grey">Sản Phẩm</th>
-                                    <th class="bg-extra-light-grey">Số Lượng</th>
+                                    <th class="bg-extra-light-grey col-md-2 col-xs-1">Số Lượng</th>
                                     <th class="bg-extra-light-grey">Giá</th>
                                     <th class="bg-extra-light-grey">Tổng</th>
                                     <th class="bg-extra-light-grey">Xóa</th>
+                                    <th style="display:none;"></th>
+                                    <th style="display:none;"></th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
@@ -65,8 +67,8 @@
                                     <td class="align-middle">
                                        <div style="width: auto;">{{$item->name}}</div>
                                     </td>
-                                    <td class="align-middle">
-                                       <div class="stepper "><input type="text" class="form-control stepper-input text-center" value="{{$item->qty*$item->options['unit_quantity']}} {{$item->options['unit']}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
+                                    <td class="align-middle text-center" style="text-align: center; ">
+                                       <div class="stepper" style="width: 100%"><input type="text" class="form-control stepper-input text-center" value="{{$item->qty*$item->options['unit_quantity']}} {{$item->options['unit']}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
                                     </td>
                                     <td class="align-middle text-center">
                                        {{number_format($item->price)}} VND
@@ -81,6 +83,8 @@
                                     <td style="display:none;">{{$item->rowId}}</td>
                                     <td style="display:none;">{{$item->options['unit_quantity']}}</td>
                                     <td style="display:none;">{{$item->options['unit']}}</td>
+                                    <td style="display:none;">{{$item->id}}</td>
+                                    <td style="display:none;">{{$item->options['farmer_id']}}</td>
                                  </tr>
                                  @endforeach
                                  
@@ -157,6 +161,8 @@ $(document).ready(function() {
          var row = $(this).closest('tr').index();
          var unit_quantity = table.row(row).data()[7];
          var unit = table.row(row).data()[8];
+         var prodID = table.row(row).data()[9];
+         var farmerID = table.row(row).data()[10];
          $(this).closest('tr').find(':input').each(function() {
             
             msg =  parseFloat($(this).val());
@@ -169,13 +175,15 @@ $(document).ready(function() {
          price = parseInt(price)*msg;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
          var rowId = table.row(row).data()[6];
-         updateCart(rowId, msg, prodID, unit_quantity, unit);
+         updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
       });
     table.on( 'click', 'span.down' , function () {
          var msg;
          var row = $(this).closest('tr').index();
          var unit_quantity = table.row(row).data()[7];
          var unit = table.row(row).data()[8];
+         var prodID = table.row(row).data()[9];
+         var farmerID = table.row(row).data()[10];
          $(this).closest('tr').find(':input').each(function() {
             
             msg =  parseFloat($(this).val());
@@ -188,7 +196,7 @@ $(document).ready(function() {
          price = parseInt(price)*msg;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
          var rowId = table.row(row).data()[6];
-         updateCart(rowId, msg, prodID, unit_quantity, unit);
+         updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
       });
    
    table.on( 'click', 'a.item-delete' , function () {
@@ -201,11 +209,11 @@ $(document).ready(function() {
         .draw();
    });
 
-    function updateCart(rowId, qty, prodID, unit_quantity, unit) {
+    function updateCart(rowId, qty, prodID, unit_quantity, unit, farmerID) {
       console.log(qty)
 
 
-      var markers = { "rowId": rowId, "qty": qty, "prodID": prodID };
+      var markers = { "rowId": rowId, "qty": qty, "prodID": prodID , "farmerID":farmerID};
 
       $.ajax({
 
@@ -257,7 +265,6 @@ $(document).ready(function() {
    function stepperUp(num, unit_quantity, unit) {
       num = parseFloat(num);
       unit_quantity = parseFloat(unit_quantity);
-      console.log(unit);
       if(unit != 'kg')
       {
         num = num + unit_quantity;
