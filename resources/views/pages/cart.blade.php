@@ -7,7 +7,9 @@
    <section class="spacer-20">
       <div class="container">
          <div class="row">
+          <aside class="col-sm-12 col-md-3">
             @include('layouts.menu_user')
+          </aside>
             <article class="col-sm-12 col-md-9">
                <div class="spacer-bottom-25">
                   <h3 class="no-margin-top text-uppercase spacer-10 text-center">

@@ -10,12 +10,8 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
          <div class="item active">
-            <a href="#">          <img alt="slide" src="assets/images/slides/Artboard1.png" />
-            </a>      
-         </div>
-         <div class="item">
-            <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="assets/images/slides/Artboard2.png" />
-            </a>        
+            <a href="#">          <img alt="slide" src="assets/images/slides/Artboard 4.png" />
+            </a>
             <div class="label-slide hidden-sm hidden-xs slideInDown animated">
                <div>
                   <h2 class="no-margin-bottom">GÓI</h2>
@@ -23,7 +19,12 @@
                </div>
                <p class="text-center">TIỆN DỤNG<BR>DINH DƯỠNG<BR>TIẾT KIỆM</p>
                <h1 class="text-right">5-10%</h1>
-            </div>
+            </div>      
+         </div>
+         <div class="item">
+            <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="assets/images/slides/Artboard 5.png" />
+            </a>        
+            
          </div>
          
          <!-- <div class="item">

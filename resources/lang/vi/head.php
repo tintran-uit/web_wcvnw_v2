@@ -23,5 +23,5 @@ return [
     'productTab' => 'Thực phẩm sạch',
     'hello' => 'Xin chào',
     'editProfile' => 'Chỉnh sửa thông tin cá nhân',
-    'rate' => 'Đánh giá sản phẩm',
+    'rate' => 'Đơn hàng của tôi',
 ];
