@@ -166,10 +166,11 @@ class OrderController extends Controller
 	
 	public function rateOrder(Request $request)
 	{
-		$rate = $request->rate;
-		$comment = $request->comment;
-		$elements = $request->elements;
-		$order_id = $request->order_id;
+		$data = $request->data;
+		$rate = $data['rate']*100;
+		$comment = $data['comment'];
+		$elements = $data['elements'];
+		$order_id = $data['order_id'];
 
 		if(Auth::check()) {
          	$user = Auth::user();
@@ -183,19 +184,31 @@ class OrderController extends Controller
 		        		                  `comment` = ?
  									WHERE `order_id` = ?', [$rate, $comment, $order_id]);
 		        	//Apply the rate, rating_count to farmers
-		        	DB::statement('UPDATE `farmers` f, `m_orders` m
+		        	DB::statement('UPDATE `farmers` f
 		        		              SET f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
-		        		                  `comment` = ?
- 									WHERE `order_id` = ?', [$rate*100, $comment, $order_id]);
+		        		                  f.`rating_count` = f.`rating_count` + 1
+ 									WHERE f.`id` IN (SELECT DISTINCT `farmer_id` 
+ 													   FROM `m_orders` 
+ 													  WHERE `order_id` = ?
+ 													)', [$rate, $order_id]);
 
 
 
          		}
          		else
          		{
+         			//rate individually. If multiple items from 1 farmer, rate him only once, apply to one order item as representative for that farmer.
+         			$product_id_list = '(0';
          			foreach ($elements as $element) {
-         				//
+         				$product_id_list = $product_id_list.','.$element;
          			}
+         			$product_id_list = $product_id_list.')'
+			        	DB::statement('UPDATE `m_orders` m, `farmers` f 
+		        		              	  SET m.`rating` = ?,
+		        		                      m.`comment` = ?
+ 										WHERE f.`id` = m.`farmer_id`
+ 										  AND m.`order_id` = ?
+ 										  AND `product_id` IN '.$product_id_list, [$rate, $comment, $order_id, $element]);
          		}
          	}
          }
@@ -217,10 +230,22 @@ class OrderController extends Controller
 
 	public function orderItems($order_id)
 	{
-		$items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ?', [$order_id]);
-    	return $items;
+		if(Auth::check()) {
+			$user = Auth::user();
+         	$customer_id = $user->connected_id;
+			if(strcmp($user->account_type, "Customer") == 0){
+				$items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ?', [$order_id]);
+    			return $items;
+    		}
+    		else {
+    			return redirect()->back();
+    		}
+    	}
+    	else {
+    		return redirect()->back();
+    	}
+
 	}
 
-	
 
 }
