@@ -10,7 +10,7 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
          <div class="item active">
-            <a href="#">          <img alt="slide" src="assets/images/slides/Artboard 4.png" />
+            <a href="#">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 4.png" />
             </a>
             <div class="label-slide hidden-sm hidden-xs slideInDown animated">
                <div>
@@ -22,19 +22,19 @@
             </div>      
          </div>
          <div class="item">
-            <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="assets/images/slides/Artboard 5.png" />
+            <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 3.png" />
             </a>        
             
          </div>
          
-         <!-- <div class="item">
-            <a href="#">          <img alt="slide" src="assets/images/slides/slide2.jpg" />
+         <div class="item">
+            <a href="#">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 5.png" />
             </a>        
             <div class="carousel-caption">
-               <h3>Didascalia</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+               <h3>Chuyên sản phẩm sạch - hữu cơ</h3>
+               <p>Kết nối lương nông - an lòng nội trợ.</p>
             </div>
-         </div> -->
+         </div>
       </div>
       <!-- end -->
       <!-- Indicatori di posizione -->
