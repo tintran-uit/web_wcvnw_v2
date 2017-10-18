@@ -22,8 +22,8 @@ Route::get('/packages', 'ProductController@getPackages');
 Route::get('/products/suppliers/product_id={product_id}', 'ProductController@getSuppliers');
 Route::get('/products/interest/product_id={product_id}', 'ProductController@addInterest');
 
-Route::get('/order/items/order_id={order_id}', 'CustomerController@orderContent');
-Route::get('/orders/customer_id={customer_id}', 'CustomerController@orders');
+Route::get('/orderitems/order_id={order_id}', 'OrderController@orderItems');
+Route::get('/orders/customer_id={customer_id}', 'CustomerController@getOrders');
 
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
 Route::get('/farmer/farmer_id={farmer_id}', 'FarmerController@getFarmerProfile');

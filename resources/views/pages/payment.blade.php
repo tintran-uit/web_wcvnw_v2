@@ -519,6 +519,8 @@ trước khi giao hàng!</p>
           }
         });
       }
+      
+      setTimeout(function(){ setShipping(); }, 1000);
     function setShipping() {
       var idDitris = document.getElementById("selectQuan").value;
       // idDitris = fr idDitris;

@@ -32,10 +32,10 @@ class CustomerController extends Controller
 	    return $items;
 	}
 
-	public function orders($customer_id)
+	public function getOrders($customer_id)
 	{
-		$orders = DB::select('SELECT g.`order_id` "order_id", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`note` "note" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`status` ASC', [$customer_id]);
-	    return $orders;
+		$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`note` "note" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
+    	return $orders;
 	}
 
 	public function createOrder($customer_id)
@@ -105,7 +105,7 @@ class CustomerController extends Controller
 	        $this->data['page'] = $page->withFakes();
 	        $this->data['menu'] = MenuItem::all();
 	        $this->data['cart'] = Cart::content();
-
+	        $this->data['cartOld'] = Cart::content();
 	        // $this->data['cartOld'] = DB::table('articles')->where('id', $post_id)->first();
 	        return view('pages.user', $this->data);
 		}

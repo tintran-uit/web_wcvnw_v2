@@ -112,7 +112,7 @@ class OrderController extends Controller
         $order_id = $order_id[0]->order_id;
         DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`) VALUES(?,?,?,?,?,?,?,?, ?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total]);
+         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `created_at`) VALUES(?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
@@ -138,7 +138,7 @@ class OrderController extends Controller
 				$unit = $numbers[0]->unit;
 				$category = $numbers[0]->category;
 
-	         	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `unit`, `price`, `price_farmer`, `created_at`) VALUES(?,?,?,?,?,?,?, CURRENT_TIMESTAMP)', [$order_id, $farmer_id, $product_id, $quantity, $unit, $price, $price_farmer]);
+	         	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $unit, $price * $qty, $price_farmer * $qty]);
 
 	         	//update trading table
 	        	DB::statement('UPDATE `trading` SET `sold_count` = `sold_count`+ ?, `sold` = `sold` + ? WHERE `farmer_id` = ? AND `product_id` = ?', [$qty, $quantity, $farmer_id, $product_id]);
@@ -147,10 +147,11 @@ class OrderController extends Controller
 	        	if($category == 0) //package
 	        	{
 		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
-		        		              SET t.`sold` = t.`sold` + m.`quantity` 
+		        		              SET t.`sold` = t.`sold` + m.`quantity`,
+		        		              	  t.`sold_count` =  t.`sold_count` + ?
  									WHERE t.`farmer_id` = m.`farmer_id`
    									  AND t.`product_id` = m.`product_id` 
-   									  AND m.`package_id` = ?', [$product_id]);
+   									  AND m.`package_id` = ?', [$qty, $product_id]);
 
 	        	}
 			}
@@ -168,6 +169,7 @@ class OrderController extends Controller
 		$rate = $request->rate;
 		$comment = $request->comment;
 		$elements = $request->elements;
+		$order_id = $request->order_id;
 
 		if(Auth::check()) {
          	$user = Auth::user();
@@ -176,6 +178,17 @@ class OrderController extends Controller
          	{
          		if($elements[0] == 0) {
          			//rate the package as whole
+		        	DB::statement('UPDATE `g_orders` 
+		        		              SET `rating` = ?,
+		        		                  `comment` = ?
+ 									WHERE `order_id` = ?', [$rate, $comment, $order_id]);
+		        	//Apply the rate, rating_count to farmers
+		        	DB::statement('UPDATE `farmers` f, `m_orders` m
+		        		              SET `rating` = ?,
+		        		                  `comment` = ?
+ 									WHERE `order_id` = ?', [$rate, $comment, $order_id]);
+
+
 
          		}
          		else
@@ -192,6 +205,7 @@ class OrderController extends Controller
 
 	}
 
+
 	/**
 	 *cancelOrder
 	 *
@@ -201,12 +215,11 @@ class OrderController extends Controller
 	 * @return array of products in its categories 
 	 */
 
-	public function cancelOrder($customer_id, $order_id, $rat)
+	public function orderItems($order_id)
 	{
-		// 
-		return 0;
+		$items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ?', [$order_id]);
+    	return $items;
 	}
-
 
 	
 

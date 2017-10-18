@@ -649,7 +649,7 @@
          <section class="visible-xs">
             <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #f8f8f8; border-color: #e7e7e7;">
               <div class="container" style="background-color: rgba(106,184,69, 0.5);">
-                <div class="col-xs-7 vcenter" style="font-style: 12px; color: #777;width: 56%;">
+                <div class="col-xs-12" style="font-style: 12px; color: #777; float: right; padding: 10px 5px;">
                  @if(!isset(Auth::user()->name)) 
                     <button type="button" data-toggle="modal" data-target="#modal-signup">
                     {{ trans('head.register') }}
@@ -659,8 +659,7 @@
                       {{ trans('head.login') }}
                       </button>
                    @else
-                   <li>
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down"></i>
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down" style="color: #A52223"></i>
                       </a>          
                       <ul class="dropdown-menu" role="menu">
                          <!-- <li>
@@ -671,10 +670,9 @@
                             <a href="{{url('')}}/admin/logout">Log out</a>
                          </li>
                       </ul>
-                  </li>
                  @endif
                  </div>
-                <div class="col-xs-5 vcenter">
+                <!-- <div class="col-xs-5 vcenter">
                   <div style="float: right; font-style: 12px; color: #777">
                             @if(App::isLocale('vi'))
                               <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/vi">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-vietnam.jpg" />
@@ -702,7 +700,7 @@
                               </ul>
                             @endif
                            </div>
-                </div>
+                </div> -->
               </ul>
               </div>
                <div class="container">
@@ -773,7 +771,7 @@
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-shipping.png" height="39" />
-                           <span data-info="text-info">Giao hàng tận nơi</span>
+                           <span data-info="text-info">Giao hàng đến tận nhà</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3 text-center">
@@ -936,11 +934,13 @@
          var length = Object.keys(data).length;
          if(length == 0){
             $('#cart-status').html("Giỏ hàng rỗng");
+            $('#cart-status2').html("Giỏ hàng rỗng");
+            $('#cartMobile').html("Giỏ hàng rỗng");
          }
          else{
-          $('#cart-status').html("bạn có " + length + " nông sản sạch!");
+            $('#cart-status').html("bạn có " + length + " nông sản sạch!");
             $('#cart-status2').html("bạn có " + length + " nông sản sạch!");
-         $('#cartMobile').html(length);
+            $('#cartMobile').html(length);
          }
 
          var code = "";
