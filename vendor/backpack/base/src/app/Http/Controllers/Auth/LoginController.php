@@ -102,6 +102,6 @@ class LoginController extends Controller
         }
         // return $user;
         // And redirect to custom location
-        return redirect('/');
+        return redirect()->back();
     }
 }

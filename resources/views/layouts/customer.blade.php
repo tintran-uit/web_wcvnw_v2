@@ -820,31 +820,7 @@
          <section id="copyright" class="bg-white">
             <div class="container">
                <div class="row clearfix">
-                  <!-- <article class="col-sm-7">
-                     <nav class="footer-links">
-                        <ul class="clearfix list-unstyled">
-                           <li class="pull-left">
-                              <a href="#">General Conditions</a>
-                           </li>
-                           <li class="pull-left separator">|</li>
-                           <li class="pull-left">
-                              <a href="#">Shipping</a>
-                           </li>
-                           <li class="pull-left separator">|</li>
-                           <li class="pull-left">
-                              <a href="#">Refounds</a>
-                           </li>
-                           <li class="pull-left separator">|</li>
-                           <li class="pull-left">
-                              <a href="#">Payments</a>
-                           </li>
-                           <li class="pull-left separator">|</li>
-                           <li class="pull-left">
-                              <a href="#">Privacy Policy</a>
-                           </li>
-                        </ul>
-                     </nav>
-                  </article> -->
+                  
                   <article class="col-sm-5">
                      <p data-text="copyright" class="text-left no-margin">
                         Copyright © 2017. Developed by <b style="color: #B62029">CFarm Technical Team</b>
@@ -1053,7 +1029,7 @@
       }
       </script>
       <script type="text/javascript">
-         @if ($errors->has('email'))
+          @if ($errors->has('email'))
             @if(Session::get('modal')=='login')
               $('#modal-signin').modal('show');
             @elseif(Session::get('modal')=='register')
