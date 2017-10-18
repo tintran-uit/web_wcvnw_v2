@@ -79,7 +79,7 @@ Route::get('/product/slug={slug}', 'PageController@getProduct');
 Route::get('/add', 'PageController@testcart');
 
 Route::get('/user/edit', 'CustomerController@editProfile');
-Route::get('/user/rate', 'CustomerController@rate');
+Route::get('/user/rate', 'CustomerController@getRate');
 
 Route::get('{page}/{subs?}', ['uses' => 'PageController@page'])
     ->where(['page' => '^((?!admin).)*$', 'subs' => '.*']);

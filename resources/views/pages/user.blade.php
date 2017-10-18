@@ -244,7 +244,7 @@ function sentRate() {
 
       $.ajax({
           type: "POST",
-          url: "api/user/rate",
+          url: "/api/customer/rate",
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
           },
@@ -253,12 +253,8 @@ function sentRate() {
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           success: function(data){
-            $('#modalLoader').modal('hide');
-            $('[href="#tab-3"]').tab('show');
-            document.getElementById('btnStep').style.visibility = 'hidden';
+            
             console.log(data);
-            document.getElementById("order_id").textContent=data.order_id;
-            updateCartStatus(data.Cart);
             
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {

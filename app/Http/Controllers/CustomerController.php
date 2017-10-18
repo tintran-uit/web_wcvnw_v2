@@ -101,7 +101,7 @@ class CustomerController extends Controller
 		return redirect()->back();
 	}
 
-	public function rate()
+	public function getRate()
 	{
 		if (Auth::check()) {
 			$page = Page::findBySlug('index');
@@ -124,6 +124,11 @@ class CustomerController extends Controller
 	        return view('pages.user', $this->data);
 		}
 		return redirect()->back();
+	}
+
+	public function rate(Request $request)
+	{
+		return $data = $request->data;
 	}
 
 }
