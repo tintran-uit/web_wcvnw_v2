@@ -94,8 +94,7 @@ class PackageItemCrudController extends CrudController
         $this->crud->addField([
             'name' => 'quantity',
             'label' => 'Số lượng',
-            'type' => 'number',
-            'default'    => 0.3,
+            'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
