@@ -184,9 +184,9 @@ class OrderController extends Controller
  									WHERE `order_id` = ?', [$rate, $comment, $order_id]);
 		        	//Apply the rate, rating_count to farmers
 		        	DB::statement('UPDATE `farmers` f, `m_orders` m
-		        		              SET `rating` = ?,
+		        		              SET f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
 		        		                  `comment` = ?
- 									WHERE `order_id` = ?', [$rate, $comment, $order_id]);
+ 									WHERE `order_id` = ?', [$rate*100, $comment, $order_id]);
 
 
 

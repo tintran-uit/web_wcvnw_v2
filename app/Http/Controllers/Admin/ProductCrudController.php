@@ -245,11 +245,8 @@ class ProductCrudController extends CrudController
         //create thumbnails
         $thumbName = str_replace("images","thumbnails",$img);
         $request->request->set('thumbnail', $thumbName);
-<<<<<<< HEAD
         $imgThumb = $this->attachmentThumb($img, $thumbName, 261, 174);
-=======
-        $imgThumb = $this->attachmentThumb($img, $thumbName, 155, 115);*/
->>>>>>> 1e7cc6aa45e14075412cf486cc779ab9d4ff09c1
+        */
 
         $redirect_location = parent::updateCrud($request);
         return $redirect_location;
