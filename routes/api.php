@@ -25,6 +25,8 @@ Route::get('/products/interest/product_id={product_id}', 'ProductController@addI
 Route::get('/orderitems/order_id={order_id}', 'OrderController@orderItems');
 Route::get('/orders/customer_id={customer_id}', 'CustomerController@getOrders');
 
+Route::post('/customer/rate', 'CustomerController@rate');
+
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
 Route::get('/farmer/farmer_id={farmer_id}', 'FarmerController@getFarmerProfile');
 Route::get('/farmer/trading/farmer_id={farmer_id}', 'FarmerController@farmerOrderList');
