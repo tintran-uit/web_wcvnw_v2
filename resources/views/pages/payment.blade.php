@@ -73,27 +73,7 @@
       <div class="container">
          <div class="row">
             <aside class="col-sm-12 col-md-3">
-               <div class="block block-nav spacer-15">
-                  <div class="title">
-                     <h4 class="text-uppercase no-margin">Đơn hàng</h4>
-                  </div>
-                  <div class="content">
-                     <ul class="list-unstyled">
-                        <li>
-                           <a href="account.html">          <i class="fa fa-angle-right"></i> Tài khoản
-                           </a>      
-                        </li>
-                        <li>
-                           <a href="{{url('gio-hang-thuc-pham-sach')}}">          <i class="fa fa-angle-right"></i> Đơn hàng
-                           </a>      
-                        </li>
-                        <li>
-                           <a class="current" href="{{url('thanh-toan')}}">          <i class="fa fa-angle-right"></i> Thông tin giao hàng
-                           </a>      
-                        </li>
-                     </ul>
-                  </div>
-               </div>
+                @include('layouts.menu_user')
                <section class="wrap wrap-border internal-padding spacer-bottom-15">
               <h4 class="text-uppercase no-margin">Giỏ thực phẩm an toàn</h4>
               <div class="spacer-top-5" style="margin-top: 5px;">
@@ -260,20 +240,27 @@
                                           </span>
                                        </div>
                                        <div class="col-xs-9">
-                                          <h4 class="no-margin">
+                                         <!--  <h4 class="no-margin">
                                              <b>Chuyển khoản ngân hàng</b>
                                           </h4>
                                           <p class="no-margin">Cảm ơn bạn đã lựa chọn mua sắm tại We Care VN, <br>
 Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
 XÁC NHẬN ĐƠN HÀNG <br>
-trước khi giao hàng!</p>
+trước khi giao hàng!</p> --><h4 class="no-margin">
+                                             <b>Thanh toán khi nhận hàng</b>
+                                          </h4>
+                                          <p class="no-margin">
+                                             <p class="no-margin" style="color: #000">Cảm ơn bạn đã lựa chọn mua sắm tại Cfarm, <br>
+                                              Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
+                                              XÁC NHẬN ĐƠN HÀNG <br>
+                                              trước khi giao hàng!</p>
                                        </div>
                                        <div class="pull-right hidden-xs">
-                                          <img alt="credit cards" src="assets/images/icons/credit-cards/credit-cards.jpg">
+                                          <img alt="credit cards"  class="image-responsive" src="{{url('')}}/assets/images/icons/credit-cards/giao-rau-sach.jpg">
                                        </div>
                                     </a>
                                  </div>
-                                 <div id="payment-1" class="choose deselected">
+                                 <!-- <div id="payment-1" class="choose deselected">
                                     <a class="clearfix" onclick="payment(1)">
                                        <div class="pull-left">
                                           <span class="fa-stack spacer-15" id="tick-pay-1">
@@ -295,7 +282,7 @@ trước khi giao hàng!</p>
                                           <img alt="paypal" src="assets/images/icons/credit-cards/paypal.png">
                                        </div>
                                     </a>
-                                 </div>
+                                 </div> -->
                               </div>
                               
                               <section>

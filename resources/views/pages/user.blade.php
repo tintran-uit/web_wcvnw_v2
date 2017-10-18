@@ -25,7 +25,9 @@
    <section class="spacer-20">
       <div class="container">
          <div class="row">
+          <aside class="col-sm-12 col-md-3">
             @include('layouts.menu_user')
+          </aside>
             <article class="col-sm-12 col-md-9">
                <div class="spacer-bottom-25">
                   <h3 class="no-margin-top text-uppercase spacer-10 text-center">
@@ -44,17 +46,16 @@
                            <?php $i=0; ?>
                            @foreach($orders as $order)
                            <?php $i++; ?>
-                            <p><a href="#" data-toggle="modal" data-target="#order-{{$i}}">Xem đơn hàng ngày: <br>{{ \Carbon\Carbon::parse($order->date)->format('d/m/Y')}}</a></p>
+                            <p><a href="#" data-toggle="modal" data-target="#order-{{$i}}">Xem đơn hàng: {{$order->order_id}}<br>{{ \Carbon\Carbon::parse($order->date)->format('d/m/Y')}} - <span class="btn-primary">Đã giao</span></a></p>
                            @endforeach
                          </div>
                        </div>
                        <div class="col-sm-9 listbar">
-                         <div class="listbox">
+                        <!-- @if() btn-info @endif @if() btn-primary @endif @if() btn-warning @endif @if() btn-error @endif -->
+                         <!-- <div class="listbox">
                            <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng ngày <b><i>21/10/2017</i></b></p>
-         <!-- <a class="btn btn-info btn-lg lg-2x" data-toggle="modal" data-target="#modal-rate"> Xem lại đơn hàng <i class="fa fa-angle-double-right"></i>
-         </a>    -->            
-          </div>
-          <form id="formRate">
+                           </div>
+                    <form id="formRate">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                              <div class="panel panel-default">
                                <div class="panel-heading" role="tab" id="headingOne">
@@ -70,7 +71,6 @@
                                       </div>
                                       <div class="modal-body">
                                         <div class="form-group" style="width: 100%">
-                                          <!-- <label for="input-1" class="control-label">Chấm điểm:</label> -->
                                            <input id="input-4" name="rate" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
                                         </div>
                                  </div>
@@ -87,14 +87,7 @@
                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                  <div class="panel-body">
                                    <p><b>Vui lòng tích vào sản phẩm nào khiến bạn <span class="prod"></span></b></p>
-                                   <!-- <table style="width: 100%;">
-                                      <tr>
-                                          <td style="width:33%">
-                                          <label class="checkbox-inline"><input type="checkbox" value="0" name="elements">Tất cả sản phẩm</label>
-                                          </td>
-                                         
-                                      </tr>
-                                   </table> -->
+                                   
                                       <div class="col-md-6" ><label><input type="checkbox" value="0" name="checked">Tất cả sản phẩm</label></div>
                                     @foreach($cartOld as $item)
                                       <div class="col-md-6" ><label><input type="checkbox" value="{{$item->id}}" name="checked">{{$item->name}}</label></div>
@@ -121,10 +114,20 @@
                                </div>
                              </div>
                            </div>
-                        </form>
-
-                           <a class="btn btn-primary btn-lg lg-2x" onclick="sentRate()"> Gửi đánh giá <i class="fa fa-angle-double-right"></i>
+                  </form> 
+<a class="btn btn-primary btn-lg lg-2x" onclick="sentRate()"> Gửi đánh giá <i class="fa fa-angle-double-right"></i>
                            </a>
+
+                -->
+
+                          <div class="listbox">
+                           <p><b>Bạn chưa có đơn hàng để đánh giá!</b><br>Bạn có thể đánh giá chất lượng sản phẩm trong thời gian một tuần, kể từ khi nhận được đơn hàng!</p>
+                           <div class="pull-right">
+                           <img alt="danh gia rau sach"  class="image-responsive" src="{{url('')}}/assets/images/icons/rate.png" style="width: 100%">
+                         </div>
+                           </div>
+
+                           
 
 
                        </div>
@@ -179,10 +182,9 @@
               @endforeach
             </tbody>
             <tfoot>
-              <tr></tr>
               <tr style="">
-              <td colspan="3" align="right" style="padding-right: 20px"><b>Tổng Tiền</b>  </td>
-              <td colspan="1" align="left" style=""><span>{{$total}} VNĐ</span></td>
+              <td colspan="3" align="right" style="padding-right: 20px"><br><b>Thành </b>  </td>
+              <td colspan="1" align="left" style=""><br><span>{{$total}} VNĐ</span></td>
             </tr>
             </tfoot>
           </table>
