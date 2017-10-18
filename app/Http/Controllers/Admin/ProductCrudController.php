@@ -227,7 +227,7 @@ class ProductCrudController extends CrudController
         $thumbName = str_replace("images","thumbnails",$img);
         $request->request->set('thumbnail', $thumbName);
 
-        $imgThumb = $this->attachmentThumb($img, $thumbName, 261, 174);
+        // $imgThumb = $this->attachmentThumb($img, $thumbName, 261, 174);
        
         $this->data['thumbnail'] = $thumbName;
 
@@ -240,14 +240,14 @@ class ProductCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
-       /* $img = $request->image;
+        $img = $request->image;
         
         //create thumbnails
         $thumbName = str_replace("images","thumbnails",$img);
         $request->request->set('thumbnail', $thumbName);
-        $imgThumb = $this->attachmentThumb($img, $thumbName, 261, 174);
-        */
-
+        // $imgThumb = $this->attachmentThumb($img, $thumbName, 261, 174);
+        
+        $this->data['thumbnail'] = $thumbName;
         $redirect_location = parent::updateCrud($request);
         return $redirect_location;
     }
