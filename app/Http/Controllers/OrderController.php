@@ -175,7 +175,13 @@ class OrderController extends Controller
 		if(Auth::check()) {
          	$user = Auth::user();
          	$customer_id = $user->connected_id;
-         	if(strcmp($user->account_type, "Customer") == 0)
+         	//check if the order_id is right for customer_id
+         	$rate_valid = DB::select('SELECT `order_id` "order_id" 
+         								FROM `g_orders` 
+         							   WHERE `order_id` = ? 
+         							     AND `customer_id` = ?', [$order_id, $customer_id]);
+
+         	if(strcmp($user->account_type, "Customer") == 0 && count($rate_valid) > 0)
          	{
          		if($elements[0] == 0) {
          			//rate the package as whole
@@ -198,17 +204,24 @@ class OrderController extends Controller
          		else
          		{
          			//rate individually. If multiple items from 1 farmer, rate him only once, apply to one order item as representative for that farmer.
-         			// $product_id_list = '(0';
-         			// foreach ($elements as $element) {
-         			// 	$product_id_list = $product_id_list.','.$element;
-         			// }
-         			// $product_id_list = $product_id_list.')'
-			        	// DB::statement('UPDATE `m_orders` m, `farmers` f 
-		        	// 	              	  SET m.`rating` = ?,
-		        	// 	                      m.`comment` = ?
- 										// WHERE f.`id` = m.`farmer_id`
- 										//   AND m.`order_id` = ?
- 										//   AND `product_id` IN '.$product_id_list, [$rate, $comment, $order_id, $element]);
+         			$product_id_list = '(0';
+         			foreach ($elements as $element) {
+         				$product_id_list = $product_id_list.','.$element;
+         			}
+         			$product_id_list = $product_id_list.')'
+			        	DB::statement('UPDATE `m_orders` m, `farmers` f 
+		        		              	  SET m.`rating` = ?,
+		        		                      m.`comment` = ?,
+		        		                      f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
+		        		                  	  f.`rating_count` = f.`rating_count` + 1
+ 										WHERE f.`id` = m.`farmer_id`
+ 										  AND m.`order_id` = ?
+ 										  AND m.`id` = (SELECT MIN(id)
+ 										  				  FROM `m_orders` mo
+ 										  				 WHERE mo.`order_id` = m.`order_id`
+ 										  				   AND mo.`farmer_id` = m.`farmer_id`
+ 										  				)
+ 										  AND `product_id` IN ?', [$rate, $comment, $rate, $order_id, $product_id_list]);
          		}
          	}
          }
