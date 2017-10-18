@@ -46,12 +46,12 @@
                           <thead>
                             <tr>
                               <th class="col-sm-1">Chọn</th>
-                              <th class="col-sm-4">Nông trại</th>
-                              <th class="col-sm-2">Đang còn</th>
+                              <th class="col-sm-5">Nông trại</th>
+                              <th class="col-sm-3">Đang còn</th>
                               <th class="col-sm-2">
                                Đánh giá
                               </th>
-                              <th class="col-sm-3"> </th>
+                              <th class="col-sm-1"> </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -174,7 +174,7 @@ function loadsuppliers() {
                 newRowContent = newRowContent = '<tr>\r\n <td><input type=\"radio\" value=\"'+data.id+'\" name=\"farmerID\"><\/td>\r\n';
               }
 
-                                           newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+quantity_left+' '+unit+'<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\">Xem đánh giá<\/a><\/td>\r\n                            <\/tr>';
+                                           newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+quantity_left+' '+unit+'<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\"><\/a><\/td>\r\n                            <\/tr>';
               jQuery("#tbSupp tbody").append(newRowContent);
             });
      }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
