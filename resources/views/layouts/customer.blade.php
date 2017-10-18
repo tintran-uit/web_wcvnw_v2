@@ -444,13 +444,13 @@
                                  <li class="spacer-10">|</li>
                                  @if(!isset(Auth::user()->name)) 
                                  <li>
-                                    <a data-toggle="modal" data-target="#modal-signup">
+                                    <a href="#" data-toggle="modal" data-target="#modal-signup">
                                     {{ trans('head.register') }}
                                     </a>
                                  </li>
                                  <li class="spacer-10">|</li>
                                  <li>
-                                    <a data-toggle="modal" data-target="#modal-signin">
+                                    <a href="#" data-toggle="modal" data-target="#modal-signin">
                                     {{ trans('head.login') }}
                                     </a>
                                  </li>

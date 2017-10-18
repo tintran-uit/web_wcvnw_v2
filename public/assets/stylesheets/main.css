@@ -131,19 +131,19 @@ src:url(/assets/stylesheets/vendor/fonts/Reso-Bold_VN.ttf);
 /* Default */
 /* line 3, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
 .btn-default {
-  color: #ffffff;
-  background-color: #e6dbd4;
+  color: #222222;
+  /*background-color: #e6dbd4;*/
   border-color: none; }
   /* line 7, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-default .glyphicon, .btn-default .fa {
     color: #ffffff; }
   /* line 10, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-default:hover, .btn-default:focus, .btn-default:active {
-    background-color: #d3c0b4; }
+    /*background-color: #d3c0b4;*/ }
   /* line 15, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/utilities/_btn.scss */
   .btn-default.open .dropdown-toggle.btn-default {
-    color: #ffffff;
-    background-color: #e6dbd4;
+    color: #222222;
+    /*background-color: #e6dbd4;*/
     border-color: none; }
 
 /* Variante Primary */
@@ -1269,6 +1269,23 @@ box-shadow: -4px 5px 10px -2px rgba(209,209,209,1);
       color: #000;
       -webkit-transition-duration: 0.4s;
       transition-duration: 0.4s; }
+
+      select{
+        /*width: 100%;*/
+      padding: 9px 15px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #e6e6e6;
+      color: #000;
+      -webkit-transition-duration: 0.4s;
+      transition-duration: 0.4s; 
+      width: 100%;
+      margin: 0;
+    }
+    .selecter-item{
+      border-color: #cdcdcd;
+    color: #333333;
+    }
       /* line 64, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/form/_style-form.scss */
       .form-style-base .form-group .selecter .selecter-selected:hover {
         border-color: #cdcdcd; }
@@ -2889,18 +2906,20 @@ box-shadow: -4px 5px 10px -2px rgba(209,209,209,1);
 
 /* line 1, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/_wishlist.scss */
 .inner {
-  -webkit-transform: rotate(-135deg);
+  /*-webkit-transform: rotate(-135deg);
   -ms-transform: rotate(-135deg);
   -o-transform: rotate(-135deg);
-  transform: rotate(-135deg);
+  transform: rotate(-135deg);*/
   width: 0;
-  height: 0;
+  /*height: 0;*/
   border-left: 35px solid transparent;
   border-right: 35px solid transparent;
   border-top: 35px solid #cccccc; }
   /* line 8, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/_wishlist.scss */
   .inner.selected {
-    border-top: 35px solid #ff5d5e; }
+    border-top: 35px solid #ff5d5e; 
+    background-color: #ffffff;
+  }
 
 /* line 13, /Users/biospank/Documents/ilaria/kids-store/source/assets/stylesheets/partials/widget/_wishlist.scss */
 .outer {
@@ -3184,5 +3203,9 @@ a.item-delete:hover{
 
 .title-article{
   font-weight: 800; color: #A52223
+}
+
+.show-tick{
+  height: 40px;
 }
 

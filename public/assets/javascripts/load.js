@@ -34,7 +34,7 @@ $(document).ready(function(){
 
   $("input[type='number']").stepper();
 
-  $("select").selecter();
+  // $("select").selecter();
 
   $("input[type=radio], input[type=checkbox]").picker();
 
@@ -94,6 +94,10 @@ $(document).ready(function(){
     } else{
       $("#input-other-amount").closest("div").fadeOut("fast");
     }
+  })
+
+  $("button[data-button='select']").click(function(){
+    $(this).closest(".wrap-address").toggleClass("selected");
   })
 
   $("button[data-button='select']").click(function(){

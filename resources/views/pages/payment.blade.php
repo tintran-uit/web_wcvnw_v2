@@ -4,7 +4,8 @@
 @endsection
 
 @section('headInput')
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
             $(document).ready(function() {
               $('#tab-1').bootstrapValidator({
@@ -21,9 +22,9 @@
                                   message: 'Vui lòng nhập họ tên.'
                               },
                               stringLength: {
-                                  min: 5,
+                                  min: 1,
                                   max: 35,
-                                  message: 'Họ tên không dưới 5 ký tự'
+                                  message: 'Họ tên không dưới 2 ký tự.'
                               }
                           }
                       },
@@ -34,6 +35,11 @@
                               },
                               numeric: {
                                    message: 'Vui lòng nhập chính xác số điện thoại.',
+                              },
+                              stringLength: {
+                                  min: 10,
+                                  max: 13,
+                                  message: 'Vui lòng nhập chính xác số điện thoại.'
                               }
                           }
                       },
@@ -73,27 +79,7 @@
       <div class="container">
          <div class="row">
             <aside class="col-sm-12 col-md-3">
-               <div class="block block-nav spacer-15">
-                  <div class="title">
-                     <h4 class="text-uppercase no-margin">Đơn hàng</h4>
-                  </div>
-                  <div class="content">
-                     <ul class="list-unstyled">
-                        <li>
-                           <a href="account.html">          <i class="fa fa-angle-right"></i> Tài khoản
-                           </a>      
-                        </li>
-                        <li>
-                           <a href="{{url('gio-hang-thuc-pham-sach')}}">          <i class="fa fa-angle-right"></i> Đơn hàng
-                           </a>      
-                        </li>
-                        <li>
-                           <a class="current" href="{{url('thanh-toan')}}">          <i class="fa fa-angle-right"></i> Thông tin giao hàng
-                           </a>      
-                        </li>
-                     </ul>
-                  </div>
-               </div>
+               @include('layouts.menu_user')
                <section class="wrap wrap-border internal-padding spacer-bottom-15">
               <h4 class="text-uppercase no-margin">Giỏ thực phẩm an toàn</h4>
               <div class="spacer-top-5" style="margin-top: 5px;">
@@ -111,7 +97,7 @@
                   </div>
                 </div>
                 <div class="row spacer-bottom-5">
-                  <div class="col-xs-6">Phí vận chuyển:</div>
+                  <div class="col-xs-6">Phí vận chuyển (*):</div>
                   <div class="col-xs-6 text-right" id="spacer-ship">
                     
                   </div>
@@ -129,9 +115,9 @@
                       echo " VND"; ?></div>
                 </div>
                 <p class="small no-margin spacer-top-15">
-                  Đã bao gồm thuế VAT.
-                  <a href="terms-conditions.html">
-                    <u></u>
+                  
+                  <a href="{{url('')}}/chinh-sach-giao-hang">
+                    <u>(*) Miễn phí giao hàng với đơn hàng có giá trị trên 500.000 VNĐ</u>
                   </a>
                 </p>
               </div>
@@ -191,17 +177,18 @@
                                        </div>
                                        <div class="form-group">
                                           <!-- <label>State</label>-->
-                                             <select id="selectQuan" name="selectQuan" class="form-control" onchange="setShipping()">
+                                             <select id="selectQuan" name="selectQuan" class="selectpicker show-tick form-control" onchange="setShipping()">
                                                 <option value="">Chọn Quận/Huyện (*)</option>
                                                 @foreach($districts as $district)
-                                                <option value="{{$district->id}}"@if($auth) @if($district->id == $customer->district)
+                                                <option value="{{$district->id}}" @if($auth) @if($district->id == $customer->district)
                                                     selected="selected"
-                                                @endif @endif>{{$district->name}} 
+                                                @endif @endif >{{$district->name}} 
                                                 </option>
                                                 @endforeach
                                              </select>
-
+                                             
                                        </div>
+
                                        <div class="form-group">
                                           <!-- <label>State</label>-->
                                           <div class="selecter  closed" tabindex="0">
@@ -519,8 +506,12 @@ trước khi giao hàng!</p>
           }
         });
       }
-      
+
+
+      @if(Auth::check())
       setTimeout(function(){ setShipping(); }, 1000);
+      @endif
+
     function setShipping() {
       var idDitris = document.getElementById("selectQuan").value;
       // idDitris = fr idDitris;
@@ -565,5 +556,11 @@ trước khi giao hàng!</p>
       document.getElementById("spacer-ship").innerHTML = text;
       $('#spacer-toal').html(numberWithCommas(spacerToalNow) + ' VN');
     }
+
+    setTimeout(function(){ $( "div.selecter" ).removeClass( "mobile" ); }, 1000);
+</script>
+<script type="text/javascript">
+  
+
 </script>
 @endsection
