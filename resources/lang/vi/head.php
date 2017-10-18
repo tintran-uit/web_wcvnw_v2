@@ -17,9 +17,8 @@ return [
 	'register' => 'Đăng kí',
 	'slogan1' => 'Kết nối lương nông',
 	'slogan2' => 'An Lòng nội trợ',
-	'reswtpass' => 'Reset your password',
-	'reswtpass_status' => 'To reset your password, enter the email address you use to sign in to site.
-            We will then send you a new password.',
+	'reswtpass' => 'Đặt lại mật khẩu',
+	'reswtpass_status' => 'Để đặt lại mật khẩu của bạn, hãy nhập địa chỉ email bạn sử dụng để đăng nhập vào trang web. Sau đó chúng tôi sẽ gửi cho bạn một mật khẩu mới.',
     'productTab' => 'Thực phẩm sạch',
     'hello' => 'Xin chào',
     'editProfile' => 'Chỉnh sửa thông tin cá nhân',
