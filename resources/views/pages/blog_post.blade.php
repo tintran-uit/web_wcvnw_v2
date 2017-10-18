@@ -22,9 +22,9 @@
                   <article class="wrap wrap-border internal-padding wrap-radius bg-white style-post">
     <div class="row clearfix">
         <div class="col-xs-8">
-            <h4 class="no-margin-top">
+            <h3 class="no-margin-top" style="font-weight: 800; color: #A52223">
                 {{$article->title}}
-            </h4>
+            </h3>
         </div>
         <div class="col-xs-4">
             <time class="pull-right">
