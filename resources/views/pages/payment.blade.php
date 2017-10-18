@@ -429,7 +429,7 @@ trước khi giao hàng!</p>
          }
 
       function checkForm(ntab) {
-          var auth = {{$auth}};
+          var auth = '{{$auth}}';
           if(auth)
           {
             return true;

@@ -2,6 +2,24 @@
 @section('title')
 {{$title}}
 @endsection
+
+@section('headInput')
+<link href="{{url('')}}/packages/kartik-rate/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+
+<!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
+<link href="{{url('')}}/packages/kartik-rate/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+
+<!-- important mandatory libraries -->
+<script src="{{url('')}}/packages/kartik-rate/js/star-rating.js" type="text/javascript"></script>
+
+<!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
+<script src="{{url('')}}/packages/kartik-rate/themes/krajee-svg/theme.js"></script>
+
+<!-- optionally if you need translation for your language then include locale file as mentioned below -->
+<!-- <script src="{{url('')}}/packages/kartik-rate/js/locales/<lang>.js"></script> -->
+@endsection
+
+
 @section('main class')
 <main>
    <section class="spacer-20">
@@ -59,13 +77,8 @@
             Bạn có thể đánh giá sản phẩm mua trong vòng một tuần, kể từ ngày nhận được hàng.
           </p>
 
-          <div class="container">
-             <input type="radio" name="example" class="rating" value="1" />
-             <input type="radio" name="example" class="rating" value="2" />
-             <input type="radio" name="example" class="rating" value="3" />
-             <input type="radio" name="example" class="rating" value="4" />
-             <input type="radio" name="example" class="rating" value="5" />
-         </div>
+          <label for="input-1" class="control-label">Chấm điểm</label>
+            <input id="input-4" name="input-4" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
 
         </div>
       </div>
@@ -78,11 +91,20 @@
 <script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
+initRatingStar();
+(function(){
+setTimeout(initRatingStar, 4000);
+})();
 
-$(document).ready(function() {
-
-    
-
+function initRatingStar() {
+   var $element1 = $('input[type="number"]');
+      $element1.rating({
+      clearCaption: '',
+      step: 1,
+      starCaptions: {1: 'Rất kém', 2: 'Kém', 3: 'Được', 4: 'Tốt', 5: 'Đáng khen'},
+      starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'}
+      });
+      };
    
 </script>
 
