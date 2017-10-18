@@ -37,7 +37,7 @@
                               },
                               stringLength: {
                                   min: 10,
-                                  max: 11,
+                                  max: 13,
                                   message: 'Vui lòng nhập chính xác số điện thoại.'
                               }
                           }
@@ -114,9 +114,9 @@
                       echo " VND"; ?></div>
                 </div>
                 <p class="small no-margin spacer-top-15">
-                  Đã bao gồm thuế VAT.
-                  <a href="terms-conditions.html">
-                    <u></u>
+                  
+                  <a href="{{url('')}}/chinh-sach-giao-hang">
+                    (*Miễn phí giao hàng với giá trị đơn hàng trên 500.000 VNĐ)
                   </a>
                 </p>
               </div>
@@ -265,29 +265,7 @@ trước khi giao hàng!</p> --><h4 class="no-margin">
                                        </div>
                                     </a>
                                  </div>
-                                 <!-- <div id="payment-1" class="choose deselected">
-                                    <a class="clearfix" onclick="payment(1)">
-                                       <div class="pull-left">
-                                          <span class="fa-stack spacer-15" id="tick-pay-1">
-                                          <i class="fa fa-circle-o fa-stack-2x"></i>
-                                          </span>
-                                       </div>
-                                       <div class="col-xs-9">
-                                          <h4 class="no-margin">
-                                             <b>Thanh toán khi nhận hàng</b>
-                                          </h4>
-                                          <p class="no-margin">
-                                             <p class="no-margin">Cảm ơn bạn đã lựa chọn mua sắm tại We Care VN, <br>
-Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
-XÁC NHẬN ĐƠN HÀNG <br>
-trước khi giao hàng!</p>
-                                          </p>
-                                       </div>
-                                       <div class="pull-right hidden-xs">
-                                          <img alt="paypal" src="assets/images/icons/credit-cards/paypal.png">
-                                       </div>
-                                    </a>
-                                 </div> -->
+                                 
                               </div>
                               
                               <section>
@@ -511,8 +489,10 @@ trước khi giao hàng!</p>
           }
         });
       }
-      
+      @if(Auth::check())
       setTimeout(function(){ setShipping(); }, 1000);
+      @endif
+
     function setShipping() {
       var idDitris = document.getElementById("selectQuan").value;
       // idDitris = fr idDitris;
@@ -552,10 +532,16 @@ trước khi giao hàng!</p>
               break;
           
       }
-      console.log(spacerToalNow);
-      spacerToalNow = spacerToalNow + '';
+        spacerToalNow = spacerToalNow + '';
+        if(spacerToal>500000)
+        {
+          spacerToalNow = spacerToal;
+          text = "0 VNĐ";
+        }
       document.getElementById("spacer-ship").innerHTML = text;
-      $('#spacer-toal').html(numberWithCommas(spacerToalNow) + ' VN');
+      console.log(spacerToal);
+      
+      $('#spacer-toal').html(numberWithCommas(spacerToalNow) + ' VNĐ');
     }
 </script>
 @endsection

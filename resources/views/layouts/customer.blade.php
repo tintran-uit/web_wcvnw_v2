@@ -865,11 +865,17 @@
            $(this).addClass('img-responsive');
            $(this).css("height", "auto");
          });
+
+         $('#article div').children('p').children('img').each(function(){
+           $(this).addClass('img-responsive');
+           $(this).css("height", "auto");
+         });
+
          $('#article').children('img').each(function(){
            $(this).addClass('img-responsive');
            $(this).css("height", "auto");
-
          });
+
        });
       </script>
       <script type="text/javascript">
