@@ -62,7 +62,7 @@
                </a>    
             </div>
          </div>
-         <div class="content" style="display: none">
+         <div class="content" style="display: none; padding: 0;">
             <h5>CFarm sẽ trả lời yêu cầu của bạn sớm nhất!</h5>
             <script type="text/javascript">
               window.fbAsyncInit = function () {
