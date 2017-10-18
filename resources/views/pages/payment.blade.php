@@ -4,8 +4,8 @@
 @endsection
 
 @section('headInput')
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{url('')}}/assets/stylesheets/vendor/bootstrap-select.min.css">
+<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/bootstrap-select.min.js"></script>
 <script type="text/javascript">
             $(document).ready(function() {
               $('#tab-1').bootstrapValidator({
