@@ -26,7 +26,7 @@
                             <div class="row clearfix">
                               <div class="col-xs-12">
                                 <h4 class="media-heading">
-                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">{{$article->title}}</a>
+                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">{{$article->title}}</a><br>
                                 </h4>
                               </div>
                               
