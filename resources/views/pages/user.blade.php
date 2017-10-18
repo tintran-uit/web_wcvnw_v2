@@ -46,12 +46,12 @@
                            <?php $i=0; ?>
                            @foreach($orders as $order)
                            <?php $i++; ?>
-                            <p><a href="#" data-toggle="modal" data-target="#order-{{$i}}">Xem đơn hàng: {{$order->order_id}}<br>{{ \Carbon\Carbon::parse($order->date)->format('d/m/Y')}} - <span class="btn-primary">Đã giao</span></a></p>
+                            <p><a href="#" data-toggle="modal" data-target="#order-{{$i}}">Xem đơn hàng: {{$order->order_id}}<br>{{ \Carbon\Carbon::parse($order->date)->format('d/m/Y')}} - <span class="@if($order->status == 1) btn-info @endif @if($order->status == 2) btn-primary @endif @if($order->status == 0) btn-warning @endif @if($order->status == 3) btn-error @endif">{{$order->status_vn_name}}</span></a></p>
                            @endforeach
                          </div>
                        </div>
                        <div class="col-sm-9 listbar">
-                        <!-- @if() btn-info @endif @if() btn-primary @endif @if() btn-warning @endif @if() btn-error @endif -->
+                        <!--  -->
                          <!-- <div class="listbox">
                            <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng ngày <b><i>21/10/2017</i></b></p>
                            </div>
@@ -156,7 +156,7 @@
               <i class="fa fa-times"></i>
             </span>
           </button>
-          <h4 class="modal-title" id="modalBuyVoucher">Đơn hàng ngày 21/10/2017</h4>
+          <h4 class="modal-title" id="modalBuyVoucher">Chi tiết đơn hàng</h4>
         </div>
         <div class="modal-body">
           
@@ -182,10 +182,18 @@
               @endforeach
             </tbody>
             <tfoot>
+              <!-- <tr style="">
+                <td colspan="3" align="right" style="padding-right: 20px"><br><b>Phí vận chuyển</b>  </td>
+                <td colspan="1" align="left" style=""><br><span>{{$total}} VNĐ</span></td>
+              </tr>
               <tr style="">
-              <td colspan="3" align="right" style="padding-right: 20px"><br><b>Thành </b>  </td>
-              <td colspan="1" align="left" style=""><br><span>{{$total}} VNĐ</span></td>
-            </tr>
+                <td colspan="3" align="right" style="padding-right: 20px"><br><b>Khuyến mãi</b>  </td>
+                <td colspan="1" align="left" style=""><br><span>{{$total}} VNĐ</span></td>
+              </tr> -->
+              <tr style="">
+                <td colspan="3" align="right" style="padding-right: 20px"><b>Thành tiền</b>  </td>
+                <td colspan="1" align="left" style=""><span>{{$total}} VNĐ</span></td>
+              </tr>
             </tfoot>
           </table>
 

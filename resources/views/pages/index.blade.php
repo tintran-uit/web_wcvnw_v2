@@ -10,7 +10,7 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
          <div class="item active">
-            <a href="#">          <img alt="slide" src="assets/images/slides/Artboard 4.png" />
+            <a href="#">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 4.png" />
             </a>
             <div class="label-slide hidden-sm hidden-xs slideInDown animated">
                <div>
@@ -22,19 +22,19 @@
             </div>      
          </div>
          <div class="item">
-            <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="assets/images/slides/Artboard 5.png" />
+            <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 3.png" />
             </a>        
             
          </div>
          
-         <!-- <div class="item">
-            <a href="#">          <img alt="slide" src="assets/images/slides/slide2.jpg" />
+         <div class="item">
+            <a href="#">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 5.png" />
             </a>        
             <div class="carousel-caption">
-               <h3>Didascalia</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+               <h3>Chuyên sản phẩm sạch - hữu cơ</h3>
+               <p>Kết nối lương nông - an lòng nội trợ.</p>
             </div>
-         </div> -->
+         </div>
       </div>
       <!-- end -->
       <!-- Indicatori di posizione -->
@@ -125,7 +125,8 @@
           <div class="intro col-md-6 col-md-offset-3 text-center"><p>"...một tương lai lành mạnh cho những em bé và sức khỏe ngày càng cải thiện của một thế hệ người tiêu dùng đang dự phần vào nền nông nghiệp sạch hữu cơ..."</p></div>
           <div class="content col-md-12">
             <div class="col-md-6">
-              <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/X0m6Rdhs1Nw" frameborder="0" allowfullscreen></iframe></div>
+              <!-- <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/X0m6Rdhs1Nw" frameborder="0" allowfullscreen></iframe></div> -->
+              <img class="image-responsive" style="width: 100%" src="{{url('')}}/uploads/anh-thuc-te/00_visit-farm-dalat.png">
             </div>
             <div class="col-md-6">
               <h2 class="title-font-handwritten"> C-FARM AN TÂM NỘI TRỢ</h2>
@@ -135,7 +136,7 @@
 
               <p>Cùng đồng điệu và chia sẻ sự trăn trở về nguồn thực phẩm sạch mà ai cũng có quyền sử dụng khiến câu chuyện về sự ra đời của Cfarm ngày càng trở nên rõ rệt và cháy bỏng. Từ đó, chúng tôi được giới thiệu đến nhiều khu vườn khác nhau và cuộc hành trình khảo sát kết nối lương nông được bắt đầu.
               </p>
-              <p>Từ đồng bằng Tây Nam Bộ trù phú với vườn cây trái xanh tươi và những cánh đồng lúa chín vàng đến cao nguyên Lâm Viên đất đỏ ba-zan, chúng tôi đã vinh dự gặp gỡ những người nông dân đáng mến, cần cù.........</p>
+              <p>Từ đồng bằng Tây Nam Bộ trù phú với vườn cây trái xanh tươi và những cánh đồng lúa chín vàng đến cao nguyên Lâm Viên đất đỏ ba-zan với đồi trà thơm mát và những mái vòm nhà kính nhấp nhô khắp các triền đồi, chúng tôi đã vinh dự gặp gỡ những người nông dân đáng mến, cần cù và đam mê. Mỗi người một câu chuyện, một hành trình phấn đấu nuôi trồng sạch, không được gia đình ủng hộ, những năm đầu gặp thất bại do chưa có kinh nghiệm và sản lượng quá thấp, có lúc tưởng chừng như phải dừng lại, liên tục cạnh tranh với rau bẩn đang lan tràn.......</p>
               </div>
               <a href="{{url('')}}/hanh-trinh-khao-sat-va-ket-noi-luong-nong" class="btn btn-success">Chi tiết</a>
             </div>
