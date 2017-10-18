@@ -171,15 +171,15 @@
             </thead>
             <tbody>
               <?php $total=0; ?>
-              @foreach($order as $item)
+              @for($j = 0; $j < sizeof($order); $j++)
               <tr>
-              <td class="col-md-3">{{$item->product_name}}</td>
-              <td>{{$item->farmer_name}}</td>
-              <td>{{$item->quantity}} {{$item->unit}}</td>
-              <td>{{$item->price}} VNĐ</td>
+              <td class="col-md-3">{{$order[$j]->product_name}}</td>
+              <td>{{$order[$j]->farmer_name}}</td>
+              <td>{{$order[$j]->quantity}} {{$order[$j]->unit}}</td>
+              <td>{{$order[$j]->price}} VNĐ</td>
               <tr>
-              <?php $total+=$item->price; ?>
-              @endforeach
+              <?php $total+=$order[$j]->price; ?>
+              @endfor
             </tbody>
             <tfoot>
               <!-- <tr style="">

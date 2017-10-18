@@ -39,7 +39,7 @@
                                 <p class="copy">
                                   <?php 
                                       $intro = strip_tags($article->content);
-                                      $intro = substr($intro, 0, 350);
+                                      $intro = mb_substr($intro, 0, 290,'UTF-8');
                                       echo $intro.'...'; 
                                   ?>
                                   <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">[Chi tiết]</a>
