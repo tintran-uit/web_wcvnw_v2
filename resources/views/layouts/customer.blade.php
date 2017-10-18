@@ -662,47 +662,15 @@
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down" style="color: #A52223"></i>
                       </a>          
                       <ul class="dropdown-menu" role="menu">
-                         <!-- <li>
-                            <a href="account.html">Edit profile</a>
-                         </li>
-                          -->
+                         
                          <li>
                             <a href="{{url('')}}/admin/logout">Log out</a>
                          </li>
                       </ul>
                  @endif
                  </div>
-                <!-- <div class="col-xs-5 vcenter">
-                  <div style="float: right; font-style: 12px; color: #777">
-                            @if(App::isLocale('vi'))
-                              <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/vi">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-vietnam.jpg" />
-                              <span id="country-lang">Tiếng Việt</span>
-                              <i class="fa fa-angle-down"></i>
-                              </a>              
-                              <ul class="dropdown-menu list-unstyled">
-                                 <li>
-                                    <a class="text-center" href="{{url('')}}/language/en"><img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
-                                      <span id="country-lang"> English</span>
-                                    </a>                
-                                 </li>
-                              </ul>
-                            @else
-                              <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/en">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
-                              <span id="country-lang">English</span>
-                              <i class="fa fa-angle-down"></i>
-                              </a>              
-                              <ul class="dropdown-menu list-unstyled">
-                                 <li>
-                                    <a class="text-center" href="{{url('')}}/language/vi"><img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-vietnam.jpg" />
-                                      <span id="country-lang">Tiếng Việt</span>
-                                    </a>                
-                                 </li>
-                              </ul>
-                            @endif
-                           </div>
-                </div> -->
-              </ul>
               </div>
+                
                <div class="container">
                   <!-- Brand and toggle get grouped for better mobile display -->
                   <div class="navbar-header">
@@ -731,7 +699,7 @@
                                     </ul>
                                  </li>
                                  <li class="">
-                                    <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang"> {{ trans('head.product') }}
+                                    <a role="button" class="dropdown-toggle" href="{{url('/mua-thuc-pham-sach')}}" id="menu-Muahang2"> {{ trans('head.product') }}
                                     </a>                  
                                  </li>
                                  <li class="@if($page->template == 'blog') active @endif">

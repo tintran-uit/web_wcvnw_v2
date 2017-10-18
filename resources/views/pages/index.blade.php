@@ -54,12 +54,7 @@
       <!-- end -->
    </div>
 </section>
-<!-- insert background-color bg-light in the section container and class space-divider -->
-<!-- <section class="subscribe-type-one spacer-30">
-   <div class="container">
-          <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2>
-   </div>
-</section> -->
+
 <section id="category-content" style="margin-top: 25px">
    <div class="container">
       
@@ -126,7 +121,7 @@
           <div class="content col-md-12">
             <div class="col-md-6">
               <!-- <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/X0m6Rdhs1Nw" frameborder="0" allowfullscreen></iframe></div> -->
-              <img class="image-responsive" style="width: 100%" src="{{url('')}}/uploads/anh-thuc-te/00_visit-farm-dalat.png">
+              <img class="image-responsive" style="width: 100%; padding-bottom: 15px;" src="{{url('')}}/uploads/anh-thuc-te/00_visit-farm-dalat.png">
             </div>
             <div class="col-md-6">
               <h2 class="title-font-handwritten"> C-FARM AN TÂM NỘI TRỢ</h2>
@@ -143,12 +138,6 @@
           </div>
    </div>
 </section>
-
-<!-- <section class="subscribe-type-one spacer-30">
-   <div class="container">
-          <h2 class="title-font-handwritten text-center space-only-bottom">Subscribe Freely</h2>
-   </div>
-</section> -->
 
 <section class="news-box spacer-bottom-30">
    <div class="container">
@@ -281,10 +270,10 @@
 
             if (isMobile()) {
    
-              $('.nav a').click(function (e) {
-              e.preventDefault()
-              $(this).tab('show')
-               })  
+              // $('.nav a').click(function (e) {
+              // e.preventDefault()
+              // $(this).tab('show')
+              //  })  
                 
                 $('a.scroll').on('click', function (e) {
                     var href = $(this).attr('href');
@@ -298,6 +287,10 @@
                } 
 
             $('#menu-Muahang').on('click', function (e) {
+                  scrollToMuaHang();
+                  e.preventDefault();
+               });
+            $('#menu-Muahang2').on('click', function (e) {
                   scrollToMuaHang();
                   e.preventDefault();
                });

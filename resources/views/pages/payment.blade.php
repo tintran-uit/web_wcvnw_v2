@@ -34,6 +34,11 @@
                               },
                               numeric: {
                                    message: 'Vui lòng nhập chính xác số điện thoại.',
+                              },
+                              stringLength: {
+                                  min: 10,
+                                  max: 11,
+                                  message: 'Vui lòng nhập chính xác số điện thoại.'
                               }
                           }
                       },
