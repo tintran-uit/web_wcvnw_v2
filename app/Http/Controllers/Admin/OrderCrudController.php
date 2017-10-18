@@ -41,45 +41,40 @@ class OrderCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'name' => 'customer_id',
-            'label' => 'Khách hàng',
+            'label' => 'Người mua',
             'type' => 'select',
             'entity' => 'customer',
             'attribute' => 'name',
             'model' => "App\Models\Customer",
         ]);
         $this->crud->addColumn([
-            'name' => 'customer_phone',
-            'label' => 'Điện Thoại',
-            'type' => 'select',
-            'entity' => 'customer',
-            'attribute' => 'phone',
-            'model' => "App\Models\Customer",
+            'name' => 'delivery_phone',
+            'label' => 'Điện Thoại Nhận',
+            'type' => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'customer_address',
-            'label' => 'Địa Chỉ',
-            'type' => 'select',
-            'entity' => 'customer',
-            'attribute' => 'address',
-            'model' => "App\Models\Customer",
+            'name' => 'delivery_address',
+            'label' => 'Địa Chỉ Giao Hàng',
+            'type' => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'shipper_id',
-            'label' => 'Giao hàng',
+            'label' => 'Người Giao hàng',
             'type' => 'select',
             'entity' => 'shipper',
             'attribute' => 'name',
             'model' => "App\Models\Shipper",
         ]);
         $this->crud->addColumn([
-            'name' => 'note',
-            'label' => 'Ghi chú',
+            'name' => 'shipping_cost',
+            'label' => 'Phí Giao Hàng',
+            'type' => 'number',
         ]);
 
         $this->crud->addColumn([
-            'name' => 'status',
-            'label' => 'Trạng Thái',
-            'type' => 'text',
+            'name' => 'total',
+            'label' => 'Tổng Tiền',
+            'type' => 'number',
         ]);
 
         // ------ CRUD FIELDS
@@ -141,7 +136,7 @@ class OrderCrudController extends CrudController
 
         $this->crud->addField([
             'name' => 'delivery_phone',
-            'label' => 'Phí Giao Hàng',
+            'label' => 'SĐT người nhận',
             'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-6'
