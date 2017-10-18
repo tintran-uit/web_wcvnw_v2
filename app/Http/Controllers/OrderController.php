@@ -101,18 +101,16 @@ class OrderController extends Controller
         
 // Create Order_id and return after adding the order successfully.
         //#34256789
-        if($total < 500000) {
-         	$total = $total - ROUND(($promotion * $total)/100, 0) + $shipping_cost;
+        if($total >= 500000) {
+         	$shipping_cost = 0;//free ship
         }
-        else {
-        	//free ship
-        	$total = $total - ROUND(($promotion * $total)/100, 0);
-        }
+        $discount_amount = ROUND(($promotion * $total)/100, 0);
+        $total = $total - $discount_amount + $shipping_cost;
         $order_id = DB::select('SELECT `order_id` "order_id" FROM `uniqueids` WHERE `id` = 1');
         $order_id = $order_id[0]->order_id;
         DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `created_at`) VALUES(?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total]);
+         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `discount_amount`, `created_at`) VALUES(?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $discount_amount]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
@@ -204,24 +202,24 @@ class OrderController extends Controller
          		else
          		{
          			//rate individually. If multiple items from 1 farmer, rate him only once, apply to one order item as representative for that farmer.
-         			$product_id_list = '(0';
-         			foreach ($elements as $element) {
-         				$product_id_list = $product_id_list.','.$element;
-         			}
-         			$product_id_list = $product_id_list.')'
-			        	DB::statement('UPDATE `m_orders` m, `farmers` f 
-		        		              	  SET m.`rating` = ?,
-		        		                      m.`comment` = ?,
-		        		                      f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
-		        		                  	  f.`rating_count` = f.`rating_count` + 1
- 										WHERE f.`id` = m.`farmer_id`
- 										  AND m.`order_id` = ?
- 										  AND m.`id` = (SELECT MIN(id)
- 										  				  FROM `m_orders` mo
- 										  				 WHERE mo.`order_id` = m.`order_id`
- 										  				   AND mo.`farmer_id` = m.`farmer_id`
- 										  				)
- 										  AND `product_id` IN ?', [$rate, $comment, $rate, $order_id, $product_id_list]);
+         		// 	$product_id_list = '(0';
+         		// 	foreach ($elements as $element) {
+         		// 		$product_id_list = $product_id_list.','.$element;
+         		// 	}
+         		// 	$product_id_list = $product_id_list.')'
+			        // 	DB::statement('UPDATE `m_orders` m, `farmers` f 
+		        	// 	              	  SET m.`rating` = ?,
+		        	// 	                      m.`comment` = ?,
+		        	// 	                      f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
+		        	// 	                  	  f.`rating_count` = f.`rating_count` + 1
+ 										// WHERE f.`id` = m.`farmer_id`
+ 										//   AND m.`order_id` = ?
+ 										//   AND m.`id` = (SELECT MIN(id)
+ 										//   				  FROM `m_orders` mo
+ 										//   				 WHERE mo.`order_id` = m.`order_id`
+ 										//   				   AND mo.`farmer_id` = m.`farmer_id`
+ 										//   				)
+ 										//   AND `product_id` IN ?', [$rate, $comment, $rate, $order_id, $product_id_list]);
          		}
          	}
          }
