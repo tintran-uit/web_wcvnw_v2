@@ -40,6 +40,12 @@
                          </div>
                          <div class="icon-box">
                            <img alt="orders" src="{{url('')}}/assets/images/icons/icon-my-order.png">
+                           <br><br>
+                           <?php $i=0; ?>
+                           @foreach($orders as $order)
+                           <?php $i++; ?>
+                            <p><a href="#" data-toggle="modal" data-target="#order-{{$i}}">Xem đơn hàng ngày: <br>{{ \Carbon\Carbon::parse($order->date)->format('d/m/Y')}}</a></p>
+                           @endforeach
                          </div>
                        </div>
                        <div class="col-sm-9 listbar">
@@ -133,8 +139,11 @@
    </section>
    @include('layouts.banner_bottom')
 </main>
- <!-- Modal buy voucher -->
-<div class="modal fade style-base-modal" id="modal-rate" tabindex="-1" role="dialog" aria-labelledby="modalBuyVoucher" aria-hidden="true">
+<?php $i=0; ?>
+@foreach($orderItem as $order)
+<?php $i++; ?>
+ <!-- Modal order -->
+<div class="modal fade style-base-modal" id="order-{{$i}}" tabindex="-1" role="dialog" aria-labelledby="modalBuyVoucher" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="inner-container">
@@ -144,20 +153,39 @@
               <i class="fa fa-times"></i>
             </span>
           </button>
-          <h4 class="modal-title" id="modalBuyVoucher">Đánh giá sản phẩm ngày 21/10/2017</h4>
+          <h4 class="modal-title" id="modalBuyVoucher">Đơn hàng ngày 21/10/2017</h4>
         </div>
         <div class="modal-body">
-          <p>
-            Bạn có thể đánh giá sản phẩm mua trong vòng một tuần, kể từ ngày nhận được hàng.
-          </p>
-
-          <div class="form-group">
-            <label for="input-1" class="control-label">Chấm điểm</label>
-             <input id="input-4" name="input-4" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
-          </div>
-          <div class="form-group" id="next1">
-
-          </div>
+          
+          <table style="width: 100%">
+            <thead>
+            <tr>
+              <th class="col-md-3">Sản phẩm</th>
+              <th class="col-md-5">Nguồn gốc</th>
+              <th class="col-md-2">Số lượng</th>
+              <th class="col-md-2">Giá</th>
+            </tr>
+            </thead>
+            <tbody>
+              <?php $total=0; ?>
+              @foreach($order as $item)
+              <tr>
+              <td class="col-md-3">{{$item->product_name}}</td>
+              <td>{{$item->farmer_name}}</td>
+              <td>{{$item->quantity}} {{$item->unit}}</td>
+              <td>{{$item->price}} VNĐ</td>
+              <tr>
+              <?php $total+=$item->price; ?>
+              @endforeach
+            </tbody>
+            <tfoot>
+              <tr></tr>
+              <tr style="">
+              <td colspan="3" align="right" style="padding-right: 20px"><b>Tổng Tiền</b>  </td>
+              <td colspan="1" align="left" style=""><span>{{$total}} VNĐ</span></td>
+            </tr>
+            </tfoot>
+          </table>
 
 
         </div>
@@ -165,6 +193,9 @@
     </div>
   </div>
 </div>
+@endforeach
+
+
 @endsection
 
 @section('scrip_code')
