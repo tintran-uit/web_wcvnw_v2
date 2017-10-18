@@ -21,17 +21,17 @@
               <div class="row clearfix">
 
                 @foreach($articles as $article)
-                <article class="col-md-6">
+                <article class="col-md-6" style="padding: 10px 10px;">
                        <div class="wrap wrap-border internal-padding wrap-radius bg-white style-post">
                             <div class="row clearfix">
                               <div class="col-xs-12">
-                                <h4 class="media-heading">
+                                <h4 class="media-heading" style="height: 38px">
                                   <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">{{$article->title}}</a>
                                 </h4>
                               </div>
                               
                             </div>
-                            <div class="media spacer-bottom-10">
+                            <div class="media spacer-bottom-10" style="height: 200px">
                               <div class="media-left media-top">
                           <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">        <img class="small-img" alt="post" src="{{url('')}}/{{$article->image}}" width="190">
                           </a>    </div>
