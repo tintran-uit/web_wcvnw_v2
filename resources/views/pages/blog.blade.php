@@ -12,7 +12,7 @@
                @include('layouts.menu_blog')
                <div class="general-info">
                   <h5 class="title">Liên hệ với chúng tôi</h5>
-                  <div class="content text-center">
+                  <div class="text-center">
                      <div class="fb-page" data-href="https://www.facebook.com/Cfarm.vn/" data-tabs="timeline" data-height="156" data-small-header="true" data-width="263" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Cfarm.vn/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Cfarm.vn/">Cfarm.vn</a></blockquote></div>  
                   </div>
                </div>
@@ -26,7 +26,7 @@
                             <div class="row clearfix">
                               <div class="col-xs-12">
                                 <h4 class="media-heading">
-                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">{{$article->title}}</a><br>
+                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">{{$article->title}}</a>
                                 </h4>
                               </div>
                               
@@ -39,7 +39,7 @@
                                 <p class="copy">
                                   <?php 
                                       $intro = strip_tags($article->content);
-                                      $intro = substr($intro, 0, 380);
+                                      $intro = substr($intro, 0, 350);
                                       echo $intro.'...'; 
                                   ?>
                                   <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">[Chi tiết]</a>

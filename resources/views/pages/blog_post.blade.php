@@ -12,7 +12,7 @@
                @include('layouts.menu_blog')
                <div class="general-info">
                   <h5 class="title">Liên hệ với chúng tôi</h5>
-                  <div class="content text-center">
+                  <div class="text-center">
                      <div class="fb-page" data-href="https://www.facebook.com/Cfarm.vn/" data-tabs="timeline" data-height="156" data-small-header="true" data-width="263" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Cfarm.vn/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Cfarm.vn/">Cfarm.vn</a></blockquote></div>  
                   </div>
                </div>
@@ -22,7 +22,7 @@
                   <article class="wrap wrap-border internal-padding wrap-radius bg-white style-post">
     <div class="row clearfix">
         <div class="col-xs-8">
-            <h3 class="no-margin-top" style="font-weight: 800; color: #A52223">
+            <h3 class="no-margin-top title-article" style="">
                 {{$article->title}}
             </h3>
         </div>
