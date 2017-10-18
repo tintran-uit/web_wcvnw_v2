@@ -21,7 +21,7 @@
                                   message: 'Vui lòng nhập họ tên.'
                               },
                               stringLength: {
-                                  min: 2,
+                                  min: 5,
                                   max: 35,
                                   message: 'Họ tên không dưới 5 ký tự'
                               }
@@ -34,11 +34,6 @@
                               },
                               numeric: {
                                    message: 'Vui lòng nhập chính xác số điện thoại.',
-                              },
-                              stringLength: {
-                                  min: 10,
-                                  max: 13,
-                                  message: 'Vui lòng nhập chính xác số điện thoại.'
                               }
                           }
                       },
@@ -78,7 +73,27 @@
       <div class="container">
          <div class="row">
             <aside class="col-sm-12 col-md-3">
-                @include('layouts.menu_user')
+               <div class="block block-nav spacer-15">
+                  <div class="title">
+                     <h4 class="text-uppercase no-margin">Đơn hàng</h4>
+                  </div>
+                  <div class="content">
+                     <ul class="list-unstyled">
+                        <li>
+                           <a href="account.html">          <i class="fa fa-angle-right"></i> Tài khoản
+                           </a>      
+                        </li>
+                        <li>
+                           <a href="{{url('gio-hang-thuc-pham-sach')}}">          <i class="fa fa-angle-right"></i> Đơn hàng
+                           </a>      
+                        </li>
+                        <li>
+                           <a class="current" href="{{url('thanh-toan')}}">          <i class="fa fa-angle-right"></i> Thông tin giao hàng
+                           </a>      
+                        </li>
+                     </ul>
+                  </div>
+               </div>
                <section class="wrap wrap-border internal-padding spacer-bottom-15">
               <h4 class="text-uppercase no-margin">Giỏ thực phẩm an toàn</h4>
               <div class="spacer-top-5" style="margin-top: 5px;">
@@ -114,9 +129,9 @@
                       echo " VND"; ?></div>
                 </div>
                 <p class="small no-margin spacer-top-15">
-                  
-                  <a href="{{url('')}}/chinh-sach-giao-hang">
-                    (*Miễn phí giao hàng với giá trị đơn hàng trên 500.000 VNĐ)
+                  Đã bao gồm thuế VAT.
+                  <a href="terms-conditions.html">
+                    <u></u>
                   </a>
                 </p>
               </div>
@@ -245,27 +260,42 @@
                                           </span>
                                        </div>
                                        <div class="col-xs-9">
-                                         <!--  <h4 class="no-margin">
+                                          <h4 class="no-margin">
                                              <b>Chuyển khoản ngân hàng</b>
                                           </h4>
                                           <p class="no-margin">Cảm ơn bạn đã lựa chọn mua sắm tại We Care VN, <br>
 Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
 XÁC NHẬN ĐƠN HÀNG <br>
-trước khi giao hàng!</p> --><h4 class="no-margin">
-                                             <b>Thanh toán khi nhận hàng</b>
-                                          </h4>
-                                          <p class="no-margin">
-                                             <p class="no-margin" style="color: #000">Cảm ơn bạn đã lựa chọn mua sắm tại Cfarm, <br>
-                                              Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
-                                              XÁC NHẬN ĐƠN HÀNG <br>
-                                              trước khi giao hàng!</p>
+trước khi giao hàng!</p>
                                        </div>
                                        <div class="pull-right hidden-xs">
-                                          <img alt="credit cards"  class="image-responsive" src="{{url('')}}/assets/images/icons/credit-cards/giao-rau-sach.jpg">
+                                          <img alt="credit cards" src="assets/images/icons/credit-cards/credit-cards.jpg">
                                        </div>
                                     </a>
                                  </div>
-                                 
+                                 <div id="payment-1" class="choose deselected">
+                                    <a class="clearfix" onclick="payment(1)">
+                                       <div class="pull-left">
+                                          <span class="fa-stack spacer-15" id="tick-pay-1">
+                                          <i class="fa fa-circle-o fa-stack-2x"></i>
+                                          </span>
+                                       </div>
+                                       <div class="col-xs-9">
+                                          <h4 class="no-margin">
+                                             <b>Thanh toán khi nhận hàng</b>
+                                          </h4>
+                                          <p class="no-margin">
+                                             <p class="no-margin">Cảm ơn bạn đã lựa chọn mua sắm tại We Care VN, <br>
+Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
+XÁC NHẬN ĐƠN HÀNG <br>
+trước khi giao hàng!</p>
+                                          </p>
+                                       </div>
+                                       <div class="pull-right hidden-xs">
+                                          <img alt="paypal" src="assets/images/icons/credit-cards/paypal.png">
+                                       </div>
+                                    </a>
+                                 </div>
                               </div>
                               
                               <section>
@@ -489,10 +519,8 @@ trước khi giao hàng!</p> --><h4 class="no-margin">
           }
         });
       }
-      @if(Auth::check())
+      
       setTimeout(function(){ setShipping(); }, 1000);
-      @endif
-
     function setShipping() {
       var idDitris = document.getElementById("selectQuan").value;
       // idDitris = fr idDitris;
@@ -532,16 +560,10 @@ trước khi giao hàng!</p> --><h4 class="no-margin">
               break;
           
       }
-        spacerToalNow = spacerToalNow + '';
-        if(spacerToal>500000)
-        {
-          spacerToalNow = spacerToal;
-          text = "0 VNĐ";
-        }
+      console.log(spacerToalNow);
+      spacerToalNow = spacerToalNow + '';
       document.getElementById("spacer-ship").innerHTML = text;
-      console.log(spacerToal);
-      
-      $('#spacer-toal').html(numberWithCommas(spacerToalNow) + ' VNĐ');
+      $('#spacer-toal').html(numberWithCommas(spacerToalNow) + ' VN');
     }
 </script>
 @endsection
