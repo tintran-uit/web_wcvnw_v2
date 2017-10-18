@@ -52,7 +52,7 @@ class PackageItemCrudController extends CrudController
             'name' => 'farmer_id',
             'label' => 'Trang trại',
             'type' => 'select',
-            'entity' => 'product',
+            'entity' => 'farmer',
             'attribute' => 'name',
             'model' => "App\Models\Farmer",
         ]);
