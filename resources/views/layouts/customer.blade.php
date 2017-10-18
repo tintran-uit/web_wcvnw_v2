@@ -514,7 +514,7 @@
             <div class="container">
                <div class="row clearfix">
                   <article class="col-sm-12 col-md-4 col-lg-3" id="logo">
-                    <a href="./">          <img class="image-responsive" alt="Kids Store" src="{{url('')}}/assets/images/logo.png" style="height: 86px" />
+                    <a href="{{url('')}}">          <img class="image-responsive" alt="Kids Store" src="{{url('')}}/assets/images/logo.png" style="height: 86px" />
                      </a>
                   </article>
                   
