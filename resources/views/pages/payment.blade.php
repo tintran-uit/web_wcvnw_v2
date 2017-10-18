@@ -21,7 +21,7 @@
                                   message: 'Vui lòng nhập họ tên.'
                               },
                               stringLength: {
-                                  min: 5,
+                                  min: 2,
                                   max: 35,
                                   message: 'Họ tên không dưới 5 ký tự'
                               }

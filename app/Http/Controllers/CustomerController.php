@@ -37,14 +37,9 @@ class CustomerController extends Controller
 		if(Auth::check()) {
 			$user = Auth::user();
          	$customer_id = $user->connected_id;
-			if(strcmp($user->account_type, "Customer") == 0)
-         	{
+			
 				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`note` "note" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
     			return $orders;
-    		}
-    		else {
-    			return redirect()->back();
-    		}
 		}
 		else
 		{
@@ -120,7 +115,20 @@ class CustomerController extends Controller
 	        $this->data['menu'] = MenuItem::all();
 	        $this->data['cart'] = Cart::content();
 	        $this->data['cartOld'] = Cart::content();
+	        $user = Auth::user();
+         	$customer_id = $user->connected_id;
+			
+			$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`note` "note" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
+			$this->data['orders'] = $orders;
+			$this->data['orderItem'] = [];
+			foreach ($orders as $order) {
+				$item = DB::select('SELECT p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name" FROM `m_orders` m, `products` p, `farmers` f  
+					WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ?', [$order->order_id]);
+				// array_push($this->data['orderItem'], $item);
+				$this->data['orderItem'][$order->order_id] = $item;
+			}
 	        // $this->data['cartOld'] = DB::table('articles')->where('id', $post_id)->first();
+	        // return $this->data['orderItem'];
 	        return view('pages.user', $this->data);
 		}
 		return redirect()->back();
