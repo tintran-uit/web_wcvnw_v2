@@ -107,12 +107,12 @@ class PageController extends Controller
             }
             if($this->data['auth']){
                 $this->data['customer'] = DB::table('customers')->where('id', Auth::user()->connected_id)->first();
-
+                if(Auth::user()->connected_id == null){
+                    $this->data['auth'] = false;
+                }
             }
 
-            if(Auth::user()->connected_id == null){
-                $this->data['auth'] = false;
-            }
+            
 
             $this->data['districts'] = DB::table('district')->where('city_id', 1)->get();
         }

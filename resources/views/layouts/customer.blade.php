@@ -98,7 +98,7 @@
       <div class="affix" id="nl-box-slider" style="right: -305px;">
          <div class="clearfix">
             <div class="pull-left" style="position: sticky;">
-               <a class="btn-block" id="label-subscribe" href="#">        <img alt="subscribe newsletter" src="{{url('')}}/assets/images/icons/btn-cart.png" />
+               <a class="btn-block" id="label-subscribe" href="{{url('')}}">        <img alt="subscribe newsletter" src="{{url('')}}/assets/images/icons/btn-cart.png" />
                </a>    
             </div>
             <div class="content pull-left hidden" id="subscribe-nl" >
