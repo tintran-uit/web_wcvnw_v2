@@ -3114,6 +3114,9 @@ a:hover{
     margin-bottom: 50px;
     margin-top: -20px;
   }
+  .rating-md {
+    font-size: 1.5em !important;
+}
 }
 
 #article img.img-responsive{

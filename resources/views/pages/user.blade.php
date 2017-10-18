@@ -36,7 +36,7 @@
                        <div class="col-sm-3 titlebar">
                          <div class="hgroup">
                            <h2 class="text-uppercase no-margin">Đơn hàng cuả tôi</h2>
-                           <h3 class="no-margin">Xem và đánh giá đơn hàng gần đây</h3>
+                           <h3 class="no-margin">Các đơn hàng gần đây của bạn:</h3>
                          </div>
                          <div class="icon-box">
                            <img alt="orders" src="{{url('')}}/assets/images/icons/icon-my-order.png">
@@ -44,7 +44,7 @@
                        </div>
                        <div class="col-sm-9 listbar">
                          <div class="listbox">
-                           <p>Đánh giá sản phẩm để xây dựng cộng đồng lương nông<br>Mời bạn đánh giá chất lượng đơn hàng ngày <b><i>21/10/2017</i></b></p>
+                           <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng ngày <b><i>21/10/2017</i></b></p>
          <!-- <a class="btn btn-info btn-lg lg-2x" data-toggle="modal" data-target="#modal-rate"> Xem lại đơn hàng <i class="fa fa-angle-double-right"></i>
          </a>    -->            
           </div>
@@ -63,9 +63,9 @@
                                    <p><b>Bạn có thể đánh giá sản phẩm mua trong vòng một tuần, kể từ ngày nhận được hàng.</b></p>
                                       </div>
                                       <div class="modal-body">
-                                        <div class="form-group" style="padding-left: 10px">
+                                        <div class="form-group" style="width: 100%">
                                           <!-- <label for="input-1" class="control-label">Chấm điểm:</label> -->
-                                           <input id="input-4" name="input-4" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
+                                           <input id="input-4" name="rate" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
                                         </div>
                                  </div>
                                </div>
@@ -89,9 +89,9 @@
                                          
                                       </tr>
                                    </table> -->
-                                      <div class="col-md-4"><label><input type="checkbox" value="0" name="elements">Tất cả sản phẩm</label></div>
+                                      <div class="col-md-6" ><label><input type="checkbox" value="0" name="checked">Tất cả sản phẩm</label></div>
                                     @foreach($cartOld as $item)
-                                      <div class="col-md-4"><label><input type="checkbox" value="{{$item->id}}" name="elements">{{$item->name}}</label></div>
+                                      <div class="col-md-6" ><label><input type="checkbox" value="{{$item->id}}" name="checked">{{$item->name}}</label></div>
                                     @endforeach
                                     
                                  </div>
@@ -108,7 +108,7 @@
                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                  <div class="panel-body">
                                    <div class="form-group">
-                                      <label for="comment">Vui lòng nhập bình luận để xây dựng cồng đồng nuôi trồng sạch:</label>
+                                      <label for="comment">Vui lòng nhập bình luận để xây dựng cồng đồng nông dân nuôi trồng sạch:</label>
                                       <textarea class="form-control" rows="5" name="comment"></textarea>
                                     </div>
                                  </div>
@@ -117,7 +117,7 @@
                            </div>
                         </form>
 
-                           <a class="btn btn-info btn-lg lg-2x" onclick="sentRate()"> Gửi đánh giá <i class="fa fa-angle-double-right"></i>
+                           <a class="btn btn-primary btn-lg lg-2x" onclick="sentRate()"> Gửi đánh giá <i class="fa fa-angle-double-right"></i>
                            </a>
 
 
@@ -174,7 +174,7 @@
    initRatingStar();
    var rate = 0;
    var dataPost = {};
-   getFormValue('#formRate');
+   // getFormValue('#formRate');  
 
    function initRatingStar() {
       var $rate = $('input[type="number"]');
@@ -215,32 +215,100 @@ function next1() {
 }
 function next2() {
    $("#collapseThree").collapse("show");
+   scrollToTab();
 }
 function getFormValue(formID) {
   var $inputs = $(formID+' :input');
-  var txt ='a';
   $inputs.each(function() {
       dataPost[this.name] = $(this).val();
-      
   });
-  myFunction();
+  dataPost['elements'] = [];
+  var inputElements = $('#formRate :input');
+      for(var i=0; inputElements[i]; ++i){
+            if(inputElements[i].checked && 'undefined'){
+                  var checked = inputElements[i].value;
+                 
+                 dataPost['elements'].push(
+                    checked
+                ); 
+            }
+      }
+  console.log(dataPost);
+  return checkForm();
 }
-function myFunction() {
-      var coffee = document.forms[0];
-    var txt = "";
-    var i;
-    for (i = 0; i < coffee.length; i++) {
-        if (coffee[i].checked) {
-            txt = txt + coffee[i].value + " ";
-        }
-    }
-  console.log(txt);
-    
 
-}
 function sentRate() {
-   getFormValue('#formRate');
+   var checkForm = getFormValue('#formRate');
+
+   if(checkForm){
+
+      $.ajax({
+          type: "POST",
+          url: "api/user/rate",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+          },
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify({ data: dataPost }),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            $('#modalLoader').modal('hide');
+            $('[href="#tab-3"]').tab('show');
+            document.getElementById('btnStep').style.visibility = 'hidden';
+            console.log(data);
+            document.getElementById("order_id").textContent=data.order_id;
+            updateCartStatus(data.Cart);
+            
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              $('#modalLoader').modal('hide');
+              console.log(textStatus);
+              alert("Vui lòng kiểm tra kết nối Internet!");
+          }
+        });
+
+   }
 }
+
+function checkForm() {
+  if (dataPost['rate'] == "") {
+    $("#collapseOne").collapse("show");
+    $("#collapseTwo").collapse("hide");
+    $("#collapseThree").collapse("hide");
+    $('#modalMessage').html("Vui lòng chấm điểm!");
+    $('#modalAlert').modal('show');
+    return false;
+  }
+
+  if (dataPost['elements'].length == 0) {
+    $("#collapseTwo").collapse("show");
+    $("#collapseOne").collapse("hide");
+    $("#collapseThree").collapse("hide");
+    $('#modalMessage').html("Vui lòng đánh dấu sản phẩm!");
+    $('#modalAlert').modal('show');
+    return false;
+  }
+
+  if (dataPost['comment'] == ""){
+    $("#collapseThree").collapse("show");
+    $("#collapseOne").collapse("hide");
+    $("#collapseTwo").collapse("hide");
+    $('#modalMessage').html("Vui lòng nhập bình luận!");
+    $('#modalAlert').modal('show');
+    return false;
+  }
+  return true;
+}
+
+function scrollToTab() {
+
+            $('html, body').animate({
+                        scrollTop: $('#formRate').offset().top
+                    }, 'slow');
+                    
+                    
+         }
 </script>
 
 @endsection
