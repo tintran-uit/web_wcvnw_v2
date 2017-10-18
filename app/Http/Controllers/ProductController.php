@@ -43,6 +43,7 @@ class ProductController extends Controller
 		$packages = DB::select('SELECT `id`, `name` FROM `products` WHERE `category` = 0');
 		return $packages;
 	}
+
 	/**
 	 *getProductDetail
 	 *

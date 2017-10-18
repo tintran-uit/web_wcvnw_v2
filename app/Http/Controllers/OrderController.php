@@ -62,7 +62,9 @@ class OrderController extends Controller
         }
         
         $shipping_cost = DB::select('SELECT `shipping_cost` FROM `district` WHERE `id` = ?', [$district]);
-        $msg['shipping_cost'] = $shipping_cost[0]->shipping_cost;
+
+        $shipping_cost = $shipping_cost[0]->shipping_cost;
+        $msg['shipping_cost'] = $shipping_cost;
 
         $msg['promotion'] = 0;
 
@@ -151,8 +153,32 @@ class OrderController extends Controller
 
 }
 	
-	public function addPackage(Request $request)
+	public function rateOrder(Request $request)
 	{
+		$rate = $request->rate;
+		$comment = $request->comment;
+		$elements = $request->elements;
+
+		if(Auth::check()) {
+         	$user = Auth::user();
+         	$customer_id = $user->connected_id;
+         	if(strcmp($user->account_type, "Customer") == 0)
+         	{
+         		if($elements[0] == 0) {
+         			//rate the package as whole
+
+         		}
+         		else
+         		{
+         			foreach ($elements as $element) {
+         				//
+         			}
+         		}
+         	}
+         }
+         else {
+         	return redirect()->back();
+         }
 
 	}
 
@@ -165,11 +191,13 @@ class OrderController extends Controller
 	 * @return array of products in its categories 
 	 */
 
-	public function cancelOrder($customer_id, $cart)
+	public function cancelOrder($customer_id, $order_id, $rat)
 	{
 		// 
 		return 0;
 	}
+
+
 	
 
 }
