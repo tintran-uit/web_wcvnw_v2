@@ -198,17 +198,17 @@ class OrderController extends Controller
          		else
          		{
          			//rate individually. If multiple items from 1 farmer, rate him only once, apply to one order item as representative for that farmer.
-         			$product_id_list = '(0';
-         			foreach ($elements as $element) {
-         				$product_id_list = $product_id_list.','.$element;
-         			}
-         			$product_id_list = $product_id_list.')'
-			        	DB::statement('UPDATE `m_orders` m, `farmers` f 
-		        		              	  SET m.`rating` = ?,
-		        		                      m.`comment` = ?
- 										WHERE f.`id` = m.`farmer_id`
- 										  AND m.`order_id` = ?
- 										  AND `product_id` IN '.$product_id_list, [$rate, $comment, $order_id, $element]);
+         			// $product_id_list = '(0';
+         			// foreach ($elements as $element) {
+         			// 	$product_id_list = $product_id_list.','.$element;
+         			// }
+         			// $product_id_list = $product_id_list.')'
+			        	// DB::statement('UPDATE `m_orders` m, `farmers` f 
+		        	// 	              	  SET m.`rating` = ?,
+		        	// 	                      m.`comment` = ?
+ 										// WHERE f.`id` = m.`farmer_id`
+ 										//   AND m.`order_id` = ?
+ 										//   AND `product_id` IN '.$product_id_list, [$rate, $comment, $order_id, $element]);
          		}
          	}
          }
