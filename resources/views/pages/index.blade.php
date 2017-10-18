@@ -129,14 +129,17 @@
               <img class="image-responsive" style="width: 100%" src="{{url('')}}/uploads/anh-thuc-te/00_visit-farm-dalat.png">
             </div>
             <div class="col-md-6">
-              <h2 class="title-font-handwritten"> C-FARM AN TÂM NỘI TRỢ</h2>
+             <h2 class="title-font-handwritten"> CFARM - KẾT NỐI LƯƠNG NÔNG - AN LÒNG NỘI TRỢ</h2>
               <div id="introCfarm">
-              <p>Để chạm đến ước mơ và đạt được mục tiêu đòi hỏi một quá trình, nhiều nỗ lực bền bỉ và đặc biệt là những người cộng sự đồng lòng. Cuộc hành trình của Cfarm bắt đầu từ những buổi thảo luận, gặp gỡ và tìm hiểu thông tin từ các bạn bè, anh chị, và những bậc tiền bối trong lĩnh vực nuôi trồng và phân phối nông sản hữu cơ tại Sài Gòn, Lâm Đồng và một số tỉnh miền Tây. 
+              <p>Team Cfarm ấp ủ và phát triển dự án với tầm nhìn kết nối những lương nông sản xuất và nuôi trồng hữu cơ, an toàn với người tiêu dùng trên nền tảng công nghệ để giải bài toán về thực phẩm sạch, rõ nguồn gốc trước tình trạng thực phẩm bẩn, tẩm hoá chất đang tràn lan ngoài thị trường. 
               </p>
 
-              <p>Cùng đồng điệu và chia sẻ sự trăn trở về nguồn thực phẩm sạch mà ai cũng có quyền sử dụng khiến câu chuyện về sự ra đời của Cfarm ngày càng trở nên rõ rệt và cháy bỏng. Từ đó, chúng tôi được giới thiệu đến nhiều khu vườn khác nhau và cuộc hành trình khảo sát kết nối lương nông được bắt đầu.
+              <p>Để chạm đến ước mơ và đạt được mục tiêu đòi hỏi một quá trình, nhiều nỗ lực bền bỉ và đặc biệt là những người cộng sự đồng lòng. Cuộc hành trình của Cfarm bắt đầu từ những buổi thảo luận, gặp gỡ và tìm hiểu thông tin từ các bạn bè, anh chị, và những bậc tiền bối trong lĩnh vực nuôi trồng và phân phối nông sản hữu cơ tại Sài Gòn, Lâm Đồng và một số tỉnh miền Tây.</p>
+
+              <p>Câu chuyện về hành trình khảo sát và kết nối lương nông của chúng tôi bắt đầu như thế. Đến thăm những trang trại, gặp những lương nông, nghe những câu chuyện của họ và thực tế khảo sát, kiểm tra qui trình sản xuất và tuyển chọn những hộ lương nông này để lại cho chúng tôi nhiều kỷ niệm đẹp và đáng nhớ.
               </p>
-              <p>Từ đồng bằng Tây Nam Bộ trù phú với vườn cây trái xanh tươi và những cánh đồng lúa chín vàng đến cao nguyên Lâm Viên đất đỏ ba-zan với đồi trà thơm mát và những mái vòm nhà kính nhấp nhô khắp các triền đồi, chúng tôi đã vinh dự gặp gỡ những người nông dân đáng mến, cần cù và đam mê. Mỗi người một câu chuyện, một hành trình phấn đấu nuôi trồng sạch, không được gia đình ủng hộ, những năm đầu gặp thất bại do chưa có kinh nghiệm và sản lượng quá thấp, có lúc tưởng chừng như phải dừng lại, liên tục cạnh tranh với rau bẩn đang lan tràn...............</p>
+
+              <p>Để những sản phẩm đến tay người tiêu dùng đúng chất lượng và đáng tin cậy, team Cfarm hiểu rằng mình cần phải thực tế, phải đi đến tận nguồn và khảo sát, lựa chọn những lương nông sản xuất hữu cơ, sạch thật sự ngay tại trang trại của họ....</p>
               </div>
               <a href="{{url('')}}/hanh-trinh-khao-sat-va-ket-noi-luong-nong" class="btn btn-success">Chi tiết</a>
             </div>
