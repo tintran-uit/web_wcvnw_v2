@@ -134,7 +134,7 @@ class OrderController extends Controller
 	        	DB::statement('UPDATE `trading` SET `sold_count` = `sold_count`+ ?, `sold` = `sold` + ? WHERE `farmer_id` = ? AND `product_id` = ?', [$qty, $quantity, $farmer_id, $product_id]);
 
 	        	//Proccess the elements in case package is order
-	        	if($capacity == 0) //package
+	        	if($category == 0) //package
 	        	{
 		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
 		        		              SET t.`sold` = t.`sold` + m.`quantity` 
