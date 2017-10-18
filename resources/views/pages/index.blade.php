@@ -136,7 +136,7 @@
 
               <p>Cùng đồng điệu và chia sẻ sự trăn trở về nguồn thực phẩm sạch mà ai cũng có quyền sử dụng khiến câu chuyện về sự ra đời của Cfarm ngày càng trở nên rõ rệt và cháy bỏng. Từ đó, chúng tôi được giới thiệu đến nhiều khu vườn khác nhau và cuộc hành trình khảo sát kết nối lương nông được bắt đầu.
               </p>
-              <p>Từ đồng bằng Tây Nam Bộ trù phú với vườn cây trái xanh tươi và những cánh đồng lúa chín vàng đến cao nguyên Lâm Viên đất đỏ ba-zan với đồi trà thơm mát và những mái vòm nhà kính nhấp nhô khắp các triền đồi, chúng tôi đã vinh dự gặp gỡ những người nông dân đáng mến, cần cù và đam mê. Mỗi người một câu chuyện, một hành trình phấn đấu nuôi trồng sạch, không được gia đình ủng hộ, những năm đầu gặp thất bại do chưa có kinh nghiệm và sản lượng quá thấp, có lúc tưởng chừng như phải dừng lại, liên tục cạnh tranh với rau bẩn đang lan tràn.......</p>
+              <p>Từ đồng bằng Tây Nam Bộ trù phú với vườn cây trái xanh tươi và những cánh đồng lúa chín vàng đến cao nguyên Lâm Viên đất đỏ ba-zan với đồi trà thơm mát và những mái vòm nhà kính nhấp nhô khắp các triền đồi, chúng tôi đã vinh dự gặp gỡ những người nông dân đáng mến, cần cù và đam mê. Mỗi người một câu chuyện, một hành trình phấn đấu nuôi trồng sạch, không được gia đình ủng hộ, những năm đầu gặp thất bại do chưa có kinh nghiệm và sản lượng quá thấp, có lúc tưởng chừng như phải dừng lại, liên tục cạnh tranh với rau bẩn đang lan tràn...............</p>
               </div>
               <a href="{{url('')}}/hanh-trinh-khao-sat-va-ket-noi-luong-nong" class="btn btn-success">Chi tiết</a>
             </div>
