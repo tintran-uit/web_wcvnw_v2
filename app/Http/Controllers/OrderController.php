@@ -204,24 +204,24 @@ class OrderController extends Controller
          		else
          		{
          			//rate individually. If multiple items from 1 farmer, rate him only once, apply to one order item as representative for that farmer.
-         			$product_id_list = '(0';
-         			foreach ($elements as $element) {
-         				$product_id_list = $product_id_list.','.$element;
-         			}
-         			$product_id_list = $product_id_list.')'
-			        	DB::statement('UPDATE `m_orders` m, `farmers` f 
-		        		              	  SET m.`rating` = ?,
-		        		                      m.`comment` = ?,
-		        		                      f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
-		        		                  	  f.`rating_count` = f.`rating_count` + 1
- 										WHERE f.`id` = m.`farmer_id`
- 										  AND m.`order_id` = ?
- 										  AND m.`id` = (SELECT MIN(id)
- 										  				  FROM `m_orders` mo
- 										  				 WHERE mo.`order_id` = m.`order_id`
- 										  				   AND mo.`farmer_id` = m.`farmer_id`
- 										  				)
- 										  AND `product_id` IN ?', [$rate, $comment, $rate, $order_id, $product_id_list]);
+         		// 	$product_id_list = '(0';
+         		// 	foreach ($elements as $element) {
+         		// 		$product_id_list = $product_id_list.','.$element;
+         		// 	}
+         		// 	$product_id_list = $product_id_list.')'
+			        // 	DB::statement('UPDATE `m_orders` m, `farmers` f 
+		        	// 	              	  SET m.`rating` = ?,
+		        	// 	                      m.`comment` = ?,
+		        	// 	                      f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
+		        	// 	                  	  f.`rating_count` = f.`rating_count` + 1
+ 										// WHERE f.`id` = m.`farmer_id`
+ 										//   AND m.`order_id` = ?
+ 										//   AND m.`id` = (SELECT MIN(id)
+ 										//   				  FROM `m_orders` mo
+ 										//   				 WHERE mo.`order_id` = m.`order_id`
+ 										//   				   AND mo.`farmer_id` = m.`farmer_id`
+ 										//   				)
+ 										//   AND `product_id` IN ?', [$rate, $comment, $rate, $order_id, $product_id_list]);
          		}
          	}
          }
