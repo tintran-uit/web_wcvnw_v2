@@ -24,7 +24,7 @@ class District extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id','name', 'city_id'];
+    protected $fillable = ['id','name', 'city_id', 'shipping_cost'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [
