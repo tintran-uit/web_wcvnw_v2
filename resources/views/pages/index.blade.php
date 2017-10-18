@@ -122,7 +122,7 @@
 <section class="subscribe-type-one spacer-30">
    <div class="container">
           <h2 class="title-font-handwritten text-center space-only-bottom">Hành trình khảo sát và kết nối lương nông</h2>
-          <div class="intro col-md-6 col-md-offset-3 text-center"><p>"...một tương lai lành mạnh cho những em bé và sức khỏe ngày càng cải thiện của một thế hệ người tiêu dùng đang dự phần vào nền nông nghiệp sạch hữu cơ..."</p></div>
+          <div class="intro col-md-6 col-md-offset-3 text-center"><p>"...nhìn về tương lai nơi mà những khách hàng của Cfarm tiêu dùng những thực phẩm hữu cơ sạch, đáng tin cậy cho nhu cầu của gia đình và những lương nông sẽ sống khoẻ trên những mảnh vườn nuôi trồng sạch của mình..."</p></div>
           <div class="content col-md-12">
             <div class="col-md-6">
               <!-- <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/X0m6Rdhs1Nw" frameborder="0" allowfullscreen></iframe></div> -->
