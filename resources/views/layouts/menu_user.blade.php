@@ -9,10 +9,12 @@
                            <a class="{{ Request::is('user/edit') ? 'current' : '' }}" href="{{url('/user/edit')}}">          <i class="fa fa-angle-right"></i> Thông tin cá nhân
                            </a>      
                         </li> -->
+                        @if(Auth::check())
                         <li>
                            <a class="{{ Request::is('user/rate') ? 'current' : '' }}" href="{{url('/user/rate')}}">          <i class="fa fa-angle-right"></i> {{ trans('head.rate') }}
                            </a>      
                         </li>
+                        @endif
                         <li>
                            <a class="{{ Request::is('gio-hang-thuc-pham-sach') ? 'current' : '' }}" href="{{url('gio-hang-thuc-pham-sach')}}">          <i class="fa fa-angle-right"></i> Giỏ hàng mới
                            </a>      
