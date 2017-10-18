@@ -84,7 +84,7 @@ class OrderController extends Controller
 	         	}
 	         	$customer_id = $customer_id[0]->id;
 
-	         	DB::statement('UPDATE `users` SET `account_type` = "Customer", `connnected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);
+	         	DB::statement('UPDATE `users` SET `account_type` = "Customer", `connected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);
          	}
          }
          else 
@@ -123,7 +123,7 @@ class OrderController extends Controller
 			$qty = $item->qty;
 			
 			//receive numbers and check if quantity_left is >= order quantity
-			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left", p.`category` "category" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
+			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left", p.`category` AS "category" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
 			
 			if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
 			{
