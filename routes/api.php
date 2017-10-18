@@ -23,7 +23,7 @@ Route::get('/products/suppliers/product_id={product_id}', 'ProductController@get
 Route::get('/products/interest/product_id={product_id}', 'ProductController@addInterest');
 
 Route::get('/orderitems/order_id={order_id}', 'OrderController@orderItems');
-Route::get('/orders/customer_id={customer_id}', 'CustomerController@getOrders');
+Route::get('/orders', 'CustomerController@getOrders');
 
 Route::post('/customer/rate', 'CustomerController@rate');
 
