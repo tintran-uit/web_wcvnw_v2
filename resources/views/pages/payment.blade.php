@@ -174,8 +174,8 @@
                                  <article class="col-sm-12">
                                  <div class="col-sm-6">
                                   @if(!Auth::check())
-                                    <p>Bạn đã có tài khoản? <a style="color: #0071b6; font-weight: 700;" href="{{url('/login')}}">Đăng nhập</a></p>
-                                    <p>Vui lòng nhập địa chỉ! <a style="color: #0071b6; font-weight: 700;" href="{{url('/register')}}">Đăng ký tài khoản</a> để nhận ưu đãi và mua hàng nhanh chóng hơn!</p>
+                                    <p>Bạn đã có tài khoản? <a data-toggle="modal" data-target="#modal-signin" style="color: #0071b6; font-weight: 700;" href="#">Đăng nhập</a></p>
+                                    <p><a data-toggle="modal" data-target="#modal-signup" style="color: #0071b6; font-weight: 700;" href="#">Đăng ký tài khoản</a> <b>để nhận ưu đãi, đánh giá, kiểm tra tình trạng đơn hàng và mua sản phẩm nhanh chóng hơn!</b></p>
                                   @endif
                                     <div class="form-group">
                                        <!-- <label>First and Last Name</label> -->
