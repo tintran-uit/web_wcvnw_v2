@@ -114,8 +114,8 @@ body .popover {
                      <h4 class="title-box text-uppercase no-margin-top" style="">
                         QUY TRÌNH TUYỂN CHỌN LƯƠNG NÔNG <img class="img_nhanchungnhan" style="height: 25px; margin-left: 10px;" src="{{url('')}}/assets/images/icons/icon-tick.png">
                      </h4>
-                     <a href="#" data-toggle="popover2" data-full="{{url('')}}/assets/images/banner/banner-nong-dan san suat-sach-cfarm.png">
-                     <img class="img-responsive" src="{{url('')}}/assets/images/banner/banner-nong-dan san suat-sach-cfarm.png">
+                     <a href="#" data-toggle="popover2" data-full="{{url('')}}/assets/images/banner/banner-nong-dan-san-suat-sach-cfarm.png">
+                     <img class="img-responsive" src="{{url('')}}/assets/images/banner/banner-nong-dan-san-suat-sach-cfarm.png">
                    </a>
                      <div class="text-center">
                       <br>

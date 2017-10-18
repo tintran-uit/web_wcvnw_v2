@@ -42,7 +42,7 @@
                                       $intro = substr($intro, 0, 380);
                                       echo $intro.'...'; 
                                   ?>
-                                  <a class="btn-link" href="#">[Chi tiết]</a>
+                                  <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">[Chi tiết]</a>
                                 </p>
                               </div>
                             </div>

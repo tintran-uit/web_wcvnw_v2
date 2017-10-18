@@ -14,15 +14,15 @@
             </a>      
          </div>
          <div class="item">
-            <a href="#">          <img alt="slide" src="assets/images/slides/Artboard2.png" />
+            <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="assets/images/slides/Artboard2.png" />
             </a>        
             <div class="label-slide hidden-sm hidden-xs slideInDown animated">
                <div>
-                  <h2 class="no-margin-bottom">NEW</h2>
-                  <h5 class="no-margin-top">COLLECTION</h5>
+                  <h2 class="no-margin-bottom">GÓI</h2>
+                  <h5 class="no-margin-top">SẢN PHẨM</h5>
                </div>
-               <p class="text-center">SPRING<BR>SUMMER</p>
-               <h1 class="text-right">‘15</h1>
+               <p class="text-center">TIỆN DỤNG<BR>DINH DƯỠNG<BR>TIẾT KIỆM</p>
+               <h1 class="text-right">5-10%</h1>
             </div>
          </div>
          
@@ -157,7 +157,7 @@
                <div class="thumbnail">
                   <section class="caption top">
                      <figure>
-                        <a href="post.html">
+                        <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo4.png" />
                            <h4 class="title">Góc nhà bếp</h4>
                         </a>
@@ -171,7 +171,7 @@
                <div class="thumbnail">
                   <section class="caption top">
                      <figure>
-                        <a href="post.html">
+                        <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=4">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo5.png" />
                            <h4 class="title">Ẩm thực & Sức khỏe</h4>
                         </a>
@@ -185,7 +185,7 @@
                <div class="thumbnail">
                   <section class="caption top">
                      <figure>
-                        <a href="post.html">
+                        <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=5">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo6.png" />
                            <h4 class="title">Câu chuyện nhà nông</h4>
                         </a>
@@ -348,7 +348,7 @@
                   html += '<!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\">';
                   $.each(data, function(i, d){
 
-                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 <span class=\"ribbonBadge new text-uppercase\">\r\n                                 Hữu cơ\r\n                                 <\/span>\r\n                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/'+d.image +'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a class=\"new-price\" href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <a href=\"{{url('')}}/farmer/id='+d.farmer_id+'\"><span class=\"new-price\"> '+d.farmer_name+'                                          <\/span></a>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                           <div class=\"pull-left vcenter\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"addCart(\''+d.id+'\','+d.farmer_id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n    <div class=\"pull-right vcenter\">\r\n                                             <span class=\"span-price\">'+numberWithCommas(d.price)+' VNĐ  </span>     \r\n                                          <\/div>\r\n                                                                            <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
+                     var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\" style=\"float:right;\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 '+createLabel(d.label)+'                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/'+d.image +'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a class=\"new-price\" href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <a href=\"{{url('')}}/farmer/id='+d.farmer_id+'\"><span class=\"new-price\"> '+d.farmer_name+'                                          <\/span></a>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                           <div class=\"pull-left vcenter\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"addCart(\''+d.id+'\','+d.farmer_id+')\">            Thêm vào giỏ\r\n                                             <\/a>        \r\n                                          <\/div>\r\n    <div class=\"pull-right vcenter\">\r\n                                             <span class=\"span-price\">'+numberWithCommas(d.price)+' VNĐ  </span>     \r\n                                          <\/div>\r\n                                                                            <\/article>\r\n                                    <\/div>\r\n                                 <\/div>\r\n                              <\/div>\r\n                           <\/div>\r\n                        <\/article>';
 
                      switch (i){
                          case 0:
@@ -493,7 +493,7 @@
           function addCart(prodID, farmerID) {
               var qty = 1;
               // var farmerID = $('input[name="farmerID"]:checked').val();;
-              console.log(farmerID);
+              // console.log(farmerID);
               var data = { "id": prodID, "qty": qty , 'farmerID':farmerID};
               $('#modalLoader').modal('show');
                   $.ajax({
@@ -517,9 +517,9 @@
                           // $('#modalChooseFarmer').modal('show');
                         }else{
                           updateCartStatus(data);
-                          $('#modalMessageFinish').html('Thêm thành công!');
-                          $('#modalAlertFinish').modal('show');
-                          setTimeout(function(){ $('#modalAlertFinish').modal('hide'); }, 800);
+                          // $('#modalMessageFinish').html('Thêm thành công!');
+                          // $('#modalAlertFinish').modal('show');
+                          // setTimeout(function(){ $('#modalAlertFinish').modal('hide'); }, 800);
                         }
                         console.log(data);
                       },
@@ -531,6 +531,16 @@
                       }
                   });
               $('#modalChooseFarmer').modal('hide');
+          }
+
+          function createLabel(label) {
+            var code = '';
+            if(label==1){
+              code = '<span class=\"ribbonBadge new text-uppercase\"> Hữu cơ <\/span>\r\n';
+            }else{
+              code = '<span class=\"ribbonBadge new2 text-uppercase\"> An toàn <\/span>\r\n';
+            }
+            return code;
           }
 
           
