@@ -12,7 +12,7 @@
                @include('layouts.menu_blog')
                <div class="general-info">
                   <h5 class="title">Liên hệ với chúng tôi</h5>
-                  <div class="content text-center">
+                  <div class="text-center">
                      <div class="fb-page" data-href="https://www.facebook.com/Cfarm.vn/" data-tabs="timeline" data-height="156" data-small-header="true" data-width="263" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Cfarm.vn/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Cfarm.vn/">Cfarm.vn</a></blockquote></div>  
                   </div>
                </div>
@@ -21,17 +21,17 @@
               <div class="row clearfix">
 
                 @foreach($articles as $article)
-                <article class="col-md-6">
+                <article class="col-md-6" style="padding: 10px 10px;">
                        <div class="wrap wrap-border internal-padding wrap-radius bg-white style-post">
                             <div class="row clearfix">
                               <div class="col-xs-12">
-                                <h4 class="media-heading">
+                                <h4 class="media-heading" style="height: 38px">
                                   <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">{{$article->title}}</a>
                                 </h4>
                               </div>
                               
                             </div>
-                            <div class="media spacer-bottom-10">
+                            <div class="media spacer-bottom-10" style="height: 200px">
                               <div class="media-left media-top">
                           <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">        <img class="small-img" alt="post" src="{{url('')}}/{{$article->image}}" width="190">
                           </a>    </div>
@@ -39,7 +39,7 @@
                                 <p class="copy">
                                   <?php 
                                       $intro = strip_tags($article->content);
-                                      $intro = substr($intro, 0, 380);
+                                      $intro = substr($intro, 0, 350);
                                       echo $intro.'...'; 
                                   ?>
                                   <a class="btn-link" href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/post_id={{$article->id}}">[Chi tiết]</a>
