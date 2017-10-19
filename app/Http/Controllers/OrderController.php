@@ -95,7 +95,7 @@ class OrderController extends Controller
          	//if not yet in db, create customer into db
          	if(!$customer_id) {
          		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $email, $address, $district]);
-         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ? OR `email` = ?', [$phone, $email]);
+         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$email]);
          	}
          	$customer_id = $customer_id[0]->id;
          }
