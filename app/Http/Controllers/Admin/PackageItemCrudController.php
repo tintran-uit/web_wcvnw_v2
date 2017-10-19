@@ -52,7 +52,7 @@ class PackageItemCrudController extends CrudController
             'name' => 'farmer_id',
             'label' => 'Trang trại',
             'type' => 'select',
-            'entity' => 'product',
+            'entity' => 'farmer',
             'attribute' => 'name',
             'model' => "App\Models\Farmer",
         ]);
@@ -94,8 +94,7 @@ class PackageItemCrudController extends CrudController
         $this->crud->addField([
             'name' => 'quantity',
             'label' => 'Số lượng',
-            'type' => 'number',
-            'default'    => 0.3,
+            'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
