@@ -129,9 +129,9 @@ class OrderCrudController extends CrudController
         $this->crud->addField([
             'name' => 'note',
             'label' => 'Ghi chú',
-            'type' => 'text',
+            'type' => 'textarea',
             'wrapperAttributes' => [
-                'class' => 'form-group col-md-4'
+                'class' => 'form-group col-md-6'
             ],
         ]);
 
