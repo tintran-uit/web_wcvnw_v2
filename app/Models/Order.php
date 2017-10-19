@@ -64,6 +64,14 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\Shipper', 'shipper_id');
     }
+    public function district()
+    {
+        return $this->belongsTo('App\Models\District', 'delivery_district');
+    }
+    public function status_v()
+    {
+        return $this->belongsTo('App\Models\Status', 'status');
+    }
     public function orderItem()
     {
         return $this->hasMany('App\Models\orderItem', 'order_id');

@@ -57,26 +57,45 @@ class OrderCrudController extends CrudController
             'label' => 'Địa Chỉ Giao Hàng',
             'type' => 'text',
         ]);
+        // $this->crud->addColumn([
+        //     'name' => 'delivery_district',
+        //     'label' => 'Quận',
+        //     'type' => 'text',
+        // ]);
         $this->crud->addColumn([
-            'name' => 'shipper_id',
-            'label' => 'Người Giao hàng',
+            'name' => 'delivery_district',
+            'label' => 'Quận',
             'type' => 'select',
-            'entity' => 'shipper',
+            'entity' => 'district',
             'attribute' => 'name',
-            'model' => "App\Models\Shipper",
+            'model' => "App\Models\District",
         ]);
         $this->crud->addColumn([
-            'name' => 'shipping_cost',
-            'label' => 'Phí Giao Hàng',
-            'type' => 'number',
+            'name' => 'status',
+            'label' => 'Trạng Thái',
+            'type' => 'select',
+            'entity' => 'status_v',
+            'attribute' => 'vn_name',
+            'model' => "App\Models\Status",
         ]);
-
+        // $this->crud->addColumn([
+        //     'name' => 'shipper_id',
+        //     'label' => 'Người Giao hàng',
+        //     'type' => 'select',
+        //     'entity' => 'shipper',
+        //     'attribute' => 'name',
+        //     'model' => "App\Models\Shipper",
+        // ]);
         $this->crud->addColumn([
             'name' => 'total',
             'label' => 'Tổng Tiền',
             'type' => 'number',
         ]);
-
+        $this->crud->addColumn([
+            'name' => 'note',
+            'label' => 'Dặn Dò',
+            'type' => 'text',
+        ]);
         // ------ CRUD FIELDS
        $this->crud->addField([
             'name' => 'order_id',
