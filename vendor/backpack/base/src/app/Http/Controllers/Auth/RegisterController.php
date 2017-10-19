@@ -31,6 +31,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        Session::set('modal', 'register');
         $this->middleware('guest');
         // Where to redirect users after login / registration.
         $this->redirectTo = property_exists($this, 'redirectTo') ? $this->redirectTo
@@ -49,7 +50,7 @@ class RegisterController extends Controller
         $user_model_fqn = config('backpack.base.user_model_fqn');
         $user = new $user_model_fqn();
         $users_table = $user->getTable();
-        Session::set('modal', 'register');
+        
         
         return Validator::make($data, [
                 'name'     => 'required|max:255',
@@ -113,6 +114,6 @@ class RegisterController extends Controller
 
         $this->guard()->login($this->create($request->all()));
 
-        return redirect($this->redirectPath());
+        return redirect()->back();
     }
 }
