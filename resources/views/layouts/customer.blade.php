@@ -9,6 +9,12 @@
       <meta name="keywords" content="{{ $page->meta_keywords }}">
       <meta name="csrf_token" content="{{ csrf_token() }}">
       <meta name="author" content="">
+
+      <meta property="og:title" content="{{$title}}" />
+      <meta property="og:url" content="http://www.cfarm.vn" />
+      <meta property="og:image" content="http://cfarm.vn/uploads/seo/Fb-cover.jpg" />
+      <meta property="og:description" content="Kết nối người tiêu dùng với những lương nông trên nền tảng công nghệ. Bạn có thể đặt mua thực phẩm sạch hoặc hữu cơ trực tiếp từ những trang trại thông qua www.cfarm.vn hoặc (Android & iOS App)" />
+      <meta property="og:site_name" content="Thực phẩm sạch Cfarm" />
       <!-- Use title if it's in the page YAML frontmatter -->
       <title>@yield('title')</title>
       <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=cyrillic-ext,latin" rel="stylesheet" type="text/css" />
