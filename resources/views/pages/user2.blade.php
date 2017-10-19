@@ -35,7 +35,7 @@
                   </h3>
                   <section class="wrap internal-padding wrap-border action-box bg-white wrap-radius">
                      <div class="row clearfix">
-                       <div class="col-sm-3 titlebar">
+                       <div class="col-sm-3 titlebar" style="border-right: 1px dashed #64903E;">
                          <div class="hgroup">
                            <h2 class="text-uppercase no-margin">Đơn hàng cuả tôi</h2>
                            <h3 class="no-margin">Các đơn hàng gần đây của bạn:</h3>
@@ -50,13 +50,9 @@
                            @endforeach
                          </div>
                        </div>
-                       <div class="col-sm-9 listbar">
-                        <?php 
-                          $today = date("Y-m-d");
-                          $checkdate = \Carbon\Carbon::parse($orders[0]->date)->format('Y-m-d');
-                        ?>
-                        @if($checkdate > $today)
-                         <div class="listbox">
+                       <div class="col-sm-9 listbar" style="border-left: 0px;">
+                        <!--  -->
+                         <!-- <div class="listbox">
                            <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng ngày <b><i>21/10/2017</i></b></p>
                            </div>
                     <form id="formRate">
@@ -122,7 +118,7 @@
 <a class="btn btn-primary btn-lg lg-2x" onclick="sentRate()"> Gửi đánh giá <i class="fa fa-angle-double-right"></i>
                            </a>
 
-                      @else
+                -->
 
                           <div class="listbox">
                            <p><b>Bạn chưa có đơn hàng để đánh giá!</b><br>Bạn có thể đánh giá chất lượng sản phẩm trong thời gian một tuần, kể từ khi nhận được đơn hàng!</p>
@@ -132,7 +128,7 @@
                            </div>
 
                            
-                      @endif
+
 
                        </div>
                      </div>
@@ -175,7 +171,7 @@
             </thead>
             <tbody>
               <?php $total=0; ?>
-              @for($j = 0; $j < sizeof($order)-2; $j++)
+              @for($j = 0; $j < sizeof($order)-3; $j++)
               <tr>
               <td class="col-md-3">{{$order[$j]->product_name}}</td>
               <td>{{$order[$j]->farmer_name}}</td>
@@ -197,6 +193,10 @@
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px"><b>Thành tiền</b>  </td>
                 <td colspan="1" align="left" style="float: right;"><span>{{$total}} VNĐ</span></td>
+              </tr>
+              <tr style="">
+                <td colspan="1" align="right" style="padding-right: 5px"><br><b>Người đặt hàng: </b>  </td>
+                <td colspan="3" align="left" style=""><br><span> {{$order['nguoinhan']}}</span></td>
               </tr>
             </tfoot>
           </table>
