@@ -119,7 +119,7 @@ body .popover {
                    </a>
                      <div class="text-center">
                       <br>
-                        <a class="btn btn-link no-margin" href="#">CHI TIẾT</a>
+                        <a class="btn btn-link no-margin" href="{{url('')}}/chinh-sach-lien-ket-nong-dan">CHI TIẾT</a>
                      </div>
                   </div>
                </section>

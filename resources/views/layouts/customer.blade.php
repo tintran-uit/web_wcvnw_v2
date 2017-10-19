@@ -662,7 +662,9 @@
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down" style="color: #A52223"></i>
                       </a>          
                       <ul class="dropdown-menu" role="menu">
-                         
+                         <li>
+                            <a href="{{url('')}}/user/rate">{{ trans('head.rate') }}</a>
+                         </li>
                          <li>
                             <a href="{{url('')}}/admin/logout">Log out</a>
                          </li>
