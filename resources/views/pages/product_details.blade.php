@@ -233,6 +233,7 @@ function addCartProd() {
 
 
 function stepperUp() {
+
   var num = document.getElementById('stepper').value;
   num = parseFloat(num);
   if(unit != 'kg')
@@ -242,7 +243,7 @@ function stepperUp() {
     num = (num + unit_quantity).toFixed(1);
   }
   var qty = num;
-  if(unit = 'kg'){
+  if(unit == 'kg'){
     qty = qty/unit_quantity;
   }
   document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
@@ -262,7 +263,7 @@ function stepperDown() {
       num = (num - unit_quantity).toFixed(1);
     }
     var qty = num;
-    if(unit = 'kg'){
+    if(unit == 'kg'){
       qty = qty/unit_quantity;
     }
     document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
