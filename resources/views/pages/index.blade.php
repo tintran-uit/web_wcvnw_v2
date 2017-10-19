@@ -134,7 +134,7 @@
               <p>Câu chuyện về hành trình khảo sát và kết nối lương nông của chúng tôi bắt đầu như thế. Đến thăm những trang trại, gặp những lương nông, nghe những câu chuyện của họ và thực tế khảo sát, kiểm tra qui trình sản xuất và tuyển chọn những hộ lương nông này để lại cho chúng tôi nhiều kỷ niệm đẹp và đáng nhớ.
               </p>
 
-              <p>Để những sản phẩm đến tay người tiêu dùng đúng chất lượng và đáng tin cậy, team Cfarm hiểu rằng mình cần phải thực tế, phải đi đến tận nguồn và khảo sát, lựa chọn những lương nông sản xuất hữu cơ, sạch thật sự ngay tại trang trại của họ....</p>
+              <p>Để những sản phẩm đến tay người tiêu dùng đúng chất lượng và đáng tin cậy, team Cfarm hiểu rằng mình cần phải thực tế, phải đi đến tận nguồn và khảo sát, lựa chọn.......</p>
               </div>
               <a href="{{url('')}}/hanh-trinh-khao-sat-va-ket-noi-luong-nong" class="btn btn-success">Chi tiết</a>
             </div>

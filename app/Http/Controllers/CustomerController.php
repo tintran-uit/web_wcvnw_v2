@@ -126,6 +126,7 @@ class CustomerController extends Controller
 			WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ?', [$order->order_id]);
 				// array_push($this->data['orderItem'], $item);
 				$this->data['orderItem'][$order->order_id] = $item;
+				// $this->data['orderItem'][$order->order_id]['ship'] = 2000;
 			}
 	        // $this->data['cartOld'] = DB::table('articles')->where('id', $post_id)->first();
 	        // return $this->data['orderItem'];

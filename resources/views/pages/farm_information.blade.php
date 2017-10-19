@@ -149,24 +149,7 @@ body .popover {
                      </div>
                </article>
                @endforeach
-               <!-- <nav class="spacer-bottom-10" style="margin-bottom: 25px">
-                  <ul class="pagination">
-                     <li>
-                        <a href="#">        <span aria-hidden="true" class="fa fa-chevron-left"></span>
-                        </a>    
-                     </li>
-                     <li><a href="active">1</a></li>
-                     <li class="#"><a href="#">2</a></li>
-                     <li><a href="#">3</a></li>
-                     <li><a href="#">4</a></li>
-                     <li><a href="#">5</a></li>
-                     <li>
-                        <a href="#" aria-label="Next">
-                        <span aria-hidden="true" class="fa fa-chevron-right"></span>
-                        </a>
-                     </li>
-                  </ul>
-               </nav> -->
+               
             </section>
             <aside class="col-lg-3 hidden-sm hidden-md">
                <section class="wrap wrap-border internal-padding bg-white wrap-radius">

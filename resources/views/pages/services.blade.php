@@ -12,7 +12,7 @@
             @include('layouts.menu_child')
 
             <article id="article" class="col-md-9">
-               <h3 class="text-uppercase no-margin-top">
+               <h3 class="text-uppercase no-margin-top title-article">
                   {{$page->name}}
                </h3>
                <?php

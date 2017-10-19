@@ -248,19 +248,21 @@
                                        </div>
                                        <div class="col-xs-9">
                                           <h4 class="no-margin">
-                                             <b>Chuyển khoản ngân hàng</b>
+                                             <b>Thanh toán khi nhận hàng</b>
                                           </h4>
-                                          <p class="no-margin">Cảm ơn bạn đã lựa chọn mua sắm tại We Care VN, <br>
+                                          <p class="no-margin">
+                                             <p class="no-margin" style="color: #222222">Cảm ơn bạn đã lựa chọn mua sắm tại Cfarm <br>
 Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
 XÁC NHẬN ĐƠN HÀNG <br>
 trước khi giao hàng!</p>
+                                          </p>
                                        </div>
                                        <div class="pull-right hidden-xs">
-                                          <img alt="credit cards" src="assets/images/icons/credit-cards/credit-cards.jpg">
+                                          <img class="image-responsive" alt="giao hang tan noi" src="assets/images/icons/credit-cards/giao-rau-sach.jpg">
                                        </div>
                                     </a>
                                  </div>
-                                 <div id="payment-1" class="choose deselected">
+                                <!--  <div id="payment-1" class="choose deselected">
                                     <a class="clearfix" onclick="payment(1)">
                                        <div class="pull-left">
                                           <span class="fa-stack spacer-15" id="tick-pay-1">
@@ -268,21 +270,13 @@ trước khi giao hàng!</p>
                                           </span>
                                        </div>
                                        <div class="col-xs-9">
-                                          <h4 class="no-margin">
-                                             <b>Thanh toán khi nhận hàng</b>
-                                          </h4>
-                                          <p class="no-margin">
-                                             <p class="no-margin">Cảm ơn bạn đã lựa chọn mua sắm tại We Care VN, <br>
-Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
-XÁC NHẬN ĐƠN HÀNG <br>
-trước khi giao hàng!</p>
-                                          </p>
+                                          
                                        </div>
                                        <div class="pull-right hidden-xs">
                                           <img alt="paypal" src="assets/images/icons/credit-cards/paypal.png">
                                        </div>
                                     </a>
-                                 </div>
+                                 </div> -->
                               </div>
                               
                               <section>
@@ -304,7 +298,8 @@ trước khi giao hàng!</p>
                            <div class="text-center">
                               <i class="fa fa-check fa-4x alert-success"></i>
                               <h3>Đặt hàng thành công!</h3>
-                              <p><b>Mã đơn đặt hàng: #<span id="order_id"></span>.</b><br>Cảm ơn bạn đã mua thực phẩm an toàn tại CFarm.vn.</p>
+                              <p><b>Mã đơn đặt hàng: #<span id="order_id"></span>.</b><br>
+                              Tất cả đơn hàng sẽ được giao vào ngày Thứ Bảy vì chúng tôi muốn nhận những <span style="color: #B62029; font-weight: 600">sản phẩm vừa thu hoạch và tươi ngon nhất, gửi trực tiếp đến bạn từ nông trại.</span> Cảm ơn bạn đã mua thực phẩm sạch tại CFarm.vn.</p>
                            </div>
                         </div>
 
@@ -551,13 +546,15 @@ trước khi giao hàng!</p>
               break;
           
       }
-      console.log(spacerToalNow);
+      if(spacerToal>500000){
+        text = "0 VNĐ";
+        spacerToalNow = spacerToal;
+      }
       spacerToalNow = spacerToalNow + '';
       document.getElementById("spacer-ship").innerHTML = text;
       $('#spacer-toal').html(numberWithCommas(spacerToalNow) + ' VN');
     }
 
-    setTimeout(function(){ $( "div.selecter" ).removeClass( "mobile" ); }, 1000);
 </script>
 <script type="text/javascript">
   
