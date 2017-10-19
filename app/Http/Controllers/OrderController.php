@@ -260,4 +260,42 @@ class OrderController extends Controller
 	}
 
 
+	public function cancelOrder($order_id)
+	{
+		$cancelStatus = 8;
+		if(Auth::check()) {
+			$user = Auth::user();
+         	$customer_id = $user->connected_id;
+			if(strcmp($user->account_type, "Admin") == 0){
+
+		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p 
+		        		              SET t.`sold` = t.`sold` - m.`quantity`
+ 									WHERE t.`farmer_id` = m.`farmer_id`
+   									  AND t.`product_id` = m.`product_id` 
+   									  AND p.`id` = mo.`product_id`
+   									  AND p.`category` = 0
+   									  AND m.`package_id` = p.`id`
+   									  AND mo.`order_id` = ?', [$order_id]);
+
+    			
+    				DB::statement('UPDATE `g_orders` AS g, `m_orders` AS m, `trading` t
+		        		              SET t.`sold` = t.`sold` - m.`quantity`,
+		        		                  g.`status` = 8
+ 									WHERE g.`status` != 8
+ 									  AND m.`order_id` = g.`order_id`
+ 									  AND m.`farmer_id` = t.`farmer_id`
+ 									  AND m.`product_id` = t.`product_id`
+ 									  AND g.`order_id` = ?', [$order_id]);
+
+    		}
+    		else {
+    			return redirect()->back();
+    		}
+    	}
+    	else {
+    		return redirect()->back();
+    	}
+
+	}
+
 }

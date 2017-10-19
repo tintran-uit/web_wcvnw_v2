@@ -22,6 +22,7 @@ Route::get('/packages', 'ProductController@getPackages');
 Route::get('/products/suppliers/product_id={product_id}', 'ProductController@getSuppliers');
 Route::get('/products/interest/product_id={product_id}', 'ProductController@addInterest');
 
+Route::get('/cancelorder/order_id={order_id}', 'OrderController@cancelOrder');
 Route::get('/orderitems/order_id={order_id}', 'OrderController@orderItems');
 Route::get('/orders', 'CustomerController@getOrders');
 
