@@ -540,9 +540,15 @@ trước khi giao hàng!</p>
               text = "30.000 VNĐ";
               spacerToalNow = spacerToal + 30000;
               break;
-          default:
+          case '13':
+          case '20':
+          case '21':
+          case '22':
               text = "35.000 VNĐ";
               spacerToalNow = spacerToal + 35000;
+          default:
+              text = "0 VNĐ";
+              spacerToalNow = spacerToal;
               break;
           
       }
