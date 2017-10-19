@@ -1037,6 +1037,8 @@
             @elseif(Session::get('modal')=='resetspasswords')
               $('#modal-reset-psw').modal('show');
             @endif
+          @elseif($errors->has('password'))
+              $('#modal-signup').modal('show');
           @endif
           @if (session('status'))
               $('#modal-reset-psw').modal('show');

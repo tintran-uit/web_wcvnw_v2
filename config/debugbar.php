@@ -12,7 +12,7 @@ return [
      |
      */
 
-    'enabled' => null,
+    'enabled' => false,
 
     /*
      |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ return [
      |
      */
     'storage' => [
-        'enabled'    => true,
+        'enabled'    => null,
         'driver'     => 'file', // redis, file, pdo, custom
         'path'       => storage_path('debugbar'), // For file driver
         'connection' => null,   // Leave null for default connection (Redis/PDO)

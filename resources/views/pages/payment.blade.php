@@ -258,7 +258,7 @@ trước khi giao hàng!</p>
                                           </p>
                                        </div>
                                        <div class="pull-right hidden-xs">
-                                          <img class="image-responsive" alt="giao hang tan noi" src="assets/images/icons/credit-cards/giao-rau-sach.jpg">
+                                          <img class="image-responsive" alt="giao hang tan noi" src="{{url('')}}/assets/images/icons/credit-cards/giao-rau-sach.jpg" style="width: 90%">
                                        </div>
                                     </a>
                                  </div>
