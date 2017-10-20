@@ -236,7 +236,7 @@
                         </div>
                         <div class="tab-pane" id="tab-2">
                            <form action="#" accept-charset="UTF-8" method="post" id="tab-2" class="form-style-base">
-                              <h4 class="nomargin spacer-bottom-15">Phương thức thanh toán:</h4>
+                              <!-- <h4 class="nomargin spacer-bottom-15">Phương thức thanh toán:</h4> -->
                               <div class="payment-method-box">
                                  <div id="payment-0" class="choose selected">
                                     <a class="clearfix" onclick="payment(0)">
@@ -251,14 +251,17 @@
                                              <b>Thanh toán khi nhận hàng</b>
                                           </h4>
                                           <p class="no-margin">
-                                             <p class="no-margin" style="color: #222222">Cảm ơn bạn đã lựa chọn mua sắm tại Cfarm <br>
+                                             <p class="no-margin" style="color: #222222">
+
+                                              Nhân viên chúng tôi sẽ giao hàng và nhận thanh toán vào ngày thứ Bảy.<br> Vui lòng giữ liên lạc qua điện thoại.
+                                              <!-- Cảm ơn bạn đã lựa chọn mua sắm tại Cfarm <br>
 Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
-XÁC NHẬN ĐƠN HÀNG <br>
-trước khi giao hàng!</p>
+XÁC NHẬN ĐƠN HÀNG
+trước khi giao hàng! --></p>
                                           </p>
                                        </div>
                                        <div class="pull-right hidden-xs">
-                                          <img class="image-responsive" alt="giao hang tan noi" src="{{url('')}}/assets/images/icons/credit-cards/giao-rau-sach.jpg" style="width: 90%">
+                                          <img class="image-responsive" alt="giao hang tan noi" src="{{url('')}}/assets/images/icons/credit-cards/giao-rau-sach.jpg" style="width: 35%; margin-left: 50px;">
                                        </div>
                                     </a>
                                  </div>
