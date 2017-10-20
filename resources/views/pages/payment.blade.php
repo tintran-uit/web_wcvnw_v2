@@ -299,7 +299,7 @@ trước khi giao hàng!</p>
                               <i class="fa fa-check fa-4x alert-success"></i>
                               <h3>Đặt hàng thành công!</h3>
                               <p><b>Mã đơn đặt hàng: #<span id="order_id"></span>.</b><br>
-                              Tất cả đơn hàng sẽ được giao vào ngày Thứ Bảy vì chúng tôi muốn nhận những <span style="color: #B62029; font-weight: 600">sản phẩm vừa thu hoạch và tươi ngon nhất, gửi trực tiếp đến bạn từ nông trại.</span> Cảm ơn bạn đã mua thực phẩm sạch tại CFarm.vn.</p>
+                              Tất cả đơn hàng sẽ được giao vào ngày Thứ Bảy vì chúng tôi muốn nhận những <span style="color: #B62029; font-weight: 600">sản phẩm tươi ngon nhất, vừa thu hoạch và gửi trực tiếp đến bạn từ nông trại vào thứ Bảy hàng tuần.</span> Cảm ơn bạn đã mua thực phẩm sạch tại CFarm.vn.</p>
                            </div>
                         </div>
 
@@ -546,6 +546,7 @@ trước khi giao hàng!</p>
           case '22':
               text = "35.000 VNĐ";
               spacerToalNow = spacerToal + 35000;
+              break;
           default:
               text = "0 VNĐ";
               spacerToalNow = spacerToal;
