@@ -15,7 +15,7 @@
                   <h3 class="no-margin-top text-uppercase spacer-10 text-center">
                      Giỏ hàng thực phẩm an toàn
                   </h3>
-                  <form action="/destroy" accept-charset="UTF-8" class="form-style-base" method="post">
+                  <form action="#" accept-charset="UTF-8" class="form-style-base">
                      <input type="hidden" name="_method" value="delete">
                      <fieldset>
                         <div class="table-responsive">

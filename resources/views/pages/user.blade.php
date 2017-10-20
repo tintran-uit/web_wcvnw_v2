@@ -177,11 +177,11 @@
               <?php $total=0; ?>
               @for($j = 0; $j < sizeof($order)-2; $j++)
               <tr>
-              <td class="col-md-3">{{$order[$j]->product_name}}</td>
+              <td>{{$order[$j]->product_name}}</td>
               <td>{{$order[$j]->farmer_name}}</td>
               <td>{{$order[$j]->quantity}} {{$order[$j]->unit}}</td>
               <td>{{$order[$j]->price}} VNĐ</td>
-              <tr>
+              </tr>
               <?php $total+=$order[$j]->price; ?>
               @endfor
             </tbody>
