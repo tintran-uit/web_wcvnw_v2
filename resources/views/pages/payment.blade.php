@@ -62,8 +62,13 @@
               }).on('error.form.bv', function(e) {
                 console.log(e);
               });
+              $('#liTab1').click(function() {
+                checkForm2();
+                $('#payment-next-button').html('Tiếp tục');
+              });
               $('#liTab2').click(function() {
                 checkForm2();
+
               });
               $('#liTab3').click(function() {
                 postDataPay();
@@ -316,7 +321,7 @@ trước khi giao hàng! --></p>
                      <div class="pull-right" id="btnStep">
                         <a class="btn btn-info btn-lg" onclick="backStep()">                  <i class="fa fa-angle-double-left"></i> <span class="hidden-xs">Quay lại</span>
                         </a>
-                        <a class="btn btn-primary btn-lg" onclick="nextStep()" id="nextButtonStep">                  <span class="hidden-xs" id="payment-next-button">Tiếp theo</span> <i class="fa fa-angle-double-right"></i>
+                        <a class="btn btn-primary btn-lg" onclick="nextStep()" id="nextButtonStep">                  <span class="hidden-xs" id="payment-next-button">Tiếp tục</span> <i class="fa fa-angle-double-right"></i>
                         </a>              
                      </div>
                   </div>
@@ -346,6 +351,7 @@ trước khi giao hàng! --></p>
                   break;
                case "liTab2":
                   $('[href="#tab-1"]').tab('show');
+                  $('#payment-next-button').html('Tiếp tục');
                   break;
                case "liTab3":
                   $('[href="#tab-2"]').tab('show');
@@ -365,6 +371,7 @@ trước khi giao hàng! --></p>
                   if(check==true)
                     {
                       $('[href="#tab-2"]').tab('show');
+                      $('#payment-next-button').html('Hoàn thành');
                       getFormValue('#tab-1');
                       console.log(dataPost);
                     }
@@ -429,12 +436,13 @@ trước khi giao hàng! --></p>
               {
                 $('[href="#tab-2"]').tab('show');
                 $("#aTab2").removeClass("li-disabled");
+                $('#payment-next-button').html('Hoàn thành');
                 getFormValue('#tab-1');
               }else{
                 var message = 'VUI LÒNG NHẬP ĐỦ THÔNG TIN BẮT BUỘC (*)';
                 $('#modalMessage').html(message);
                 $('#modalAlert').modal('show');
-
+                $('#payment-next-button').html('Tiếp tục');
                 setTimeout(function(){ 
                   $("#liTab2").removeClass("active");
                   $("#liTab1").addClass("active");
