@@ -45,8 +45,10 @@
                            <br><br>
                            <?php $i=0; ?>
                            @foreach($orders as $order)
+                           @if($order->status != 8)
                            <?php $i++; ?>
                             <p><a href="#" data-toggle="modal" data-target="#order-{{$i}}">Xem đơn hàng: {{$order->order_id}}<br>{{ \Carbon\Carbon::parse($order->date)->format('d/m/Y')}} - <span class="@if($order->status == 1) btn-info @endif @if($order->status == 2) btn-primary @endif @if($order->status == 0) btn-warning @endif @if($order->status == 3) btn-error @endif">{{$order->status_vn_name}}</span></a></p>
+                            @endif
                            @endforeach
                          </div>
                        </div>
@@ -191,8 +193,12 @@
                 <td colspan="1" align="left" style="float: right;"><span>{{$order['shipping_cost']}} VNĐ</span></td>
               </tr>
               <tr style="">
-                <td colspan="3" align="right" style="padding-right: 20px"><b>Thành tiền</b>  </td>
+                <td colspan="3" align="right" style="padding-right: 20px"><b>Tạm tính</b>  </td>
                 <td colspan="1" align="left" style="float: right;"><span>{{$total}} VNĐ</span></td>
+              </tr>
+              <tr style="">
+                <td colspan="3" align="right" style="padding-right: 20px"><b>Tổng tiền</b>  </td>
+                <td colspan="1" align="left" style="float: right;"><span>{{($total+$order['shipping_cost'])}} VNĐ</span></td>
               </tr>
               <tr style="">
                 <td colspan="1" align="right" style="padding-right: 5px"><br><b>Người đặt hàng: </b>  </td>
