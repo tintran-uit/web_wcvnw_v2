@@ -172,7 +172,7 @@
                     <input type="text" class="form-control stepper-input text-center" value="{{$order[$j]->quantity}} {{$order[$j]->unit}}" >
                  </td>
                   <td id="order{{$i}}{{$j}}">{{$order[$j]->price}} VND</td>
-                  <td>{{$order[$j]->price/$order[$j]->quantity}}</td>
+                  <td style="display:none;">{{$order[$j]->price/$order[$j]->quantity}}</td>
               </tr>
               <?php $total+=$order[$j]->price; ?>
               @endfor
