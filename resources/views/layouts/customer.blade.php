@@ -56,7 +56,7 @@
    <body class="index">
       <div id="chat" class="box-chat col-sm-5 col-md-4 col-lg-2 hidden-xs">
          <div class="clearfix">
-            <div class="pull-left" id="chat-title">Bạn cần hỗ trợ?</div>
+            <div class="pull-left" id="chat-title"><b>Bạn cần hỗ trợ?</b></div>
             <div class="pull-right">
                <a class="btn-link button-show" href="#">        <i class="glyphicon glyphicon-plus"></i>
                </a>    

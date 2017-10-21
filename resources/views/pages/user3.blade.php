@@ -4,19 +4,9 @@
 @endsection
 
 @section('headInput')
-<link href="{{url('')}}/packages/kartik-rate/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 
-<!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
-<link href="{{url('')}}/packages/kartik-rate/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
 
-<!-- important mandatory libraries -->
-<script src="{{url('')}}/packages/kartik-rate/js/star-rating.js" type="text/javascript"></script>
 
-<!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
-<script src="{{url('')}}/packages/kartik-rate/themes/krajee-svg/theme.js"></script>
-
-<!-- optionally if you need translation for your language then include locale file as mentioned below -->
-<!-- <script src="{{url('')}}/packages/kartik-rate/js/locales/<lang>.js"></script> -->
 @endsection
 
 
@@ -144,7 +134,7 @@
    </section>
    @include('layouts.banner_bottom')
 </main>
-<?php $i=0; ?>
+<?php $i=0;?>
 @foreach($orderItem as $order)
 <?php $i++; ?>
  <!-- Modal order -->
@@ -158,51 +148,56 @@
               <i class="fa fa-times"></i>
             </span>
           </button>
-          <h4 class="modal-title" id="modalBuyVoucher">Chi tiết đơn hàng</h4>
+          <h4 class="modal-title" id="">Chi tiết đơn hàng</h4>
         </div>
         <div class="modal-body">
           
-          <table style="width: 100%">
+          <table  id="cartTable{{$i}}" class="table table-bordered" cellspacing="0">
             <thead>
             <tr>
               <th class="col-md-3">Sản phẩm</th>
-              <th class="col-md-5">Nguồn gốc</th>
+              <th class="col-md-4">Nguồn gốc</th>
               <th class="col-md-2">Số lượng</th>
               <th class="col-md-2">Giá</th>
+              <th style="display:none;"></th>
             </tr>
             </thead>
             <tbody>
               <?php $total=0; ?>
               @for($j = 0; $j < sizeof($order)-3; $j++)
               <tr>
-              <td class="col-md-3">{{$order[$j]->product_name}}</td>
-              <td>{{$order[$j]->farmer_name}}</td>
-              <td><input type="text" name="qty" value="{{$order[$j]->quantity}}" style="width: 40%" class="text-center"> {{$order[$j]->unit}}</td>
-              <td>{{$order[$j]->price}} VNĐ</td>
+                  <td class="col-md-3">{{$order[$j]->product_name}}</td>
+                  <td>{{$order[$j]->farmer_name}}</td>
+                  <td class="text-center">
+                    <input type="text" class="form-control stepper-input text-center" value="{{$order[$j]->quantity}} {{$order[$j]->unit}}" >
+                 </td>
+                  <td id="order{{$i}}{{$j}}">{{$order[$j]->price}} VND</td>
+                  <td>{{$order[$j]->price/$order[$j]->quantity}}</td>
               </tr>
               <?php $total+=$order[$j]->price; ?>
               @endfor
             </tbody>
             <tfoot>
               <tr style="">
-                <td colspan="3" align="right" style="padding-right: 20px"><br><b>Khuyến mãi</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><br><span>{{$order['discount_amount']}} VNĐ</span></td>
+                <td colspan="3" align="right" style="padding-right: 20px"><b>Tạm tính</b>  </td>
+                <td align="left" style="float: right;width: 100%"><span>{{$total}} VND</span></td>
+                <td style="display:none;"></td>
               </tr>
+
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px;"><b>Phí vận chuyển</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><span>{{$order['shipping_cost']}} VNĐ</span></td>
+                <td align="left" style="float: right; width: 100%"><span>{{$order['shipping_cost']}} VND</span></td>
+                <td style="display:none;"></td>
               </tr>
-              <tr style="">
-                <td colspan="3" align="right" style="padding-right: 20px"><b>Tạm tính</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><span>{{$total}} VNĐ</span></td>
-              </tr>
+              
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px"><b>Tổng tiền</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><span>{{($total+$order['shipping_cost'])}} VNĐ</span></td>
+                <td align="left" style="float: right;width: 100%"><span>{{($total+$order['shipping_cost'])}} VND</span></td>
+                <td style="display:none;"></td>
               </tr>
               <tr style="">
-                <td colspan="1" align="right" style="padding-right: 5px"><br><b>Người đặt hàng: </b>  </td>
-                <td colspan="3" align="left" style=""><br><span> {{$order['nguoinhan']}}</span></td>
+                <td colspan="5" align="right" style="padding-right: 5px"><br><b>Người đặt hàng: </b> {{$order['nguoinhan']}}</td>
+                <td style="display:none;"></td>
               </tr>
             </tfoot>
           </table>
@@ -213,6 +208,7 @@
     </div>
   </div>
 </div>
+
 @endforeach
 
 
@@ -220,142 +216,67 @@
 
 @section('scrip_code')
 <script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"></script>
-
+<?php $i=0;?>
+@foreach($orderItem as $order)
+<?php $i++; ?>
 <script type="text/javascript">
-   initRatingStar();
-   var rate = 0;
-   var dataPost = {};
-   // getFormValue('#formRate');  
+  $(document).ready(function() {
 
-   function initRatingStar() {
-      var $rate = $('input[type="number"]');
-      $rate.rating({
-         clearCaption: '',
-         step: 1,
-         starCaptions: {1: 'Rất kém', 2: 'Kém', 3: 'Được', 4: 'Tốt', 5: 'Đáng khen'},
-         starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'}
+    var table{{$i}} = $('#cartTable{{$i}}').DataTable({searching: false, paging: false, "bInfo" : false, "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+            
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\VND,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+ 
+            // Total over all pages
+            total = api
+                .column( 3 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+                
+            // Total over this page
+            pageTotal = api
+                .column( 3, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Update footer
+            $( api.column( 3 ).footer() ).html(
+                numberWithCommas(pageTotal) +' VND'
+            );
+        }});
+
+    table{{$i}}.on( 'change', 'input.stepper-input' , function () {
+         var msg;
+         var row = $(this).closest('tr').index();
+         // var unit_quantity = table.row(row).data()[2];
+         var price = table{{$i}}.row(row).data()[4];
+         $(this).closest('tr').find(':input').each(function() {
+            
+            msg = parseFloat($(this).val());
+            console.log(msg);
+
          });
-      };
-$(document).on('ready', function () {
-         $('.rating,.kv-gly-star,.kv-gly-heart,.kv-uni-star,.kv-uni-rook,.kv-fa,.kv-fa-heart,.kv-svg,.kv-svg-heart').on(
-                'change', function () {
-                    rate = $(this).val();
-                    if(rate>3){
-                        $('.prod').html('ưng ý');
-                    }else{
-                        $('.prod').html('không hài lòng');
-                    }
-                    next1();
-                });
-         $('input[type="checkbox"]').on(
-                'change', function () {
-                    rate = $(this).val();
-                    if(rate>3){
-                        $('.prod').html('ưng ý');
-                    }else{
-                        $('.prod').html('không hài lòng');
-                    }
-                    next2();
-                });
-    });
+         console.log(price);
+         price = price*msg;
+         console.log(price);
+         console.log(row);
+         table{{$i}}.cell(row, 3).data(numberWithCommas(price) + ' VND').draw();
+         
+      });
+   
 
-function next1() {
-   $("#collapseTwo").collapse("show");
-   $("#collapseOne").collapse("hide");
-
-}
-function next2() {
-   $("#collapseThree").collapse("show");
-   scrollToTab();
-}
-function getFormValue(formID) {
-  var $inputs = $(formID+' :input');
-  $inputs.each(function() {
-      dataPost[this.name] = $(this).val();
-  });
-  dataPost['elements'] = [];
-  var inputElements = $('#formRate :input');
-      for(var i=0; inputElements[i]; ++i){
-            if(inputElements[i].checked && 'undefined'){
-                  var checked = inputElements[i].value;
-                 
-                 dataPost['elements'].push(
-                    checked
-                ); 
-            }
-      }
-  console.log(dataPost);
-  return checkForm();
-}
-
-function sentRate() {
-   var checkForm = getFormValue('#formRate');
-
-   if(checkForm){
-
-      $.ajax({
-          type: "POST",
-          url: "/api/customer/rate",
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-          },
-          // The key needs to match your method's input parameter (case-sensitive).
-          data: JSON.stringify({ data: dataPost }),
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          success: function(data){
-            
-            console.log(data);
-            
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-              $('#modalLoader').modal('hide');
-              console.log(textStatus);
-              alert("Vui lòng kiểm tra kết nối Internet!");
-          }
-        });
-
-   }
-}
-
-function checkForm() {
-  if (dataPost['rate'] == "") {
-    $("#collapseOne").collapse("show");
-    $("#collapseTwo").collapse("hide");
-    $("#collapseThree").collapse("hide");
-    $('#modalMessage').html("Vui lòng chấm điểm!");
-    $('#modalAlert').modal('show');
-    return false;
-  }
-
-  if (dataPost['elements'].length == 0) {
-    $("#collapseTwo").collapse("show");
-    $("#collapseOne").collapse("hide");
-    $("#collapseThree").collapse("hide");
-    $('#modalMessage').html("Vui lòng đánh dấu sản phẩm!");
-    $('#modalAlert').modal('show');
-    return false;
-  }
-
-  if (dataPost['comment'] == ""){
-    $("#collapseThree").collapse("show");
-    $("#collapseOne").collapse("hide");
-    $("#collapseTwo").collapse("hide");
-    $('#modalMessage').html("Vui lòng nhập bình luận!");
-    $('#modalAlert').modal('show');
-    return false;
-  }
-  return true;
-}
-
-function scrollToTab() {
-
-            $('html, body').animate({
-                        scrollTop: $('#formRate').offset().top
-                    }, 'slow');
-                    
-                    
-         }
+});
 </script>
+@endforeach
 
 @endsection

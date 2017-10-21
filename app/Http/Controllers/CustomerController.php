@@ -133,10 +133,11 @@ class CustomerController extends Controller
 					$this->data['orderItem'][$order->order_id]['discount_amount'] = $order->discount_amount;
 					$this->data['orderItem'][$order->order_id]['nguoinhan'] = DB::select('SELECT `name` FROM `customers` 
 								WHERE `id` = ?', [$order->customer_id])[0]->name;
+					// return view('pages.user3', $this->data);
 					}
 				}
-		        $this->data['orderItem'];
-		        return view('pages.user2', $this->data);
+		        // return $this->data['orderItem'];
+		        return view('pages.user3', $this->data);
 			}else{
 				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
 			}
@@ -154,7 +155,7 @@ class CustomerController extends Controller
 	        // $this->data['cartOld'] = DB::table('articles')->where('id', $post_id)->first();
 	        // return $this->data['orderItem'];
 	        if($user->email == 'cau2binhdinh@gmail.com'){
-	        	return view('pages.user2', $this->data);
+	        	return view('pages.user3', $this->data);
 	        }
 	        return view('pages.user', $this->data);
 		}
@@ -185,37 +186,313 @@ class CustomerController extends Controller
 	        $this->data['cart'] = Cart::content();
 	        $this->data['cartOld'] = Cart::content();
 
-		if(Auth::check() && Auth::user()->email == 'cau2binhdinh@gmail.com'){
-				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+		if(Auth::check() && Auth::user()->email == 'minh.huynh@cfarm.vn'){
+			if($id==1){
+				$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+
+		 	$mua = [];
+		 	foreach ($products_list as $key) {
+		 		$mua[$key->slug] = 0;
+		 	}
+		 	// return $mua;
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
 					// return $order->customer_id;
 					if($order->status != 8){
-					$item = DB::select('SELECT p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
-						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ?', [$order->order_id]);
-					// array_push($this->data['orderItem'], $item);
-					for($j = 0; $j < sizeof($item); $j++){
-						// if($j>3){return sizeof($item);}
-						if($item[$j]->farmer_id != $id && $item[$j]->farmer_id != 10){
-							// if($item[$j]->farmer_id == 8){return $item[$j]->farmer_id;}
-						unset($item[$j]);
+					$item = DB::select('SELECT p.`id` "product_id", p.`name` "product_name",p.`slug` "slug" , m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, $id]);
+					
+						foreach ($item as $it) {
+							if($it->slug == 'ga-ta'){
+								$mua['ga-ta'] += $it->quantity; 
+							}
+							if($it->slug == 'trung-ga'){
+								$mua['trung-ga'] += $it->quantity; 
+							}
+							
 							
 						}
+						// array_push($mua, $item);
 
-					}
-						$this->data['orderItem'][$order->order_id] = $item;
+						$item2 = DB::select('SELECT p.`id` "product_id", p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, 10]);
+						// array_push($mua, $item);
+						foreach ($item2 as $it) {
+							if($it->product_id == 63 || $it->product_id == 64){
+								$mua['trung-ga'] += $it->quantity; 
+								$mua['ga-ta'] += $it->quantity; 
+							}
+							
+						}
 					
-					// $this->data['orderItem'][$order->order_id] = $item;
-					// $this->data['orderItem'][$order->order_id]['shipping_cost'] = $order->shipping_cost;
-					// $this->data['orderItem'][$order->order_id]['discount_amount'] = $order->discount_amount;
-					// $this->data['orderItem'][$order->order_id]['nguoinhan'] = DB::select('SELECT `name` FROM `customers` 
-					// 			WHERE `id` = ?', [$order->customer_id])[0]->name;
 					}
 				}
-		        return $this->data['orderItem'];
-		        return view('pages.user2', $this->data);
+				// return $this->data['orderItem'];
+				return $mua;
 			}
+		}
+
+		if($id==2){
+		
+		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+
+		 	$mua = [];
+		 	foreach ($products_list as $key) {
+		 		$mua[$key->slug] = 0;
+		 	}
+		 	// return $mua;
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+				$this->data['orders'] = $orders;
+				$this->data['orderItem'] = [];
+				foreach ($orders as $order) {
+					// return $order->customer_id;
+					if($order->status != 8){
+					$item = DB::select('SELECT p.`id` "product_id", p.`name` "product_name",p.`slug` "slug" , m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, $id]);
+					
+						foreach ($item as $it) {
+							if($it->slug == 'chuoi-xiem'){
+								$mua['chuoi-xiem'] += $it->quantity; 
+							}
+							if($it->slug == 'chuoi-cau'){
+								$mua['chuoi-cau'] += $it->quantity; 
+							}
+							if($it->slug == 'chuoi-gia'){
+								$mua['chuoi-gia'] += $it->quantity; 
+							}
+							if($it->slug == 'buoi-da-xanh'){
+								$mua['buoi-da-xanh'] += $it->quantity; 
+							}
+							if($it->slug == 'ga-toc'){
+								$mua['ga-toc'] += $it->quantity; 
+							}
+							if($it->slug == 'vit-ray'){
+								$mua['vit-ray'] += $it->quantity; 
+							}
+							if($it->slug == 'gao-ray-toc'){
+								$mua['gao-ray-toc'] += $it->quantity; 
+							}
+							if($it->slug == 'thit-dui-heo-toc'){
+								$mua['thit-dui-heo-toc'] += $it->quantity; 
+							}
+							if($it->slug == 'thit-ba-roi-heo-toc'){
+								$mua['thit-ba-roi-heo-toc'] += $it->quantity; 
+							}
+							if($it->slug == 'bap-gio-heo-toc'){
+								$mua['bap-gio-heo-toc'] += $it->quantity; 
+							}
+							
+						}
+						// array_push($mua, $item);
+
+						$item2 = DB::select('SELECT p.`id` "product_id", p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, 10]);
+						// array_push($mua, $item);
+						foreach ($item2 as $it) {
+							
+							if($it->product_id == 63 || $it->product_id == 62){
+								$mua['chuoi-xiem'] += $it->quantity*2; 
+							}else{
+								$mua['chuoi-xiem'] += $it->quantity;
+							}
+						}
+					
+					}
+				}
+				// return $this->data['orderItem'];
+				return $mua;
+		
+	        }
+
+	    if($id==3){
+		
+		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+
+		 	$mua = [];
+		 	foreach ($products_list as $key) {
+		 		$mua[$key->slug] = 0;
+		 	}
+		 	// return $mua;
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+				$this->data['orders'] = $orders;
+				$this->data['orderItem'] = [];
+				foreach ($orders as $order) {
+					// return $order->customer_id;
+					if($order->status != 8){
+					$item = DB::select('SELECT p.`id` "product_id", p.`name` "product_name",p.`slug` "slug" , m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, $id]);
+					
+						foreach ($item as $it) {
+							if($it->slug == 'suon-non'){
+								$mua['suon-non'] += $it->quantity; 
+							}
+							if($it->slug == 'suon-gia'){
+								$mua['suon-gia'] += $it->quantity; 
+							}
+							if($it->slug == 'thit-ba-roi-heo'){
+								$mua['thit-ba-roi-heo'] += $it->quantity; 
+							}
+							if($it->slug == 'cot-let-heo'){
+								$mua['cot-let-heo'] += $it->quantity; 
+							}
+							if($it->slug == 'thit-dui-heo'){
+								$mua['thit-dui-heo'] += $it->quantity; 
+							}
+							if($it->slug == 'thit-nac-dam'){
+								$mua['thit-nac-dam'] += $it->quantity; 
+							}
+							if($it->slug == 'chan-gio'){
+								$mua['chan-gio'] += $it->quantity; 
+							}
+							if($it->slug == 'xuong'){
+								$mua['xuong'] += $it->quantity; 
+							}
+							
+							
+						}
+						// array_push($mua, $item);
+
+						$item2 = DB::select('SELECT p.`id` "product_id", p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, 10]);
+						// array_push($mua, $item);
+						foreach ($item2 as $it) {
+							
+							if($it->product_id == 64){
+								 $mua['thit-dui-heo'] += $it->quantity*0.5; 
+								 $mua['cot-let-heo'] += $it->quantity*0.3;
+								  $mua['thit-ba-roi-heo'] += $it->quantity*0.5;
+								   $mua['suon-non'] += $it->quantity*0.5;
+							}elseif($it->product_id == 63){
+								$mua['thit-dui-heo'] += $it->quantity*0.5; 
+								 $mua['cot-let-heo'] += $it->quantity*1;
+								  $mua['thit-ba-roi-heo'] += $it->quantity*0.5;
+								   $mua['suon-non'] += $it->quantity*1;
+							}
+						}
+					
+					}
+				}
+				// return $this->data['orderItem'];
+				return $mua;
+		
+	        }
+
+	    if($id==9){
+		
+		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+
+		 	$mua = [];
+		 	foreach ($products_list as $key) {
+		 		$mua[$key->slug] = 0;
+		 	}
+		 	// return $mua;
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+				$this->data['orders'] = $orders;
+				$this->data['orderItem'] = [];
+				foreach ($orders as $order) {
+					// return $order->customer_id;
+					if($order->status != 8){
+					$item = DB::select('SELECT p.`id` "product_id", p.`name` "product_name",p.`slug` "slug" , m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, $id]);
+					
+						foreach ($item as $it) {
+							if($it->slug == 'cam-xoan'){
+								$mua['cam-xoan'] += $it->quantity; 
+							}
+							
+							
+							
+						}
+						// array_push($mua, $item);
+
+						$item2 = DB::select('SELECT p.`id` "product_id", p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, 10]);
+						// array_push($mua, $item);
+						foreach ($item2 as $it) {
+							
+							if($it->product_id == 64 || $it->product_id == 61){
+								 $mua['cam-xoan'] += $it->quantity; 
+								 
+							}elseif($it->product_id == 63 || $it->product_id == 62 ){
+								$mua['cam-xoan'] += $it->quantity*2; 
+								 
+							}
+						}
+					
+					}
+				}
+				// return $this->data['orderItem'];
+				return $mua;
+		
+	        }
+
+	        if($id==6){
+		
+		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+
+		 	$mua = [];
+		 	foreach ($products_list as $key) {
+		 		$mua[$key->slug] = 0;
+		 	}
+		 	// return $mua;
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+				$this->data['orders'] = $orders;
+				$this->data['orderItem'] = [];
+				foreach ($orders as $order) {
+					// return $order->customer_id;
+					if($order->status != 8){
+					$item = DB::select('SELECT p.`id` "product_id", p.`name` "product_name",p.`slug` "slug" , m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, $id]);
+					
+						foreach ($item as $it) {
+							if($it->slug == 'kho-qua'){
+								$mua['kho-qua'] += $it->quantity; 
+							}
+							if($it->slug == 'dua-leo'){
+								$mua['dua-leo'] += $it->quantity; 
+							}
+							if($it->slug == 'bi-xanh'){
+								$mua['bi-xanh'] += $it->quantity; 
+							}
+							if($it->slug == 'ca-tim'){
+								$mua['ca-tim'] += $it->quantity; 
+							}
+							if($it->slug == 'cu-cai-trang'){
+								$mua['cu-cai-trang'] += $it->quantity; 
+							}
+							if($it->slug == 'dau-cove'){
+								$mua['dau-cove'] += $it->quantity; 
+							}
+							
+							
+							
+						}
+						// array_push($mua, $item);
+
+						$item2 = DB::select('SELECT p.`id` "product_id", p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name", m.`farmer_id` FROM `m_orders` m, `products` p, `farmers` f  
+						WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ? AND f.`id` = ?' , [$order->order_id, 10]);
+						// array_push($mua, $item);
+						foreach ($item2 as $it) {
+							
+							if($it->product_id == 64 || $it->product_id == 61){
+								 $mua['ca-tim'] += $it->quantity*0.3; 
+								 
+							}elseif($it->product_id == 63 || $it->product_id == 62 ){
+								$mua['ca-tim'] += $it->quantity*0.5; 
+								 
+							}
+						}
+					
+					}
+				}
+				// return $this->data['orderItem'];
+				return $mua;
+		
+	        }
+
+
 	}
 
 }
