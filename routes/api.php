@@ -26,7 +26,7 @@ Route::get('/cancelorder/order_id={order_id}', 'OrderController@cancelOrder');
 Route::get('/orderitems/order_id={order_id}', 'OrderController@orderItems');
 Route::get('/orders', 'CustomerController@getOrders');
 
-Route::post('/customer/rate', 'CustomerController@rate');
+Route::post('/customer/rate', 'CustomerController@rating');
 
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
 Route::get('/farmer/farmer_id={farmer_id}', 'FarmerController@getFarmerProfile');

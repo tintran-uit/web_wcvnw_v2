@@ -33,6 +33,7 @@ class TradingCrudController extends CrudController
 //        $this->crud->setFromDb();
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('name', 1);
+        $this->crud->addClause('where', 'status', '=', '1');
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
