@@ -15,7 +15,7 @@ class CartProductController extends Controller
         $prodID = $data['prodID'];
         $farmerID = $data['farmerID'];
         $qty = $data['qty'];
-        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image", p.`unit_quantity` "unit_quantity", p.`unit` "unit" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`capacity` - td.`sold` >= ?', [$prodID, $farmerID, $qty]);
+        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image", p.`unit_quantity` "unit_quantity", p.`unit` "unit" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`status` = 1 AND td.`capacity` - td.`sold` >= ?', [$prodID, $farmerID, $qty]);
         if($prod)
         {
             Cart::update($data['rowId'], $data['qty']);
@@ -43,7 +43,7 @@ class CartProductController extends Controller
         $proID = $data['id'];
         $farmerID = $data['farmerID'];
         $qty = $data['qty'];
-        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image", p.`unit_quantity` "unit_quantity", p.`unit` "unit" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`capacity` - td.`sold` >= ?', [$proID, $farmerID, $qty]);
+        $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  p.`price` "price", p.`image` "image", p.`unit_quantity` "unit_quantity", p.`unit` "unit" FROM `products` p, `trading` td  WHERE p.`id` = ? AND td.`status` = 1 AND td.`product_id` = p.`id` AND td.`farmer_id` = ? AND td.`capacity` - td.`sold` >= ?', [$proID, $farmerID, $qty]);
         if($prod)
         {
             Cart::add([

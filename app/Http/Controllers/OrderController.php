@@ -50,7 +50,7 @@ class OrderController extends Controller
 			$total = $total + ($price * $qty);
 			
 			//receive numbers and check if quantity_left is >= order quantity
-			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
+			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`status` = 1 AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
 			
 			if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
 			{
@@ -124,7 +124,7 @@ class OrderController extends Controller
 			$qty = $item->qty;
 			
 			//receive numbers and check if quantity_left is >= order quantity
-			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left", p.`category` AS "category" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
+			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left", p.`category` AS "category" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`status` = 1 AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
 			
 			if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
 			{
@@ -140,7 +140,7 @@ class OrderController extends Controller
 	         	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $unit, $price * $qty, $price_farmer * $qty]);
 
 	         	//update trading table
-	        	DB::statement('UPDATE `trading` SET `sold_count` = `sold_count`+ ?, `sold` = `sold` + ? WHERE `farmer_id` = ? AND `product_id` = ?', [$qty, $quantity, $farmer_id, $product_id]);
+	        	DB::statement('UPDATE `trading` SET `sold_count` = `sold_count`+ ?, `sold` = `sold` + ? WHERE `status` = 1 AND `farmer_id` = ? AND `product_id` = ?', [$qty, $quantity, $farmer_id, $product_id]);
 
 	        	//Proccess the elements in case package is order
 	        	if($category == 0) //package
@@ -149,6 +149,7 @@ class OrderController extends Controller
 		        		              SET t.`sold` = t.`sold` + m.`quantity`,
 		        		              	  t.`sold_count` =  t.`sold_count` + ?
  									WHERE t.`farmer_id` = m.`farmer_id`
+ 									  AND t.`status` = 1
    									  AND t.`product_id` = m.`product_id` 
    									  AND m.`package_id` = ?', [$qty, $product_id]);
 
@@ -274,6 +275,7 @@ class OrderController extends Controller
    									  AND t.`product_id` = m.`product_id` 
    									  AND p.`id` = mo.`product_id`
    									  AND p.`category` = 0
+   									  AND t.`status` = 1
    									  AND m.`package_id` = p.`id`
    									  AND mo.`order_id` = ?', [$order_id]);
 
@@ -285,6 +287,7 @@ class OrderController extends Controller
  									  AND m.`order_id` = g.`order_id`
  									  AND m.`farmer_id` = t.`farmer_id`
  									  AND m.`product_id` = t.`product_id`
+ 									  AND t.`status` = 1
  									  AND g.`order_id` = ?', [$order_id]);
 
     		}
