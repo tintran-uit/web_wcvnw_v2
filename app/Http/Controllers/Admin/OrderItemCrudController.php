@@ -95,7 +95,7 @@ class OrderItemCrudController extends CrudController
         $this->crud->addField([
             'name' => 'quantity',
             'label' => 'Số lượng',
-            'type' => 'number',
+            'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
