@@ -31,7 +31,7 @@ class ProductController extends Controller
 		$categories = DB::select('SELECT `id`, `name` FROM `categories` ORDER BY `id` ASC');
 		foreach($categories as $cat)
 		{
-		 	$products_list[""+$cat->id] = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = tr.`farmer_id` AND p.`category` = ? ORDER BY tr.`priority` ASC', [$cat->id]);
+		 	$products_list[""+$cat->id] = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` AND p.`category` = ? ORDER BY tr.`priority` ASC', [$cat->id]);
 
 		 	// $products_list[""+$cat->id] = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", p.`unit` "unit"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = tr.`farmer_id` AND tr.`status` = 1 AND p.`category` = ? ', [$cat->id]);
 		}
@@ -53,7 +53,7 @@ class ProductController extends Controller
 	 */
     public function getProductDetail($product_id)
 	{
-		$product_detail = DB::select('SELECT f.`id` "id", f.`name` "name", f.`rating` "rating", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` "unit" FROM `farmers` f, `trading` tr, `products` p WHERE p.`id` = tr.`product_id` AND tr.`product_id` = ? AND tr.`farmer_id` = f.`id` ', [$product_id]);
+		$product_detail = DB::select('SELECT f.`id` "id", f.`name` "name", f.`rating` "rating", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` "unit" FROM `farmers` f, `trading` tr, `products` p WHERE p.`id` = tr.`product_id` AND tr.`product_id` = ? AND tr.`farmer_id` = f.`id` AND tr.`status` = 1 ', [$product_id]);
 
 		return $product_detail;
 	}
@@ -67,7 +67,7 @@ class ProductController extends Controller
 	 */
     public function getSuppliers($product_id)
 	{
-		$product_detail = DB::select('SELECT f.`id` "id", f.`name` "name", ROUND(f.`rating`/100, 2)  "rating", tr.`capacity`, IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` FROM `farmers` f, `trading` tr, `products` p WHERE p.`id` = tr.`product_id` AND tr.`product_id` = ? AND tr.`farmer_id` = f.`id`', [$product_id]);
+		$product_detail = DB::select('SELECT f.`id` "id", f.`name` "name", ROUND(f.`rating`/100, 2)  "rating", tr.`capacity`, IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` FROM `farmers` f, `trading` tr, `products` p WHERE p.`id` = tr.`product_id` AND tr.`product_id` = ? AND tr.`status` = 1 AND tr.`farmer_id` = f.`id`', [$product_id]);
 
 		return $product_detail;
 	}

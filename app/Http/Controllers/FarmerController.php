@@ -20,7 +20,7 @@ class FarmerController extends Controller
 	public function farmerOrderList($farmer_id)
 	{
 		$trading = DB::select('SELECT p.`name` "product_name", t.`capacity` "capacity", t.`sold` "sold", t.`unit`, t.`sold_count` * p.`price_farmer` "price_farmer" FROM `trading` t, `products` p 
-			WHERE t.`product_id` = p.`id` AND t.`farmer_id` = ?', [$farmer_id]);
+			WHERE t.`product_id` = p.`id` AND t.`status` = 1 AND t.`farmer_id` = ?', [$farmer_id]);
 		
 	    return $trading;
 	}
