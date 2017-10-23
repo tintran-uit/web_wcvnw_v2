@@ -144,7 +144,7 @@
    </section>
    @include('layouts.banner_bottom')
 </main>
-<?php $i=0; $tong = 0;?>
+<?php $i=0; ?>
 @foreach($orderItem as $order)
 <?php $i++; ?>
  <!-- Modal order -->
@@ -178,11 +178,10 @@
               <td class="col-md-3">{{$order[$j]->product_name}}</td>
               <td>{{$order[$j]->farmer_name}}</td>
               <td><input type="text" name="qty" value="{{$order[$j]->quantity}}" style="width: 40%" class="text-center"> {{$order[$j]->unit}}</td>
-              <td>{{$order[$j]->price}} VNĐ</td>
+              <td><input type="text" name="qty" value="{{$order[$j]->price}}" style="width: 40%" class="text-center"> VNĐ</td>
               </tr>
               <?php $total+=$order[$j]->price; ?>
               @endfor
-              <?php $tong+=$total?>
             </tbody>
             <tfoot>
               <tr style="">
@@ -227,7 +226,7 @@
    var rate = 0;
    var dataPost = {};
    // getFormValue('#formRate');  
-   alert({{$tong}});
+
    function initRatingStar() {
       var $rate = $('input[type="number"]');
       $rate.rating({
