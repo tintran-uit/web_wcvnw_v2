@@ -33,6 +33,7 @@ class TradingCrudController extends CrudController
 //        $this->crud->setFromDb();
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('name', 1);
+        $this->crud->addClause('where', 'status', '=', '1');
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
@@ -77,7 +78,10 @@ class TradingCrudController extends CrudController
             'name' => 'status',
             'label' => 'Trạng Thái',
         ]);
-
+        $this->crud->addColumn([
+            'name' => 'delivery_date',
+            'label' => 'Ngày Giao Hàng',
+        ]);        
         // ------ CRUD FIELDS
         $this->crud->addField([
             'name' => 'farmer_id',
@@ -141,7 +145,15 @@ class TradingCrudController extends CrudController
             'name' => 'status',
             'label' => 'Trạng Thái',
             'type' => 'text',
-            'default'    => '0',
+            'default'    => '1',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'delivery_date',
+            'label' => 'Ngày Giao Hàng',
+            'type' => 'date',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
