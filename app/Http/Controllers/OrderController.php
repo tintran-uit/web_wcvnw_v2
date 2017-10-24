@@ -243,15 +243,8 @@ class OrderController extends Controller
 	public function orderItems($order_id)
 	{
 		if(Auth::check()) {
-			$user = Auth::user();
-         	$customer_id = $user->connected_id;
-			if(strcmp($user->account_type, "Customer") == 0){
-				$items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ?', [$order_id]);
-    			return $items;
-    		}
-    		else {
-    			return redirect()->back();
-    		}
+			$items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ?', [$order_id]);
+    		return $items;
     	}
     	else {
     		return redirect()->back();
