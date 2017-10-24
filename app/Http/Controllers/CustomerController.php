@@ -174,7 +174,6 @@ class CustomerController extends Controller
 		$comment = $data['comment'];
 		$elements = $data['elements'];
 		$order_id = $data['order_id'];
-		return $data;
 
 		if(Auth::check()) {
          	$user = Auth::user();
@@ -188,16 +187,22 @@ class CustomerController extends Controller
          							   WHERE `order_id` = ? 
          							     AND `customer_id` = ?
          							     AND DATEDIFF(CURRENT_DATE, `delivery_date`) < 7
-         							     AND `rating` IS NULL', [$order_id, $customer_id]);
+         							     AND `rating` IS NULL', [$order_id, $customer_id]);//count `status` != cancel
 
-         	if(strcmp($user->account_type, "Customer") == 0 && count($rate_valid) > 0)
+         	$msg['order_id'] = $order_id;
+         	$msg['customer_id'] = $customer_id;
+         	$msg['rate_valid'] = count($rate_valid);
+         	$msg['elements'] = $elements;
+         	$msg['account_type'] = $user->account_type;
+         	if(count($rate_valid) > 0)
          	{
          		if($elements[0] == 0) {
          			//rate the package as whole
 		        	DB::statement('UPDATE `g_orders` 
 		        		              SET `rating` = ?,
 		        		                  `comment` = ?
- 									WHERE `order_id` = ?', [$rate, $comment, $order_id]);
+ 									WHERE `order_id` = ?
+ 									  AND `rating` IS NULL', [$rate, $comment, $order_id]);
 		        	//Apply the rate, rating_count to farmers
 		        	DB::statement('UPDATE `farmers` f
 		        		              SET f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
@@ -228,7 +233,10 @@ class CustomerController extends Controller
 			        }
          		}
          	}
-         }
+	        $msg['error'] = 0;
+	        $msg['status'] = 'Cảm ơn bạn đã đánh giá để góp phân nâng cao chất lượng dịch vụ của cfarm.';
+         	return response()->json($msg);
+	     }
          else {
          	return redirect()->back();
          }

@@ -68,7 +68,6 @@ class OrderItemCrudController extends CrudController
             'attribute' => 'name',
             'model' => "App\Models\Farmer",
         ]);
-
         // ------ CRUD FIELDS
         $this->crud->addField([
             'name' => 'order_id',
