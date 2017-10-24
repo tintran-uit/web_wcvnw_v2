@@ -150,6 +150,7 @@
 var unit_quantity = parseFloat('{{$product[0]->unit_quantity}}');
 var unit = '{{$product[0]->unit}}';
 var dis_price = '{{$product[0]->price}}';
+var quantity = 100;
 
 loadsuppliers();
 
@@ -176,6 +177,7 @@ function loadsuppliers() {
 
                                            newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+quantity_left+' '+unit+'<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\"><\/a><\/td>\r\n                            <\/tr>';
               jQuery("#tbSupp tbody").append(newRowContent);
+              quantity = quantity_left;
             });
      }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
          alert("Vui lòng kiểm tra kết nối internet.");

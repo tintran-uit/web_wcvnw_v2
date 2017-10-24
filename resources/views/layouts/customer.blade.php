@@ -48,7 +48,7 @@
 <script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/bootstrap/bootstrapValidator.min.js"></script>
       <script src="{{url('')}}/assets/javascripts/utility.js" type="text/javascript"></script>
       <script src="{{url('')}}/assets/javascripts/all.js" type="text/javascript"></script>
-      <!-- <script src="{{url('')}}/assets/javascripts/load.js" type="text/javascript"></script> -->
+      <script src="{{url('')}}/assets/javascripts/load.js" type="text/javascript"></script>
       
       @yield('headInput')
 
