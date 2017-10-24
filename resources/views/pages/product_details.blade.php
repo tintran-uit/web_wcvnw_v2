@@ -238,18 +238,24 @@ function stepperUp() {
 
   var num = document.getElementById('stepper').value;
   num = parseFloat(num);
-  if(unit != 'kg')
-  {
-    num = num + unit_quantity;
-  }else {
-    num = (num + unit_quantity).toFixed(1);
+    if (num < quantity) {
+      if(unit != 'kg')
+    {
+      num = num + unit_quantity;
+    }else {
+      num = (num + unit_quantity).toFixed(1);
+    }
+    var qty = num;
+    if(unit == 'kg'){
+      qty = qty/unit_quantity;
+    }
+    document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
+    document.getElementById('stepper').value = num + ' ' + unit; 
+  }else{
+    $('#modalMessage').html("sản lượng còn lại không đủ.");
+            $('#modalAlert').modal('show');
   }
-  var qty = num;
-  if(unit == 'kg'){
-    qty = qty/unit_quantity;
-  }
-  document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
-  document.getElementById('stepper').value = num + ' ' + unit; 
+  
 
 }
 
