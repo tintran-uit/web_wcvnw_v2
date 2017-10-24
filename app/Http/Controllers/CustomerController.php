@@ -114,11 +114,10 @@ class CustomerController extends Controller
 	        $this->data['page'] = $page->withFakes();
 	        $this->data['menu'] = MenuItem::all();
 	        $this->data['cart'] = Cart::content();
-	        $this->data['cartOld'] = Cart::content();
 	        $user = Auth::user();
          	$customer_id = $user->connected_id;
-			if($user->email == 'cau2binhdinh@gmail.com' || $user->email == 'minh.huynh@cfarm.vn'){
-				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+			if($user->email == 'minh.huynh@cfarm.vn'){
+				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id", g.`delivery_date` "delivery_date" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
@@ -137,34 +136,102 @@ class CustomerController extends Controller
 					}
 				}
 		        // return $this->data['orderItem'];
-		        return view('pages.user3', $this->data);
+		        return view('pages.user2', $this->data);
 			}else{
-				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
+				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`delivery_date` "delivery_date" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
 			}
 			
 			$this->data['orders'] = $orders;
 			$this->data['orderItem'] = [];
+	        $this->data['orderRate'] = [];
+	        $today = date("Y-m-d");
+	        $week = strtotime(date("Y-m-d", strtotime($today)) . " -1 week");
+  			$week = strftime("%Y-%m-%d", $week);
+  			// return $week;
 			foreach ($orders as $order) {
-				$item = DB::select('SELECT p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name" FROM `m_orders` m, `products` p, `farmers` f  
+				$item = DB::select('SELECT p.`id` "id", p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name" FROM `m_orders` m, `products` p, `farmers` f  
 					WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ?', [$order->order_id]);
 				// array_push($this->data['orderItem'], $item);
+				if(empty($this->data['orderRate'] ) && $order->delivery_date > $week){
+					$this->data['orderRate'] = $item;
+				}
 				$this->data['orderItem'][$order->order_id] = $item;
 				$this->data['orderItem'][$order->order_id]['shipping_cost'] = $order->shipping_cost;
 				$this->data['orderItem'][$order->order_id]['discount_amount'] = $order->discount_amount;
 			}
 	        // $this->data['cartOld'] = DB::table('articles')->where('id', $post_id)->first();
 	        // return $this->data['orderItem'];
-	        if($user->email == 'cau2binhdinh@gmail.com'){
-	        	return view('pages.user3', $this->data);
-	        }
+	        
 	        return view('pages.user', $this->data);
 		}
 		return redirect()->back();
 	}
 
-	public function rate(Request $request)
+	public function rating(Request $request)
 	{
-		return $data = $request->data;
+		$data = $request->data;
+		$rate = $data['rate']*100;
+		$comment = $data['comment'];
+		$elements = $data['elements'];
+		$order_id = $data['order_id'];
+		return $data;
+
+		if(Auth::check()) {
+         	$user = Auth::user();
+         	$customer_id = $user->connected_id;
+         	if(!$customer_id){
+         		return redirect()->back();
+         	}
+         	//check if the order_id is right for customer_id
+         	$rate_valid = DB::select('SELECT `order_id` "order_id" 
+         								FROM `g_orders` 
+         							   WHERE `order_id` = ? 
+         							     AND `customer_id` = ?
+         							     AND DATEDIFF(CURRENT_DATE, `delivery_date`) < 7
+         							     AND `rating` IS NULL', [$order_id, $customer_id]);
+
+         	if(strcmp($user->account_type, "Customer") == 0 && count($rate_valid) > 0)
+         	{
+         		if($elements[0] == 0) {
+         			//rate the package as whole
+		        	DB::statement('UPDATE `g_orders` 
+		        		              SET `rating` = ?,
+		        		                  `comment` = ?
+ 									WHERE `order_id` = ?', [$rate, $comment, $order_id]);
+		        	//Apply the rate, rating_count to farmers
+		        	DB::statement('UPDATE `farmers` f
+		        		              SET f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
+		        		                  f.`rating_count` = f.`rating_count` + 1
+ 									WHERE f.`id` IN (SELECT DISTINCT `farmer_id` 
+ 													   FROM `m_orders` 
+ 													  WHERE `order_id` = ?
+ 													)', [$rate, $order_id]);
+
+         		}
+         		else
+         		{
+         			//rate individually. If multiple items from 1 farmer, rate him only once, apply to one order item as representative for that farmer.
+         			foreach ($elements as $element) {
+			        	DB::statement('UPDATE `m_orders` m, `farmers` f 
+		        		              	  SET m.`rating` = ?,
+		        		                      m.`comment` = ?,
+		        		                      f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
+		        		                  	  f.`rating_count` = f.`rating_count` + 1
+ 										WHERE f.`id` = m.`farmer_id`
+ 										  AND m.`order_id` = ?
+ 										  AND m.`id` = (SELECT MIN(id)
+ 										  				  FROM `m_orders` mo
+ 										  				 WHERE mo.`order_id` = m.`order_id`
+ 										  				   AND mo.`farmer_id` = m.`farmer_id`
+ 										  				)
+ 										  AND `product_id` = ?', [$rate, $comment, $rate, $order_id, $element]);
+			        }
+         		}
+         	}
+         }
+         else {
+         	return redirect()->back();
+         }
 	}
 
 	public function layhang($id)
@@ -562,6 +629,7 @@ class CustomerController extends Controller
 		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
 
 		 	$mua = [];
+		 	// $mua['tinh'] = 0;
 		 	foreach ($products_list as $key) {
 		 		$mua[$key->slug] = 0;
 		 	}
@@ -584,6 +652,8 @@ class CustomerController extends Controller
 							}
 							if($it->slug == 'xa-lach-xoong-nhat'){
 								$mua['xa-lach-xoong-nhat'] += $it->quantity; 
+								if($it->quantity == 0.3){
+								$mua['xa-lach-xoong-nhatz'] = $mua['xa-lach-xoong-nhatz'] + 1;}
 							}
 							
 								

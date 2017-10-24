@@ -163,19 +163,21 @@
             </tr>
             </thead>
             <tbody>
-              <?php $total=0; ?>
-              @for($j = 0; $j < sizeof($order)-3; $j++)
-              <tr>
-                  <td class="col-md-3">{{$order[$j]->product_name}}</td>
-                  <td>{{$order[$j]->farmer_name}}</td>
+              <?php $total=0; $z=0; $code='a';
+              for($j = 0; $j < sizeof($order)-3; $j++){
+              $code1 = '<tr>
+                  <td class="col-md-3">'.$order[$j]->product_name.'</td>
+                  <td>'.$order[$j]->farmer_name.'</td>
                   <td class="text-center">
-                    <input type="text" class="form-control stepper-input text-center" value="{{$order[$j]->quantity}} {{$order[$j]->unit}}" >
+                    <input type="text" class="form-control stepper-input text-center" value="'.$order[$j]->quantity.' '.$order[$j]->unit.'" >
                  </td>
-                  <td id="order{{$i}}{{$j}}">{{$order[$j]->price}} VND</td>
-                  <td style="display:none;">{{$order[$j]->price/$order[$j]->quantity}}</td>
-              </tr>
-              <?php $total+=$order[$j]->price; ?>
-              @endfor
+                  <td><span id="tien'.$i.$j.'">'.$order[$j]->price.' VND</span></td>
+                  <td style="display:none;"><span id="gia'.$i.$z.'">'.$order[$j]->price/$order[$j]->quantity.'</span></td>
+              </tr>';
+              $code = 'sss';
+              $total+=$order[$j]->price; 
+              $z++;}  echo($code);?>
+             
             </tbody>
             <tfoot>
               <tr style="">
@@ -259,7 +261,8 @@
          var msg;
          var row = $(this).closest('tr').index();
          // var unit_quantity = table.row(row).data()[2];
-         var price = table{{$i}}.row(row).data()[4];
+         // var price = table{{$i}}.row(row).data()[4];
+         var price = $('#gia{{$i}}'+row).text();
          $(this).closest('tr').find(':input').each(function() {
             
             msg = parseFloat($(this).val());

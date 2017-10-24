@@ -51,15 +51,13 @@
                          </div>
                        </div>
                        <div class="col-sm-9 listbar">
-                        <?php 
-                          $today = date("Y-m-d");
-                          $checkdate = \Carbon\Carbon::parse($orders[0]->date)->format('Y-m-d');
-                        ?>
-                        @if($checkdate > $today)
+                        
+                        @if(!empty($orderRate))
                          <div class="listbox">
-                           <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng ngày <b><i>21/10/2017</i></b></p>
+                           <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng nhận được ngày <b><i>{{$orders[0]->delivery_date}}</i></b></p>
                            </div>
                     <form id="formRate">
+                      <input type="hidden" name="order_id" value="{{$orders[0]->order_id}}">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                              <div class="panel panel-default">
                                <div class="panel-heading" role="tab" id="headingOne">
@@ -92,9 +90,9 @@
                                  <div class="panel-body">
                                    <p><b>Vui lòng tích vào sản phẩm nào khiến bạn <span class="prod"></span></b></p>
                                    
-                                      <div class="col-md-6" ><label><input type="checkbox" value="0" name="checked">Tất cả sản phẩm</label></div>
-                                    @foreach($cartOld as $item)
-                                      <div class="col-md-6" ><label><input type="checkbox" value="{{$item->id}}" name="checked">{{$item->name}}</label></div>
+                                      <div class="col-md-6" ><label><input type="checkbox" value="0" class="cbAll" onclick="removeCheckAll(this);" name="checked"> Tất cả sản phẩm</label></div>
+                                    @foreach($orderRate as $item)
+                                      <div class="col-md-6" ><label><input type="checkbox" value="{{$item->id}}" class="cb" name="checked" onclick="removeCheck(this);"> {{$item->product_name}}</label></div>
                                     @endforeach
                                     
                                  </div>
@@ -241,16 +239,16 @@ $(document).on('ready', function () {
                     }
                     next1();
                 });
-         $('input[type="checkbox"]').on(
-                'change', function () {
-                    rate = $(this).val();
-                    if(rate>3){
-                        $('.prod').html('ưng ý');
-                    }else{
-                        $('.prod').html('không hài lòng');
-                    }
-                    next2();
-                });
+         // $('input[type="checkbox"]').on(
+         //        'change', function () {
+         //            rate = $(this).val();
+         //            if(rate>3){
+         //                $('.prod').html('ưng ý');
+         //            }else{
+         //                $('.prod').html('không hài lòng');
+         //            }
+         //            next2();
+         //        });
     });
 
 function next1() {
@@ -284,7 +282,7 @@ function getFormValue(formID) {
 
 function sentRate() {
    var checkForm = getFormValue('#formRate');
-
+   // console.log(checkForm);
    if(checkForm){
 
       $.ajax({
@@ -344,12 +342,28 @@ function checkForm() {
 
 function scrollToTab() {
 
-            $('html, body').animate({
-                        scrollTop: $('#formRate').offset().top
-                    }, 'slow');
-                    
-                    
-         }
+  $('html, body').animate({
+              scrollTop: $('#formRate').offset().top
+          }, 'slow');
+          
+}
+
+function removeCheckAll(obj) {
+    var cbs = document.getElementsByClassName("cb");
+    for (var i = 0; i < cbs.length; i++) {
+        cbs[i].checked = false;
+    }
+    obj.checked = true;
+    next2();
+}
+
+function removeCheck(obj) {
+    var cbs = document.getElementsByClassName("cbAll");
+    for (var i = 0; i < cbs.length; i++) {
+        cbs[i].checked = false;
+    }
+    next2();
+}
 </script>
 
 @endsection
