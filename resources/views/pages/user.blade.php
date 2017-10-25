@@ -52,85 +52,16 @@
                        </div>
                        <div class="col-sm-9 listbar">
                         
-                        @if(!empty($orderRate))
-                         <div class="listbox">
-                           <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng nhận được ngày <b><i>{{$orders[0]->delivery_date}}</i></b></p>
-                           </div>
-                    <form id="formRate">
-                      <input type="hidden" name="order_id" value="{{$orders[0]->order_id}}">
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                             <div class="panel panel-default">
-                               <div class="panel-heading" role="tab" id="headingOne">
-                                 <h4 class="panel-title">
-                                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                     <i class="fa fa-angle-down btn-link"></i> Chấm điểm
-                                   </a>
-                                 </h4>
-                               </div>
-                               <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                 <div class="panel-body">
-                                   <p><b>Bạn có thể đánh giá sản phẩm mua trong vòng một tuần, kể từ ngày nhận được hàng.</b></p>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="form-group" style="width: 100%">
-                                           <input id="input-4" name="rate" type="number" class="rating rating-loading" data-show-clear="false" data-min="0" data-max="5" data-step="1">
-                                        </div>
-                                 </div>
-                               </div>
-                             </div>
-                             <div class="panel panel-default">
-                               <div class="panel-heading" role="tab" id="headingTwo">
-                                 <h4 class="panel-title">
-                                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                     <i class="fa fa-angle-down btn-link"></i> Chọn sản phẩm <span class="prod"></span> 
-                                   </a>
-                                 </h4>
-                               </div>
-                               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                 <div class="panel-body">
-                                   <p><b>Vui lòng tích vào sản phẩm nào khiến bạn <span class="prod"></span></b></p>
-                                   
-                                      <div class="col-md-6" ><label><input type="checkbox" value="0" class="cbAll" onclick="removeCheckAll(this);" name="checked"> Tất cả sản phẩm</label></div>
-                                    @foreach($orderRate as $item)
-                                      <div class="col-md-6" ><label><input type="checkbox" value="{{$item->id}}" class="cb" name="checked" onclick="removeCheck(this);"> {{$item->product_name}}</label></div>
-                                    @endforeach
-                                    
-                                 </div>
-                               </div>
-                             </div>
-                             <div class="panel panel-default">
-                               <div class="panel-heading" role="tab" id="headingThree">
-                                 <h4 class="panel-title">
-                                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                     <i class="fa fa-angle-down btn-link"></i> Bình luận
-                                   </a>
-                                 </h4>
-                               </div>
-                               <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                 <div class="panel-body">
-                                   <div class="form-group">
-                                      <label for="comment">Vui lòng nhập bình luận để xây dựng cồng đồng nông dân nuôi trồng sạch:</label>
-                                      <textarea class="form-control" rows="5" name="comment"></textarea>
-                                    </div>
-                                 </div>
-                               </div>
-                             </div>
-                           </div>
-                  </form> 
-<a class="btn btn-primary btn-lg lg-2x" onclick="sentRate()"> Gửi đánh giá <i class="fa fa-angle-double-right"></i>
-                           </a>
-
-                      @else
-
+                       
                           <div class="listbox">
-                           <p><b>Bạn chưa có đơn hàng để đánh giá!</b><br>Bạn có thể đánh giá chất lượng sản phẩm trong thời gian một tuần, kể từ khi nhận được đơn hàng!</p>
+                           <p><b>Chức năng đánh giá sắp ra mắt!</b></p>
                            <div class="pull-right">
                            <img alt="danh gia rau sach"  class="image-responsive" src="{{url('')}}/assets/images/icons/rate.png" style="width: 100%">
                          </div>
                            </div>
 
                            
-                      @endif
+                  
 
                        </div>
                      </div>
