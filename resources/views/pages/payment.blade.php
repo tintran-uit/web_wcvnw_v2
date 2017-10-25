@@ -238,7 +238,7 @@
                                        </div>
                                           <div class="form-group row clearfix">
                                              <div class="col-sm-9">
-                                                <textarea name="note" class="form-control" placeholder="Nhập ghi chú thêm (nếu có)"></textarea>
+                                                <textarea rows="4" name="note" class="form-control" placeholder="Nhập ghi chú thêm (nếu có)"></textarea>
                                              </div>
                                           </div>
                                    </article>
