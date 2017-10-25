@@ -33,7 +33,7 @@ class OrderCrudController extends CrudController
 //        $this->crud->setFromDb();
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('name', 1);
-        $this->crud->orderBy('delivery_date', 'DESC');
+        $this->crud->orderBy('created_at', 'DESC');
 
 
         // ------ CRUD COLUMNS
