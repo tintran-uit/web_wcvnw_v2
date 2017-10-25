@@ -24,7 +24,7 @@ class OrderItem extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id', 'order_id', 'farmer_id', 'product_id','quantity', 'unit', 'price', 'price_agent','price_farmer'];
+    protected $fillable = ['id', 'order_id', 'farmer_id', 'product_id','quantity', 'unit', 'price','price_farmer'];
      protected $hidden = ['order_id'];
     // protected $dates = [];
     /*protected $casts = [
