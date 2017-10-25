@@ -35,6 +35,7 @@ class OrderController extends Controller
         $district = $data["selectQuan"];
         $payment = $data["thanhToan"];
         $promotion_code = $data["maGiamGia"];
+        $note = $date["note"];
 
          $items = Cart::content();
          $orderPossible = 1;
@@ -112,7 +113,7 @@ class OrderController extends Controller
         $order_id = $order_id[0]->order_id;
         DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `discount_amount`, `created_at`, `delivery_date`) VALUES(?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $discount_amount, $delivery_date]);
+         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`) VALUES(?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $discount_amount, $delivery_date, $note]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
