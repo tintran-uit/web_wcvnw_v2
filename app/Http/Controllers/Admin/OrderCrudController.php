@@ -95,7 +95,12 @@ class OrderCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'name' => 'note',
-            'label' => 'Dặn Dò',
+            'label' => 'Note',
+            'type' => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'delivery_date',
+            'label' => 'Ngày Giao Hàng',
             'type' => 'text',
         ]);
         // ------ CRUD FIELDS
