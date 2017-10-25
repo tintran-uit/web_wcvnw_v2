@@ -150,6 +150,7 @@
 var unit_quantity = parseFloat('{{$product[0]->unit_quantity}}');
 var unit = '{{$product[0]->unit}}';
 var dis_price = '{{$product[0]->price}}';
+var quantity = 100;
 
 loadsuppliers();
 
@@ -176,6 +177,7 @@ function loadsuppliers() {
 
                                            newRowContent += '<td>'+data.name+'<\/td>\r\n                              <td>'+quantity_left+' '+unit+'<\/td>\r\n                              <td>\r\n                                <div id=\"colorstar\" class=\"starrr ratable\">\r\n                                  '+data.rating+' <span class=\"glyphicon glyphicon-star\"><\/span>\r\n                                <\/div>\r\n                              <\/td>\r\n                              <td><a href=\"luong-nong/id='+data.id+'\"><\/a><\/td>\r\n                            <\/tr>';
               jQuery("#tbSupp tbody").append(newRowContent);
+              quantity = quantity_left;
             });
      }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
          alert("Vui lòng kiểm tra kết nối internet.");
@@ -236,18 +238,24 @@ function stepperUp() {
 
   var num = document.getElementById('stepper').value;
   num = parseFloat(num);
-  if(unit != 'kg')
-  {
-    num = num + unit_quantity;
-  }else {
-    num = (num + unit_quantity).toFixed(1);
+    if (num < quantity) {
+      if(unit != 'kg')
+    {
+      num = num + unit_quantity;
+    }else {
+      num = (num + unit_quantity).toFixed(1);
+    }
+    var qty = num;
+    if(unit == 'kg'){
+      qty = qty/unit_quantity;
+    }
+    document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
+    document.getElementById('stepper').value = num + ' ' + unit; 
+  }else{
+    $('#modalMessage').html("Sản lượng còn lại không đủ.");
+            $('#modalAlert').modal('show');
   }
-  var qty = num;
-  if(unit == 'kg'){
-    qty = qty/unit_quantity;
-  }
-  document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
-  document.getElementById('stepper').value = num + ' ' + unit; 
+  
 
 }
 
