@@ -35,9 +35,8 @@ class OrderController extends Controller
         $district = $data["selectQuan"];
         $payment = $data["thanhToan"];
         $promotion_code = $data["maGiamGia"];
-        //$note = $data["note"];
-        $note = '';
-
+        $note = $data["note"];
+        
          $items = Cart::content();
          $orderPossible = 1;
          $counter = 1;

@@ -16,19 +16,19 @@ class OrderCrudController extends CrudController
     {
 
         /*
-		|--------------------------------------------------------------------------
-		| BASIC CRUD INFORMATION
-		|--------------------------------------------------------------------------
-		*/
+        |--------------------------------------------------------------------------
+        | BASIC CRUD INFORMATION
+        |--------------------------------------------------------------------------
+        */
         $this->crud->setModel("App\Models\Order");
         $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/order');
         $this->crud->setEntityNameStrings('order', 'orders');
 
         /*
-		|--------------------------------------------------------------------------
-		| BASIC CRUD INFORMATION
-		|--------------------------------------------------------------------------
-		*/
+        |--------------------------------------------------------------------------
+        | BASIC CRUD INFORMATION
+        |--------------------------------------------------------------------------
+        */
 
 //        $this->crud->setFromDb();
         $this->crud->allowAccess('reorder');
@@ -80,14 +80,7 @@ class OrderCrudController extends CrudController
             'attribute' => 'vn_name',
             'model' => "App\Models\Status",
         ]);
-        // $this->crud->addColumn([
-        //     'name' => 'shipper_id',
-        //     'label' => 'Người Giao hàng',
-        //     'type' => 'select',
-        //     'entity' => 'shipper',
-        //     'attribute' => 'name',
-        //     'model' => "App\Models\Shipper",
-        // ]);
+        
         $this->crud->addColumn([
             'name' => 'total',
             'label' => 'Tổng Tiền',
@@ -133,23 +126,6 @@ class OrderCrudController extends CrudController
                 'class' => 'form-group col-md-4'
             ],
         ]);
-        $this->crud->addField([
-            'name' => 'note',
-            'label' => 'Ghi chú',
-            'type' => 'textarea',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ],
-        ]);
-
-        $this->crud->addField([
-            'name' => 'shipping_cost',
-            'label' => 'Phí Giao Hàng',
-            'type' => 'number',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-4'
-            ],
-        ]);
 
         $this->crud->addField([
             'name' => 'delivery_address',
@@ -180,6 +156,32 @@ class OrderCrudController extends CrudController
             ],
         ]);
 
+        $this->crud->addField([
+            'name' => 'note',
+            'label' => 'Ghi chú',
+            'type' => 'textarea',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ],
+        ]);
+
+        $this->crud->addField([
+            'name' => 'shipping_cost',
+            'label' => 'Phí Giao Hàng',
+            'type' => 'number',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4'
+            ],
+        ]);
+
+        $this->crud->addField([
+            'name' => 'total',
+            'label' => 'Tổng tiền',
+            'type' => 'number',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4'
+            ],
+        ]);
 
         $this->crud->addField([
             'name' => 'status',
@@ -239,21 +241,21 @@ class OrderCrudController extends CrudController
         return view($this->crud->getCreateView(), $this->data);
 
     } 
-	public function store(StoreRequest $request)
-	{
-		// your additional operations before save here
+    public function store(StoreRequest $request)
+    {
+        // your additional operations before save here
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
-	}
+    }
 
-	public function update(UpdateRequest $request)
-	{
-		// your additional operations before save here
+    public function update(UpdateRequest $request)
+    {
+        // your additional operations before save here
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
-	}
+    }
 }

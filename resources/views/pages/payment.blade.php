@@ -175,7 +175,7 @@
                                  </div>
                                  </article>
                                  <article class="col-sm-12">
-                                 <article class="col-sm-6">
+                                 <article class="col-sm-6" style="margin-top: 6px">
                                        <div class="form-group">
                                           <label>Địa chỉ giao hàng</label>
                                           <input name="diaChi" type="text" class="form-control input-lg" value="@if($auth) {{$customer->address}} @endif" placeholder="Nhập địa chỉ (*)">
@@ -203,7 +203,7 @@
                                     
                                     
                                  </article>
-                                 <article class="col-sm-6">
+                                 <article class="col-sm-6" style="margin-top: 6px">
                                        <div class="form-group">
                                           <label>Thông tin liên lạc</label>
                                        </div>
@@ -229,6 +229,16 @@
                                              </div>
                                              <div class="col-sm-8">
                                                 <input name="email" type="text" value="@if($auth) {{$customer->email}} @endif" class="form-control input-lg">
+                                             </div>
+                                          </div>
+                                   </article>
+                                   <article class="col-sm-8" style="margin-top: 6px">
+                                       <div class="form-group">
+                                          <label>Ghi chú thêm (nếu có)</label>
+                                       </div>
+                                          <div class="form-group row clearfix">
+                                             <div class="col-sm-9">
+                                                <textarea rows="4" name="note" class="form-control" placeholder="Nhập ghi chú thêm (nếu có)"></textarea>
                                              </div>
                                           </div>
                                    </article>
