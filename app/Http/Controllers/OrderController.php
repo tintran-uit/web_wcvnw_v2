@@ -244,11 +244,15 @@ class OrderController extends Controller
 	public function orderItems($order_id)
 	{
 		if(Auth::check()) {
-			$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", p.`category` "category", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ? ORDER BY p.`category` ASC', [$order_id]);
+			$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", p.`category` "category", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ? ORDER BY p.`category` DESC', [$order_id]);
 
             for($x=0; $x<count($products); $x++) {
                 if($products[$x]->category==0){
-                    $items =  DB::select('SELECT * FROM `m_packages` WHERE `package_id` = ?',[$products[$x]->product_id]);
+                    $items =  DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", 
+                           m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM m_packages m, products p, farmers f 
+                       WHERE p.`id` = m.`product_id` 
+                       AND f.`id` = m.`farmer_id` 
+                       AND m.`package_id` = ?',[$products[$x]->product_id]);
                     $products[$x]->items = $items;
                 }
             }
@@ -318,6 +322,7 @@ class OrderController extends Controller
                         'status' => 'Sản lượng không đủ. Vui lòng chọn sản phẩm khác.'
                     ]);
                 }else{
+
                     return response()->json([
                         'error' => 0,
                         'status' => $qty

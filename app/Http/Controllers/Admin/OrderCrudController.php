@@ -44,7 +44,9 @@ class OrderCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'customer_id',
             'label' => 'Người mua',
-            'type' => 'text',
+            'type' => 'select',
+            'entity' => 'customer',
+            'attribute' => 'name',
             'model' => "App\Models\Customer",
         ]);
         $this->crud->addColumn([
