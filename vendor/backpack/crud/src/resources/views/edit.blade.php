@@ -115,6 +115,7 @@ textarea.form-control {
             <div class="box-footer">
 
                 @include('crud::inc.form_save_buttons')
+                <hr>
 		   <h3><b>Chi tiết đơn hàng:</b></h3>
 		   <div>
 		   <div class="col-md-2 vcenter">
@@ -124,7 +125,7 @@ textarea.form-control {
 	            <a class="btn btn-default xlsx" onclick="exportExcell()">Xuất hóa đơn (.xlsx)</a>
 	        </div>
 	    </div>
-		  <table id="tbSupp" class="table table-bordered table-striped display">
+		  <table id="tbSupp" class="table table-bordered table-striped display" style="margin-top: 10px;">
             <thead>
               <tr>
                 <th>STT</th>
@@ -225,19 +226,9 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                         </div>
                      </fieldset>
                      <hr>
-                     <fieldset class="buttons">
-                        <div class="pull-right">
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/mua-thuc-pham-sach')}}">Tiếp tục mua hàng</a>
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/thanh-toan')}}">Đặt hàng</a>
-                        </div>
-                     </fieldset>
+                     
                   </form>
 
-			<div class="form-group col-md-3">
-			    <label>Sản lượng:</label>
-			<div class="stepper col-sm-5 vcenter"><input type="text" class="form-control stepper-input text-center" id="stepper" value="1 gói" min="1" max="1000"><span class="stepper-arrow up" onclick="stepperUp()">Up</span><span class="stepper-arrow down" onclick="stepperDown()">Down</span></div>
-			</div>
-    
 		</div>
       </div>
     </div>
@@ -263,38 +254,58 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 	  var newRowContent = '';
 	  $.getJSON(url, function(data0){
 		  	var n = Object.keys(data0).length
-	    	var countGoi = 0
+	    	var countGoi = 0;
+	    	var countGoiItem = 0;
 	    	//dem goi
 	    	for(var i = 0; i<n; i++){
 	    		if(data0[i].category==0){
 	    			countGoi++;
+	    			countGoiItem = countGoiItem + Object.keys(data0[i].items).length;
 	    		}
 	    	}
+	    	console.log(countGoiItem);
 	    	var countLe = n - countGoi;
 	    	var firstGoi = 0;
 	    	var firstLe = 0;
+	    	var stt = 1;
 	        $.each(data0, function(index, data){ 
 	        	
-	              if(data.category==0){
+	               if(data.category==0){
 	              	//them goi
-		              	if(firstGoi==0){
-		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+(index+1)+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+countGoi+'">Gói</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
-		              		firstGoi++;
-		              	}else{
-		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+(index+1)+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
-		              	}
+		              	// if(firstGoi==0){
+		              		$.each(data.items, function(index, data2){
+		              			if(firstGoi==0){
+				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">Gói</td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">'+data.price+' VNĐ\r\n</td><td></td>\r\n <\/tr>';
+					              	stt++;
+				              		firstGoi++;
+				              	}else{
+				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="display:none;"></td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td style="display:none;"></td><td></td>\r\n <\/tr>';
+			              			stt++;
+				              	}
+
+			              	});
+			              	firstGoi=0;
+		              	// }else{
+		              	// 	$.each(data.items, function(index, data2){
+
+			              // 		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="display:none;"></td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+			              // 		stt++;
+			              // 	});
+		              	// }
 	              	
 	              }else{
 	              	// them le
 	              		if(firstLe==0){
-		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+(index+1)+'<\/td>\r\n<td style="vertical-align: inherit; background-color:#fff" rowspan="'+countLe+'">Lẻ</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+countLe+'">Lẻ</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
 		              		firstLe++;
+		              		stt++;
 		              	}else{
-		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+(index+1)+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+		              		stt++;
 		              	}
 	          		}
 	            });
-	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 VN\u0110<\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+shipping_cost+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbtotal\">'+total+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
+	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 VN\u0110<\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+shipping_cost+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbtotal\">'+total+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
 	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>'
 	              jQuery("#tbSupp tbody").append(newRowContent);
 
