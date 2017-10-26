@@ -336,7 +336,7 @@
                   html += '\r\n <ul class=\"pagination\" >\r\n    <li>\r\n<a href=\"#myCarousel'+index+'\" data-slide=\"prev\">        <span aria-hidden=\"true\" class=\"fa fa-chevron-left\"><\/span>\r\n<\/a>    <\/li>\r\n';
                   var n = length/8;
                   var numClick = '';
-                  for(var i = 0; i<=n; i++)
+                  for(var i = 0; i<n; i++)
                     {
                       numClick += ' <li data-target=\"#myCarousel'+index+'\" data-slide-to=\"'+i+'\" class=\"\"><a href=\"#\">'+(i+1)+'<\/a><\/li>';
                       }
@@ -402,7 +402,7 @@
 
                   html += '<\/div>\r\n <\/div> \r\n <ul class=\"pagination\">\r\n    <li>\r\n<a href=\"#myCarousel'+index+'\" data-slide=\"prev\">        <span aria-hidden=\"true\" class=\"fa fa-chevron-left\"><\/span>\r\n<\/a>    <\/li>\r\n';
                   var numClick2 = '';
-                  for(var i = 0; i<=n; i++)
+                  for(var i = 0; i<n; i++)
                     {
                       numClick2 += ' <li data-target=\"#myCarousel'+index+'\" data-slide-to=\"'+i+'\" ><a href=\"#\">'+(i+1)+'<\/a><\/li>';
                       }
