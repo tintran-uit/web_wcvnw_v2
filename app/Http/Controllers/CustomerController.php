@@ -694,4 +694,9 @@ class CustomerController extends Controller
 
 	}
 
+	public function FunctionName($value='')
+	{
+		
+	}
+
 }
