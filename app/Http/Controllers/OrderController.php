@@ -244,8 +244,15 @@ class OrderController extends Controller
 	public function orderItems($order_id)
 	{
 		if(Auth::check()) {
-			$items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ?', [$order_id]);
-    		return $items;
+			$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", p.`category` "category", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ? ORDER BY p.`category` ASC', [$order_id]);
+
+            for($x=0; $x<count($products); $x++) {
+                if($products[$x]->category==0){
+                    $items =  DB::select('SELECT * FROM `m_packages` WHERE `package_id` = ?',[$products[$x]->product_id]);
+                    $products[$x]->items = $items;
+                }
+            }
+    		return $products;
     	}
     	else {
     		return redirect()->back();
@@ -293,5 +300,31 @@ class OrderController extends Controller
     	}
 
 	}
+
+	public function addItemAdmin(Request $request)
+    {
+        if(Auth::check()){
+            $data = $request->data;
+            $farmer_id = $data["farmerID"];
+            $product_id = $data["prodID"];
+            $qty = $data["qty"];
+            //receive numbers and check if quantity_left is >= order quantity
+                $numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`delivery_date` "delivery_date" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`status` = 1 AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
+                
+                if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
+                {
+                    return response()->json([
+                        'error' => 1,
+                        'status' => 'Sản lượng không đủ. Vui lòng chọn sản phẩm khác.'
+                    ]);
+                }else{
+                    return response()->json([
+                        'error' => 0,
+                        'status' => $qty
+                    ]);
+                }
+        }
+        
+    }
 
 }
