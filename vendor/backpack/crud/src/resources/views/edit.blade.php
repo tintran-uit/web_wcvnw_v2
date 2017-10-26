@@ -226,7 +226,11 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                         </div>
                      </fieldset>
                      <hr>
-                     
+                     <fieldset class="buttons">
+                        <div class="pull-right">
+                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="#" onclick="addItems();">Thêm sản phẩm</a>
+                        </div>
+                     </fieldset>
                   </form>
 
 		</div>
@@ -305,7 +309,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 		              	}
 	          		}
 	            });
-	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 VN\u0110<\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+shipping_cost+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbtotal\">'+total+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
+	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 VN\u0110<\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+shipping_cost+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbtotal\">'+total+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
 	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>'
 	              jQuery("#tbSupp tbody").append(newRowContent);
 
@@ -331,6 +335,8 @@ function exportExcell() {
 @section('after_scripts2')
 <script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
+    // var ItemsUpload = ["order_id":order_id];
+    var ItemsUpload = [];
 
 $(document).ready(function() {
 
@@ -393,32 +399,20 @@ $(document).ready(function() {
       console.log(qty)
 
 
-      var markers = { "rowId": rowId, "qty": qty, "prodID": prodID , "farmerID":farmerID, "order_id":order_id};
+      var markers = {"qty": qty, "prodID": prodID , "farmerID":farmerID};
 
-      $.ajax({
+      var check = false;
+      for(var i = 0; i<ItemsUpload.length; i++){
+      	if(ItemsUpload[i].prodID==prodID){
+      		ItemsUpload[i].qty = qty;
+      		check = true;
+      		break; 
+      	}
+      }
+      if(!check){
+      	ItemsUpload.push(markers);
+      }
 
-          type: "POST",
-          url: "{{url('')}}/api/admin/update-cart",
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-          },
-          // The key needs to match your method's input parameter (case-sensitive).
-          data: JSON.stringify({ data: markers }),
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          success: function(data){
-            console.log(data);
-            if(data.error==0){
-            	alert(data.status);
-            }else{
-            	alert(data.status);
-            }
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-              console.log(textStatus);
-              alert("Vui lòng kiểm tra kết nối Internet!");
-          }
-      });
    }
 
    function deleteItem(rowId) {
@@ -493,7 +487,37 @@ $(document).ready(function() {
          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
      }
 
-});
    
+
+});
+  function addItems() {
+  	var dataUp = {"order_id":order_id, ItemsUpload};
+   	console.log(dataUp);
+
+   		$.ajax({
+
+          type: "POST",
+          url: "{{url('')}}/api/admin/update-cart",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+          },
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify({ data: dataUp }),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            console.log(data);
+            if(data.error==0){
+            	alert(data.status);
+            }else{
+            	alert(data.status);
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log(textStatus);
+              alert("Vui lòng kiểm tra kết nối Internet!");
+          }
+      });
+   } 
 </script>
 @endsection
