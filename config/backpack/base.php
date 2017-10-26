@@ -12,10 +12,10 @@ return [
     */
 
     // Project name. Shown in the breadcrumbs and a few other places.
-    'project_name' => 'Laravel Ecommerce',
+    'project_name' => 'Cfarm Admin',
 
     // Menu logos
-    'logo_lg'   => '<b>Laravel</b>Ecommerce',
+    'logo_lg'   => '<b>Cfarm</b>Admin',
     'logo_mini' => '<b>L</b>E',
 
     // Developer or company name. Shown in footer.

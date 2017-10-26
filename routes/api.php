@@ -33,6 +33,8 @@ Route::get('/farmer/farmer_id={farmer_id}', 'FarmerController@getFarmerProfile')
 Route::get('/farmer/trading/farmer_id={farmer_id}', 'FarmerController@farmerOrderList');
 Route::get('/farmers', 'FarmerController@farmers');
 
+//admin
+Route::post('admin/update-cart', 'OrderController@addItemAdmin');
 
 //gio hang
 Route::post('cart/update-cart', 'CartProductController@updateCart');

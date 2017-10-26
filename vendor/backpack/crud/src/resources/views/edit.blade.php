@@ -68,13 +68,10 @@ textarea.form-control {
 	height: 105px;
 }
 </style>
-<link href="{{url('')}}/assets/stylesheets/main.css" rel="stylesheet" type="text/css" />
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/TableExport/3.3.13/css/tableexport.min.css" rel="stylesheet" type="text/css" />
 <script src="{{url('')}}/assets/javascripts/vendor/jquery-2.1.3.min.js" type="text/javascript"></script>
-<!-- <script src="{{url('')}}/vendor/backpack/xlsx/xlsx.core.min.js"></script>
-<script src="{{url('')}}/vendor/backpack/xlsx/blob.min.js"></script>
-<script src="{{url('')}}/vendor/backpack/xlsx/fileSaver.min.js"></script>
-<script src="{{url('')}}/vendor/backpack/xlsx/tableexport.min.js"></script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.3.7/alasql.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.2/xlsx.core.min.js"></script>
 <div class="row">
@@ -118,19 +115,21 @@ textarea.form-control {
             <div class="box-footer">
 
                 @include('crud::inc.form_save_buttons')
+                <hr>
 		   <h3><b>Chi tiết đơn hàng:</b></h3>
 		   <div>
-		   <div class="col-md-1 vcenter">
-		   <a href="#" class="btn btn-primary ladda-button" data-style="zoom-in" data-toggle="modal" data-target="#modal-add-item"><span class="ladda-label"><i class="fa fa-plus"></i> Thêm</span></a>
+		   <div class="col-md-2 vcenter">
+		   <a href="#" class="btn btn-primary ladda-button" data-style="zoom-in" data-toggle="modal" data-target="#modal-add-item"><span class="ladda-label"><i class="fa fa-plus"></i> Thêm hàng</span></a>
 			</div>
 			<div class="col-md-2 vcenter">
-	            <a class="btn btn-default xlsx" onclick="exportExcell()" style="margin-top: -10px;">Xuất hóa đơn (.xlsx)</a>
+	            <a class="btn btn-default xlsx" onclick="exportExcell()">Xuất hóa đơn (.xlsx)</a>
 	        </div>
 	    </div>
-		  <table id="tbSupp" class="table table-bordered table-striped display">
+		  <table id="tbSupp" class="table table-bordered table-striped display" style="margin-top: 10px;">
             <thead>
               <tr>
                 <th>STT</th>
+                <th>Gói/lẻ</th>
                 <th>Sản phẩm</th>
                 <th>Trang trại</th>
                 <th>Đơn vị</th>
@@ -143,24 +142,7 @@ textarea.form-control {
 
             </tbody>
             <tfoot>
-              </tr>
-            	<tr><td colspan="8"></td>
-              </tr>
-              <tr>
-                <td colspan="5" align="right" style="padding-right: 20px">Khuyến mãi:</td>
-                <td colspan="2" style="float: right; width: 100%;">0 VNĐ</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td colspan="5" align="right" style="padding-right: 20px">Phí vận chuyển:</td>
-                <td colspan="2" style="float: right;width: 100%;"><span id="tbshipping_cost"></span></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td colspan="5" align="right" style="padding-right: 20px;">Tổng tiền:</td>
-                <td colspan="2" style="float: right;width: 100%;"><span id="tbtotal"></span></td>
-                <td></td>
-              </tr>
+              
             </tfoot>
           </table>
 
@@ -172,11 +154,11 @@ textarea.form-control {
 </div>
 
 <?php 
-$products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` ORDER BY tr.`priority` ASC');
+$products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` ORDER BY p.`name` ASC');
 ?>
 <!-- Modal add item -->
 <div class="modal fade style-base-modal" id="modal-add-item" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width: 60%">
     <div class="modal-content">
       <div class="inner-container">
         <div class="modal-header" style="background-color: #f9f9f9">
@@ -190,20 +172,63 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 
         <div class="modal-body clearfix">
 
-          	<div class="form-group col-md-3">
-			    <label>Sản phẩm:</label>
-		        <select name="product_id" class="form-control">
-		        	@foreach($products as $product)
-	                <option value="{{$product->id}}">{{$product->name}}</option>
-	                @endforeach
-	            </select>
-			</div>
+          	<form action="#" accept-charset="UTF-8" class="form-style-base">
+                     <input type="hidden" name="_method" value="delete">
+                     <fieldset>
+                        <div class="table-responsive">
+                           <table id="cartTable" class="table table-bordered table-striped display dataTable" cellspacing="0" style="width: 100%">
+                              <thead>
+                                 <tr>
+                                    
+                                    <th class="bg-extra-light-grey">Sản Phẩm</th>
+                                    <th class="bg-extra-light-grey">Nông trại</th>
+                                    <th class="bg-extra-light-grey col-md-2 col-xs-1">Số Lượng</th>
+                                    <th class="bg-extra-light-grey">Giá</th>
+                                    <th class="bg-extra-light-grey">Tổng</th>
+                                    <th style="display:none;"></th>
+                                    <th style="display:none;"></th>
+                                    <th style="display:none;"></th>
+                                    <th style="display:none;"></th>
+                                    <th style="display:none;"></th>
+                                    <th style="display:none;"></th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                              @foreach($products as $item)
+                                 <tr>
+                                    <td class="align-middle">
+                                       <div style="width: auto;">{{$item->name}}</div>
+                                    </td>
+                                    <td>
+                                    	<div style="width: auto;">{{$item->farmer_name}}</div>
+                                    </td>
+                                    <td class="align-middle text-center" style="text-align: center; ">
+                                       <div class="stepper" style="width: 100%"><input type="text" class="form-control stepper-input text-center" value="0 {{$item->unit}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                       {{number_format($item->price)}} VND
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        VND
+                                    </td>
+                                    <td style="display:none;"></td>
+                                    <td style="display:none;"></td>
+                                    <td style="display:none;">{{$item->unit_quantity}}</td>
+                                    <td style="display:none;">{{$item->unit}}</td>
+                                    <td style="display:none;">{{$item->id}}</td>
+                                    <td style="display:none;">{{$item->farmer_id}}</td>
+                                 </tr>
+                                 @endforeach
+                                 
+                              </tbody>
+                              
+                           </table>
+                        </div>
+                     </fieldset>
+                     <hr>
+                     
+                  </form>
 
-			<div class="form-group col-md-3">
-			    <label>Sản lượng:</label>
-			<div class="stepper col-sm-5 vcenter"><input type="text" class="form-control stepper-input text-center" id="stepper" value="1 gói" min="1" max="1000"><span class="stepper-arrow up" onclick="stepperUp()">Up</span><span class="stepper-arrow down" onclick="stepperDown()">Down</span></div>
-			</div>
-    
 		</div>
       </div>
     </div>
@@ -213,41 +238,262 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 
 <script type="text/javascript">
 	loaditems();
+	var customer = $("select[name=customer_id] option:selected").text();
+	var order_id = $("input[name=order_id]").val();
+
 	function loaditems() {
-	  var order_id = $("input[name=order_id]").val();
+		var order_id = $("input[name=order_id]").val();	
 	  var url = '/api/orderitems/order_id='+order_id;
+	  var shipping_cost = $("input[name=shipping_cost]").val();
+	  var total = $("input[name=total]").val();
+	  var delivery_phone = $("input[name=delivery_phone]").val();
+	  var delivery_address = $("input[name=delivery_address]").val();
 	  // alert(order_id);
 	  jQuery("#tbSupp tbody").empty();
 	  $.ajaxSetup({ cache: false });
 	  var newRowContent = '';
-	  $.getJSON(url, function(data){
-	        $.each(data, function(index, data){ 
-	              
-	              newRowContent += '<tr data-entry-id=\"122\" role=\"row\" class=\"odd\">\r\n  <td>'+(index+1)+'<\/td>                    \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.product_name+'<\/td>                    \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>                    \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+	  $.getJSON(url, function(data0){
+		  	var n = Object.keys(data0).length
+	    	var countGoi = 0;
+	    	var countGoiItem = 0;
+	    	//dem goi
+	    	for(var i = 0; i<n; i++){
+	    		if(data0[i].category==0){
+	    			countGoi++;
+	    			countGoiItem = countGoiItem + Object.keys(data0[i].items).length;
+	    		}
+	    	}
+	    	console.log(countGoiItem);
+	    	var countLe = n - countGoi;
+	    	var firstGoi = 0;
+	    	var firstLe = 0;
+	    	var stt = 1;
+	        $.each(data0, function(index, data){ 
+	        	
+	               if(data.category==0){
+	              	//them goi
+		              	// if(firstGoi==0){
+		              		$.each(data.items, function(index, data2){
+		              			if(firstGoi==0){
+				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">Gói</td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">'+data.price+' VNĐ\r\n</td><td></td>\r\n <\/tr>';
+					              	stt++;
+				              		firstGoi++;
+				              	}else{
+				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="display:none;"></td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td style="display:none;"></td><td></td>\r\n <\/tr>';
+			              			stt++;
+				              	}
+
+			              	});
+			              	firstGoi=0;
+		              	// }else{
+		              	// 	$.each(data.items, function(index, data2){
+
+			              // 		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="display:none;"></td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+			              // 		stt++;
+			              // 	});
+		              	// }
+	              	
+	              }else{
+	              	// them le
+	              		if(firstLe==0){
+		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+countLe+'">Lẻ</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+		              		firstLe++;
+		              		stt++;
+		              	}else{
+		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+		              		stt++;
+		              	}
+	          		}
 	            });
+	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 VN\u0110<\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+shipping_cost+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbtotal\">'+total+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
+	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>'
 	              jQuery("#tbSupp tbody").append(newRowContent);
 
 	     }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
 	         alert("Vui lòng kiểm tra kết nối internet.");
 	     });
 
-	  var shipping_cost = $("input[name=shipping_cost]").val();
-	  var total = $("input[name=total]").val();
-	  $('#tbshipping_cost').html(shipping_cost+' VNĐ');
-	  $('#tbtotal').html(total+' VNĐ');
 	}
-
 function exportExcell() {
-	 
-    alasql('SELECT * INTO XLSX("myinquires.xlsx",{headers:true, footers:true}) \
+
+	var filename = customer + '_' + order_id;
+    alasql('SELECT * INTO XLSX("'+filename+'.xlsx",{headers:true, footers:true}) \
                     FROM HTML("#tbSupp",{headers:true, footers:true})');
 
 }
 
+
 </script>
+
 @endif
 @endsection
 
-@section('after_scripts')
+@section('after_scripts2')
+<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
 
+$(document).ready(function() {
+
+    var table = $('#cartTable').DataTable({searching: false, paging: false, "bInfo" : false});
+
+    table.on( 'click', 'span.up' , function () {
+         var msg;
+         var row = $(this).closest('tr').index();
+         var unit_quantity = table.row(row).data()[7];
+         var unit = table.row(row).data()[8];
+         var prodID = table.row(row).data()[9];
+         var farmerID = table.row(row).data()[10];
+         $(this).closest('tr').find(':input').each(function() {
+            
+            msg =  parseFloat($(this).val());
+            msg = stepperUp(msg, unit_quantity, unit); 
+
+            $(this).val(msg);
+         });
+         msg = converQty(msg, unit_quantity, unit);
+         var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
+         price = parseInt(price)*msg;
+         table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
+         var rowId = table.row(row).data()[6];
+         updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
+      });
+    table.on( 'click', 'span.down' , function () {
+         var msg;
+         var row = $(this).closest('tr').index();
+         var unit_quantity = table.row(row).data()[7];
+         var unit = table.row(row).data()[8];
+         var prodID = table.row(row).data()[9];
+         var farmerID = table.row(row).data()[10];
+         $(this).closest('tr').find(':input').each(function() {
+            
+            msg =  parseFloat($(this).val());
+            msg = stepperDown(msg, unit_quantity, unit); 
+
+            $(this).val(msg);
+         });
+         msg = converQty(msg, unit_quantity, unit);
+         var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
+         price = parseInt(price)*msg;
+         table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
+         var rowId = table.row(row).data()[6];
+         updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
+      });
+   
+   table.on( 'click', 'a.item-delete' , function () {
+      var row = $(this).closest('tr').index();
+      var rowId = table.row(row).data()[6];
+      var status = deleteItem(rowId);
+      table
+        .row( $(this).parents('tr') )
+        .remove()
+        .draw();
+   });
+
+    function updateCart(rowId, qty, prodID, unit_quantity, unit, farmerID) {
+      console.log(qty)
+
+
+      var markers = { "rowId": rowId, "qty": qty, "prodID": prodID , "farmerID":farmerID, "order_id":order_id};
+
+      $.ajax({
+
+          type: "POST",
+          url: "{{url('')}}/api/admin/update-cart",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+          },
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify({ data: markers }),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            console.log(data);
+            if(data.error==0){
+            	alert(data.status);
+            }else{
+            	alert(data.status);
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log(textStatus);
+              alert("Vui lòng kiểm tra kết nối Internet!");
+          }
+      });
+   }
+
+   function deleteItem(rowId) {
+      var markers = { "rowId": rowId};
+
+      $.ajax({
+          type: "POST",
+          url: "api/cart/delete-item",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+          },
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify({ data: markers }),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            console.log(data);
+            if(data.error){
+            	alert(data.status);
+            }else{
+            	alert("Thêm thành công!");
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log(textStatus);
+              alert("Vui lòng kiểm tra kết nối Internet!");
+          }
+      });
+   }
+
+
+   function stepperUp(num, unit_quantity, unit) {
+      num = parseFloat(num);
+      unit_quantity = parseFloat(unit_quantity);
+      if(unit != 'kg')
+      {
+        num = num + unit_quantity;
+        
+      }else {
+        num = (num + unit_quantity).toFixed(1);
+      }
+      num = num + ' ' + unit;
+      return num;
+   }
+
+   function stepperDown(num, unit_quantity, unit) {
+      num = parseFloat(num);
+      unit_quantity = parseFloat(unit_quantity);
+      console.log(unit);
+      if(unit != 'kg')
+      {
+        num = num - unit_quantity;
+        
+      }else {
+        num = (num - unit_quantity).toFixed(1);
+      }
+      num = num + ' ' + unit;
+      return num;
+   }
+
+   function converQty(qty, unit_quantity, unit) {
+      if(unit = 'kg'){
+        qty = parseFloat(qty);
+        qty = qty/unit_quantity;
+      }
+        
+      return parseInt(qty);
+      
+   }
+
+   function numberWithCommas(x) {
+         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     }
+
+});
+   
+</script>
 @endsection
