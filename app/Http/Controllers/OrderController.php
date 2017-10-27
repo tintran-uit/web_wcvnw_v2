@@ -483,7 +483,6 @@ class OrderController extends Controller
         
     }
 
-
 	public function  itemStats($date){
 
 		$farmers = DB::select('SELECT DISTINCT f.`name` "name", p.`name` "product_name", f.`id` "id", tr.`sold`  
@@ -532,5 +531,4 @@ class OrderController extends Controller
         if($num == 0) $products = "No data";
 		return $products;
     }
-
 }
