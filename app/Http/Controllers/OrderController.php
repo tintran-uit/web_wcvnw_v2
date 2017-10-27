@@ -68,8 +68,9 @@ class OrderController extends Controller
         $delivery_date = $numbers[0]->delivery_date;        
         $shipping_cost = DB::select('SELECT `shipping_cost`, `name` FROM `district` WHERE `id` = ?', [$district]);
 
-        $shipping_cost = $shipping_cost[0]->shipping_cost;
+//Be careful of reassignment of $shipping_cost to itself
         $district_name = $shipping_cost[0]->name;
+        $shipping_cost = $shipping_cost[0]->shipping_cost;
         $msg['shipping_cost'] = $shipping_cost;
 
         $address = $address.$district_name;
