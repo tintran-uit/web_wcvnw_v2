@@ -385,15 +385,6 @@ $(document).ready(function() {
          updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
       });
    
-   table.on( 'click', 'a.item-delete' , function () {
-      var row = $(this).closest('tr').index();
-      var rowId = table.row(row).data()[6];
-      var status = deleteItem(rowId);
-      table
-        .row( $(this).parents('tr') )
-        .remove()
-        .draw();
-   });
 
     function updateCart(rowId, qty, prodID, unit_quantity, unit, farmerID) {
       console.log(qty)
