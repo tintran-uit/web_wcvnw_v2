@@ -26,7 +26,7 @@ public function stats()
             {
                 $products[$farm->name] = $this->layhang($farm->id, $date);
             }
-          return $products;  
+          // return $products;  
         return view('admin.stats', ['farmers' =>$farmers, 'products' => $products]);
         
     }
