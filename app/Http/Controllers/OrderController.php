@@ -142,18 +142,17 @@ class OrderController extends Controller
 	         	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $unit, $price * $qty, $price_farmer]);
 
 	         	//update trading table
-	        	DB::statement('UPDATE `trading` SET `sold_count` = `sold_count`+ ?, `sold` = `sold` + ? WHERE `status` = 1 AND `farmer_id` = ? AND `product_id` = ?', [$qty, $quantity, $farmer_id, $product_id]);
+	        	DB::statement('UPDATE `trading` SET `sold` = `sold` + ? WHERE `status` = 1 AND `farmer_id` = ? AND `product_id` = ?', [$quantity, $farmer_id, $product_id]);
 
 	        	//Proccess the elements in case package is order
 	        	if($category == 0) //package
 	        	{
 		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
-		        		              SET t.`sold` = t.`sold` + m.`quantity`,
-		        		              	  t.`sold_count` =  t.`sold_count` + ?
+		        		              SET t.`sold` = t.`sold` + m.`quantity`
  									WHERE t.`farmer_id` = m.`farmer_id`
  									  AND t.`status` = 1
    									  AND t.`product_id` = m.`product_id` 
-   									  AND m.`package_id` = ?', [$qty, $product_id]);
+   									  AND m.`package_id` = ?', [$product_id]);
 
 	        	}
 			}
@@ -312,6 +311,7 @@ class OrderController extends Controller
             $farmer_id = $data["farmerID"];
             $product_id = $data["prodID"];
             $qty = $data["qty"];
+            $order_id = $data["order_id"];
             //receive numbers and check if quantity_left is >= order quantity
                 $numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", (tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`delivery_date` "delivery_date" FROM `products` p, `trading` tr WHERE p.`id` = tr.`product_id` AND tr.`status` = 1 AND tr.`farmer_id` = ? AND p.`id` = ?', [$farmer_id, $product_id]);
                 
@@ -321,15 +321,121 @@ class OrderController extends Controller
                         'error' => 1,
                         'status' => 'Sản lượng không đủ. Vui lòng chọn sản phẩm khác.'
                     ]);
-                }else{
+                }
+                else
+                {
+					$quantity = $qty * $numbers[0]->unit_quantity;
+					$price_farmer = $qty * $numbers[0]->price_farmer;
+					$unit = $numbers[0]->unit;
+					$category = $numbers[0]->category;
+
+		         	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $unit, $price * $qty, $price_farmer]);
+
+		         	//update trading table
+		        	DB::statement('UPDATE `trading` SET `sold` = `sold` + ? WHERE `status` = 1 AND `farmer_id` = ? AND `product_id` = ?', [$quantity, $farmer_id, $product_id]);
+
+		        	//Proccess the elements in case package is order
+		        	if($category == 0) //package
+		        	{
+			        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
+			        		              SET t.`sold` = t.`sold` + m.`quantity`
+	 									WHERE t.`farmer_id` = m.`farmer_id`
+	 									  AND t.`status` = 1
+	   									  AND t.`product_id` = m.`product_id` 
+	   									  AND m.`package_id` = ?', [$product_id]);
+
+		        	}
 
                     return response()->json([
                         'error' => 0,
-                        'status' => $qty
+                        'status' => 'Thêm sản phẩm thành công.'
                     ]);
                 }
         }
         
     }
+
+	public function removeItemAdmin(Request $request)
+    {
+        if(Auth::check()){
+            $data = $request->data;
+            $farmer_id = $data["farmerID"];
+            $product_id = $data["prodID"];
+            $qty = $data["qty"];
+            $order_id = $data["order_id"];
+
+			$quantity = $qty * $numbers[0]->unit_quantity;
+			$price_farmer = $qty * $numbers[0]->price_farmer;
+			$unit = $numbers[0]->unit;
+			$category = $numbers[0]->category;
+
+         	$m_order = DB::delete('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $unit, $price * $qty, $price_farmer]);
+
+         	//update trading table
+        	DB::statement('UPDATE `trading` SET `sold` = `sold` - ? WHERE `status` = 1 AND `farmer_id` = ? AND `product_id` = ?', [$quantity, $farmer_id, $product_id]);
+
+        	//Proccess the elements in case package is order
+        	if($category == 0) //package
+        	{
+	        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
+	        		              SET t.`sold` = t.`sold` + m.`quantity`
+									WHERE t.`farmer_id` = m.`farmer_id`
+									  AND t.`status` = 1
+									  AND t.`product_id` = m.`product_id` 
+									  AND m.`package_id` = ?', [$product_id]);
+
+        	}
+
+            return response()->json([
+                'error' => 0,
+                'status' => 'Thêm sản phẩm thành công.'
+            ]);
+        }
+        
+    }
+
+	public function  itemStats($date){
+
+		$farmers = DB::select('SELECT DISTINCT f.`name` "name", p.`name` "product_name", f.`id` "id", tr.`sold`  
+								 FROM `farmers` f, `trading` tr, `products` p
+								WHERE tr.`delivery_date` = ?
+								  AND p.`id` = tr.`product_id`
+								  AND tr.`sold` > 0
+								  AND tr.`farmer_id` = f.`id` 
+						 	 ORDER BY `name` ASC', [$date]);
+		// return $farmers;
+		$products  = 'No Data';
+
+			foreach($farmers as $farm)
+			{
+				$products[$farm->id] = DB::select('(SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity" 
+													  FROM `m_orders` m, `g_orders` g, `products` p, `trading` tr
+													 WHERE p.`id` = m.`product_id`
+													   AND m.`order_id` = g.`order_id`
+													   AND tr.`farmer_id` = m.`farmer_id`
+													   AND tr.`product_id` = m.`product_id`
+													   AND g.`status` != 8
+													   AND tr.`delivery_date` = g.`delivery_date`
+													   AND tr.`farmer_id` = ?
+													   AND tr.`delivery_date` = ?
+													GROUP BY `Product`) 
+													UNION ALL
+													(SELECT CONCAT(p.`name`, " (", pa.`quantity`, pa.`unit`, ")") "Product", COUNT(*) "Quantity"
+													  FROM `m_orders` m, `g_orders` g, `products` p, `m_packages` pa, `trading` tr
+													 WHERE p.`id` = pa.`product_id`
+													   AND m.`order_id` = g.`order_id`
+													   AND tr.`farmer_id` = pa.`farmer_id`
+													   AND tr.`product_id` = pa.`product_id`
+													   AND g.`status` != 8
+													   AND tr.`farmer_id` = ?
+													   AND g.`delivery_date` = ?
+													   AND tr.`delivery_date` = g.`delivery_date`
+													   AND m.`product_id` IN (SELECT `id` FROM `products` WHERE `category` = 0)
+													   AND pa.`package_id` = m.`product_id`
+													 GROUP BY `Product`)
+													ORDER BY `Product`  ASC', [$farm->id, $date, $farm->id, $date]);
+			}
+		return $products;
+}
 
 }
