@@ -352,10 +352,11 @@ $(document).ready(function() {
          msg = converQty(msg, unit_quantity, unit);
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
+         // row = 2;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
+         console.log(row);
          var rowId = 0;
          updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
-         console.log(row);
       });
     table.on( 'click', 'span.down' , function () {
          var msg;
