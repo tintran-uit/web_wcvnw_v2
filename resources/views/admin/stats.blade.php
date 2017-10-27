@@ -270,7 +270,7 @@
                                                 @foreach($product as $item)
                                                   <tr>
                                                     <td style="width: 30%">
-                                                        <div>* Sản phẩm:{{$item['full_name']}}
+                                                        <div>* Sản phẩm: {{$item['full_name']}}
                                                             <br><span style="margin-left: 10px">- Số lượng: {{$item['take_in']}} {{$item['unit']}}</span>
                                                             
                                                         </div>
@@ -301,7 +301,7 @@
                                                 @foreach($product as $item)
                                                   <tr>
                                                     <td style="width: 30%">
-                                                        <div>* Sản phẩm:{{$item['full_name']}}
+                                                        <div>* Sản phẩm: {{$item['full_name']}}
                                                             <br><span style="margin-left: 10px">- Số lượng: {{$item['take_in']}} {{$item['unit']}}</span>
                                                             
                                                         </div>

@@ -73,7 +73,7 @@ textarea.form-control {
 <script src="{{url('')}}/assets/javascripts/vendor/jquery-2.1.3.min.js" type="text/javascript"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.3.7/alasql.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.2/xlsx.core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.2/xlsx.core.min.js"></script>
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<!-- Default box -->
@@ -158,7 +158,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 ?>
 <!-- Modal add item -->
 <div class="modal fade style-base-modal" id="modal-add-item" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" style="width: 60%">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="inner-container">
         <div class="modal-header" style="background-color: #f9f9f9">
@@ -176,16 +176,15 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                      <input type="hidden" name="_method" value="delete">
                      <fieldset>
                         <div class="table-responsive">
-                           <table id="cartTable" class="table table-bordered table-striped display dataTable" cellspacing="0" style="width: 100%">
+                           <table id="cartTable" class="table table-bordered table-striped" cellspacing="0">
                               <thead>
                                  <tr>
-                                    
+                                    <th class="bg-extra-light-grey col-md-1 col-xs-1">STT</th>
                                     <th class="bg-extra-light-grey">Sản Phẩm</th>
-                                    <th class="bg-extra-light-grey">Nông trại</th>
                                     <th class="bg-extra-light-grey col-md-2 col-xs-1">Số Lượng</th>
                                     <th class="bg-extra-light-grey">Giá</th>
                                     <th class="bg-extra-light-grey">Tổng</th>
-                                    <th style="display:none;"></th>
+                                    <th class="bg-extra-light-grey">Xóa</th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
@@ -194,34 +193,44 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                                  </tr>
                               </thead>
                               <tbody>
+                              	<?php $i=0; ?>
                               @foreach($products as $item)
-                                 <tr>
+                                 <tr class="">
+                                    <td class="align-middle">
+                                    	{{$i}}
+                                    </td>
                                     <td class="align-middle">
                                        <div style="width: auto;">{{$item->name}}</div>
-                                    </td>
-                                    <td>
-                                    	<div style="width: auto;">{{$item->farmer_name}}</div>
                                     </td>
                                     <td class="align-middle text-center" style="text-align: center; ">
                                        <div class="stepper" style="width: 100%"><input type="text" class="form-control stepper-input text-center" value="0 {{$item->unit}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
                                     </td>
                                     <td class="align-middle text-center">
-                                       {{number_format($item->price)}}
+                                       {{number_format($item->price)}} VND
                                     </td>
                                     <td class="align-middle text-center">
-                                        
+                                        VND
                                     </td>
-                                    <td style="display:none;"></td>
+                                    <td class="align-middle text-center">
+                                       <a class="btn btn-info text-center no-margin item-delete">                            <i class="fa fa-trash"></i>
+                                       </a>                        
+                                    </td>
                                     <td style="display:none;"></td>
                                     <td style="display:none;">{{$item->unit_quantity}}</td>
                                     <td style="display:none;">{{$item->unit}}</td>
                                     <td style="display:none;">{{$item->id}}</td>
                                     <td style="display:none;">{{$item->farmer_id}}</td>
                                  </tr>
+                                 <?php $i++;?>
                                  @endforeach
                                  
                               </tbody>
-                              
+                              <tfoot>
+                                 <tr>
+                                   <td colspan="4" align="right" style="padding-right: 20px"><b>Tổng Tiền</b>  </td>
+                                   <td colspan="2" style="padding-left: 20px"><span id="total"></span></td>
+                                 </tr>
+                              </tfoot>
                            </table>
                         </div>
                      </fieldset>
@@ -242,8 +251,9 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 
 <script type="text/javascript">
 	loaditems();
-	var customer = $("select[name=customer_id] option:selected").text();
+	var customer = $("input[name=delivery_name]").val();
 	var order_id = $("input[name=order_id]").val();
+	var note = $("textarea[name=note]").val();
 
 	function loaditems() {
 		var order_id = $("input[name=order_id]").val();	
@@ -303,7 +313,8 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 	          		}
 	            });
 	        	newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 <\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+shipping_cost+'<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbtotal\">'+total+'<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
-	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>'
+	        	newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>';
+	        	newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Ghi chú: '+note+'<\/td>\r\n<\/tr>';
 	              jQuery("#tbSupp tbody").append(newRowContent);
 
 	     }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
@@ -326,7 +337,7 @@ function exportExcell() {
 @endsection
 
 @section('after_scripts2')
-<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"	></script>
+<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     // var ItemsUpload = ["order_id":order_id];
     var ItemsUpload = [];
@@ -358,6 +369,7 @@ $(document).ready(function() {
          var rowId = 0;
          updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
       });
+
     table.on( 'click', 'span.down' , function () {
          var msg;
          var row = $(this).closest('tr').index();
