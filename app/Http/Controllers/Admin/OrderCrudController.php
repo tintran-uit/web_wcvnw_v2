@@ -50,6 +50,11 @@ class OrderCrudController extends CrudController
             'model' => "App\Models\Customer",
         ]);
         $this->crud->addColumn([
+            'name' => 'delivery_name',
+            'label' => 'Người Nhận',
+            'type' => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'delivery_phone',
             'label' => 'Điện Thoại Nhận',
             'type' => 'text',

@@ -113,7 +113,7 @@ class OrderController extends Controller
         $order_id = $order_id[0]->order_id;
         DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`) VALUES(?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $discount_amount, $delivery_date, $note]);
+         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`, `delivery_name`) VALUES(?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $discount_amount, $delivery_date, $note, $name]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
@@ -394,6 +394,7 @@ class OrderController extends Controller
         
     }
 
+<<<<<<< HEAD
     	public function  itemStats($date){
 
     		$farmers = DB::select('SELECT f.`name` "name", f.`id` "id" 
@@ -427,5 +428,55 @@ class OrderController extends Controller
     			}
     		return $products;
     }
+=======
+	public function  itemStats($date){
+
+		$farmers = DB::select('SELECT DISTINCT f.`name` "name", p.`name` "product_name", f.`id` "id", tr.`sold`  
+								 FROM `farmers` f, `trading` tr, `products` p
+								WHERE tr.`delivery_date` = ?
+								  AND p.`id` = tr.`product_id`
+								  AND tr.`sold` > 0
+								  AND tr.`farmer_id` = f.`id` 
+						 	 ORDER BY `name` ASC', [$date]);
+		// return $farmers;
+		// $products  = 'No Data';
+        $num = 0;
+
+			foreach($farmers as $farm)
+			{
+                // $products[$num]->farmer = $farm;
+                $num = $num+1;
+
+				$products[$farm->name] = DB::select('(SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", tr.`category` "category"
+                                                      FROM `m_orders` m, `g_orders` g, `products` p, `trading` tr
+                                                     WHERE p.`id` = m.`product_id`
+                                                       AND m.`order_id` = g.`order_id`
+                                                       AND tr.`farmer_id` = m.`farmer_id`
+                                                       AND tr.`product_id` = m.`product_id`
+                                                       AND g.`status` != 8
+                                                       AND tr.`farmer_id` = ?
+                                                       AND tr.`delivery_date` = g.`delivery_date`
+                                                       AND tr.`delivery_date` = ?
+                                                    GROUP BY  `category`, `Product`) 
+                                                    UNION ALL
+                                                    (SELECT CONCAT(p.`name`, " (", pa.`quantity`, pa.`unit`, ")") "Product", COUNT(*) "Quantity", tr.`category` "category"
+                                                      FROM `m_orders` m, `g_orders` g, `products` p, `m_packages` pa, `trading` tr
+                                                     WHERE p.`id` = pa.`product_id`
+                                                       AND m.`order_id` = g.`order_id`
+                                                       AND tr.`farmer_id` = pa.`farmer_id`
+                                                       AND tr.`product_id` = pa.`product_id`
+                                                       AND tr.`farmer_id` = ?
+                                                       AND g.`status` != 8
+                                                       AND g.`delivery_date` = ?
+                                                       AND tr.`delivery_date` = g.`delivery_date`
+                                                       AND m.`product_id` IN (SELECT `id` FROM `products` WHERE `category` = 0)
+                                                       AND pa.`package_id` = m.`product_id`
+                                                     GROUP BY `category`, `Product`)
+                                                    ORDER BY `category`,`Product`  ASC', [$farm->id, $date, $farm->id, $date]);
+			}
+        if($num == 0) $products = "No data";
+		return $products;
+}
+>>>>>>> 36fd75c2f8e7f6448f7647d4239d43d9bbe216be
 
 }
