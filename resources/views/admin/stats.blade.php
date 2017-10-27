@@ -253,14 +253,19 @@
                                     <?php $i = 0;?>
                                     @foreach($products as $product)
                                       @if($i==0)
+
                                         <div id="menu{{$i}}" class="tab-pane fade in active">
-                                            <div style="width: 100%">* Sản phẩm: Gà ta 
-                                                <br><span style="margin-left: 10px">- Số lượng: 10kg</span>
-                                                <br><span style="margin-left: 10px">- Đóng gói: 10 phần</span>
-                                                <br><span style="margin-left: 30px">+ 1kg: 6 phần</span>
-                                                <br><span style="margin-left: 30px">+ 2kg: 4 phần</span>
+                                            @foreach($product as $item)
+                                            <div style="width: 100%">* Sản phẩm:{{$item['full_name']}}
+                                                <br><span style="margin-left: 10px">- Số lượng: {{$item['take_in']}} {{$item['unit']}}</span>
+                                                <br><span style="margin-left: 10px">- Đóng gói: {{$item['count_pack']}} phần</span>
+                                                
+                                                <!-- <br><span style="margin-left: 30px">+ 1kg: 6 phần</span>
+                                                <br><span style="margin-left: 30px">+ 2kg: 4 phần</span> -->
                                             </div>
+                                            @endforeach
                                         </div>
+
                                       @else
                                         <div id="menu{{$i}}" class="tab-pane fade">
                                           <?php 

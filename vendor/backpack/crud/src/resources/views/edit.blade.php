@@ -119,7 +119,7 @@ textarea.form-control {
 		   <h3><b>Chi tiết đơn hàng:</b></h3>
 		   <div>
 		   <div class="col-md-2 vcenter">
-		   <a href="#" class="btn btn-primary ladda-button" data-style="zoom-in" data-toggle="modal" data-target="#modal-add-item"><span class="ladda-label"><i class="fa fa-plus"></i> Thêm hàng</span></a>
+		   <a href="#" class="btn btn-primary ladda-button" data-style="zoom-in" data-toggle="modal" data-target="#modal-add-item"><span class="ladda-label"><i class="fa fa-plus"></i> Thêm/sửa</span></a>
 			</div>
 			<div class="col-md-2 vcenter">
 	            <a class="btn btn-default xlsx" onclick="exportExcell()">Xuất hóa đơn (.xlsx)</a>
@@ -206,10 +206,10 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                                        <div class="stepper" style="width: 100%"><input type="text" class="form-control stepper-input text-center" value="0 {{$item->unit}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
                                     </td>
                                     <td class="align-middle text-center">
-                                       {{number_format($item->price)}} VND
+                                       {{number_format($item->price)}}
                                     </td>
                                     <td class="align-middle text-center">
-                                        VND
+                                        
                                     </td>
                                     <td style="display:none;"></td>
                                     <td style="display:none;"></td>
@@ -279,7 +279,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 		              	// if(firstGoi==0){
 		              		$.each(data.items, function(index, data2){
 		              			if(firstGoi==0){
-				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">Gói</td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">'+data.price+' VNĐ\r\n</td><td></td>\r\n <\/tr>';
+				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">Gói</td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">'+data.price+'\r\n</td><td></td>\r\n <\/tr>';
 					              	stt++;
 				              		firstGoi++;
 				              	}else{
@@ -289,27 +289,20 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 
 			              	});
 			              	firstGoi=0;
-		              	// }else{
-		              	// 	$.each(data.items, function(index, data2){
-
-			              // 		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="display:none;"></td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
-			              // 		stt++;
-			              // 	});
-		              	// }
 	              	
 	              }else{
 	              	// them le
 	              		if(firstLe==0){
-		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+countLe+'">Lẻ</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+countLe+'">Lẻ</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' \r\n<td></td>\r\n <\/tr>';
 		              		firstLe++;
 		              		stt++;
 		              	}else{
-		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+' VNĐ\r\n<td></td>\r\n <\/tr>';
+		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+'\r\n<td></td>\r\n <\/tr>';
 		              		stt++;
 		              	}
 	          		}
 	            });
-	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 VN\u0110<\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+shipping_cost+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbtotal\">'+total+' VNĐ<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
+	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 <\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+shipping_cost+'<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbtotal\">'+total+'<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
 	        	newRowContent += '<\/tr><tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>'
 	              jQuery("#tbSupp tbody").append(newRowContent);
 
