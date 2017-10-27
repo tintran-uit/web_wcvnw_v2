@@ -241,7 +241,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 
 
 <script type="text/javascript">
-	// loaditems();
+	loaditems();
 	var customer = $("select[name=customer_id] option:selected").text();
 	var order_id = $("input[name=order_id]").val();
 
@@ -353,7 +353,7 @@ $(document).ready(function() {
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          // row = 2;
-         table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
+         table.cell(1, 4).data(numberWithCommas(price) + ' VND').draw();
          console.log(row);
          var rowId = 0;
          updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
