@@ -68,11 +68,12 @@ class OrderController extends Controller
         $delivery_date = $numbers[0]->delivery_date;        
         $shipping_cost = DB::select('SELECT `shipping_cost`, `name` FROM `district` WHERE `id` = ?', [$district]);
 
+//Be careful of reassignment of $shipping_cost to itself
+        $district_name = $shipping_cost[0]->name;
         $shipping_cost = $shipping_cost[0]->shipping_cost;
-        $district = $shipping_cost[0]->name;
         $msg['shipping_cost'] = $shipping_cost;
 
-        $address = $address.$district;
+        $address = $address.$district_name;
 
         $msg['promotion'] = $promotion;
 
@@ -85,7 +86,7 @@ class OrderController extends Controller
 	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$account_email]);
 	         	//if not yet in db, create customer into db
 	         	if(!$customer_id) {
-	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $account_email, $address, $district]);
+	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $account_email, $address, $district_name]);
 	         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$account_email]);
 	         	}
 	         	$customer_id = $customer_id[0]->id;
@@ -99,7 +100,7 @@ class OrderController extends Controller
          	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$email]);
          	//if not yet in db, create customer into db
          	if(!$customer_id) {
-         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $email, $address, $district]);
+         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $email, $address, $district_name]);
          		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$email]);
          	}
          	$customer_id = $customer_id[0]->id;
@@ -116,7 +117,7 @@ class OrderController extends Controller
         $order_id = $order_id[0]->order_id;
         DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`, `delivery_name`) VALUES(?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $discount_amount, $delivery_date, $note, $name]);
+         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`, `delivery_name`) VALUES(?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district_name, $shipping_cost, $total, $discount_amount, $delivery_date, $note, $name]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
