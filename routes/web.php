@@ -32,7 +32,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
     //Operation Management CRUD
     CRUD::resource('order', 'OrderCrudController');
     CRUD::resource('order-item', 'OrderItemCrudController');
-    CRUD::resource('order-stats', 'OrderItemCrudController@stats');
+    CRUD::resource('order-stats', 'StatsController@stats');
     CRUD::resource('package', 'PackageCrudController');
     CRUD::resource('package-item', 'PackageItemCrudController');
     CRUD::resource('agent-item', 'AgentCrudController');
@@ -81,7 +81,7 @@ Route::get('/add', 'PageController@testcart');
 
 Route::get('/user/edit', 'CustomerController@editProfile');
 Route::get('/user/rate', 'CustomerController@getRate');
-Route::get('/layhang/{id}', 'CustomerController@layhang');
+Route::get('/layhang/{id}', 'CustomerController@layhang2');
 
 Route::get('{page}/{subs?}', ['uses' => 'PageController@page'])
     ->where(['page' => '^((?!admin).)*$', 'subs' => '.*']);

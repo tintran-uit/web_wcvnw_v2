@@ -195,7 +195,9 @@ class OrderItemCrudController extends CrudController
                                          GROUP BY `Product`, `category` )
                                         ORDER BY `Product`  ASC', [$farm->id, $date, $farm->id, $date]);
             }
-        return $products;
+          // return $products;  
+        return view('admin.stats', $products);
+        
     }
     
 }
