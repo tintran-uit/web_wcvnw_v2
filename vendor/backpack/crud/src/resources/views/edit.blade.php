@@ -241,7 +241,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
 
 
 <script type="text/javascript">
-	loaditems();
+	// loaditems();
 	var customer = $("select[name=customer_id] option:selected").text();
 	var order_id = $("input[name=order_id]").val();
 
@@ -326,7 +326,7 @@ function exportExcell() {
 @endsection
 
 @section('after_scripts2')
-<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"	></script>
 <script type="text/javascript">
     // var ItemsUpload = ["order_id":order_id];
     var ItemsUpload = [];
@@ -353,8 +353,9 @@ $(document).ready(function() {
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
-         var rowId = table.row(row).data()[6];
+         var rowId = 0;
          updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
+         console.log(row);
       });
     table.on( 'click', 'span.down' , function () {
          var msg;
@@ -374,13 +375,13 @@ $(document).ready(function() {
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
-         var rowId = table.row(row).data()[6];
+         var rowId = 0;
          updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
       });
    
 
     function updateCart(rowId, qty, prodID, unit_quantity, unit, farmerID) {
-      console.log(qty)
+      // console.log(qty)
 
 
       var markers = {"qty": qty, "prodID": prodID , "farmerID":farmerID};

@@ -250,27 +250,72 @@
                                   </ul>
 
                                   <div class="tab-content">
-                                    <?php $i = 0;?>
+                                    <?php 
+                                        $i = 0; 
+                                        $farmer_name = array_keys($products);
+                                    ?>
                                     @foreach($products as $product)
                                       @if($i==0)
 
                                         <div id="menu{{$i}}" class="tab-pane fade in active">
-                                            @foreach($product as $item)
-                                            <div style="width: 100%">* Sản phẩm:{{$item['full_name']}}
-                                                <br><span style="margin-left: 10px">- Số lượng: {{$item['take_in']}} {{$item['unit']}}</span>
-                                                <br><span style="margin-left: 10px">- Đóng gói: {{$item['count_pack']}} phần</span>
-                                                
-                                                <!-- <br><span style="margin-left: 30px">+ 1kg: 6 phần</span>
-                                                <br><span style="margin-left: 30px">+ 2kg: 4 phần</span> -->
-                                            </div>
-                                            @endforeach
+                                            <h4><b><?php echo(key($products));?></b></h4>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Sản phẩm</th>
+                                                    <th>Đóng gói</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($product as $item)
+                                                  <tr>
+                                                    <td style="width: 30%">
+                                                        <div>* Sản phẩm:{{$item['full_name']}}
+                                                            <br><span style="margin-left: 10px">- Số lượng: {{$item['take_in']}} {{$item['unit']}}</span>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span style="margin-left: 10px">- Đóng gói: {{$item['count_pack']}} phần</span>
+                                                            @foreach($item['pack'] as $key => $value)
+                                                                <br><span style="margin-left: 30px">+ {{$key}}: {{$value}} phần</span>
+                                                            @endforeach
+                                                    </td>
+                                                  </tr>
+                                                @endforeach
+                                                </tbody>
+                                              </table>
                                         </div>
 
                                       @else
                                         <div id="menu{{$i}}" class="tab-pane fade">
-                                          <?php 
-                                            var_dump($product);
-                                          ?>
+                                            <h4><b><?php echo($farmer_name[$i]);?></b></h4>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Sản phẩm</th>
+                                                    <th>Đóng gói</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($product as $item)
+                                                  <tr>
+                                                    <td style="width: 30%">
+                                                        <div>* Sản phẩm:{{$item['full_name']}}
+                                                            <br><span style="margin-left: 10px">- Số lượng: {{$item['take_in']}} {{$item['unit']}}</span>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span style="margin-left: 10px">- Đóng gói: {{$item['count_pack']}} phần</span>
+                                                            @foreach($item['pack'] as $key => $value)
+                                                                <br><span style="margin-left: 30px">+ {{$key}}: {{$value}} phần</span>
+                                                            @endforeach
+                                                    </td>
+                                                  </tr>
+                                                @endforeach
+                                                </tbody>
+                                              </table>
                                         </div>
                                       @endif
                                     <?php $i++;?>
