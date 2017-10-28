@@ -110,12 +110,9 @@ class OrderCrudController extends CrudController
             ],
         ]);
         $this->crud->addField([
-            'name' => 'customer_id',
-            'label' => 'Khách hàng',
-            'type' => 'select',
-            'entity' => 'customer',
-            'attribute' => 'name',
-            'model' => "App\Models\Customer",
+            'name' => 'delivery_name',
+            'label' => 'Người Nhận',
+            'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4'
             ],
