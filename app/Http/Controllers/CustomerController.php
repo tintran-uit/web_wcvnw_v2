@@ -152,10 +152,10 @@ class CustomerController extends Controller
 				$item = DB::select('SELECT p.`id` "id", p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name" FROM `m_orders` m, `products` p, `farmers` f  
 					WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ?', [$order->order_id]);
 				// array_push($this->data['orderItem'], $item);
-				if(empty($this->data['orderRate'] ) && $order->delivery_date > $week && ($order->status == 2 || $order->status == 4) ){
+				if(empty($this->data['orderRate'] ) && $order->delivery_date > $week && $order->delivery_date < $today  && ($order->status == 2 || $order->status == 4) ){
 					$this->data['orderRate'] = $item;
 				}
-				$this->data['orderItem'][$order->order_id] = $item;
+				// $this->data['orderItem'][$order->order_id] = $item;
 				$this->data['orderItem'][$order->order_id]['shipping_cost'] = $order->shipping_cost;
 				$this->data['orderItem'][$order->order_id]['discount_amount'] = $order->discount_amount;
 			}
