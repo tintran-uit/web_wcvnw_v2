@@ -89,8 +89,9 @@
                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                  <div class="panel-body">
                                    <p><b>Vui lòng tích vào sản phẩm nào khiến bạn <span class="prod"></span></b></p>
-                                   
+                                    @if(count($orderRate)>1)
                                       <div class="col-md-6" ><label><input type="checkbox" value="0" class="cbAll" onclick="removeCheckAll(this);" name="checked"> Tất cả sản phẩm</label></div>
+                                    @endif
                                     @foreach($orderRate as $item)
                                       <div class="col-md-6" ><label><input type="checkbox" value="{{$item->id}}" class="cb" name="checked" onclick="removeCheck(this);"> {{$item->product_name}}</label></div>
                                     @endforeach
@@ -239,21 +240,21 @@ $(document).on('ready', function () {
                     }
                     next1();
                 });
-         // $('input[type="checkbox"]').on(
-         //        'change', function () {
-         //            rate = $(this).val();
-         //            if(rate>3){
-         //                $('.prod').html('ưng ý');
-         //            }else{
-         //                $('.prod').html('không hài lòng');
-         //            }
-         //            next2();
-         //        });
+         
     });
 
 function next1() {
+  @if(count($orderRate)>1)
    $("#collapseTwo").collapse("show");
    $("#collapseOne").collapse("hide");
+  @else
+    $("#collapseThree").collapse("show");
+   $("#collapseOne").collapse("hide");
+   var cbs = document.getElementsByClassName("cb");
+    for (var i = 0; i < cbs.length; i++) {
+        cbs[i].checked = true;
+    }
+  @endif
 
 }
 function next2() {
@@ -298,7 +299,7 @@ function sentRate() {
           success: function(data){
             
             console.log(data);
-            
+            location.reload();
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
               $('#modalLoader').modal('hide');
