@@ -169,6 +169,8 @@ class CustomerController extends Controller
 
 	public function rating(Request $request)
 	{
+		//rating will be share to detail farmers
+		//comment will be farmer 0 -> Gói -> 1 item selected
 		$data = $request->data;
 		$rate = $data['rate']*100;
 		$comment = $data['comment'];
@@ -186,8 +188,10 @@ class CustomerController extends Controller
          								FROM `g_orders` 
          							   WHERE `order_id` = ? 
          							     AND `customer_id` = ?
-         							     AND DATEDIFF(CURRENT_DATE, `delivery_date`) < 7
-         							     AND `rating` IS NULL', [$order_id, $customer_id]);//count `status` != cancel
+         							     AND `status` IN (2, 4)
+         							     AND `rating` IS NULL
+         							     AND DATEDIFF(CURRENT_DATE, `delivery_date`) < 7', [$order_id, $customer_id]);
+         							     //count `status` != cancel
 
          	$msg['order_id'] = $order_id;
          	$msg['customer_id'] = $customer_id;
@@ -198,11 +202,48 @@ class CustomerController extends Controller
          	{
          		if($elements[0] == 0) {
          			//rate the package as whole
-		        	DB::statement('UPDATE `g_orders` 
-		        		              SET `rating` = ?,
-		        		                  `comment` = ?
+					$farmer_id = 0;
+                    $m_rating = DB::insert('INSERT INTO `rating` (`rating`, `comment`, `farmer_id`, `customer_id`, `order_id`, `date`)
+                                            VALUES(?, ?, ?, ?, ?, CURRENT_DATE)',
+                                          [$rate, $comment, $farmer_id, $customer_id, $order_id]);
+
+                    DB::statement('UPDATE `g_orders` 
+		        		              SET `rating` = ?
  									WHERE `order_id` = ?
- 									  AND `rating` IS NULL', [$rate, $comment, $order_id]);
+ 									  AND `status` IN (2, 4)
+ 									  AND `rating` IS NULL', [$rate, $order_id]);
+		        	//Apply the rate, rating_count to farmers
+		        	DB::statement('UPDATE `farmers` f
+		        		              SET f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
+		        		                  f.`rating_count` = f.`rating_count` + 1
+ 									WHERE f.`id` IN (SELECT DISTINCT `farmer_id` 
+ 													   FROM `m_orders` 
+ 													  WHERE `order_id` = ?
+ 													)', [$rate, $order_id]);
+
+         		}
+         		else if(count($elements) == 1) {
+         			//rate one product individually
+         			$product_id = $elements[0];
+         			$product_rate = DB::select('SELECT `farmer_id` 
+         										  FROM `m_orders` 
+         							   			 WHERE `order_id` = ? 
+         							   			   AND `product_id` = ?', [$order_id, $product_id]);
+					if(!$product_rate) {
+						$msg["error"] =1;
+						$msg["status"] = "Wrong product_id passed into order";
+						return response()->json($msg);
+					}
+					$farmer_id = $product_rate[0]->farmer_id;
+                    $m_rating = DB::insert('INSERT INTO `rating` (`rating`, `comment`, `farmer_id`, `customer_id`, `order_id`, `date`)
+                                            VALUES(?, ?, ?, ?, ?, CURRENT_DATE)',
+                                          [$rate, $comment, $farmer_id, $customer_id, $order_id]);
+
+                    DB::statement('UPDATE `g_orders` 
+		        		              SET `rating` = ?
+ 									WHERE `order_id` = ?
+ 									  AND `status` IN (2, 4)
+ 									  AND `rating` IS NULL', [$rate, $order_id]);
 		        	//Apply the rate, rating_count to farmers
 		        	DB::statement('UPDATE `farmers` f
 		        		              SET f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),

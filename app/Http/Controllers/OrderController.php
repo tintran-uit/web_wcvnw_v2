@@ -171,68 +171,7 @@ class OrderController extends Controller
 	
 	public function rateOrder(Request $request)
 	{
-		$data = $request->data;
-		$rate = $data['rate']*100;
-		$comment = $data['comment'];
-		$elements = $data['elements'];
-		$order_id = $data['order_id'];
-
-		if(Auth::check()) {
-         	$user = Auth::user();
-         	$customer_id = $user->connected_id;
-         	if(!$customer_id){
-         		return redirect()->back();
-         	}
-            //$m_rating = DB::insert('INSERT INTO `rating` (`rate`, `comment`, `farmer_id`, `customer_id`, `date`') ')
-         	//check if the order_id is right for customer_id
-         	$rate_valid = DB::select('SELECT `order_id` "order_id" 
-         								FROM `g_orders` 
-         							   WHERE `order_id` = ? 
-         							     AND `customer_id` = ?
-         							     AND DATEDIFF(CURRENT_DATE, `delivery_date`) < 7', [$order_id, $customer_id]);
-
-         	if(strcmp($user->account_type, "Customer") == 0 && count($rate_valid) > 0)
-         	{
-         		if($elements[0] == 0) {
-         			//rate the package as whole
-		        	DB::statement('UPDATE `g_orders` 
-		        		              SET `rating` = ?,
-		        		                  `comment` = ?
- 									WHERE `order_id` = ?', [$rate, $comment, $order_id]);
-		        	//Apply the rate, rating_count to farmers
-		        	DB::statement('UPDATE `farmers` f
-		        		              SET f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
-		        		                  f.`rating_count` = f.`rating_count` + 1
- 									WHERE f.`id` IN (SELECT DISTINCT `farmer_id` 
- 													   FROM `m_orders` 
- 													  WHERE `order_id` = ?
- 													)', [$rate, $order_id]);
-
-         		}
-         		else
-         		{
-         			//rate individually. If multiple items from 1 farmer, rate him only once, apply to one order item as representative for that farmer.
-         			foreach ($elements as $element) {
-			        	DB::statement('UPDATE `m_orders` m, `farmers` f 
-		        		              	  SET m.`rating` = ?,
-		        		                      m.`comment` = ?,
-		        		                      f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
-		        		                  	  f.`rating_count` = f.`rating_count` + 1
- 										WHERE f.`id` = m.`farmer_id`
- 										  AND m.`order_id` = ?
- 										  AND m.`id` = (SELECT MIN(id)
- 										  				  FROM `m_orders` mo
- 										  				 WHERE mo.`order_id` = m.`order_id`
- 										  				   AND mo.`farmer_id` = m.`farmer_id`
- 										  				)
- 										  AND `product_id` = ?', [$rate, $comment, $rate, $order_id, $element]);
-			        }
-         		}
-         	}
-         }
-         else {
-         	return redirect()->back();
-         }
+        return redirect()->back();
 	}
 
 
