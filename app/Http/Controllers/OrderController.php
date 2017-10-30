@@ -183,6 +183,7 @@ class OrderController extends Controller
          	if(!$customer_id){
          		return redirect()->back();
          	}
+            $m_rating = DB::insert('INSERT INTO `rating` (`rate`, `comment`, `farmer_id`, `customer_id`, `date`') ')
          	//check if the order_id is right for customer_id
          	$rate_valid = DB::select('SELECT `order_id` "order_id" 
          								FROM `g_orders` 
