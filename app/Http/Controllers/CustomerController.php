@@ -186,8 +186,8 @@ class CustomerController extends Controller
          								FROM `g_orders` 
          							   WHERE `order_id` = ? 
          							     AND `customer_id` = ?
-         							     AND DATEDIFF(CURRENT_DATE, `delivery_date`) < 7
-         							     AND `rating` IS NULL', [$order_id, $customer_id]);//count `status` != cancel
+         							     AND DATEDIFF(CURRENT_DATE, `delivery_date`) < 7', [$order_id, $customer_id]);
+         							     //count `status` != cancel
 
          	$msg['order_id'] = $order_id;
          	$msg['customer_id'] = $customer_id;
@@ -198,7 +198,14 @@ class CustomerController extends Controller
          	{
          		if($elements[0] == 0) {
          			//rate the package as whole
-		        	DB::statement('UPDATE `g_orders` 
+					$farmer_id = 0;
+                    $m_rating = DB::insert('INSERT INTO `rating` (`rating`, `comment`, `farmer_id`, `customer_id`, `order_id`, `date`)
+                                            VALUES(?, ?, ?, ?, ?, CURRENT_DATE)',
+                                          [$rate, $comment, $farmer_id, $customer_id, $order_id]);
+                    $msg['rating_id'] = $m_rating;
+                    return response()->json($msg);
+
+                    DB::statement('UPDATE `g_orders` 
 		        		              SET `rating` = ?,
 		        		                  `comment` = ?
  									WHERE `order_id` = ?

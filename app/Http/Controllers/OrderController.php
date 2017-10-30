@@ -194,6 +194,11 @@ class OrderController extends Controller
          	if(strcmp($user->account_type, "Customer") == 0 && count($rate_valid) > 0)
          	{
          		if($elements[0] == 0) {
+                    $farmer_id = 0;
+                    $m_rating = DB::insert('INSERT INTO `rating` (`rate`, `comment`, `farmer_id`, `customer_id`, `date`)
+                                            VALUES(?, ?, ?, ?, CURRENT_DATE)',
+                                          [$rate, $comment, $farmer_id, $customer_id]);
+                    $return $m_rating;
          			//rate the package as whole
 		        	DB::statement('UPDATE `g_orders` 
 		        		              SET `rating` = ?,
