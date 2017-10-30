@@ -70,8 +70,8 @@ textarea.form-control {
 </style>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/TableExport/3.3.13/css/tableexport.min.css" rel="stylesheet" type="text/css" />
-<script src="{{url('')}}/assets/javascripts/vendor/jquery-2.1.3.min.js" type="text/javascript"></script>
 
+<script src="{{url('')}}/assets/javascripts/vendor/jquery-2.1.3.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.3.7/alasql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.2/xlsx.core.min.js"></script>
 <div class="row">
@@ -196,6 +196,11 @@ $products = array_merge($products, DB::select($mySQL));
 
           	<form action="#" accept-charset="UTF-8" class="form-style-base">
                      <input type="hidden" name="_method" value="delete">
+                     <fieldset class="buttons">
+                        <div class="pull-right">
+                           <a class="btn btn-info text-uppercase" href="#" onclick="addItems();">Chỉnh sửa xong</a>
+                        </div>
+                     </fieldset>
                      <fieldset>
                         <div class="table-responsive">
                            <table id="cartTable" class="table table-bordered table-striped" cellspacing="0">
@@ -257,11 +262,7 @@ $products = array_merge($products, DB::select($mySQL));
                         </div>
                      </fieldset>
                      <hr>
-                     <fieldset class="buttons">
-                        <div class="pull-right">
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="#" onclick="addItems();">Thêm sản phẩm</a>
-                        </div>
-                     </fieldset>
+                     
                   </form>
 
 		</div>

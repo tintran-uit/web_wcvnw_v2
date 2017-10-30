@@ -36,7 +36,7 @@ $(document).ready(function(){
 
   // $("select").selecter();
 
-  $("input[type=radio], input[type=checkbox]").picker();
+  // $("input[type=radio], input[type=checkbox]").picker();
 
   $("#owl-example").owlCarousel({
     pagination: false

@@ -98,7 +98,7 @@ class LoginController extends Controller
         if ($user['account_type'] == 'Admin') {
             return redirect($this->redirectTo);
         }elseif ($user['account_type'] == 'Farmer') {
-            return redirect('farmer/farmer-acc-item');
+            return redirect('farmer/dashboard');
         }
         // return $user;
         // And redirect to custom location
