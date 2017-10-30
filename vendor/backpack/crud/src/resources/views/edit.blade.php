@@ -183,7 +183,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                                     <th class="bg-extra-light-grey">Sản Phẩm</th>
                                     <th class="bg-extra-light-grey col-md-2 col-xs-1">Số Lượng</th>
                                     <th class="bg-extra-light-grey">Giá</th>
-                                    <th class="bg-extra-light-grey">Tổng</th>
+                                    <th class="bg-extra-light-grey col-md-2 col-xs-1">Tổng</th>
                                     <th class="bg-extra-light-grey" style="display:none;">Xóa</th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
