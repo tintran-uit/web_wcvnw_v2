@@ -81,6 +81,9 @@
                         <div class="clearfix product-price"> 
                           <p class="discounted-price pull-left" id="dis_price">
                             {{number_format($product[0]->price)}} VND
+                            @if($product[0]->category == 0)
+                              <p style="font-size: 19px;">Mua lẻ: <span style="text-decoration: line-through;">{{$product[0]->price_old}} VND</span></p>
+                            @endif
                           </p>
                         </div>
                       </article>
