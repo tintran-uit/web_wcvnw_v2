@@ -54,7 +54,7 @@
                         
                         @if(!empty($orderRate))
                          <div class="listbox">
-                           <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng nhận được ngày <b><i>{{$orders[0]->delivery_date}}</i></b></p>
+                           <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng nhận được ngày <b><i>{{$orderRate_delivery_date}}</i></b></p>
                            </div>
                     <form id="formRate">
                       <input type="hidden" name="order_id" value="{{$orders[0]->order_id}}">

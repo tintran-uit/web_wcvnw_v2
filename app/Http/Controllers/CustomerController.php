@@ -154,8 +154,9 @@ class CustomerController extends Controller
 				// array_push($this->data['orderItem'], $item);
 				if(empty($this->data['orderRate'] ) && $order->delivery_date > $week && $order->delivery_date < $today  && ($order->status == 2 || $order->status == 4) ){
 					$this->data['orderRate'] = $item;
+					$this->data['orderRate_delivery_date'] = $order->delivery_date;
 				}
-				// $this->data['orderItem'][$order->order_id] = $item;
+				$this->data['orderItem'][$order->order_id] = $item;
 				$this->data['orderItem'][$order->order_id]['shipping_cost'] = $order->shipping_cost;
 				$this->data['orderItem'][$order->order_id]['discount_amount'] = $order->discount_amount;
 			}
