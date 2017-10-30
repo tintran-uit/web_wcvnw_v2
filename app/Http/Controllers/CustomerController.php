@@ -199,11 +199,11 @@ class CustomerController extends Controller
          		if($elements[0] == 0) {
          			//rate the package as whole
 					$farmer_id = 0;
-                    $m_rating = DB::insert('INSERT INTO `rating` (`rating`, `comment`, `farmer_id`, `customer_id`, `date`)
-                                            VALUES(?, ?, ?, ?, CURRENT_DATE)',
-                                          [$rate, $comment, $farmer_id, $customer_id]);
+                    $m_rating = DB::insert('INSERT INTO `rating` (`rating`, `comment`, `farmer_id`, `customer_id`, `order_id`, `date`)
+                                            VALUES(?, ?, ?, ?, ?, CURRENT_DATE)',
+                                          [$rate, $comment, $farmer_id, $customer_id, $order_id]);
                     $msg['rating_id'] = $m_rating;
-                    return response()->json($msg);		
+                    return response()->json($msg);
 
                     DB::statement('UPDATE `g_orders` 
 		        		              SET `rating` = ?,
