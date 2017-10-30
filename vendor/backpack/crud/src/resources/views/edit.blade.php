@@ -154,7 +154,29 @@ textarea.form-control {
 </div>
 
 <?php 
-$products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` ORDER BY p.`name` ASC');
+$order_id = $fields['order_id']['value'];
+$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", p.`price` "price", p.`id` "id", p.`unit` "unit", p.`category` "category", m.`quantity` "quantity", p.`unit_quantity` "unit_quantity", m.`price` "m_price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ? ORDER BY p.`category` DESC', [$order_id]);
+
+for($x=0; $x<count($products); $x++) {
+    if($products[$x]->category==0){
+        $items =  DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", p.`price` "price", p.`id` "id", p.`unit` "unit", p.`category` "category", m.`quantity` "quantity", p.`unit_quantity` "unit_quantity", m.`price` "m_price", p.`thumbnail` "product_thumbnail" FROM m_packages m, products p, farmers f 
+           WHERE p.`id` = m.`product_id` 
+           AND f.`id` = m.`farmer_id` 
+           AND m.`package_id` = ?',[$products[$x]->id]);
+        unset($products[$x]);
+        $products += $items;
+    }
+}
+
+$mySQL = 'SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` ';
+
+foreach ($products as $item) {
+	$mySQL = $mySQL.'AND p.`id` != '.$item->id.' ';
+}
+
+$mySQL = $mySQL.'ORDER BY p.`name` ASC';
+
+$products = array_merge($products, DB::select($mySQL));
 ?>
 <!-- Modal add item -->
 <div class="modal fade style-base-modal" id="modal-add-item" tabindex="-1" role="dialog" aria-hidden="true">
@@ -183,7 +205,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                                     <th class="bg-extra-light-grey">Sản Phẩm</th>
                                     <th class="bg-extra-light-grey col-md-2 col-xs-1">Số Lượng</th>
                                     <th class="bg-extra-light-grey">Giá</th>
-                                    <th class="bg-extra-light-grey">Tổng</th>
+                                    <th class="bg-extra-light-grey">Thành tiền</th>
                                     <th class="bg-extra-light-grey" style="display:none;">Xóa</th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
@@ -193,7 +215,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                                  </tr>
                               </thead>
                               <tbody>
-                              	<?php $i=0; ?>
+                              	<?php $i=1; ?>
                               @foreach($products as $item)
                                  <tr class="">
                                     <td class="align-middle">
@@ -203,19 +225,19 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                                        <div style="width: auto;">{{$item->name}}</div>
                                     </td>
                                     <td class="align-middle text-center" style="text-align: center; ">
-                                       <div class="stepper" style="width: 100%"><input type="text" class="form-control stepper-input text-center" value="0 {{$item->unit}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
+                                       <div class="stepper" style="width: 100%"><input type="text" class="form-control stepper-input text-center" value="@if(isset($item->quantity)) {{$item->quantity}} @else 0 @endif {{$item->unit}}" ><span class="stepper-arrow up">Up</span><span class="stepper-arrow down">Down</span></div>
                                     </td>
                                     <td class="align-middle text-center">
                                        {{number_format($item->price)}} VND
                                     </td>
                                     <td class="align-middle text-center">
-                                        VND
+                                       @if(isset($item->m_price)) {{$item->m_price}} @endif VND
                                     </td>
                                     <td class="align-middle text-center" style="display:none;">
                                        <a class="btn btn-info text-center no-margin item-delete">                            <i class="fa fa-trash"></i>
                                        </a>                        
                                     </td>
-                                    <td style="display:none;"></td>
+                                    <td style="display:none;">@if(isset($item->quantity)) {{$item->quantity}} @else 0 @endif</td>
                                     <td style="display:none;">{{$item->unit_quantity}}</td>
                                     <td style="display:none;">{{$item->unit}}</td>
                                     <td style="display:none;">{{$item->id}}</td>
@@ -365,7 +387,7 @@ $(document).ready(function() {
          price = parseInt(price)*msg;
          // row = 2;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
-         console.log(row);
+         console.log(unit_quantity);
          var rowId = 0;
          updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
       });
