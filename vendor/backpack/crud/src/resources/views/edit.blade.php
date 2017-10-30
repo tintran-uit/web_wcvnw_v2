@@ -184,7 +184,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                                     <th class="bg-extra-light-grey col-md-2 col-xs-1">Số Lượng</th>
                                     <th class="bg-extra-light-grey">Giá</th>
                                     <th class="bg-extra-light-grey">Tổng</th>
-                                    <th class="bg-extra-light-grey">Xóa</th>
+                                    <th class="bg-extra-light-grey" style="display:none;">Xóa</th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
@@ -211,7 +211,7 @@ $products = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name
                                     <td class="align-middle text-center">
                                         VND
                                     </td>
-                                    <td class="align-middle text-center">
+                                    <td class="align-middle text-center" style="display:none;">
                                        <a class="btn btn-info text-center no-margin item-delete">                            <i class="fa fa-trash"></i>
                                        </a>                        
                                     </td>
