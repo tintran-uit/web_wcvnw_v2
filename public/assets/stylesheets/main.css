@@ -3209,3 +3209,24 @@ a.item-delete:hover{
   height: 40px;
 }
 
+.order-0{
+      color: #ffffff;
+    background-color: #ec971f;
+}
+.order-1{
+      color: #ffffff;
+    background-color: #2e2f3e;
+}
+.order-2{
+      color: #ffffff;
+    background-color: #337ab7;
+}
+.order-4{
+      color: #ffffff;
+    background-color: #64903E;
+}
+.order-8{
+      color: #ffffff;
+    background-color: #A52223;
+}
+
