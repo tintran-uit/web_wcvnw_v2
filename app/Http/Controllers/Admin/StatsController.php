@@ -15,7 +15,8 @@ class StatsController extends CrudController
 
 public function stats()
     {
-        $date = '2017-10-28';
+        $date = new DateTime('next saturday');
+        $date->format('Y-m-d');
         $farmers = DB::select('SELECT DISTINCT f.`name` "name", f.`id` "id" 
                                  FROM `farmers` f, `trading` tr 
                                 WHERE tr.`delivery_date` = ?
