@@ -369,9 +369,13 @@ $(document).ready(function() {
 
     var table = $('#cartTable').DataTable({searching: true, paging: false, "bInfo" : false});
 
+
     table.on( 'click', 'span.up' , function () {
          var msg;
-         var row = $(this).closest('tr').index();
+         // var row = $(this).closest('tr').index();
+         var tr = $(this).parents('tr');
+    		var row = table.row( tr );
+         console.log(row);
          var unit_quantity = table.row(row).data()[7];
          var unit = table.row(row).data()[8];
          var prodID = table.row(row).data()[9];
@@ -395,7 +399,8 @@ $(document).ready(function() {
 
     table.on( 'click', 'span.down' , function () {
          var msg;
-         var row = $(this).closest('tr').index();
+         var tr = $(this).parents('tr');
+    		var row = table.row( tr );
          var unit_quantity = table.row(row).data()[7];
          var unit = table.row(row).data()[8];
          var prodID = table.row(row).data()[9];
