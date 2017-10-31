@@ -46,7 +46,7 @@
                            <?php $i=0; ?>
                            @foreach($orders as $order)
                            <?php $i++; ?>
-                            <p><a href="#" data-toggle="modal" data-target="#order-{{$i}}">Xem đơn hàng: {{$order->order_id}}<br>{{ \Carbon\Carbon::parse($order->date)->format('d/m/Y')}} - <span class="@if($order->status == 1) btn-info @endif @if($order->status == 2) btn-primary @endif @if($order->status == 0) btn-warning @endif @if($order->status == 3) btn-error @endif">{{$order->status_vn_name}}</span></a></p>
+                            <p><a href="#" data-toggle="modal" data-target="#order-{{$i}}">Xem đơn hàng: {{$order->order_id}}<br>{{ \Carbon\Carbon::parse($order->date)->format('d/m/Y')}} - <span class="@if($order->status == 1) order-1 @endif @if($order->status == 2) order-2 @endif @if($order->status == 0) order-0 @endif @if($order->status == 4) order-4 @endif @if($order->status == 8) order-8 @endif">{{$order->status_vn_name}}</span></a></p>
                            @endforeach
                          </div>
                        </div>
@@ -54,7 +54,7 @@
                         
                         @if(!empty($orderRate))
                          <div class="listbox">
-                           <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng nhận được ngày <b><i>{{$orderRate_delivery_date}}</i></b></p>
+                           <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng <b>#{{$orderRate_id}}</b> - nhận được ngày <b><i>{{$orderRate_delivery_date}}</i></b></p>
                            </div>
                     <form id="formRate">
                       <input type="hidden" name="order_id" value="{{$orders[0]->order_id}}">
