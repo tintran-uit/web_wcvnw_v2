@@ -73,7 +73,7 @@ class OrderController extends Controller
         $shipping_cost = $shipping_cost[0]->shipping_cost;
         $msg['shipping_cost'] = $shipping_cost;
 
-        $address = $address.$district_name;
+        $address = $address." ".$district_name;
 
         $msg['promotion'] = $promotion;
 
