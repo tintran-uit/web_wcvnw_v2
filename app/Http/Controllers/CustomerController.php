@@ -155,6 +155,7 @@ class CustomerController extends Controller
 				if(empty($this->data['orderRate'] ) && $order->delivery_date > $week && $order->delivery_date < $today  && ($order->status == 2 || $order->status == 4) ){
 					$this->data['orderRate'] = $item;
 					$this->data['orderRate_delivery_date'] = $order->delivery_date;
+					$this->data['orderRate_id'] = $order->order_id;
 				}
 				$this->data['orderItem'][$order->order_id] = $item;
 				$this->data['orderItem'][$order->order_id]['shipping_cost'] = $order->shipping_cost;
