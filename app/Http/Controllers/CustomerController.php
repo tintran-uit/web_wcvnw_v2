@@ -250,37 +250,48 @@ class CustomerController extends Controller
 		        	DB::statement('UPDATE `farmers` f
 		        		              SET f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
 		        		                  f.`rating_count` = f.`rating_count` + 1
- 									WHERE f.`id` IN (SELECT DISTINCT `farmer_id` 
- 													   FROM `m_orders` 
- 													  WHERE `order_id` = ?
- 													)', [$rate, $order_id]);
+ 									WHERE f.`id` = ?', [$rate, $farmer_id]);
 
          		}
          		else
          		{
          			//rate individually. If multiple items from 1 farmer, rate him only once, apply to one order item as representative for that farmer.
+         			$package_id = DB::select('SELECT `id`
+         				       					FROM `products`
+         				       				   WHERE `category` = 0'
+         				       				 );
+					$farmer_id = 0;         			
          			foreach ($elements as $element) {
-			        	DB::statement('UPDATE `m_orders` m, `farmers` f 
-		        		              	  SET m.`rating` = ?,
-		        		                      m.`comment` = ?,
-		        		                      f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
-		        		                  	  f.`rating_count` = f.`rating_count` + 1
- 										WHERE f.`id` = m.`farmer_id`
- 										  AND m.`order_id` = ?
- 										  AND m.`id` = (SELECT MIN(id)
- 										  				  FROM `m_orders` mo
- 										  				 WHERE mo.`order_id` = m.`order_id`
- 										  				   AND mo.`farmer_id` = m.`farmer_id`
- 										  				)
- 										  AND `product_id` = ?', [$rate, $comment, $rate, $order_id, $element]);
-			        }
+         				if(in_array($element, $package_id)){
+         					$farmer_id = 10;//Cfarm farmers combination
+         					break;
+         				}
+         			}
+                    DB::insert('INSERT INTO `rating` (`rating`, `comment`, `farmer_id`, `customer_id`, `order_id`, `date`)
+                                               VALUES(?, ?, ?, ?, ?, CURRENT_DATE)',
+                                          [$rate, $comment, $farmer_id, $customer_id, $order_id]);
+         			
+                    DB::statement('UPDATE `g_orders` 
+		        		              SET `rating` = ?
+ 									WHERE `order_id` = ?
+ 									  AND `status` IN (2, 4)
+ 									  AND `rating` IS NULL', [$rate, $order_id]);
+
+		        	//Apply the rate, rating_count to farmers
+		        	DB::statement('UPDATE `farmers` f
+		        		              SET f.`rating` = ROUND((f.`rating` * f.`rating_count` + ?)/(f.`rating_count` + 1), 0),
+		        		                  f.`rating_count` = f.`rating_count` + 1
+ 									WHERE f.`id` IN (SELECT DISTINCT `farmer_id` 
+ 													   FROM `m_orders` 
+ 													  WHERE `order_id` = ?
+ 													)', [$rate, $order_id]);
          		}
          	}
 	        $msg['error'] = 0;
 	        $msg['status'] = 'Cảm ơn bạn đã đánh giá để góp phân nâng cao chất lượng dịch vụ của cfarm.';
          	return response()->json($msg);
-	     }
-         else {
+	    }
+        else {
          	return redirect()->back();
          }
 	}
