@@ -24,7 +24,7 @@ class Order extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id', 'order_id', 'customer_id', 'shipper_id','rating', 'note','status', 'shipping_cost', 'delivery_phone', 'delivery_address','delivery_district', 'total'];
+    protected $fillable = ['id', 'order_id', 'customer_id', 'shipper_id','rating', 'note','status', 'shipping_cost', 'delivery_phone', 'delivery_name', 'delivery_address','delivery_district', 'total'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [
