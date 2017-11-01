@@ -23,9 +23,11 @@ Route::get('/products/suppliers/product_id={product_id}', 'ProductController@get
 Route::get('/products/interest/product_id={product_id}', 'ProductController@addInterest');
 
 Route::get('/cancelorder/order_id={order_id}', 'OrderController@cancelOrder');
+Route::get('/moveorder/order_id={order_id}/date={delivery_date}', 'OrderController@moveOrder');
 Route::get('/orderitems/order_id={order_id}', 'OrderController@orderItems');
 Route::get('/orders', 'CustomerController@getOrders');
 Route::get('/orderstats/date={date}', 'OrderController@itemStats');
+Route::get('/orderrm/order_id={order_id}/product_id={product_id}/farmer_id={farmer_id}', 'OrderController@removeItemAdmin');
 
 Route::post('/customer/rate', 'CustomerController@rating');
 
