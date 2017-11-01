@@ -385,6 +385,9 @@ class OrderController extends Controller
                               SET `total` = ? ,
                                   `shipping_cost` = ?
                             WHERE `order_id` = ?', [$total, $shipping_cost, $order_id]);
+              
+            $msg["error"]=0;
+            $msg["status"] = "Chỉnh sửa đơn hàng thành công.";
 
             return response()->json($msg);
         }
