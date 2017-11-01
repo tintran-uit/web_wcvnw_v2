@@ -17,21 +17,43 @@ use DateTime;
 class PageController extends Controller
 {
 
-    public function page()
+    public function dashboard()
     {
         $date = new DateTime('next saturday');
         $date->format('Y-m-d');
 
         $category = [];
-
+        $products = [];
         $items = $this->layhang(2, $date);
         foreach ($items as $key) {
         	array_push($category, $key['category']);
         }
-        return $category;
-        $this->data['farmers'] = $farmers;
+
+        $category = array_unique($category);
+
+        $category = DB::table('categories')
+             ->whereIn('id', $category)
+             ->get();
+
+        $products = $category;
+
+        foreach ($products as $pro) {
+        	// $pro['item'];
+        	$pro->items = [];
+        	foreach ($items as $item) {
+        		if($pro->id==$item['category']){
+        			 array_push($pro->items, $item);
+        		}
+        	}
+        }
+        $this->data['farmers'] = $category;
         $this->data['products'] = $products;
         return view('farmer.dashboard', $this->data);
+    }
+
+    public function sell()
+    {
+    	return view('farmer.sell');
     }
 
 
