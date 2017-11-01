@@ -839,20 +839,26 @@
       @yield('scrip_code')
       <script type="text/javascript">
         $(document).ready(function(){
-         $('#article').children('p').children('img').each(function(){
-           $(this).addClass('img-responsive');
-           $(this).css("height", "auto");
-         });
+         // $('#article').children('p').children('img').each(function(){
+         //   $(this).addClass('img-responsive');
+         //   $(this).css("height", "auto");
+         // });
 
-         $('#article div').children('p').children('img').each(function(){
-           $(this).addClass('img-responsive');
-           $(this).css("height", "auto");
-         });
+         // $('#article div').children('p').children('img').each(function(){
+         //   $(this).addClass('img-responsive');
+         //   $(this).css("height", "auto");
+         // });
 
-         $('#article').children('img').each(function(){
-           $(this).addClass('img-responsive');
+         // $('#article').children('img').each(function(){
+         //   $(this).addClass('img-responsive');
+         //   $(this).css("height", "auto");
+         // });
+
+         $("#article img").each(function(){
+            $(this).addClass('img-responsive');
            $(this).css("height", "auto");
-         });
+          })
+
 
        });
       </script>
