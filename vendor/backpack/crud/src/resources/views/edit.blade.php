@@ -133,8 +133,7 @@ textarea.form-control {
 		        </a>
 
 		        <?php
-		        	$date1 = new DateTime('next saturday');
-        			$date1 = $date1->format('Y-m-d');
+		        	$date1 = date("Y-m-d",strtotime('Saturday +1 week'));
         			$date2 = date("Y-m-d",strtotime('Saturday +2 week'));
         			// $date2 = $date2->format('Y-m-d');
 		        ?>
