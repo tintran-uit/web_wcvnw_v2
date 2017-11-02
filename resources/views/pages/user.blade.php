@@ -300,13 +300,15 @@ function sentRate() {
           success: function(data){
             
             console.log(data);
-            if(data.error){
+            if(data.error == 1){
                 $('#modalMessage').html(data.status);
                 $('#modalLoader').modal('hide');
                 $('#modalAlert').modal('show');
-            }else{
-              location.reload();
-            }
+            }else if(data.error == '0'){
+                $('#modalMessageFinish').html(data.status);
+                $('#modalLoader').modal('hide');
+                $('#modalAlertFinish').modal('show');
+              }
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
               $('#modalLoader').modal('hide');
