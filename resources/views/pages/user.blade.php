@@ -282,6 +282,7 @@ function getFormValue(formID) {
 }
 
 function sentRate() {
+  $('#modalLoader').modal('show');
    var checkForm = getFormValue('#formRate');
    // console.log(checkForm);
    if(checkForm){
@@ -299,7 +300,13 @@ function sentRate() {
           success: function(data){
             
             console.log(data);
-            // location.reload();
+            if(data.error){
+                $('#modalMessage').html(data.status);
+                $('#modalLoader').modal('hide');
+                $('#modalAlert').modal('show');
+            }else{
+              location.reload();
+            }
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
               $('#modalLoader').modal('hide');
