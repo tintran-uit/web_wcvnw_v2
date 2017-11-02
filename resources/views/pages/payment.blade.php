@@ -258,7 +258,7 @@
                                        <div class="pull-left">
                                           <span class="fa-stack spacer-15" id="tick-pay-0">
                                           <i class="fa fa-circle fa-stack-2x"></i>
-                                          <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+                                          <i class="fa fa-money fa-stack-1x fa-inverse"></i>
                                           </span>
                                        </div>
                                        <div class="col-xs-9">
