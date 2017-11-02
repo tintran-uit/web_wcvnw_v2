@@ -138,7 +138,7 @@ class CustomerController extends Controller
 		        // return $this->data['orderItem'];
 		        return view('pages.user2', $this->data);
 			}else{
-				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`delivery_date` "delivery_date" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
+				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", g.`rating` "rating", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`delivery_date` "delivery_date" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
 			}
 			
 			$this->data['orders'] = $orders;
@@ -152,7 +152,7 @@ class CustomerController extends Controller
 				$item = DB::select('SELECT p.`id` "id", p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name" FROM `m_orders` m, `products` p, `farmers` f  
 					WHERE m.`product_id` = p.`id` AND f.`id` = m.`farmer_id` AND m.`order_id` = ?', [$order->order_id]);
 				// array_push($this->data['orderItem'], $item);
-				if(empty($this->data['orderRate'] ) && $order->delivery_date > $week && $order->delivery_date < $today  && ($order->status == 2 || $order->status == 4) ){
+				if(empty($this->data['orderRate'] ) && $order->rating == null && $order->delivery_date > $week && $order->delivery_date < $today  && ($order->status == 2 || $order->status == 4) ){
 					$this->data['orderRate'] = $item;
 					$this->data['orderRate_delivery_date'] = $order->delivery_date;
 					$this->data['orderRate_id'] = $order->order_id;
