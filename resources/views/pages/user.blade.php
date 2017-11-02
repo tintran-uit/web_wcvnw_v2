@@ -57,7 +57,7 @@
                            <p>Đánh giá sản phẩm để xây dựng cộng đồng tốt hơn<br>Mời bạn đánh giá chất lượng đơn hàng <b>#{{$orderRate_id}}</b> - nhận được ngày <b><i>{{$orderRate_delivery_date}}</i></b></p>
                            </div>
                     <form id="formRate">
-                      <input type="hidden" name="order_id" value="{{$orders[0]->order_id}}">
+                      <input type="hidden" name="order_id" value="{{$orderRate_id}}">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                              <div class="panel panel-default">
                                <div class="panel-heading" role="tab" id="headingOne">
@@ -282,6 +282,7 @@ function getFormValue(formID) {
 }
 
 function sentRate() {
+  $('#modalLoader').modal('show');
    var checkForm = getFormValue('#formRate');
    // console.log(checkForm);
    if(checkForm){
@@ -299,7 +300,13 @@ function sentRate() {
           success: function(data){
             
             console.log(data);
-            location.reload();
+            if(data.error){
+                $('#modalMessage').html(data.status);
+                $('#modalLoader').modal('hide');
+                $('#modalAlert').modal('show');
+            }else{
+              location.reload();
+            }
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
               $('#modalLoader').modal('hide');
