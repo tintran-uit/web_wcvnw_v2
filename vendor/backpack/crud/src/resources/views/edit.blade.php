@@ -121,6 +121,29 @@ textarea.form-control {
 		   <div class="col-md-2 vcenter">
 		   <a href="#" class="btn btn-primary ladda-button" data-style="zoom-in" data-toggle="modal" data-target="#modal-add-item"><span class="ladda-label"><i class="fa fa-plus"></i> Thêm/sửa</span></a>
 			</div>
+			<div class="btn-group">
+		        <a class="btn btn-success">
+		            <span class="fa fa-save" role="presentation" aria-hidden="true"></span> &nbsp;
+		            <span data-value="save_and_back">Chuyển đơn hàng:</span>
+		        </a>
+
+		        <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aira-expanded="false" aria-expanded="false">
+		            <span class="caret"></span>
+		            <span class="sr-only">Toggle Save Dropdown</span>
+		        </a>
+
+		        <?php
+		        	$date1 = new DateTime('next saturday');
+        			$date1 = $date1->format('Y-m-d');
+        			$date2 = date("Y-m-d",strtotime('Saturday +2 week'));
+        			// $date2 = $date2->format('Y-m-d');
+		        ?>
+
+		        <ul class="dropdown-menu" style="background-color: #008d4c; color: #ffffff">
+                    <li><a href="{{url('')}}/admin/set-delivery-date/order-id={{$fields['order_id']['value']}}&date={{$date1}}" data-value="save_and_edit" style="color: #ffffff">+1 Tuần</a></li>
+                    <li><a href="{{url('')}}/admin/set-delivery-date/order-id={{$fields['order_id']['value']}}&date={{$date2}}" data-value="save_and_new" style="color: #ffffff">+2 Tuần</a></li>
+                </ul>
+		    </div>
 			<div class="col-md-2 vcenter">
 	            <a class="btn btn-default xlsx" onclick="exportExcell()">Xuất hóa đơn (.xlsx)</a>
 	        </div>
