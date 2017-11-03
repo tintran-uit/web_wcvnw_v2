@@ -273,6 +273,7 @@ $(document).ready(function() {
       if(unit = 'kg'){
         qty = parseFloat(qty);
         qty = qty/unit_quantity;
+        return qty.toFixed(0);
       }
         
       return parseInt(qty);

@@ -111,7 +111,6 @@ class OrderController extends Controller
         $address = $address." ".$district_name;
 
         $msg['promotion'] = $promotion;
-
          if(Auth::check()) {
          	$user = Auth::user();
          	$customer_id = $user->connected_id;
@@ -120,7 +119,7 @@ class OrderController extends Controller
          		//check if data exist in db (email and phone)
 	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$account_email]);
 	         	//if not yet in db, create customer into db
-	         	if(!$customer_id) {
+	         	if($customer_id!==null) {
 	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $account_email, $address, $district]);
 	         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$account_email]);
 	         	}
@@ -140,7 +139,6 @@ class OrderController extends Controller
          	}
          	$customer_id = $customer_id[0]->id;
          }
-        
 // Create Order_id and return after adding the order successfully.
         //#34256789
         if($total >= 500000) {
