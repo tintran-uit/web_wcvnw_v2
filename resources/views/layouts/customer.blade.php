@@ -523,6 +523,7 @@
                      <div class="dropdown bg-white" id="basket">
                         <div class="shadow-wrap-box">
                            <a href="#" class="checkout-basket dropdown-toggle btn-block clearfix" data-toggle="dropdown" aria-expanded="true">
+
                               <div class="pull-left bg-super-light" style="background-color: #64903E !important">
                                  <i class="fa fa-shopping-cart"></i>
                               </div>
@@ -683,7 +684,7 @@
                      <span class="icon-bar"></span>
                      </button>
                      <a class="navbar-brand" href="{{url('/gio-hang-thuc-pham-sach')}}">
-                     <i class="fa fa-shopping-cart"></i> <span class="badge" id="cartMobile" >{{count($cart)}}</span>
+                     <i class="fa fa-shopping-cart"></i> <span class="badge" id="cartMobile" >Đặt hàng: {{count($cart)}}</span>
                      </a>
                   </div>
                   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -898,7 +899,7 @@
          else{
             $('#cart-status').html("bạn có " + length + " nông sản sạch!");
             $('#cart-status2').html("bạn có " + length + " nông sản sạch!");
-            $('#cartMobile').html(length);
+            $('#cartMobile').html("Đặt hàng: " + length);
          }
 
          var code = "";

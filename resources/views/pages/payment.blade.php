@@ -71,6 +71,7 @@
 
               });
               $('#liTab3').click(function() {
+                getFormValue('#tab-2');
                 postDataPay();
               });
           });
@@ -134,22 +135,25 @@
                      <section id="steps-order">
                         <!-- Nav with Number -->
                         <ul class="nav nav-tabs" id="tab-payment">
-                           <li href="#tab-1" class="active" data-toggle="tab" id="liTab1">
+                           <li href="#tab-1" class="active text-center" data-toggle="tab" id="liTab1">
                               <a data-toggle="tab" aria-expanded="false">
-                              <span class="numberCircle">1</span>
+                              <span class="numberCircle">1</span><br class="visible-xs">
+                              <label class="visible-xs">Thông tin</label>
                               <label class="hidden-xs">Thông tin giao hàng</label>
                               </a>
                            </li>
-                           <li data-toggle="tab" id="liTab2">
+                           <li data-toggle="tab" class="text-center" id="liTab2">
                               <a id="aTab2" data-toggle="tab" href="#tab-2" class="li-disabled">
-                              <span class="numberCircle">2</span>
+                              <span class="numberCircle">2</span><br class="visible-xs">
+                              <label class="visible-xs">Thanh toán</label>
                               <label class="hidden-xs">Phương thức thanh toán</label>
                               </a>
                            </li>
-                           <li href="#tab-3" data-toggle="tab" id="liTab3">
+                           <li href="#tab-3" class="text-center" data-toggle="tab" id="liTab3">
                               <a data-toggle="tab">
-                              <span class="numberCircle">3</span>
-                              <label class="hidden-xs">Hoàn thành</label>
+                              <span class="numberCircle">3</span><br class="visible-xs">
+                              <label class="visible-xs">Hoàn tất</label>
+                              <label class="hidden-xs">Hoàn tất</label>
                               </a>
                            </li>
                         </ul>
@@ -232,16 +236,7 @@
                                              </div>
                                           </div>
                                    </article>
-                                   <article class="col-sm-8" style="margin-top: 6px">
-                                       <div class="form-group">
-                                          <label>Ghi chú thêm (nếu có)</label>
-                                       </div>
-                                          <div class="form-group row clearfix">
-                                             <div class="col-sm-9">
-                                                <textarea rows="4" name="note" class="form-control" placeholder="Nhập ghi chú thêm (nếu có)"></textarea>
-                                             </div>
-                                          </div>
-                                   </article>
+                                   
                                  </article>
                               </div>
                               <div class="form-group no-margin">
@@ -252,6 +247,9 @@
                         <div class="tab-pane" id="tab-2">
                            <form action="#" accept-charset="UTF-8" method="post" id="tab-2" class="form-style-base">
                               <!-- <h4 class="nomargin spacer-bottom-15">Phương thức thanh toán:</h4> -->
+                              <div class="form-group no-margin">
+                                 <p class="required-fields no-margin">* Nhấn "tiếp tục" để hoàn tất quá trình mua hàng</p>
+                              </div>
                               <div class="payment-method-box">
                                  <div id="payment-0" class="choose selected">
                                     <a class="clearfix" onclick="payment(0)">
@@ -301,7 +299,7 @@ trước khi giao hàng! --></p>
                                  <h4>Bạn có mã giảm giá?</h4>
                                  <div class="row clearfix">
                                     <div class="col-xs-6 form-group">
-                                       <input name="maGiamGia" type="text" class="form-control input-lg" placeholder="Nhập mã giảm giá">
+                                       <input name="maGiamGia" type="text" class="form-control input-lg" placeholder="Nhập mã giảm giá (nếu có)">
                                     </div>
                                     <div class="col-xs-4 form-group no-padding-left">
                                     <a onclick="checkMaGiamGia()" class="btn btn-warning btn-block btn-lg no-margin">
@@ -310,6 +308,18 @@ trước khi giao hàng! --></p>
                                   </div>
                                  </div>
                               </section>
+                              <section style="margin-top: 20px">
+                                  <h4>Ghi chú thêm (nếu có)</h4>
+                                  <div class="form-group row clearfix">
+                                     <div class="col-sm-9">
+                                        <textarea rows="4" name="note" class="form-control" placeholder="Nhập ghi chú thêm (nếu có)"></textarea>
+                                     </div>
+                                  </div>
+                               </section>
+                              <div class="form-group no-margin">
+                                <p></p>
+                                 <p class="required-fields text-right no-margin">* Nhấn "tiếp tục" để hoàn tất quá trình mua hàng</p>
+                              </div>
                            </form>
                         </div>
                         <div class="tab-pane" id="tab-3">
@@ -381,7 +391,7 @@ trước khi giao hàng! --></p>
                   if(check==true)
                     {
                       $('[href="#tab-2"]').tab('show');
-                      $('#payment-next-button').html('Hoàn thành');
+                      $('#payment-next-button').html('Tiếp tục');
                       getFormValue('#tab-1');
                       console.log(dataPost);
                     }
@@ -446,7 +456,7 @@ trước khi giao hàng! --></p>
               {
                 $('[href="#tab-2"]').tab('show');
                 $("#aTab2").removeClass("li-disabled");
-                $('#payment-next-button').html('Hoàn thành');
+                $('#payment-next-button').html('Tiếp tục');
                 getFormValue('#tab-1');
               }else{
                 var message = 'VUI LÒNG NHẬP ĐỦ THÔNG TIN BẮT BUỘC (*)';
@@ -475,16 +485,17 @@ trước khi giao hàng! --></p>
         if(ma=='')
           alert('Bạn cần nhập mã!');
         else{
-          $.ajaxSetup({ cache: false });
-          $('#modalLoader').modal('show');
-          $.getJSON(url, function(data){
-                $('#modalLoader').modal('hide');
-                console.log(data);
-                showTotal(data);
-             }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
-                $('#modalLoader').modal('hide');
-                 alert("Vui lòng kiểm tra kết nối internet.");
-             });
+          alert('Mã giảm giá không đúng! Vui lòng kiểm tra.');
+          // $.ajaxSetup({ cache: false });
+          // $('#modalLoader').modal('show');
+          // $.getJSON(url, function(data){
+          //       $('#modalLoader').modal('hide');
+          //       console.log(data);
+          //       showTotal(data);
+          //    }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+          //       $('#modalLoader').modal('hide');
+          //        alert("Vui lòng kiểm tra kết nối internet.");
+          //    });
         }
       }
 

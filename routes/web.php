@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
     //Operation Management CRUD
     CRUD::resource('order', 'OrderCrudController');
     CRUD::resource('order-item', 'OrderItemCrudController');
+    // CRUD::resource('set-delivery-date/order-id={order_id}&date={delivery_date}', 'OrderCrudController@setDelivery');
     CRUD::resource('order-stats', 'StatsController@stats');
     CRUD::resource('package', 'PackageCrudController');
     CRUD::resource('package-item', 'PackageItemCrudController');
@@ -49,6 +50,7 @@ Route::group(['prefix' => 'farmer', 'middleware' => ['web', 'farmer'], 'namespac
     // Backpack\MenuCRUD
     CRUD::resource('dashboard', 'PageController@dashboard');
     CRUD::resource('sell', 'PageController@sell');
+    Route::post('sell-update', 'PageController@sellUpdate');
     CRUD::resource('farmer-acc-item', 'FarmerAccCrudController');
     CRUD::resource('farmer-acc-farming', 'FarmingAccCrudController');
     CRUD::resource('farmer-acc-trading', 'TradingAccCrudController');
@@ -56,7 +58,6 @@ Route::group(['prefix' => 'farmer', 'middleware' => ['web', 'farmer'], 'namespac
 
 });
 
-// Route::get('/admin/order-item/additem/{order_id}', 'Admin\OrderCrudController@additem');
 /** CATCH-ALL ROUTE for Backpack/PageManager - needs to be at the end of your routes.php file  **/
 
 Route::get('language/{locale}', function ($locale) {
@@ -67,6 +68,8 @@ Route::get('language/{locale}', function ($locale) {
 Route::get('s', function () {
     Session::flush();
 });
+
+Route::get('admin/set-delivery-date/order-id={order_id}&date={delivery_date}', 'OrderController@moveOrder');
 
 Route::get('/kinh-nghiem-mua-thuc-pham-sach/post_id={post_id}', 'PageController@getPost');
 

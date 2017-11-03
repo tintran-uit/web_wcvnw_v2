@@ -29,7 +29,7 @@ class OrderController extends Controller
   {
     if(Auth::check()) {
 
-      DB::statement('UPDATE `trading` tr, `m_orders` m, `g_orders` g
+      $update = DB::statement('UPDATE `trading` tr, `m_orders` m, `g_orders` g
                         SET tr.`sold` = tr.`sold` - m.`quantity`
                       WHERE m.`order_id` = g.`order_id`
                         AND g.`order_id` = ?
@@ -37,20 +37,22 @@ class OrderController extends Controller
                         AND tr.`product_id` = m.`product_id`
                         AND tr.`farmer_id` = m.`farmer_id`', [$order_id]);
 
-      DB::statement('UPDATE `g_orders` 
-                        SET `delivery_date` = ?
-                      WHERE `order_id` = ?', [$delivery_date, $order_id]);
-      
-      DB::statement('UPDATE `trading` tr, `m_orders` m
-                        SET tr.`sold` = tr.`sold` + m.`quantity`
-                      WHERE m.`order_id` = ?
-                        AND tr.`product_id` = m.`product_id`
-                        AND tr.`farmer_id` = m.`farmer_id`
-                        AND tr.`delivery_date` = ?
-                        AND tr.`status` = 1', [$order_id, $delivery_date]);
-      $msg["error"]=0;
-      $msg["status"] = "Đã chuyển đơn hàng thành công";
-      return response()->json($msg);
+        $update =  DB::statement('UPDATE `g_orders` 
+                            SET `delivery_date` = ?
+                          WHERE `order_id` = ?', [$delivery_date, $order_id]);
+          
+        $update = DB::statement('UPDATE `trading` tr, `m_orders` m
+                            SET tr.`sold` = tr.`sold` + m.`quantity`
+                          WHERE m.`order_id` = ?
+                            AND tr.`product_id` = m.`product_id`
+                            AND tr.`farmer_id` = m.`farmer_id`
+                            AND tr.`delivery_date` = ?
+                            AND tr.`status` = 1', [$order_id, $delivery_date]);
+        if($update){
+            return redirect()->back();
+        }else{
+            return "Cập nhật không thành công";
+        }
 
     }
     else {

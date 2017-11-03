@@ -310,6 +310,7 @@
          
          });
       </script>
+      @yield('script')
       <!-- CRUD LIST CONTENT - crud_list_scripts stack -->
       <!-- JavaScripts -->
    </body>
