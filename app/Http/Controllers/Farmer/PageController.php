@@ -53,7 +53,14 @@ class PageController extends Controller
 
     public function sell()
     {
-    	return view('farmer.sell');
+      $farmer_id = 2;
+      $this->data['products'] = DB::select('SELECT * FROM trading WHERE `status`=1 AND farmer_id = ? ORDER BY `category`', [$farmer_id]);
+    	return view('farmer.sell', $this->data);
+    }
+
+    public function sellUpdate(Request $request)
+    {
+      return $request->data;
     }
 
 

@@ -236,16 +236,7 @@
                                              </div>
                                           </div>
                                    </article>
-                                   <article class="col-sm-8" style="margin-top: 6px">
-                                       <div class="form-group">
-                                          <label>Ghi chú thêm (nếu có)</label>
-                                       </div>
-                                          <div class="form-group row clearfix">
-                                             <div class="col-sm-9">
-                                                <textarea rows="4" name="note" class="form-control" placeholder="Nhập ghi chú thêm (nếu có)"></textarea>
-                                             </div>
-                                          </div>
-                                   </article>
+                                   
                                  </article>
                               </div>
                               <div class="form-group no-margin">
@@ -317,6 +308,14 @@ trước khi giao hàng! --></p>
                                   </div>
                                  </div>
                               </section>
+                              <section style="margin-top: 20px">
+                                  <h4>Ghi chú thêm (nếu có)</h4>
+                                  <div class="form-group row clearfix">
+                                     <div class="col-sm-9">
+                                        <textarea rows="4" name="note" class="form-control" placeholder="Nhập ghi chú thêm (nếu có)"></textarea>
+                                     </div>
+                                  </div>
+                               </section>
                               <div class="form-group no-margin">
                                 <p></p>
                                  <p class="required-fields text-right no-margin">* Nhấn "tiếp tục" để hoàn tất quá trình mua hàng</p>

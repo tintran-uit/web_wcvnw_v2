@@ -50,6 +50,7 @@ Route::group(['prefix' => 'farmer', 'middleware' => ['web', 'farmer'], 'namespac
     // Backpack\MenuCRUD
     CRUD::resource('dashboard', 'PageController@dashboard');
     CRUD::resource('sell', 'PageController@sell');
+    Route::post('sell-update', 'PageController@sellUpdate');
     CRUD::resource('farmer-acc-item', 'FarmerAccCrudController');
     CRUD::resource('farmer-acc-farming', 'FarmingAccCrudController');
     CRUD::resource('farmer-acc-trading', 'TradingAccCrudController');
