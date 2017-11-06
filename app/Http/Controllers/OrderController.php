@@ -114,14 +114,15 @@ class OrderController extends Controller
          if(Auth::check()) {
          	$user = Auth::user();
          	$customer_id = $user->connected_id;
+
          	$account_email = $user->email;
-         	if($customer_id===null) {
+         	if($customer_id === null) {
          		//check if data exist in db (email and phone)
-	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$account_email]);
+	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
 	         	//if not yet in db, create customer into db
-	         	if($customer_id!==null) {
+	         	if($customer_id === null) {
 	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $account_email, $address, $district]);
-	         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$account_email]);
+	         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
 	         	}
 	         	$customer_id = $customer_id[0]->id;
 
@@ -131,11 +132,11 @@ class OrderController extends Controller
          else 
          {
          	//check if data exist in db (email and phone)
-         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$email]);
+         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
          	//if not yet in db, create customer into db
-         	if(!$customer_id) {
+         	if($customer_id === null) {
          		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $email, $address, $district]);
-         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$email]);
+         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
          	}
          	$customer_id = $customer_id[0]->id;
          }
