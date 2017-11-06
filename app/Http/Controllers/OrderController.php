@@ -121,7 +121,7 @@ class OrderController extends Controller
 	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
 	         	//if not yet in db, create customer into db
 	         	if($customer_id === null) {
-	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $account_email, $address, $district]);
+	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $account_email, $address, $district]);
 	         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
 	         	}
 	         	$customer_id = $customer_id[0]->id;
@@ -135,7 +135,7 @@ class OrderController extends Controller
          	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
          	//if not yet in db, create customer into db
          	if($customer_id === null) {
-         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`) VALUES(?,?,?,?,?)', [$name, $phone, $email, $address, $district]);
+         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $email, $address, $district]);
          		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
          	}
          	$customer_id = $customer_id[0]->id;
