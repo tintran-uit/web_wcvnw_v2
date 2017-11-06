@@ -116,7 +116,7 @@ class OrderController extends Controller
          	$user = Auth::user();
          	$customer_id = $user->connected_id;
          	$account_email = $user->email;
-         	if(!$customer_id) {
+         	if($customer_id===null) {
          		//check if data exist in db (email and phone)
 	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `email` = ?', [$account_email]);
 	         	//if not yet in db, create customer into db
