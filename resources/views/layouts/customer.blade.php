@@ -462,7 +462,11 @@
                                        <!-- <li>
                                           <a href="{{url('')}}/user/edit">{{ trans('head.editProfile') }}</a>
                                        </li> -->
-
+                                       @if(Auth::user()->account_type=='Farmer')
+                                       <li>
+                                          <a href="{{url('')}}/farmer/dashboard">{{ trans('head.farmer') }}</a>
+                                       </li>
+                                       @endif
                                        <li>
                                           <a href="{{url('')}}/user/rate">{{ trans('head.rate') }}</a>
                                        </li>
