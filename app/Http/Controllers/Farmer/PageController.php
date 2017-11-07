@@ -60,7 +60,14 @@ class PageController extends Controller
 
     public function sellUpdate(Request $request)
     {
-      return $request->data;
+      $farmer_id = 2;
+      $delivery_date = '2017-11-11';
+      $products_id = DB::select('SELECT product_id FROM trading WHERE `status`=1 AND farmer_id = ? ORDER BY `category`', [$farmer_id]);
+      $products_list = [];
+      foreach ($products_id as $id) {        
+        DB::statement('UPDATE `trading` tr SET `capacity` = ? WHERE `farmer_id`=? AND `product_id` =? AND `delivery_date` =?', [$request->input('id_'.$id->product_id), $farmer_id, $id->product_id, $delivery_date]);
+      }
+      return redirect('farmer/sell');
     }
 
 
