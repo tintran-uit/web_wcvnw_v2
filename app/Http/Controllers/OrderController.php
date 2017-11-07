@@ -151,16 +151,19 @@ class OrderController extends Controller
         $address = $address." ".$district_name;
 
         $msg['promotion'] = $promotion;
+        $balance = 0;
+
          if(Auth::check()) {
          	$user = Auth::user();
          	$customer_id = $user->connected_id;
+          $balance = $user->balance;
 
          	$account_email = $user->email;
          	if($customer_id === null) {
          		//check if data exist in db (email and phone)
 	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
 	         	//if not yet in db, create customer into db
-	         	if($customer_id === null) {
+	         	if(count($customer_id) < 1) {
 	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $account_email, $address, $district]);
 	         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
 	         	}
@@ -174,7 +177,7 @@ class OrderController extends Controller
          	//check if data exist in db (email and phone)
          	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
          	//if not yet in db, create customer into db
-         	if($customer_id === null) {
+         	if(count($customer_id) < 1) {
          		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $email, $address, $district]);
          		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
          	}
@@ -187,7 +190,6 @@ class OrderController extends Controller
         }
         $discount_amount = ROUND(($promotion * $total)/100, 0);
         $total = $total - $discount_amount + $shipping_cost;
-        $balance = $user->balance;
         $deposit = 0;
 
         if($balance > 0){
