@@ -20,10 +20,11 @@ public function stats()
         $date->format('Y-m-d');
         $farmers = DB::select('SELECT DISTINCT f.`name` "name", f.`id` "id" 
                                  FROM `farmers` f, `trading` tr 
-                                WHERE tr.`delivery_date` = ?
+                                WHERE tr.`status` = 1
                                   AND tr.`sold` > 0
                                   AND tr.`farmer_id` = f.`id` 
-                             ORDER BY `id` ASC', [$date]);
+                             ORDER BY `id` ASC');
+
             foreach($farmers as $farm)
             {
               if($farm->id != 10){
