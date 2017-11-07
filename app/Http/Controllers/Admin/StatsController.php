@@ -16,8 +16,13 @@ class StatsController extends CrudController
 
 public function stats()
     {
+      if(date('D') == 'Sat'){
+        $date = date('Y-m-d');
+      }else{
         $date = new DateTime('next saturday');
         $date->format('Y-m-d');
+      }
+        
         $farmers = DB::select('SELECT DISTINCT f.`name` "name", f.`id` "id" 
                                  FROM `farmers` f, `trading` tr 
                                 WHERE tr.`status` = 1

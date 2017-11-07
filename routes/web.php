@@ -67,6 +67,19 @@ Route::get('language/{locale}', function ($locale) {
 
 Route::get('s', function () {
     Session::flush();
+    // $id = DB::select('SELECT id FROM products WHERE `category` = 5');
+    // $product_id = [];
+    // foreach ($id as $key) {
+    //     array_push($product_id, $key->id);
+    // }
+    // $product_id = implode(',', $product_id);
+    // // return $product_id;
+    // $total = DB::select('SELECT * FROM m_orders WHERE `order_id`>1000155 AND `order_id`<1000176 AND `product_id` IN ('.$product_id.') ');
+    // $price = 0;
+    // foreach ($total as $key) {
+    //     $price += $key->price;
+    // }
+    // return $price;
 });
 
 Route::get('admin/set-delivery-date/order-id={order_id}&date={delivery_date}', 'OrderController@moveOrder');

@@ -3230,4 +3230,23 @@ a.item-delete:hover{
     background-color: #A52223;
 }
 
+<<<<<<< HEAD
+=======
+.reported-out-of-stock{
+    position: absolute;
+    z-index: 2;
+    background-color: #fff688;
+    width: 40%;
+    bottom: 10px;
+    left: 30%;
+    font-weight: 600;
+    padding: 3px;
+  opacity: 0.8;
+}
+
+.content-product .thumbnail .image-product a.center-block .reported-out-of-stock:hover{
+  color: #C04724 !important;
+}
+
+>>>>>>> 8c879237cea3ab2c661195170850fb39a0c1251c
 

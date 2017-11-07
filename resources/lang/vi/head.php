@@ -23,4 +23,5 @@ return [
     'hello' => 'Xin chào',
     'editProfile' => 'Chỉnh sửa thông tin cá nhân',
     'rate' => 'Đơn hàng của bạn',
+    'farmer' => 'Quản lý nông trại',
 ];

@@ -33,7 +33,7 @@
     		<td>@if($product->status==1) Đang bán @else Chưa bán @endif</td>
     		<td>{{$delivery_date}}</td>
     		<td>{{$product->unit}}</td>
-    		<td class="text-center"><input type="number" name="date{{$product->product_id}}" value="{{$product->capacity}}" style="text-align: center;"></td>
+    		<td class="text-center"><input type="number" name="id_{{$product->product_id}}" value="{{$product->capacity}}" style="text-align: center;" step="0.5"></td>
     		<td style="display:none;">{{$product->product_id}}</td>
     	</tr>
     	<?php $i++; ?>
