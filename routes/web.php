@@ -98,6 +98,7 @@ Route::get('/add', 'PageController@testcart');
 
 Route::get('/user/edit', 'CustomerController@editProfile');
 Route::get('/user/rate', 'CustomerController@getRate');
+Route::get('/user/account', 'CustomerController@getAccount');
 Route::get('/layhang/{id}', 'CustomerController@layhang2');
 
 Route::get('{page}/{subs?}', ['uses' => 'PageController@page'])
