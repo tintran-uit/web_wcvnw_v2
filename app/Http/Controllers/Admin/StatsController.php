@@ -37,7 +37,7 @@ public function stats()
                 $products[$farm->name] = $this->soangoi($farm->id, $date);
               }
             }
-          // return $products;  
+          return $products;  
         return view('admin.stats', ['farmers' =>$farmers, 'products' => $products]);
         
     }

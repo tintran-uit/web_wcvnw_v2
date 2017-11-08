@@ -133,14 +133,14 @@ textarea.form-control {
 		        </a>
 
 		        <?php
-		        	$date1 = date("Y-m-d",strtotime('Saturday +1 week'));
-        			$date2 = date("Y-m-d",strtotime('Saturday +2 week'));
+		        	// $date1 = date("Y-m-d",strtotime('Saturday +1 week'));
+        			// $date2 = date("Y-m-d",strtotime('Saturday +2 week'));
         			// $date2 = $date2->format('Y-m-d');
 		        ?>
 
 		        <ul class="dropdown-menu" style="background-color: #008d4c; color: #ffffff">
-                    <li><a href="{{url('')}}/admin/set-delivery-date/order-id={{$fields['order_id']['value']}}&date={{$date1}}" data-value="save_and_edit" style="color: #ffffff">+1 Tuần</a></li>
-                    <li><a href="{{url('')}}/admin/set-delivery-date/order-id={{$fields['order_id']['value']}}&date={{$date2}}" data-value="save_and_new" style="color: #ffffff">+2 Tuần</a></li>
+                    <li><a href="{{url('')}}/admin/set-delivery-date/order-id={{$fields['order_id']['value']}}&date=1" data-value="save_and_edit" style="color: #ffffff">+1 Tuần</a></li>
+                    <li><a href="{{url('')}}/admin/set-delivery-date/order-id={{$fields['order_id']['value']}}&date=2" data-value="save_and_new" style="color: #ffffff">+2 Tuần</a></li>
                 </ul>
 		    </div>
 			<div class="col-md-2 vcenter">
