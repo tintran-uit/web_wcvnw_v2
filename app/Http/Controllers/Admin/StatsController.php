@@ -95,6 +95,7 @@ public function stats()
                                     AND f.`id` = m.`farmer_id` 
                                     AND m.`delivery_date` = ?
                                     AND m.`package_id` = ?',[$date, $it->product_id]);
+
               foreach ($sp as $key) {
                 if(array_key_exists($key->product_id, $mua)){
                   if($key->slug == $mua[$key->product_id]['name'])
