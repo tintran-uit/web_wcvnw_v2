@@ -334,7 +334,7 @@ class OrderController extends Controller
               $products[$x]->inPack = $products[$x]->product_id;
               $products[$x]->order = $order_id;
               $items =  DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", 
-                                            p.`id` "product_id", m.`quantity` "quantity", m.`order_quantity` "order_quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" 
+                                            p.`id` "product_id", m.`quantity` "quantity", "" AS "order_quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" 
                                       FROM `m_packages` m, `products` p, `farmers` f, `g_orders` g
                                      WHERE p.`id` = m.`product_id` 
                                        AND f.`id` = m.`farmer_id` 
