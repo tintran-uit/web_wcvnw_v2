@@ -1,0 +1,37 @@
+/* Hides the Page Title and Source URL */
+
+#pf-title {
+    display:none;
+}
+
+p.box-header{
+	display:none;
+}
+
+#saveActions{
+	display:none;
+}
+
+#pf-src{
+	display:none;
+	border-top:none;
+}
+
+#pf-body td {
+    vertical-align: inherit;
+}
+
+#pf-body img#pf-src-icon{
+	max-width: 32px;
+	max-height: 32px;
+}
+
+.print-head{
+	text-align: center;
+}
+
+.print-title{
+	display: block;
+    font-size: 18px;
+    font-weight: bold;
+}

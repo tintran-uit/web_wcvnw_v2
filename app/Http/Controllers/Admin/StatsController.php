@@ -73,7 +73,8 @@ public function stats()
                                m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM m_packages m, products p, farmers f 
                            WHERE p.`id` = m.`product_id` 
                            AND f.`id` = m.`farmer_id` 
-                           AND m.`package_id` = ?',[$it->product_id]);
+                           AND m.`package_id` = ?
+                           AND m.`delivery_date` = ?',[$it->product_id, $date]);
               foreach ($sp as $key) {
                 if(array_key_exists($key->product_id, $mua)){
                   if($key->slug == $mua[$key->product_id]['name'])

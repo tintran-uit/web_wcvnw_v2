@@ -24,7 +24,11 @@
          <div class="item">
             <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 3.png" />
             </a>        
-            
+            <div class="carousel-caption">
+               <h4><b>Để đảm bảo đủ sản lượng thực phẩm nuôi trồng thuận tự nhiên & hữu cơ cung cấp cho khách hàng</b></h4>
+               <h3><b>Cfarm chốt đơn vào 6h:00 PM Thứ Năm - Giao hàng tại nhà vào Thứ Bảy hàng tuần.</b></h3>
+               <p>(Các đơn hàng đặt sau 6h00 PM Thứ Năm sẽ được giao vào thứ Bảy của tuần tiếp theo.<br> Cảm ơn quý khách đã đồng hành cùng Cfarm xây dựng cộng đồng nuôi trồng thực phẩm sạch & hữu cơ)</p>
+            </div>
          </div>
          
          <div class="item">
