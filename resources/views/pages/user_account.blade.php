@@ -43,16 +43,17 @@
                           <div class="internal-box">
                             <div class="title clearfix">
                               <h5 class="no-margin pull-left">
-                                <strong>Contact information</strong>
+                                <strong>{{ trans('user.contact_information') }} </strong>
                               </h5>
                               <div class="pull-right">
                                     <a class="btn-link" href="#"><i class="fa fa-pencil"></i></a>                
                               </div>
                             </div>
                             <div class="content">
-                              Stephanie Chung<br>
-                              ianwatts@yahoo.com<br>
-                              Tel.: +000 434549776880
+                              {{Auth::user()->name}}<br>
+                              {{Auth::user()->email}}<br>
+                              Tel.: {{$customer[0]->phone}}
+
                             </div>
                           </div>
                         </div>

@@ -190,7 +190,7 @@ class CustomerController extends Controller
 	        $user = Auth::user();
          	$customer_id = $user->connected_id;
 			
-			
+			return $customer = DB::select('SELECT * FROM customers WHERE `id` = ?', [$customer_id]);
 			
 	        
 	        return view('pages.user_account', $this->data);
