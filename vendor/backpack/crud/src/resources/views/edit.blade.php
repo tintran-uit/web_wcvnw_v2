@@ -3,7 +3,7 @@
 @section('header')
 	<section class="content-header">
 	  <h1>
-	    {{ trans('backpack::crud.edit') }} <span>{{ $crud->entity_name }}</span>
+	    Cfarm.vn
 	  </h1>
 	  <ol class="breadcrumb">
 	    <li><a href="{{ url(config('backpack.base.route_prefix'),'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
@@ -70,10 +70,10 @@ textarea.form-control {
 </style>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/TableExport/3.3.13/css/tableexport.min.css" rel="stylesheet" type="text/css" />
-
+<!-- <link rel="stylesheet" type="text/css" href="{{url('')}}/assets/stylesheets/vendor/print-friendly/custom.css"> -->
 <script src="{{url('')}}/assets/javascripts/vendor/jquery-2.1.3.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.3.7/alasql.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.2/xlsx.core.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.3.7/alasql.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.2/xlsx.core.min.js"></script> -->
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<!-- Default box -->
@@ -144,8 +144,13 @@ textarea.form-control {
                 </ul>
 		    </div>
 			<div class="col-md-2 vcenter">
-	            <a class="btn btn-default xlsx" onclick="exportExcell()">Xuất hóa đơn (.xlsx)</a>
+	            <!-- <a class="btn btn-default xlsx" onclick="exportExcell()">Xuất hóa đơn (.xlsx)</a> -->
+	            <a href="https://www.printfriendly.com" class="btn btn-default xlsx" onclick="window.print();return false;">Xuất hóa đơn (.xlsx)</a>
+	            <script>
+	            	var headCode = '<div class="print-head text-center"><span class="print-title">Cfarm.vn</span><b><i>Kết nối lương nông - An lòng nội trợ</i></b><br><img id="pf-src-icon" src="http://cfarm.vn/assets/images/favicon/favicon-96x96.png" class="non-delete"></div>';
+	            var pfHeaderImgUrl = '';var pfHeaderTagline = headCode;var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 0;var pfDisablePrint = 0;var pfCustomCSS = '{{url('')}}/assets/stylesheets/vendor/print-friendly/custom.css';var pfBtVersion='1';(function(){var js,pf;pf=document.createElement('script');pf.type='text/javascript';pf.src='{{url('')}}/assets/javascripts/vendor/print-friendly/custom.js';document.getElementsByTagName('head')[0].appendChild(pf)})();</script>
 	        </div>
+
 	    </div>
 		  <table id="tbSupp" class="table table-bordered table-striped display" style="margin-top: 10px;">
             <thead>
