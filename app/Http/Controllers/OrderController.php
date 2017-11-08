@@ -60,6 +60,46 @@ class OrderController extends Controller
     } 
   }
 
+  public function cancelOrder($order_id)
+  {
+    $cancelStatus = 8;
+    if(Auth::check()) {
+      $user = Auth::user();
+          $customer_id = $user->connected_id;
+      if(strcmp($user->account_type, "Admin") == 0){
+
+              DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p 
+                                SET t.`sold` = t.`sold` - m.`quantity`
+                              WHERE t.`farmer_id` = m.`farmer_id`
+                                AND t.`product_id` = m.`product_id` 
+                                AND p.`id` = mo.`product_id`
+                                AND p.`category` = 0
+                                AND t.`status` = 1
+                                AND m.`package_id` = p.`id`
+                                AND mo.`order_id` = ?', [$order_id]);
+
+          
+            DB::statement('UPDATE `g_orders` AS g, `m_orders` AS m, `trading` t
+                              SET t.`sold` = t.`sold` - m.`quantity`,
+                                  g.`status` = 8
+                            WHERE g.`status` != 8
+                              AND m.`order_id` = g.`order_id`
+                              AND m.`farmer_id` = t.`farmer_id`
+                              AND m.`product_id` = t.`product_id`
+                              AND t.`status` = 1
+                              AND g.`order_id` = ?', [$order_id]);
+
+        }
+        else {
+          return redirect()->back();
+        }
+      }
+      else {
+        return redirect()->back();
+      }
+
+  }
+
 	public function addOrder(Request $request)
 	{
 		$data = $request->data;
@@ -111,16 +151,19 @@ class OrderController extends Controller
         $address = $address." ".$district_name;
 
         $msg['promotion'] = $promotion;
+        $balance = 0;
+
          if(Auth::check()) {
          	$user = Auth::user();
          	$customer_id = $user->connected_id;
+          $balance = $user->balance;
 
          	$account_email = $user->email;
          	if($customer_id === null) {
          		//check if data exist in db (email and phone)
 	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
 	         	//if not yet in db, create customer into db
-	         	if($customer_id === null) {
+	         	if(count($customer_id) < 1) {
 	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $account_email, $address, $district]);
 	         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
 	         	}
@@ -134,7 +177,7 @@ class OrderController extends Controller
          	//check if data exist in db (email and phone)
          	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
          	//if not yet in db, create customer into db
-         	if($customer_id === null) {
+         	if(count($customer_id) < 1) {
          		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $email, $address, $district]);
          		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
          	}
@@ -147,11 +190,23 @@ class OrderController extends Controller
         }
         $discount_amount = ROUND(($promotion * $total)/100, 0);
         $total = $total - $discount_amount + $shipping_cost;
+        $deposit = 0;
+
+        if($balance > 0){
+          if($balance >= $total){
+            $deposit = $total;
+          }
+          else {
+            $deposit = $balance;
+          }
+          $balance = $balance - $deposit;
+          DB::statement('UPDATE `users` SET `balance` = ? WHERE `email` = ?', [$balance, $account_email]);
+        }
         $order_id = DB::select('SELECT `order_id` "order_id" FROM `uniqueids` WHERE `id` = 1');
         $order_id = $order_id[0]->order_id;
         DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`, `delivery_name`) VALUES(?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $discount_amount, $delivery_date, $note, $name]);
+         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`, `delivery_name`, `deposit`) VALUES(?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $discount_amount, $delivery_date, $note, $name, $deposit]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
@@ -242,45 +297,7 @@ class OrderController extends Controller
 	}
 
 
-	public function cancelOrder($order_id)
-	{
-		$cancelStatus = 8;
-		if(Auth::check()) {
-			$user = Auth::user();
-         	$customer_id = $user->connected_id;
-			if(strcmp($user->account_type, "Admin") == 0){
 
-		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p 
-		        		              SET t.`sold` = t.`sold` - m.`quantity`
- 									WHERE t.`farmer_id` = m.`farmer_id`
-   									  AND t.`product_id` = m.`product_id` 
-   									  AND p.`id` = mo.`product_id`
-   									  AND p.`category` = 0
-   									  AND t.`status` = 1
-   									  AND m.`package_id` = p.`id`
-   									  AND mo.`order_id` = ?', [$order_id]);
-
-    			
-    				DB::statement('UPDATE `g_orders` AS g, `m_orders` AS m, `trading` t
-		        		              SET t.`sold` = t.`sold` - m.`quantity`,
-		        		                  g.`status` = 8
- 									WHERE g.`status` != 8
- 									  AND m.`order_id` = g.`order_id`
- 									  AND m.`farmer_id` = t.`farmer_id`
- 									  AND m.`product_id` = t.`product_id`
- 									  AND t.`status` = 1
- 									  AND g.`order_id` = ?', [$order_id]);
-
-    		}
-    		else {
-    			return redirect()->back();
-    		}
-    	}
-    	else {
-    		return redirect()->back();
-    	}
-
-	}
 
     public function addItemAdmin(Request $request)
     {
