@@ -486,7 +486,8 @@ $(document).ready(function() {
             if(data.error){
             	alert(data.status);
             }else{
-            	alert("Thêm thành công!");
+            	// alert("Thêm thành công!");
+            	location.reload();
             }
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -562,7 +563,8 @@ $(document).ready(function() {
           success: function(data){
             console.log(data);
             if(data.error==0){
-            	alert(data.status);
+            	// alert(data.status);
+            	location.reload();
             }else{
             	alert(data.status);
             }
