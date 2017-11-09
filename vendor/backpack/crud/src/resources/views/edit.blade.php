@@ -160,9 +160,9 @@ textarea.form-control {
                 <th>Sản phẩm</th>
                 <th>Trang trại</th>
                 <th>Đơn vị</th>
-                <th>Số lượng</th>
+                <th>SL đặt mua</th>
+                <th>SL thực tế</th>
                 <th>Thành tiền</th>
-                <th>Ghi chú</th>
               </tr>
             </thead>
             <tbody>
@@ -339,11 +339,11 @@ $products = array_merge($products, DB::select($mySQL));
 		              	// if(firstGoi==0){
 		              		$.each(data.items, function(index, data2){
 		              			if(firstGoi==0){
-				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">Gói</td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">'+data.price+'</td><td></td>\r\n <\/tr>';
+				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">Gói</td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>   \r\n  <td>'+data2.quantity+'    \r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">'+data2.price+'</td>\r\n <\/tr>';
 					              	stt++;
 				              		firstGoi++;
 				              	}else{
-				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="display:none;"></td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>       \r\n<td style="display:none;"></td><td></td>\r\n <\/tr>';
+				              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="display:none;"></td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>  \r\n  <td>'+data2.quantity+'     \r\n<td style="display:none;"></td>\r\n <\/tr>';
 			              			stt++;
 				              	}
 
@@ -353,11 +353,11 @@ $products = array_merge($products, DB::select($mySQL));
 	              }else{
 	              	// them le
 	              		if(firstLe==0){
-		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+countLe+'">Lẻ</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+'<td></td>\r\n <\/tr>';
+		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+countLe+'">Lẻ</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.order_quantity+'<\/td>\r\n  <td>'+data.quantity+'</td>     \r\n<td>'+data.price+'</td>\r\n <\/tr>';
 		              		firstLe++;
 		              		stt++;
 		              	}else{
-		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.quantity+'<\/td>       \r\n<td>'+data.price+'<td></td>\r\n <\/tr>';
+		              		newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.order_quantity+'<\/td>   \r\n  <td>'+data.quantity+'    \r\n<td>'+data.price+'</td>\r\n <\/tr>';
 		              		stt++;
 		              	}
 	          		}
@@ -387,7 +387,9 @@ function exportExcell() {
 @endsection
 
 @section('after_scripts2')
+<!-- <script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/editor.jqueryui.min.js"></script> -->
 <script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/dataTables/jquery.dataTables.min.js"></script>
+
 <script type="text/javascript">
     // var ItemsUpload = ["order_id":order_id];
     var ItemsUpload = [];
@@ -396,6 +398,32 @@ $(document).ready(function() {
 
     var table = $('#cartTable').DataTable({searching: true, paging: false, "bInfo" : false});
 
+    table.on( 'input', 'input.stepper-input' , function () {
+         var msg;
+         // var row = $(this).closest('tr').index();
+         var tr = $(this).parents('tr');
+    		var row = table.row( tr );
+         console.log(row);
+         var unit_quantity = table.row(row).data()[7];
+         var unit = table.row(row).data()[8];
+         var prodID = table.row(row).data()[9];
+         var farmerID = table.row(row).data()[10];
+         // $(this).closest('tr').find(':input').each(function() {
+            
+            msg =  parseFloat($(this).val());
+            // msg = stepperUp(msg, unit_quantity, unit); 
+
+            // $(this).val(msg);
+         // });
+         msg = converQty(msg, unit_quantity, unit);
+         console.log(msg);
+         var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
+         price = parseInt(price)*msg;
+         // row = 2;
+         // table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
+         var rowId = 0;
+         updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
+      });
 
     table.on( 'click', 'span.up' , function () {
          var msg;
@@ -415,11 +443,11 @@ $(document).ready(function() {
             $(this).val(msg);
          });
          msg = converQty(msg, unit_quantity, unit);
+         console.log(msg);
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          // row = 2;
          table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
-         console.log(unit_quantity);
          var rowId = 0;
          updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
       });
@@ -528,13 +556,13 @@ $(document).ready(function() {
    }
 
    function converQty(qty, unit_quantity, unit) {
-      if(unit = 'kg'){
-        qty = parseFloat(qty);
-        qty = qty/unit_quantity;
-        return qty.toFixed(0);
-      }
-        
-      return parseInt(qty);
+      // if(unit = 'kg'){
+      //   qty = parseFloat(qty);
+      //   qty = qty/unit_quantity;
+      //   return qty.toFixed(0);
+      // }
+      qty = parseFloat(qty); 
+      return qty.toFixed(3);
       
    }
 
@@ -564,7 +592,7 @@ $(document).ready(function() {
             console.log(data);
             if(data.error==0){
             	// alert(data.status);
-            	location.reload();
+            	// location.reload();
             }else{
             	alert(data.status);
             }

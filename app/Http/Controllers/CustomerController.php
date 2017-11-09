@@ -169,6 +169,35 @@ class CustomerController extends Controller
 		return redirect()->back();
 	}
 
+	public function getAccount()
+	{
+		if (Auth::check()) {
+			$page = Page::findBySlug('index');
+
+	        if (!$page)
+	        {
+	            abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
+	        }
+
+	        if (Session::has('locale')) {
+	            App::setLocale(Session::get('locale'));
+	        }
+
+	        $this->data['title'] = $page->title;
+	        $this->data['page'] = $page->withFakes();
+	        $this->data['menu'] = MenuItem::all();
+	        $this->data['cart'] = Cart::content();
+	        $user = Auth::user();
+         	$customer_id = $user->connected_id;
+			
+			return $customer = DB::select('SELECT * FROM customers WHERE `id` = ?', [$customer_id]);
+			
+	        
+	        return view('pages.user_account', $this->data);
+		}
+		return redirect()->back();
+	}
+
 	public function rating(Request $request)
 	{
 		//rating will be share to detail farmers
