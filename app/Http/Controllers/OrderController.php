@@ -27,13 +27,14 @@ class OrderController extends Controller
 
   public function moveOrder($order_id, $week_num)
   {
-    $delivery_date = DB::select('SELECT `delivery_date` FROM `g_orders` WHERE `order_id` = ?', [$order_id]);
+    $delivery_date = DB::select('SELECT DATE_ADD(`delivery_date`, INTERVAL 7*? DAY) "next_delivery_date", `delivery_date` "delivery_date" FROM `g_orders` WHERE `order_id` = ?', [$week_num, $order_id]);
     if(count($delivery_date) < 1) {
       $msg['error'] = 0;
       $msg['status'] = "Mã Order ".$order_id." không tồn tại trong hệ thống.";
       return response()->json($msg);
     }
-    $delivery_date = $delivery_date[0]->delivery_date + $week_num * 7;
+    $next_delivery_date = $delivery_date[0]->next_delivery_date;
+    $delivery_date = $delivery_date[0]->delivery_date;
     if(Auth::check()) {
         DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p, `g_orders` g 
                           SET t.`sold` = t.`sold` - m.`quantity`* mo.`quantity`
@@ -57,15 +58,14 @@ class OrderController extends Controller
 
         $update =  DB::statement('UPDATE `g_orders` 
                                      SET `delivery_date` = ?
-                                   WHERE `order_id` = ?', [$delivery_date, $order_id]);
+                                   WHERE `order_id` = ?', [$next_delivery_date, $order_id]);
           
         $update = DB::statement('UPDATE `trading` tr, `m_orders` m
                                     SET tr.`sold` = tr.`sold` + m.`quantity`
                                   WHERE m.`order_id` = ?
                                     AND tr.`product_id` = m.`product_id`
                                     AND tr.`farmer_id` = m.`farmer_id`
-                                    AND tr.`delivery_date` = ?
-                                    AND tr.`status` = 1', [$order_id, $delivery_date]);
+                                    AND tr.`delivery_date` = ?', [$order_id, $delivery_date]);
 
         DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p 
                           SET t.`sold` = t.`sold` + m.`quantity`* mo.`quantity`
@@ -435,7 +435,6 @@ class OrderController extends Controller
                     $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
                                              FROM `products` p, `trading` tr
                                             WHERE p.`id` = tr.`product_id`
-                                              AND tr.`status` = 1
                                               AND (tr.`capacity` - tr.`sold`) > ?
                                               AND tr.`farmer_id` = ?
                                               AND tr.`product_id` = ?
@@ -479,7 +478,6 @@ class OrderController extends Controller
                                               SET tr.`sold` = tr.`sold` + m.`quantity` * ?
                                             WHERE tr.`farmer_id` = m.`farmer_id`
                                               AND tr.`product_id` = m.`product_id` 
-                                              AND tr.`status` = 1
                                               AND tr.`delivery_date` = m.`delivery_date`
                                               AND tr.`delivery_date` = ?
                                               AND m.`package_id` = ?', [$new_quantity, $delivery_date, $product_id]);
@@ -492,7 +490,6 @@ class OrderController extends Controller
                 $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
                                        FROM `products` p, `trading` tr
                                       WHERE p.`id` = tr.`product_id`
-                                        AND tr.`status` = 1
                                         AND (tr.`capacity` - tr.`sold`) > ?
                                         AND tr.`farmer_id` = ?
                                         AND tr.`product_id` = ?
@@ -516,8 +513,7 @@ class OrderController extends Controller
 
                     DB::statement('UPDATE `trading` 
                                       SET `sold` = `sold` + ? 
-                                    WHERE `status` = 1 
-                                      AND `delivery_date` = ?
+                                    WHERE `delivery_date` = ?
                                       AND `farmer_id` = ? 
                                       AND `product_id` = ?', [$quantity, $delivery_date, $farmer_id, $product_id]);
 
@@ -528,7 +524,6 @@ class OrderController extends Controller
                                           SET tr.`sold` = tr.`sold` + m.`quantity` * ?
                                         WHERE tr.`farmer_id` = m.`farmer_id`
                                           AND tr.`product_id` = m.`product_id` 
-                                          AND tr.`status` = 1
                                           AND tr.`delivery_date` = m.`delivery_date`
                                           AND tr.`delivery_date` = ?
                                           AND m.`package_id` = ?', [$qty, $delivery_date, $product_id]);
