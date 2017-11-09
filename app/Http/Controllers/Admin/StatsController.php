@@ -22,7 +22,7 @@ public function stats()
         $date = new DateTime('next saturday');
         $date->format('Y-m-d');
       }
-        
+      // $date = '2017-11-11'; 
         $farmers = DB::select('SELECT DISTINCT f.`name` "name", f.`id` "id" 
                                  FROM `farmers` f, `trading` tr 
                                 WHERE tr.`delivery_date` = ?
@@ -52,7 +52,6 @@ public function stats()
                                   WHERE tr.`product_id` = p.`id` 
                                     AND f.`id` = ? 
                                     AND f.`id` = tr.`farmer_id` 
-                                    AND tr.`status` = 1 
                                     AND tr.`sold` > 0 
                                     AND tr.`delivery_date` = ? 
                                ORDER BY p.`category` DESC', [$id, $date]);
@@ -134,7 +133,7 @@ public function stats()
 
   public function soangoi($id, $date)
   {
-    $products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id` AND tr.`status` = 1 AND tr.`sold` > 0 AND tr.`delivery_date` = ? ORDER BY p.`category` DESC', [$id, $date]);
+    $products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id` AND tr.`sold` > 0 AND tr.`delivery_date` = ? ORDER BY p.`category` DESC', [$id, $date]);
 
       $mua = [];
       foreach ($products_list as $key) {
