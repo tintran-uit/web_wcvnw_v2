@@ -353,7 +353,41 @@ class OrderController extends Controller
 	}
 
 
+    public function adjustRealOrder(Request $request)
+    {
+        if(Auth::check()){
+            $data = $request->data;
+            $order_id = $data["order_id"];
+            $m_orders = $data["ItemsUpload"];
+            $g_orders = DB::select('SELECT g.`total`, g.`shipping_cost` "shipping_cost", g.`delivery_date`, 
+                                           d.`shipping_cost` "shipping_cost_ex"
+                                      FROM `g_orders` g, `district` d
+                                     WHERE `order_id` = ?
+                                       AND g.`delivery_district` = d.`id`', [$order_id]);
 
+            if(count($g_orders) < 1){
+              $msg["error"]=1;
+              $msg["status"] = "Thông tin chung đơn hàng không tồn tại";
+              return response()->json($msg);
+            }
+            $total = $g_orders[0]->total;
+            $shipping_cost = $g_orders[0]->shipping_cost;
+            $shipping_cost_ex = $g_orders[0]->shipping_cost_ex;
+            $delivery_date = $g_orders[0]->delivery_date;
+
+
+            foreach ($m_orders as $m_order) {
+              //return response()->json($m_order);
+
+                $farmer_id = $m_order["farmerID"];
+                $product_id = $m_order["prodID"];
+                $qty = $m_order["qty"];          
+              }
+      }
+      else {
+        return redirect()->back();
+      }
+    }
 
     public function addItemAdmin(Request $request)
     {
