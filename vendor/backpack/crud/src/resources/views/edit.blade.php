@@ -186,10 +186,18 @@ $products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`na
 
 for($x=0; $x<count($products); $x++) {
     if($products[$x]->category==0){
-        $items =  DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", p.`price` "price", p.`id` "id", p.`unit` "unit", p.`category` "category", m.`quantity` "quantity", p.`unit_quantity` "unit_quantity", m.`price` "m_price", p.`thumbnail` "product_thumbnail" FROM m_packages m, products p, farmers f 
-           WHERE p.`id` = m.`product_id` 
-           AND f.`id` = m.`farmer_id` 
-           AND m.`package_id` = ?',[$products[$x]->id]);
+        // $items =  DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", p.`price` "price", p.`id` "id", p.`unit` "unit", p.`category` "category", m.`quantity` "quantity", p.`unit_quantity` "unit_quantity", m.`price` "m_price", p.`thumbnail` "product_thumbnail" FROM m_packages m, products p, farmers f 
+        //    WHERE p.`id` = m.`product_id` 
+        //    AND f.`id` = m.`farmer_id` 
+        //    AND m.`package_id` = ?',[$products[$x]->id]);
+        $items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", 
+                                            p.`id` "product_id", m.`quantity` "quantity", "" AS "order_quantity", m.`unit` "unit", m.`price` "price", p.`category` "category", p.`id` "id", p.`unit_quantity` "unit_quantity"
+                                      FROM `m_packages` m, `products` p, `farmers` f, `g_orders` g
+                                     WHERE p.`id` = m.`product_id` 
+                                       AND f.`id` = m.`farmer_id` 
+                                       AND m.`delivery_date` = g.`delivery_date`
+                                       AND g.`order_id` = ?
+                                       AND m.`package_id` = ?',[$order_id, $products[$x]->id]);
         unset($products[$x]);
         $products += $items;
     }
