@@ -435,7 +435,7 @@ class OrderController extends Controller
                     $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
                                              FROM `products` p, `trading` tr
                                             WHERE p.`id` = tr.`product_id`
-                                              AND (tr.`capacity` - tr.`sold`) > ?
+                                              AND (tr.`capacity` - tr.`sold`) >= ?
                                               AND tr.`farmer_id` = ?
                                               AND tr.`product_id` = ?
                                               AND tr.`delivery_date` = ?', [round($qty, 2), $farmer_id, $product_id, $delivery_date]
@@ -490,7 +490,7 @@ class OrderController extends Controller
                 $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
                                        FROM `products` p, `trading` tr
                                       WHERE p.`id` = tr.`product_id`
-                                        AND (tr.`capacity` - tr.`sold`) > ?
+                                        AND (tr.`capacity` - tr.`sold`) >= ?
                                         AND tr.`farmer_id` = ?
                                         AND tr.`product_id` = ?
                                         AND tr.`delivery_date` = ?', [round($qty, 2), $farmer_id, $product_id, $delivery_date]);
