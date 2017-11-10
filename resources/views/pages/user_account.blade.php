@@ -38,6 +38,29 @@
                 </p>
               </section>
               <section class="row clearfix">
+                      <div class="col-sm-6" style="margin-bottom: 10px">
+                        <div class="wrap wrap-border wrap-radius">
+                          <div class="internal-box">
+                            <div class="title clearfix">
+                              <h5 class="no-margin pull-left">
+                                <strong>{{ trans('user.wallet') }}</strong>
+                              </h5>
+                              <div class="pull-right">
+          <a class="btn-link" href="#">                        <i class="fa fa-money"></i>
+          </a>                    </div>
+                            </div>
+                            <div class="content">
+                              {{ trans('user.wallet_info1') }}: {{Auth::user()->balance}} VND<br>
+                              <img src="{{url('')}}/assets/images/icons/payment.png" style="height: 61px;">
+                              <!-- <address class="no-margin">
+                                21 Nursary Lane<br>
+                                Stockport, Manchester, SK200PW<br>
+                                Manchester
+                              </address> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <div class="col-sm-6">
                         <div class="wrap wrap-border wrap-radius">
                           <div class="internal-box">
@@ -58,28 +81,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-6">
-                        <div class="wrap wrap-border wrap-radius">
-                          <div class="internal-box">
-                            <div class="title clearfix">
-                              <h5 class="no-margin pull-left">
-                                <strong>{{ trans('user.wallet') }}</strong>
-                              </h5>
-                              <div class="pull-right">
-          <a class="btn-link" href="#">                        <i class="fa fa-money"></i>
-          </a>                    </div>
-                            </div>
-                            <div class="content">
-                              {{ trans('user.wallet_info1') }}: {{Auth::user()->balance}} VND<br>
-                              <!-- <address class="no-margin">
-                                21 Nursary Lane<br>
-                                Stockport, Manchester, SK200PW<br>
-                                Manchester
-                              </address> -->
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      
                     </section>
                       </article>
                    </div>

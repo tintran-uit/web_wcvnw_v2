@@ -24,6 +24,7 @@ return [
     'hello' => 'Hello',
     'editProfile' => 'Edit profile',
     'rate' => 'Rate',
+    'account' => 'Rate',
     'farmer' => 'Quản lý nông trại',
 ];
 

@@ -79,6 +79,7 @@
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-brand') }}"><i class="fa fa-star"></i> <span>Mô Hình</span></a></li>
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-category') }}"><i class="fa fa-sitemap"></i> <span>Danh Mục</span></a></li>
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-item') }}"><i class="fa fa-newspaper-o"></i> <span>Mặt Hàng</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-trading') }}"><i class="fa fa-newspaper-o"></i> <span>Trading</span></a></li>
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/package-item') }}"><i class="fa fa-shopping-basket"></i> <span>Sửa Gói Hàng</span></a></li>
                 </ul>
               </li>              

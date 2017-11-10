@@ -26,8 +26,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
     CRUD::resource('article-tag', 'ArticleTagCrudController');
     //Products CRUD (Category, Brand, Product)
     CRUD::resource('product-category', 'ProductCategoryCrudController');
-    CRUD::resource('product-item', 'ProductCrudController');
     CRUD::resource('product-brand', 'BrandCrudController');
+    CRUD::resource('product-item', 'ProductCrudController');
+
+    CRUD::resource('product-trading', 'TradingController@index');
 
     //Operation Management CRUD
     CRUD::resource('order', 'OrderCrudController');

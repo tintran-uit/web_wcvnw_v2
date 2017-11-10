@@ -5,11 +5,11 @@
                   </div>
                   <div class="content">
                      <ul class="list-unstyled">
-                        <!-- <li>
-                           <a class="{{ Request::is('user/edit') ? 'current' : '' }}" href="{{url('/user/edit')}}">          <i class="fa fa-angle-right"></i> Thông tin cá nhân
-                           </a>      
-                        </li> -->
                         @if(Auth::check())
+                        <li>
+                           <a class="{{ Request::is('user/account') ? 'current' : '' }}" href="{{url('/user/account')}}">          <i class="fa fa-angle-right"></i> {{ trans('user.wallet') }}
+                           </a>      
+                        </li>
                         <li>
                            <a class="{{ Request::is('user/rate') ? 'current' : '' }}" href="{{url('/user/rate')}}">          <i class="fa fa-angle-right"></i> {{ trans('head.rate') }}
                            </a>      
