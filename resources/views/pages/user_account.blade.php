@@ -46,14 +46,14 @@
                                 <strong>{{ trans('user.contact_information') }} </strong>
                               </h5>
                               <div class="pull-right">
-                                    <a class="btn-link" href="#"><i class="fa fa-pencil"></i></a>                
+                                    <a class="btn-link" href="#"><i class="fa fa-user"></i></a>                
                               </div>
                             </div>
                             <div class="content">
                               {{Auth::user()->name}}<br>
                               {{Auth::user()->email}}<br>
-                              Tel.: {{$customer[0]->phone}}
-
+                              Tel.: {{$customer[0]->phone}}<br>
+                              {{$customer[0]->address}}
                             </div>
                           </div>
                         </div>
@@ -63,19 +63,19 @@
                           <div class="internal-box">
                             <div class="title clearfix">
                               <h5 class="no-margin pull-left">
-                                <strong>Default shipping address</strong>
+                                <strong>{{ trans('user.wallet') }}</strong>
                               </h5>
                               <div class="pull-right">
-          <a class="btn-link" href="#">                        <i class="fa fa-pencil"></i>
+          <a class="btn-link" href="#">                        <i class="fa fa-money"></i>
           </a>                    </div>
                             </div>
                             <div class="content">
-                              Lorenzo Hewitt<br>
-                              <address class="no-margin">
+                              {{ trans('user.wallet_info1') }}: {{Auth::user()->balance}} VND<br>
+                              <!-- <address class="no-margin">
                                 21 Nursary Lane<br>
                                 Stockport, Manchester, SK200PW<br>
                                 Manchester
-                              </address>
+                              </address> -->
                             </div>
                           </div>
                         </div>
