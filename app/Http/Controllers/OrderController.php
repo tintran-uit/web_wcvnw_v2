@@ -65,7 +65,7 @@ class OrderController extends Controller
                                   WHERE m.`order_id` = ?
                                     AND tr.`product_id` = m.`product_id`
                                     AND tr.`farmer_id` = m.`farmer_id`
-                                    AND tr.`delivery_date` = ?', [$order_id, $delivery_date]);
+                                    AND tr.`delivery_date` = ?', [$order_id, $next_delivery_date]);
 
         DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p 
                           SET t.`sold` = t.`sold` + m.`quantity`* mo.`quantity`
@@ -76,7 +76,7 @@ class OrderController extends Controller
                           AND m.`delivery_date` = t.`delivery_date`
                           AND m.`package_id` = p.`id`
                           AND t.`delivery_date` = ?
-                          AND mo.`order_id` = ?', [$delivery_date, $order_id]);
+                          AND mo.`order_id` = ?', [$next_delivery_date, $order_id]);
         if($update){
             return redirect()->back();
         }else{
@@ -427,30 +427,35 @@ class OrderController extends Controller
                                          AND `order_id` = ?', [$product_id, $farmer_id, $order_id]);
                 if(count($m_item) > 0){
                   //UPDATE
-                  if($qty == 0){ 
+                  if(round($qty, 1) == 0){ 
                     $total = $total - $m_item[0]->price;
                     $this->removeItemAdmin($order_id, $product_id, $farmer_id);
                   }
                   else {
+
                     $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
                                              FROM `products` p, `trading` tr
                                             WHERE p.`id` = tr.`product_id`
-                                              AND (tr.`capacity` - tr.`sold`) > ?
+                                              AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
                                               AND tr.`farmer_id` = ?
                                               AND tr.`product_id` = ?
-                                              AND tr.`delivery_date` = ?', [$qty, $farmer_id, $product_id, $delivery_date]
+                                              AND tr.`delivery_date` = ?', [round($qty, 2) - round($m_item[0]->quantity, 2), $farmer_id, $product_id, $delivery_date]
                                          );
                     if(count($product) < 1)
                     {
                         $msg["failed:".$product_id] = $m_order;
+                        $msg["m_quantity"]= round($m_item[0]->quantity, 2);
+                        $msg["qty"]= round($qty, 2);
+
+
                     }
-                    else if ($qty > 0){
+                    else if (round($qty, 1) > 0){
                         $msg["success:".$product_id] = $m_order;
 
-                        $quantity = $qty;
+                        $quantity = round($qty, 2);
                         $new_quantity = $quantity - $m_item[0]->quantity;
-                        $price = round(($qty * $product[0]->price)/$product[0]->unit_quantity);
-                        $price_farmer = round(($qty * $product[0]->price_farmer)/$product[0]->unit_quantity);
+                        $price = round((round($qty, 2) * $product[0]->price)/$product[0]->unit_quantity);
+                        $price_farmer = round((round($qty, 2) * $product[0]->price_farmer)/$product[0]->unit_quantity);
                         $category = $product[0]->category;
                         $unit = $product[0]->unit;
 
@@ -490,20 +495,20 @@ class OrderController extends Controller
                 $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
                                        FROM `products` p, `trading` tr
                                       WHERE p.`id` = tr.`product_id`
-                                        AND (tr.`capacity` - tr.`sold`) > ?
+                                        AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
                                         AND tr.`farmer_id` = ?
                                         AND tr.`product_id` = ?
-                                        AND tr.`delivery_date` = ?', [$qty, $farmer_id, $product_id, $delivery_date]);
+                                        AND tr.`delivery_date` = ?', [round($qty, 2), $farmer_id, $product_id, $delivery_date]);
                 if(count($product) < 1)
                 {
                     $msg["failed:".$product_id] = $m_order;
                 }
-                else if ($qty > 0){
+                else if (round($qty, 1) > 0){
                     $msg["success:".$product_id] = $m_order;
 
-                    $quantity = $qty;
-                    $price = round(($qty * $product[0]->price)/$product[0]->unit_quantity);
-                    $price_farmer = round(($qty * $product[0]->price_farmer)/$product[0]->unit_quantity);
+                    $quantity = round($qty, 2);
+                    $price = round((round($qty, 2)  * $product[0]->price)/$product[0]->unit_quantity);
+                    $price_farmer = round((round($qty, 2) * $product[0]->price_farmer)/$product[0]->unit_quantity);
                     $category = $product[0]->category;
                     $unit = $product[0]->unit;
 
@@ -526,7 +531,7 @@ class OrderController extends Controller
                                           AND tr.`product_id` = m.`product_id` 
                                           AND tr.`delivery_date` = m.`delivery_date`
                                           AND tr.`delivery_date` = ?
-                                          AND m.`package_id` = ?', [$qty, $delivery_date, $product_id]);
+                                          AND m.`package_id` = ?', [round($qty, 2), $delivery_date, $product_id]);
 
                     }
 
