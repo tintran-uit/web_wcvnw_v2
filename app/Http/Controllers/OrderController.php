@@ -432,17 +432,22 @@ class OrderController extends Controller
                     $this->removeItemAdmin($order_id, $product_id, $farmer_id);
                   }
                   else {
+
                     $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
                                              FROM `products` p, `trading` tr
                                             WHERE p.`id` = tr.`product_id`
-                                              AND (tr.`capacity` - tr.`sold`) >= ?
+                                              AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
                                               AND tr.`farmer_id` = ?
                                               AND tr.`product_id` = ?
-                                              AND tr.`delivery_date` = ?', [round($qty, 2), $farmer_id, $product_id, $delivery_date]
+                                              AND tr.`delivery_date` = ?', [round($qty, 2) - round($m_item[0]->quantity, 2), $farmer_id, $product_id, $delivery_date]
                                          );
                     if(count($product) < 1)
                     {
                         $msg["failed:".$product_id] = $m_order;
+                        $msg["m_quantity"]= round($m_item[0]->quantity, 2);
+                        $msg["qty"]= round($qty, 2);
+
+
                     }
                     else if (round($qty, 1) > 0){
                         $msg["success:".$product_id] = $m_order;
@@ -490,7 +495,7 @@ class OrderController extends Controller
                 $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
                                        FROM `products` p, `trading` tr
                                       WHERE p.`id` = tr.`product_id`
-                                        AND (tr.`capacity` - tr.`sold`) >= ?
+                                        AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
                                         AND tr.`farmer_id` = ?
                                         AND tr.`product_id` = ?
                                         AND tr.`delivery_date` = ?', [round($qty, 2), $farmer_id, $product_id, $delivery_date]);
