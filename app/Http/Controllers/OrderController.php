@@ -65,7 +65,7 @@ class OrderController extends Controller
                                   WHERE m.`order_id` = ?
                                     AND tr.`product_id` = m.`product_id`
                                     AND tr.`farmer_id` = m.`farmer_id`
-                                    AND tr.`delivery_date` = ?', [$order_id, $delivery_date]);
+                                    AND tr.`delivery_date` = ?', [$order_id, $next_delivery_date]);
 
         DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p 
                           SET t.`sold` = t.`sold` + m.`quantity`* mo.`quantity`
@@ -76,7 +76,7 @@ class OrderController extends Controller
                           AND m.`delivery_date` = t.`delivery_date`
                           AND m.`package_id` = p.`id`
                           AND t.`delivery_date` = ?
-                          AND mo.`order_id` = ?', [$delivery_date, $order_id]);
+                          AND mo.`order_id` = ?', [$next_delivery_date, $order_id]);
         if($update){
             return redirect()->back();
         }else{
