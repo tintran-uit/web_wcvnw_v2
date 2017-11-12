@@ -44,6 +44,44 @@ class ProductController extends Controller
 		return $packages;
 	}
 
+	public function setupPackages()
+	{
+		$packages = DB::select('SELECT `id`, `name` FROM `products` WHERE `category` = 0');
+		return $packages;
+	}
+
+	public function setupTrading(Request $request)
+    {
+        if(Auth::check() && strcmp(Auth::user()->account_type, "Admin") == 0){
+            $data = $request->data;
+            $order_id = $data["order_id"];
+
+            $m_orders = $data["ItemsUpload"];
+			$date = "2017-11-18";
+			$packages = DB::select('SELECT f.`name` "farmer_name", p.`name` "product_name", ROUND(tr.`capacity`, 2) "capacity"
+										  , ROUND(p.`unit_quantity`, 2) "unit_quantity", p.`unit` "unit", p.`price` "price", tr.`price_farmer` "price_farmer", tr.`delivery_date` "delivery_date", p.`category` "category", 1 as "status"
+									  FROM `trading` tr, `products` p, `farmers` f
+									 WHERE `delivery_date`= ?
+									   AND tr.`product_id` = p.`id` 
+									   AND tr.`farmer_id` = f.`id` 
+									UNION 
+									  SELECT f.`name` "farmer_name", p.`name` "product_name", 0 AS "capacity", 
+									  		 0.3 AS "unit_quantity", "kg" AS "unit", p.`price` "price", 0 "price_farmer",
+									  		  ? AS "delivery_date", p.`category` "category", 0 AS "status"
+									  FROM `products` p, `farmers` f
+									 WHERE f.`id` = p.`farmer_id`
+									   AND p.`id` NOT IN (SELECT `product_id` FROM `trading` WHERE `delivery_date`=?) 
+									 ORDER BY `category` ', 
+									[$date, $date, $date]);
+			return $packages;
+		}
+		else {
+			return  redirect()->back();
+		}
+	}
+
+
+
 	/**
 	 *getProductDetail
 	 *

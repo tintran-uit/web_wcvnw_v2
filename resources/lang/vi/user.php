@@ -3,8 +3,8 @@
 return [
 
     'contact_information' => 'Thông tin cá nhân',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'name' => 'Name',
+    'wallet' => 'Ví của bạn',
+    'wallet_info1' => 'Tài khoản của bạn còn',
     'email' => 'E-Mail Address',
     'password' => 'Password',
     're_password' => 'Confirm Password',

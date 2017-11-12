@@ -468,6 +468,9 @@
                                        </li>
                                        @endif
                                        <li>
+                                          <a href="{{url('')}}/user/account">{{ trans('user.wallet') }}</a>
+                                       </li>
+                                       <li>
                                           <a href="{{url('')}}/user/rate">{{ trans('head.rate') }}</a>
                                        </li>
                                        
@@ -667,6 +670,14 @@
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down" style="color: #A52223"></i>
                       </a>          
                       <ul class="dropdown-menu" role="menu">
+                        @if(Auth::user()->account_type=='Farmer')
+                         <li>
+                            <a href="{{url('')}}/farmer/dashboard">{{ trans('head.farmer') }}</a>
+                         </li>
+                         @endif
+                         <li>
+                            <a href="{{url('')}}/user/account">{{ trans('user.wallet') }}</a>
+                         </li>
                          <li>
                             <a href="{{url('')}}/user/rate">{{ trans('head.rate') }}</a>
                          </li>

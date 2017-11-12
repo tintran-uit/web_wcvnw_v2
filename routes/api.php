@@ -37,7 +37,12 @@ Route::get('/farmer/trading/farmer_id={farmer_id}', 'FarmerController@farmerOrde
 Route::get('/farmers', 'FarmerController@farmers');
 
 //admin
-Route::post('admin/update-cart', 'OrderController@addItemAdmin');
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace' => 'Admin'], function () {
+	Route::get('product-trading/items', 'TradingController@getItems');
+	Route::post('product-trading/items', 'TradingController@editItem');
+});
+	Route::post('admin/update-cart', 'OrderController@addItemAdmin');
+
 
 //gio hang
 Route::post('cart/update-cart', 'CartProductController@updateCart');

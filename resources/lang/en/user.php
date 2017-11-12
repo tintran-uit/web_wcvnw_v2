@@ -3,8 +3,8 @@
 return [
 
     'contact_information' => 'Contact information',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'name' => 'Name',
+    'wallet' => 'Wallet',
+    'wallet_info1' => 'Your account balance',
     'email' => 'E-Mail Address',
     'password' => 'Password',
     're_password' => 'Confirm Password',
