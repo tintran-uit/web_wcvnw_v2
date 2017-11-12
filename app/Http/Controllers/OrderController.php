@@ -37,7 +37,7 @@ class OrderController extends Controller
     $delivery_date = $delivery_date[0]->delivery_date;
     if(Auth::check()) {
         DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p, `g_orders` g 
-                          SET t.`sold` = t.`sold` - m.`quantity`* mo.`quantity`
+                          SET t.`sold` = ROUND(t.`sold`,2) - ROUND(m.`quantity`* mo.`quantity`, 2)
                         WHERE t.`farmer_id` = m.`farmer_id`
                           AND t.`product_id` = m.`product_id` 
                           AND p.`id` = mo.`product_id`
@@ -49,7 +49,7 @@ class OrderController extends Controller
                           AND mo.`order_id` = ?', [$order_id]);
 
       $update = DB::statement('UPDATE `trading` tr, `m_orders` m, `g_orders` g
-                                  SET tr.`sold` = tr.`sold` - m.`quantity`
+                                  SET tr.`sold` = ROUND(tr.`sold`,2) - ROUND(m.`quantity`, 2)
                                 WHERE m.`order_id` = g.`order_id`
                                   AND g.`order_id` = ?
                                   AND g.`delivery_date` = tr.`delivery_date`
@@ -61,14 +61,14 @@ class OrderController extends Controller
                                    WHERE `order_id` = ?', [$next_delivery_date, $order_id]);
           
         $update = DB::statement('UPDATE `trading` tr, `m_orders` m
-                                    SET tr.`sold` = tr.`sold` + m.`quantity`
+                                    SET tr.`sold` = ROUND(tr.`sold`, 2) + ROUND(m.`quantity`, 2)
                                   WHERE m.`order_id` = ?
                                     AND tr.`product_id` = m.`product_id`
                                     AND tr.`farmer_id` = m.`farmer_id`
                                     AND tr.`delivery_date` = ?', [$order_id, $next_delivery_date]);
 
         DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p 
-                          SET t.`sold` = t.`sold` + m.`quantity`* mo.`quantity`
+                          SET t.`sold` = ROUND(t.`sold`, 2) + ROUND(m.`quantity`* mo.`quantity`, 2)
                         WHERE t.`farmer_id` = m.`farmer_id`
                           AND t.`product_id` = m.`product_id` 
                           AND p.`id` = mo.`product_id`
@@ -98,7 +98,7 @@ class OrderController extends Controller
       if(strcmp($user->account_type, "Admin") == 0){
 
               DB::statement('UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p , `g_orders` g
-                                SET t.`sold` = t.`sold` - m.`quantity`* mo.`quantity`
+                                SET t.`sold` = ROUND(t.`sold`, 2) - ROUND(m.`quantity`* mo.`quantity`, 2)
                               WHERE t.`farmer_id` = m.`farmer_id`
                                 AND t.`product_id` = m.`product_id` 
                                 AND p.`id` = mo.`product_id`
@@ -112,7 +112,7 @@ class OrderController extends Controller
 
           
             DB::statement('UPDATE `g_orders` AS g, `m_orders` AS m, `trading` t
-                              SET t.`sold` = t.`sold` - m.`quantity`,
+                              SET t.`sold` = ROUND(t.`sold`, 2) - ROUND(m.`quantity`, 2),
                                   g.`status` = 8
                             WHERE g.`status` != 8
                               AND m.`order_id` = g.`order_id`
@@ -160,14 +160,14 @@ class OrderController extends Controller
 			
 			//receive numbers and check if quantity_left is >= order quantity
 			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", 
-                                    (tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`delivery_date` "delivery_date" 
+                                    ROUND(tr.`capacity` - tr.`sold`, 2) AS "quantity_left", tr.`delivery_date` "delivery_date" 
                                FROM `products` p, `trading` tr 
                               WHERE p.`id` = tr.`product_id` 
                                 AND tr.`status` = 1 
                                 AND tr.`farmer_id` = ? 
                                 AND p.`id` = ?', [$farmer_id, $product_id]);
 			
-			if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
+			if($numbers[0]->quantity_left < round($qty * $numbers[0]->unit_quantity, 2) )
 			{
 				$item->options["error"] = 1;
 				$orderPossible = 0;
@@ -258,20 +258,20 @@ class OrderController extends Controller
 			
 			//receive numbers and check if quantity_left is >= order quantity
 			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", 
-                                   (tr.`capacity` - tr.`sold`) AS "quantity_left", p.`category` AS "category" 
+                                   ROUND(tr.`capacity` - tr.`sold`, 2) AS "quantity_left", p.`category` AS "category" 
                               FROM `products` p, `trading` tr 
                              WHERE p.`id` = tr.`product_id` 
                                AND tr.`status` = 1 
                                AND tr.`farmer_id` = ? 
                                AND p.`id` = ?', [$farmer_id, $product_id]);
 			
-			if($numbers[0]->quantity_left < $qty * $numbers[0]->unit_quantity)
+			if($numbers[0]->quantity_left < round($qty * $numbers[0]->unit_quantity, 2) )
 			{
 				$item->options["error"] = 1;
 				Cart::update($item->rowId, $item->options["error"]);
 			}
 			else{
-				$quantity = $qty * $numbers[0]->unit_quantity;
+				$quantity = round($qty * $numbers[0]->unit_quantity, 2);
 				$price_farmer = $qty * $numbers[0]->price_farmer;
 				$unit = $numbers[0]->unit;
 				$category = $numbers[0]->category;
@@ -285,7 +285,7 @@ class OrderController extends Controller
 	        	if($category == 0) //package
 	        	{
 		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
-		        		                SET t.`sold` = t.`sold` + m.`quantity`
+		        		                SET t.`sold` = ROUND(t.`sold` + m.`quantity`, 2)
            									  WHERE t.`farmer_id` = m.`farmer_id`
            									    AND t.`status` = 1
                                 AND m.`delivery_date` = t.`delivery_date`
