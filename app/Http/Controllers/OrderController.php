@@ -429,7 +429,11 @@ class OrderController extends Controller
                   //UPDATE
                   if(round($qty, 1) == 0){ 
                     $total = $total - $m_item[0]->price;
-                    $this->removeItemAdmin($order_id, $product_id, $farmer_id);
+                    //$this->removeItemAdmin($order_id, $product_id, $farmer_id);
+                    DB::delete('DELETE FROM `m_orders`
+                                      WHERE `order_id` = ?
+                                        AND `product_id` = ?', [$order_id, $product_id]
+                              );
                   }
                   else {
 
@@ -543,7 +547,7 @@ class OrderController extends Controller
                 $total = $total - $shipping_cost;
                 $shipping_cost = 0;
             }
-            else if(($total - $shipping_cost) < 500000 && $shipping_cost == 0)
+            else if($total < 500000 && $shipping_cost == 0)
             {
               $shipping_cost = $shipping_cost_ex;
               $total = $total + $shipping_cost;
