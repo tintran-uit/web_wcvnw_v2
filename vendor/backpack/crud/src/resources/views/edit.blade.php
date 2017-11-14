@@ -855,7 +855,7 @@ $(document).ready(function() {
             console.log(data);
             if(data.error==0){
             	// alert(data.status);
-            	// location.reload();
+            	location.reload();
             }else{
             	alert(data.status);
             }
