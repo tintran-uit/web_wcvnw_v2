@@ -24,7 +24,7 @@ class Status extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id','name', 'vn_name', 'description'];
+    protected $fillable = ['id','name', 'en_name', 'description'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [

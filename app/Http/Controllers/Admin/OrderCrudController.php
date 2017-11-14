@@ -82,7 +82,7 @@ class OrderCrudController extends CrudController
             'label' => 'Trạng Thái',
             'type' => 'select',
             'entity' => 'status_v',
-            'attribute' => 'vn_name',
+            'attribute' => 'name',
             'model' => "App\Models\Status",
         ]);
         
@@ -190,7 +190,7 @@ class OrderCrudController extends CrudController
             'label' => 'Trạng Thái',
             'type' => 'select',
             'entity' => 'status',
-            'attribute' => 'vn_name',
+            'attribute' => 'name',
             'model' => "App\Models\Status",
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4'
