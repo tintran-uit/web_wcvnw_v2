@@ -38,7 +38,7 @@ class CustomerController extends Controller
 			$user = Auth::user();
          	$customer_id = $user->connected_id;
 			
-			$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
+			$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
     		return $orders;
 		}
 		else
@@ -49,7 +49,7 @@ class CustomerController extends Controller
 
 	public function createOrder($customer_id)
 	{
-		$orders = DB::select('SELECT g.`order_id` "order_id", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`note` "note" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`status` ASC', [$customer_id]);
+		$orders = DB::select('SELECT g.`order_id` "order_id", s.`en_name` "status_name", s.`name` "status_vn_name", g.`note` "note" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`status` ASC', [$customer_id]);
 	    return $orders;
 	}
 
@@ -117,7 +117,7 @@ class CustomerController extends Controller
 	        $user = Auth::user();
          	$customer_id = $user->connected_id;
 			if($user->email == 'minh.huynh@cfarm.vn'){
-				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id", g.`delivery_date` "delivery_date" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id", g.`delivery_date` "delivery_date" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
@@ -138,7 +138,7 @@ class CustomerController extends Controller
 		        // return $this->data['orderItem'];
 		        return view('pages.user2', $this->data);
 			}else{
-				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", g.`rating` "rating", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`delivery_date` "delivery_date" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
+				$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", g.`rating` "rating", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`delivery_date` "delivery_date" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` AND g.`customer_id` = ? ORDER BY g.`order_id` DESC', [$customer_id]);
 			}
 			
 			$this->data['orders'] = $orders;
@@ -355,7 +355,7 @@ class CustomerController extends Controller
 		 		$mua[$key->slug] = 0;
 		 	}
 		 	// return $mua;
-		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
@@ -403,7 +403,7 @@ class CustomerController extends Controller
 		 		$mua[$key->slug] = 0;
 		 	}
 		 	// return $mua;
-		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
@@ -475,7 +475,7 @@ class CustomerController extends Controller
 		 		$mua[$key->slug] = 0;
 		 	}
 		 	// return $mua;
-		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
@@ -548,7 +548,7 @@ class CustomerController extends Controller
 		 		$mua[$key->slug] = 0;
 		 	}
 		 	// return $mua;
-		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
@@ -597,7 +597,7 @@ class CustomerController extends Controller
 		 		$mua[$key->slug] = 0;
 		 	}
 		 	// return $mua;
-		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
@@ -661,7 +661,7 @@ class CustomerController extends Controller
 		 		$mua[$key->slug] = 0;
 		 	}
 		 	// return $mua;
-		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
@@ -727,7 +727,7 @@ class CustomerController extends Controller
 		 		$mua[$key->slug] = 0;
 		 	}
 		 	// return $mua;
-		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id` ORDER BY g.`order_id` DESC');
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 				foreach ($orders as $order) {
@@ -793,7 +793,7 @@ class CustomerController extends Controller
 		 		$mua[$key->id]['pack'] = [];
 		 	}
 		 // return $mua;
-		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id`AND g.`delivery_date` = ? AND g.`status` != ? ORDER BY g.`order_id` DESC', [$date, 8]);
+		 	$orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id`AND g.`delivery_date` = ? AND g.`status` != ? ORDER BY g.`order_id` DESC', [$date, 8]);
 				$this->data['orders'] = $orders;
 				$this->data['orderItem'] = [];
 
