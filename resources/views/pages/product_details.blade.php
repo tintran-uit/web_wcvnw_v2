@@ -21,7 +21,7 @@
                   GIAO HÀNG TẬN NƠI
                 </h4>
                 <p class="copy-box no-margin">
-                  Miễn phí giao hàng cho đơn hàng trên 500.000 VNĐ.
+                  Miễn phí giao hàng cho đơn hàng trên 500.000 VND.
                 </p>
               </div>
 
@@ -73,7 +73,7 @@
                     <div class="row">
                       <article class="col-sm-7 button-group">
                         <a class="btn btn-primary btn-lg lg-2x" onclick="addCartProd()">
-                          Thêm vào giỏ <i class="glyphicon glyphicon-shopping-cart"></i>
+                          {{ trans('head.addCart') }} <i class="glyphicon glyphicon-shopping-cart"></i>
                         </a>
 <a class="btn btn-info btn-lg" onclick="interest({{$product[0]->id}})">                          <i class="fa fa-heart"></i>
 </a>                  </article>
@@ -252,7 +252,7 @@ function stepperUp() {
     if(unit == 'kg'){
       qty = qty/unit_quantity;
     }
-    document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
+    document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VND';
     document.getElementById('stepper').value = num + ' ' + unit; 
   }else{
     $('#modalMessage').html("Sản lượng còn lại không đủ.");
@@ -277,7 +277,7 @@ function stepperDown() {
     if(unit == 'kg'){
       qty = qty/unit_quantity;
     }
-    document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VNĐ';
+    document.getElementById('dis_price').innerHTML = numberWithCommas(dis_price*qty) + ' VND';
     document.getElementById('stepper').value = num + ' ' + unit;
   }
 }

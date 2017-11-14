@@ -7,7 +7,7 @@
             <i class="fa fa-truck fa-3x" style="color: #ffffff"></i>
             <h4>Giao hàng tận nơi</h4>
             <p class="no-margin">
-              Miễn phí với đơn hàng<br>trên 500.000 VNĐ
+              Miễn phí với đơn hàng<br>trên 500.000 VND
             </p>
           </div>
         </article>

@@ -26,5 +26,15 @@ return [
     'rate' => 'Rate',
     'account' => 'Rate',
     'farmer' => 'Quản lý nông trại',
+    'right_title' => 'HOME DELIVERY',
+    'cartStatus0' => 'Cart is empty',
+    'cartStatus1_1' => 'You have',
+    'cartStatus1_2' => 'products',
+    'cartStatus3' => 'CFarm Viet Nam',
+    'cartTotal' => 'Total',
+    'cartView' => 'view cart',
+    'cartCheckOut' => 'Checkout',
+    'addCart' => 'Add to cart',
+    'retail' => 'Retail',
 ];
 
