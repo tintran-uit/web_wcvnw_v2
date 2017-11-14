@@ -103,9 +103,9 @@
             </div>
             <div class="content pull-left hidden" id="subscribe-nl" >
                <h2 class="no-margin-top"  id="cart-status2" style="color: #B62029">@if(count($cart) == 0)
-                                 Giỏ hàng rỗng
+                                 {{ trans('head.cartStatus0') }}
                                  @else
-                                 Bạn có {{count($cart)}} nông sản sạch!
+                                 {{ trans('head.cartStatus1_1') }} {{count($cart)}} {{ trans('head.cartStatus1_2') }}!
                                  @endif</h2>
                <form action="/#" accept-charset="UTF-8" method="post" style="width:253px;">
                   <fieldset>
@@ -138,17 +138,17 @@
                        </ul>
                        <hr>
                        <div class="subtotale pull-right no-margin" style="margin-right: 32px">
-                           Tổng: &nbsp;&nbsp;&nbsp;<span class="price" id="cart-status-totalz">{{number_format($total)}} VND</span>
+                          {{ trans('head.cartTotal') }}: &nbsp;&nbsp;&nbsp;<span class="price" id="cart-status-totalz">{{number_format($total)}} VND</span>
                         </div>
                        <br><br>
                        <div class="button-basket text-right">
-                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/gio-hang-thuc-pham-sach')}}">Xem giỏ hàng</a>
-                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/thanh-toan')}}">Thanh toán</a>
+                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/gio-hang-thuc-pham-sach')}}">{{ trans('head.cartView') }} </a>
+                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/thanh-toan')}}">{{ trans('head.cartCheckOut') }} </a>
                         </div>
                      <div class="text-right">
                       <br>
                       <br>
-                      <a href="/">CFarm Việt Nam</a>
+                      <a href="/">{{ trans('head.cartStatus3') }} </a>
                      </div>
                   </fieldset>
                </form>
@@ -429,7 +429,7 @@
                <div class="row clearfix">
                   <div class="col-sm-6">
                      <p class="hidden-xs spacer-top-10">
-                        <i class="fa fa-truck"></i> GIAO HÀNG TẬN NƠI
+                        <i class="fa fa-truck"></i> {{ trans('head.right_title') }}
                      </p>
                   </div>
                   <div class="col-sm-6">
@@ -490,13 +490,13 @@
                               <span id="country-lang">Tiếng Việt</span>
                               <i class="fa fa-angle-down"></i>
                               </a>              
-                              <!-- <ul class="dropdown-menu list-unstyled">
+                              <ul class="dropdown-menu list-unstyled">
                                  <li>
                                     <a class="text-center" href="{{url('')}}/language/en"><img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
                                       <span id="country-lang"> English</span>
                                     </a>                
                                  </li>
-                              </ul> -->
+                              </ul>
                             @else
                               <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/en">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
                               <span id="country-lang">English</span>
@@ -537,9 +537,9 @@
                               <div class="info-basket pull-left">
                                  <span id="cart-status" data-name="item" style="font-weight: 700; color: #fff">
                                  @if(count($cart) == 0)
-                                 Giỏ hàng rỗng
+                                 {{ trans('head.cartStatus0') }}
                                  @else
-                                 Bạn có {{count($cart)}} nông sản sạch!
+                                 {{ trans('head.cartStatus1_1') }} {{count($cart)}} {{ trans('head.cartStatus1_2') }}
                                  @endif
                                  </span>
                                  <span data-name="price">
@@ -580,12 +580,12 @@
                                  <div class="summary clearfix">
                                     <p class="amount pull-left no-margin"></p>
                                     <p class="subtotale pull-right no-margin">
-                                       Tổng:&nbsp;&nbsp;&nbsp;<span class="price" id="cart-status-total">{{number_format($total)}} VND</span>
+                                       {{ trans('head.cartTotal') }}:&nbsp;&nbsp;&nbsp;<span class="price" id="cart-status-total">{{number_format($total)}} VND</span>
                                     </p>
                                  </div>
                                  <div class="button-basket text-right">
-                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/gio-hang-thuc-pham-sach')}}">Xem giỏ hàng</a>
-                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/thanh-toan')}}">Thanh toán</a>
+                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/gio-hang-thuc-pham-sach')}}">{{ trans('head.cartView') }}</a>
+                                    <a class="btn btn-warning btn-sm no-margin" href="{{url('/thanh-toan')}}">{{ trans('head.cartCheckOut') }}</a>
                                  </div>
                               </div>
                            </div>
@@ -912,8 +912,8 @@
             $('#cartMobile').html("Giỏ hàng rỗng");
          }
          else{
-            $('#cart-status').html("bạn có " + length + " nông sản sạch!");
-            $('#cart-status2').html("bạn có " + length + " nông sản sạch!");
+            $('#cart-status').html("{{ trans('head.cartStatus1_1') }} " + length + " {{ trans('head.cartStatus1_2') }}!");
+            $('#cart-status2').html("{{ trans('head.cartStatus1_1') }} " + length + " {{ trans('head.cartStatus1_2') }}!");
             $('#cartMobile').html("Đặt hàng: " + length);
          }
 

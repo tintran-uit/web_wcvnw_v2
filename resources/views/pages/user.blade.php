@@ -179,7 +179,7 @@
               <td>{{$order[$j]->product_name}}</td>
               <td>{{$order[$j]->farmer_name}}</td>
               <td>{{$order[$j]->quantity}} {{$order[$j]->unit}}</td>
-              <td>{{$order[$j]->price}} VNĐ</td>
+              <td>{{$order[$j]->price}} VND</td>
               </tr>
               <?php $total+=$order[$j]->price; ?>
               @endfor
@@ -187,15 +187,15 @@
             <tfoot>
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px"><br><b>Khuyến mãi</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><br><span>{{$order['discount_amount']}} VNĐ</span></td>
+                <td colspan="1" align="left" style="float: right;"><br><span>{{$order['discount_amount']}} VND</span></td>
               </tr>
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px;"><b>Phí vận chuyển</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><span>{{$order['shipping_cost']}} VNĐ</span></td>
+                <td colspan="1" align="left" style="float: right;"><span>{{$order['shipping_cost']}} VND</span></td>
               </tr>
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px"><b>Thành tiền</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><span>{{$total}} VNĐ</span></td>
+                <td colspan="1" align="left" style="float: right;"><span>{{$total}} VND</span></td>
               </tr>
             </tfoot>
           </table>

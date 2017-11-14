@@ -123,7 +123,7 @@
                 <p class="small no-margin spacer-top-15">
                   
                   <a href="{{url('')}}/chinh-sach-giao-hang">
-                    <u>(*) Miễn phí giao hàng với đơn hàng có giá trị trên 500.000 VNĐ</u>
+                    <u>(*) Miễn phí giao hàng với đơn hàng có giá trị trên 500.000 VND</u>
                   </a>
                 </p>
               </div>
@@ -553,7 +553,7 @@ trước khi giao hàng! --></p>
           case '7':
           case '8':
           case '10':
-              text = "25.000 VNĐ";
+              text = "25.000 VND";
               spacerToalNow = spacerToal + 25000;
               break;
           case '2':
@@ -562,31 +562,31 @@ trước khi giao hàng! --></p>
           case '17':
           case '16':
           case '14':
-              text = "30.000 VNĐ";
+              text = "30.000 VND";
               spacerToalNow = spacerToal + 30000;
               break;
           case '9':
           case '12':
           case '15':
           case '19':
-              text = "35.000 VNĐ";
+              text = "35.000 VND";
               spacerToalNow = spacerToal + 35000;
               break;
           case '13':
           case '20':
           case '21':
           case '22':
-              text = "40.000 VNĐ";
+              text = "40.000 VND";
               spacerToalNow = spacerToal + 40000;
               break;
           default:
-              text = "0 VNĐ";
+              text = "0 VND";
               spacerToalNow = spacerToal;
               break;
           
       }
       if(spacerToal>500000){
-        text = "0 VNĐ";
+        text = "0 VND";
         spacerToalNow = spacerToal;
       }
       spacerToalNow = spacerToalNow + '';

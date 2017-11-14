@@ -178,7 +178,7 @@
               <td class="col-md-3">{{$order[$j]->product_name}}</td>
               <td>{{$order[$j]->farmer_name}}</td>
               <td><input type="text" name="qty" value="{{$order[$j]->quantity}}" style="width: 40%" class="text-center"> {{$order[$j]->unit}}</td>
-              <td>{{$order[$j]->price}} VNĐ</td>
+              <td>{{$order[$j]->price}} VND</td>
               </tr>
               <?php $total+=$order[$j]->price; ?>
               @endfor
@@ -187,19 +187,19 @@
             <tfoot>
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px"><br><b>Khuyến mãi</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><br><span>{{$order['discount_amount']}} VNĐ</span></td>
+                <td colspan="1" align="left" style="float: right;"><br><span>{{$order['discount_amount']}} VND</span></td>
               </tr>
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px;"><b>Phí vận chuyển</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><span>{{$order['shipping_cost']}} VNĐ</span></td>
+                <td colspan="1" align="left" style="float: right;"><span>{{$order['shipping_cost']}} VND</span></td>
               </tr>
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px"><b>Tạm tính</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><span>{{$total}} VNĐ</span></td>
+                <td colspan="1" align="left" style="float: right;"><span>{{$total}} VND</span></td>
               </tr>
               <tr style="">
                 <td colspan="3" align="right" style="padding-right: 20px"><b>Tổng tiền</b>  </td>
-                <td colspan="1" align="left" style="float: right;"><span>{{($total+$order['shipping_cost'])}} VNĐ</span></td>
+                <td colspan="1" align="left" style="float: right;"><span>{{($total+$order['shipping_cost'])}} VND</span></td>
               </tr>
               <tr style="">
                 <td colspan="1" align="right" style="padding-right: 5px"><br><b>Người đặt hàng: </b>  </td>
