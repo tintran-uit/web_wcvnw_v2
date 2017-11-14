@@ -25,8 +25,7 @@ public function stats()
       // $date = '2017-11-11'; 
         $farmers = DB::select('SELECT DISTINCT f.`name` "name", f.`id` "id" 
                                  FROM `farmers` f, `trading` tr 
-                                WHERE tr.`status` = 1
-                                  AND tr.`sold` > 0
+                                WHERE tr.`sold` > 0
                                   AND tr.`farmer_id` = f.`id` 
                              ORDER BY `id` ASC');
 
