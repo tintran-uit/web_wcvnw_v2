@@ -5,36 +5,36 @@
         <article class="col-xs-12 col-sm-3">
           <div class="column text-center spacer-bottom-15">
             <i class="fa fa-truck fa-3x" style="color: #ffffff"></i>
-            <h4>Giao hàng tận nơi</h4>
+            <h4>{{ trans('head.bannerBottom_1') }}</h4>
             <p class="no-margin">
-              Miễn phí với đơn hàng<br>trên 500.000 VND
+              {{ trans('head.bannerBottomDes_1') }}
             </p>
           </div>
         </article>
         <article class="col-xs-12 col-sm-3">
           <div class="column text-center spacer-bottom-15">
             <i class="fa fa-gift fa-3x" style="color: #ffffff"></i>
-            <h4>Tặng quà cho người thân?</h4>
+            <h4>{{ trans('head.bannerBottom_2') }}</h4>
             <p class="no-margin">
-              Hãy gửi những món quà sức khỏe và yêu thương đến người thân, đồng nghiệp, cấp trên của bạn
+              {{ trans('head.bannerBottomDes_2') }}
             </p>
           </div>
         </article>
         <article class="col-xs-12 col-sm-3">
           <div class="column text-center spacer-bottom-15">
             <i class="fa fa-users fa-3x" style="color: #ffffff" aria-hidden="true"></i>
-            <h4>Biết rõ nguồn gốc!</h4>
+            <h4>{{ trans('head.bannerBottom_3') }}</h4>
             <p class="no-margin">
-              Nguồn gốc sản phẩm rõ ràng. Khách hàng được chọn trang trại mong muốn
+              {{ trans('head.bannerBottomDes_3') }}
             </p>
           </div>
         </article>
         <article class="col-xs-12 col-sm-3">
           <div class="column text-center spacer-bottom-15">
             <i class="fa fa-phone fa-3x" style="color: #ffffff"></i>
-            <h4>Chăm sóc khách hàng</h4>
+            <h4>{{ trans('head.bannerBottom_4') }}</h4>
             <p class="no-margin">
-              Hỗ trợ tư vấn, giải đáp thắc mắc khách hàng, từ thứ Hai đến thứ Bảy 8:00 to 17:00
+              {{ trans('head.bannerBottomDes_4') }}
             </p>
           </div>
         </article>

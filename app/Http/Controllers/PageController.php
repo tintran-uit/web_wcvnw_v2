@@ -135,6 +135,9 @@ class PageController extends Controller
         {
             abort(404, 'Please go back to our <a href="'.url('').'">homepage</a>.');
         }
+        if (Session::has('locale')) {
+            App::setLocale(Session::get('locale'));
+        }
 
         $page = Page::findBySlug('thong-tin-chi-tiet-thuc-pham-sach');
         $this->data['title'] = $page->title;
