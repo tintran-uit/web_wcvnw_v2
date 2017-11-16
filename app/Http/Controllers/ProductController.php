@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Auth;
+use Session;
+use App;
 
 
 class ProductController extends Controller
@@ -28,14 +30,42 @@ class ProductController extends Controller
 	 */
     public function getProducts()
 	{
-		$categories = DB::select('SELECT `id`, `name` FROM `categories` ORDER BY `id` ASC');
-		foreach($categories as $cat)
-		{
-		 	$products_list[""+$cat->id] = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`price_old` "price_old" ,p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` AND p.`category` = ? ORDER BY tr.`priority` ASC', [$cat->id]);
+		$locale = 'vi';
+		if (Session::has('locale')) {
+            $locale = Session::get('locale');
+        }
 
-		 	// $products_list[""+$cat->id] = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", p.`unit` "unit"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = tr.`farmer_id` AND tr.`status` = 1 AND p.`category` = ? ', [$cat->id]);
+		if (strcmp($locale, 'en') == 0) {
+			$categories = DB::select('SELECT `id` "id", `en_name` "name" FROM `categories` ORDER BY `id` ASC');
+			foreach($categories as $cat)
+			{
+			 	$products_list[""+$cat->id] = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`en_name` "farmer_name", 
+			 													 p.`id` "id" ,p.`en_name` "name", p.`slug` "slug", p.`price_old` "price_old" ,p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  
+			 												FROM `products` p, `trading` tr, `farmers` f 
+			 											   WHERE tr.`product_id` = p.`id` 
+			 											     AND tr.`status` = 1 
+			 											     AND f.`id` = tr.`farmer_id` 
+			 											     AND p.`category` = ? 
+			 											ORDER BY tr.`priority` ASC', [$cat->id]);
+
+			}		    
 		}
-	        return $products_list;
+		else {
+			$categories = DB::select('SELECT `id`, `name` FROM `categories` ORDER BY `id` ASC');
+			foreach($categories as $cat)
+			{
+			 	$products_list[""+$cat->id] = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", 
+			 													 p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`price_old` "price_old" ,p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  
+			 											 	FROM `products` p, `trading` tr, `farmers` f 
+			 											   WHERE tr.`product_id` = p.`id` 
+			 											     AND tr.`status` = 1 
+			 											     AND f.`id` = tr.`farmer_id` 
+			 											     AND p.`category` = ? 
+			 											ORDER BY tr.`priority` ASC', [$cat->id]
+			   );
+			}
+		}
+	    return $products_list;
 	}
 
 	public function getPackages()
@@ -91,7 +121,29 @@ class ProductController extends Controller
 	 */
     public function getProductDetail($product_id)
 	{
-		$product_detail = DB::select('SELECT f.`id` "id", f.`name` "name", f.`rating` "rating", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` "unit" FROM `farmers` f, `trading` tr, `products` p WHERE p.`id` = tr.`product_id` AND tr.`product_id` = ? AND tr.`farmer_id` = f.`id` AND tr.`status` = 1 ', [$product_id]);
+
+		$locale = 'vi';
+		if (Session::has('locale')) {
+            $locale = Session::get('locale');
+        }
+
+		if (strcmp($locale, 'en') == 0) {
+			$product_detail = DB::select('SELECT f.`id` "id", f.`en_name` "name", f.`rating` "rating", 
+												 IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` "unit" 
+										    FROM `farmers` f, `trading` tr, `products` p 
+										   WHERE p.`id` = tr.`product_id` 
+										     AND tr.`product_id` = ? 
+										     AND tr.`farmer_id` = f.`id` 
+										     AND tr.`status` = 1 ', [$product_id]);		}
+		else {
+			$product_detail = DB::select('SELECT f.`id` "id", f.`name` "name", f.`rating` "rating", 
+												 IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` "unit" 
+										    FROM `farmers` f, `trading` tr, `products` p 
+										   WHERE p.`id` = tr.`product_id` 
+										     AND tr.`product_id` = ? 
+										     AND tr.`farmer_id` = f.`id` 
+										     AND tr.`status` = 1 ', [$product_id]);
+		}
 
 		return $product_detail;
 	}
@@ -105,7 +157,31 @@ class ProductController extends Controller
 	 */
     public function getSuppliers($product_id)
 	{
-		$product_detail = DB::select('SELECT f.`id` "id", f.`name` "name", ROUND(f.`rating`/100, 2)  "rating", tr.`capacity`, IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` FROM `farmers` f, `trading` tr, `products` p WHERE p.`id` = tr.`product_id` AND tr.`product_id` = ? AND tr.`status` = 1 AND tr.`farmer_id` = f.`id`', [$product_id]);
+		$locale = 'vi';
+		if (Session::has('locale')) {
+            $locale = Session::get('locale');
+        }
+
+		if (strcmp($locale, 'en') == 0) {
+			$product_detail = DB::select('SELECT f.`id` "id", f.`en_name` "name", ROUND(f.`rating`/100, 2)  "rating", 
+												 tr.`capacity`, IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` 
+											FROM `farmers` f, `trading` tr, `products` p 
+										   WHERE p.`id` = tr.`product_id` 
+										     AND tr.`product_id` = ? 
+										     AND tr.`status` = 1 
+										     AND tr.`farmer_id` = f.`id`', [$product_id]
+										);					}
+		else {
+			$product_detail = DB::select('SELECT f.`id` "id", f.`name` "name", ROUND(f.`rating`/100, 2)  "rating", 
+												 tr.`capacity`, IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, tr.`capacity` - tr.`sold`) AS "quantity_left", tr.`unit` 
+											FROM `farmers` f, `trading` tr, `products` p 
+										   WHERE p.`id` = tr.`product_id` 
+										     AND tr.`product_id` = ? 
+										     AND tr.`status` = 1 
+										     AND tr.`farmer_id` = f.`id`', [$product_id]
+										);			
+		}
+
 
 		return $product_detail;
 	}
