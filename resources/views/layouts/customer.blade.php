@@ -56,14 +56,14 @@
    <body class="index">
       <div id="chat" class="box-chat col-sm-5 col-md-4 col-lg-2 hidden-xs">
          <div class="clearfix">
-            <div class="pull-left" id="chat-title"><b>Bạn cần hỗ trợ?</b></div>
+            <div class="pull-left" id="chat-title"><b>{{ trans('head.chatBoxTitle') }}</b></div>
             <div class="pull-right">
                <a class="btn-link button-show" href="#">        <i class="glyphicon glyphicon-plus"></i>
                </a>    
             </div>
          </div>
          <div class="content" style="display: none; padding: 0;">
-            <h5>CFarm sẽ trả lời yêu cầu của bạn sớm nhất!</h5>
+            <h5>{{ trans('head.chatBoxDescript') }}</h5>
             <script type="text/javascript">
               window.fbAsyncInit = function () {
                   FB.init({
@@ -667,7 +667,7 @@
                       {{ trans('head.login') }}
                       </button>
                    @else
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Xin chào <strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down" style="color: #A52223"></i>
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ trans('head.hello') }}<strong> {{Auth::user()->name}} </strong> <i class="fa fa-chevron-down" style="color: #A52223"></i>
                       </a>          
                       <ul class="dropdown-menu" role="menu">
                         @if(Auth::user()->account_type=='Farmer')
@@ -699,7 +699,7 @@
                      <span class="icon-bar"></span>
                      </button>
                      <a class="navbar-brand" href="{{url('/gio-hang-thuc-pham-sach')}}">
-                     <i class="fa fa-shopping-cart"></i> <span class="badge" id="cartMobile" >Đặt hàng: {{count($cart)}}</span>
+                     <i class="fa fa-shopping-cart"></i> <span class="badge" id="cartMobile" >{{ trans('head.order') }}: {{count($cart)}}</span>
                      </a>
                   </div>
                   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -751,27 +751,27 @@
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="tel" src="{{url('')}}/assets/images/icons/icon-tel.png" height="39" />
-                           <span data-info="text-info">Hotline: +84 919 616 054</span>
+                           <span data-info="text-info">{{ trans('head.bannerFooter_1') }}</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="time" src="{{url('')}}/assets/images/icons/icon-shipping.png" height="39" />
-                           <span data-info="text-info">Giao hàng đến tận nhà</span>
+                           <span data-info="text-info">{{ trans('head.bannerFooter_2') }}</span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3 text-center">
                         <div class="info-col bg-super-light">
                            <img class="hidden-sm hidden-md" alt="email" src="{{url('')}}/assets/images/icons/icon-mail.png" height="39" />
                            <span data-info="text-info">
-                           Hỗ trợ: support@cfarm.vn
+                           {{ trans('head.bannerFooter_3') }}
                            </span>
                         </div>
                      </article>
                      <article class="col col-xs-12 col-sm-3">
                         <div class="info-col bg-super-light text-center">
                            <img class="hidden-sm hidden-md" alt="location" src="{{url('')}}/assets/images/icons/icon-location.png" height="39" />
-                           <span data-info="text-info">167 Trần Trọng Cung, Q.7</span>
+                           <span data-info="text-info">{{ trans('head.bannerFooter_4') }}</span>
                         </div>
                      </article>
                   </div>
@@ -785,7 +785,7 @@
                      <div class="clearfix row">
                         <div class="col-sm-5">
                            <ul class="footer-widget-list list-unstyled"><li><strong>Cfarm! </strong></li></ul>
-                           Kết nối người tiêu dùng với những lương nông trên nền tảng công nghệ. Bạn có thể đặt mua thực phẩm sạch hoặc hữu cơ trực tiếp từ những trang trại thông qua <a href="{{url('')}}">www.cfarm.vn</a> hoặc (Android & iOS App)
+                           {{ trans('head.footerIntro') }} <a href="{{url('')}}">www.cfarm.vn</a> {{ trans('head.or') }} (Android & iOS App)
                         </div>
                         <div class="col-sm-3 col-sm-offset-1">
                            <ul class="footer-widget-list list-unstyled spacer-bottom-5">
@@ -800,18 +800,18 @@
                         <div class="col-sm-3">
                            <ul class="footer-widget-list list-unstyled">
                               <li>
-                                 <strong>Chăm sóc khách hàng</strong>
+                                 <strong>{{ trans('head.footer0') }} </strong>
                               </li>
                               <li>
-                                 <a class="" href="{{url('')}}/huong-dan-mua-thuc-pham-sach">Hướng dẫn mua hàng
+                                 <a class="" href="{{url('')}}/huong-dan-mua-thuc-pham-sach">{{ trans('head.footer1') }}
                            </a>
                               </li>
                               <li>
-                                 <a class="" href="{{url('')}}/chinh-sach-doi-tra">Chính sách đổi trả
+                                 <a class="" href="{{url('')}}/chinh-sach-doi-tra">{{ trans('head.footer2') }}
                            </a>
                               </li>
                               <li>
-                                 <a class="" href="{{url('')}}/chinh-sach-giao-hang">Chính sách giao hàng
+                                 <a class="" href="{{url('')}}/chinh-sach-giao-hang">{{ trans('head.footer3') }}
                            </a>
                               </li>
                              
@@ -907,9 +907,9 @@
       function updateCartStatus(data) {
          var length = Object.keys(data).length;
          if(length == 0){
-            $('#cart-status').html("Giỏ hàng rỗng");
-            $('#cart-status2').html("Giỏ hàng rỗng");
-            $('#cartMobile').html("Giỏ hàng rỗng");
+            $('#cart-status').html("{{ trans('head.cartStatus0') }}");
+            $('#cart-status2').html("{{ trans('head.cartStatus0') }}");
+            $('#cartMobile').html("{{ trans('head.cartStatus0') }}");
          }
          else{
             $('#cart-status').html("{{ trans('head.cartStatus1_1') }} " + length + " {{ trans('head.cartStatus1_2') }}!");

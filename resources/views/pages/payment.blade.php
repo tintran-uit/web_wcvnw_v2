@@ -9,7 +9,7 @@
 <script type="text/javascript">
             $(document).ready(function() {
               $('#tab-1').bootstrapValidator({
-                  excluded: ':disabled',
+                  framework: 'bootstrap',
                   feedbackIcons: {
                       valid: 'glyphicon glyphicon-ok',
                       invalid: 'glyphicon glyphicon-remove',
@@ -172,16 +172,31 @@
                                     <p>Bạn đã có tài khoản? <a data-toggle="modal" data-target="#modal-signin" style="color: #0071b6; font-weight: 700;" href="#">Đăng nhập</a></p>
                                     <p><a data-toggle="modal" data-target="#modal-signup" style="color: #0071b6; font-weight: 700;" href="#">Đăng ký tài khoản</a> <b>để nhận ưu đãi, đánh giá, kiểm tra tình trạng đơn hàng và mua sản phẩm nhanh chóng hơn!</b></p>
                                   @endif
-                                    <div class="form-group">
-                                       <!-- <label>First and Last Name</label> -->
-                                       <input name="ten" type="text" value="@if($auth) {{$customer->name}} @endif" class="form-control input-lg" placeholder="Họ tên khách hàng (*)">
-                                    </div>
+                                    
                                  </div>
                                  </article>
                                  <article class="col-sm-12">
-                                 <article class="col-sm-6" style="margin-top: 6px">
+
+                                  <article class="col-sm-6" style="margin-top: 6px">
                                        <div class="form-group">
-                                          <label>Địa chỉ giao hàng</label>
+                                          <label>Thông tin liên hệ:</label>
+                                       </div>
+                                          <div class="form-group">
+                                             <!-- <label>First and Last Name</label> -->
+                                             <input name="sdt" value="@if($auth) {{$customer->phone}} @endif" type="text" class="form-control input-lg" placeholder="Số điện thoại: (*)" oninput="getCustomer(this)">
+                                          </div>
+                                          <div class="form-group">
+                                                <input name="ten" type="text" value="@if($auth) {{$customer->name}} @endif" class="form-control input-lg" placeholder="Họ tên khách hàng (*)">
+                                          </div>
+                                          <div class="form-group">
+                                                <input name="email" type="text" value="@if($auth) {{$customer->email}} @endif" class="form-control input-lg" placeholder="Email">
+                                          </div>
+                                   </article>
+                                 <article class="col-sm-6" style="margin-top: 6px">
+                                      <div class="form-group">
+                                          <label>Địa chỉ giao hàng:</label>
+                                      </div>
+                                       <div class="form-group">
                                           <input name="diaChi" type="text" class="form-control input-lg" value="@if($auth) {{$customer->address}} @endif" placeholder="Nhập địa chỉ (*)">
                                        </div>
                                        <div class="form-group">
@@ -207,35 +222,7 @@
                                     
                                     
                                  </article>
-                                 <article class="col-sm-6" style="margin-top: 6px">
-                                       <div class="form-group">
-                                          <label>Thông tin liên lạc</label>
-                                       </div>
-                                          <div class="form-group row clearfix">
-                                             <div class="col-sm-4">
-                                                <div class="spacer-10">
-                                                   <div class="picker picker-radio  checked">
-                                                      <label class="picker-label">Số điện thoại: (*)</label>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="col-sm-8">
-                                                <input name="sdt" value="@if($auth) {{$customer->phone}} @endif" type="text" class="form-control input-lg">
-                                             </div>
-                                          </div>
-                                          <div class="form-group row clearfix">
-                                             <div class="col-sm-4">
-                                                <div class="spacer-10">
-                                                   <div name="email" class="picker picker-radio ">
-                                                      <label class="picker-label">Email:</label>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="col-sm-8">
-                                                <input name="email" type="text" value="@if($auth) {{$customer->email}} @endif" class="form-control input-lg">
-                                             </div>
-                                          </div>
-                                   </article>
+                                 
                                    
                                  </article>
                               </div>
@@ -274,11 +261,11 @@ trước khi giao hàng! --></p>
                                           </p>
                                        </div>
                                        <div class="pull-right hidden-xs">
-                                          <img class="image-responsive" alt="giao hang tan noi" src="{{url('')}}/assets/images/icons/credit-cards/giao-rau-sach.jpg" style="width: 35%; margin-left: 50px;">
+                                          <img class="image-responsive" alt="giao hang tan noi" src="{{url('')}}/assets/images/icons/credit-cards/giao-rau-sach.png" style="width: 25%; margin-left: 50px;">
                                        </div>
                                     </a>
                                  </div>
-                                <!--  <div id="payment-1" class="choose deselected">
+                                 <div id="payment-1" class="choose deselected">
                                     <a class="clearfix" onclick="payment(1)">
                                        <div class="pull-left">
                                           <span class="fa-stack spacer-15" id="tick-pay-1">
@@ -286,13 +273,19 @@ trước khi giao hàng! --></p>
                                           </span>
                                        </div>
                                        <div class="col-xs-9">
-                                          
+                                          <h4 class="no-margin">
+                                             <b>Thanh toán chuyển khoản ngân hàng</b>
+                                          </h4>
+                                          <p class="no-margin">
+                                             <p class="no-margin" style="color: #222222">
+
+                                              Nhân viên chúng tôi sẽ giao hàng và nhận thanh toán vào ngày thứ Bảy.<br> Vui lòng giữ liên lạc qua điện thoại.
                                        </div>
                                        <div class="pull-right hidden-xs">
-                                          <img alt="paypal" src="assets/images/icons/credit-cards/paypal.png">
+                                          <img class="image-responsive" alt="giao hang tan noi" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-online.png" style="width: 40%; margin-left: 50px;margin-top: 10px;">
                                        </div>
                                     </a>
-                                 </div> -->
+                                 </div>
                               </div>
                               
                               <section>
@@ -360,10 +353,36 @@ trước khi giao hàng! --></p>
 <script type="text/javascript">
       var spacerToal = '{{$subtotal}}';
       spacerToal = parseInt(spacerToal);
+      var auth = '{{$auth}}';
       var dataPost = {};
       dataPost['thanhToan'] = 1;
       isMobilePayment();
       // var t=setInterval(checkForm1,900);
+      function getCustomer(input) {
+      $('#selectQuan').val('1');
+
+          var checkSDT = input.value;
+          if(checkSDT.length>=10){
+            checkSDT = checkSDT.replace(" ", "");
+            var url = 'api/customerinfo/phone='+checkSDT;
+            $.getJSON( url )
+            .done(function( data ) {
+              data = data[0];
+              if('name' in data){
+                  $("input[name=ten]").val(data.name).trigger('change');
+                  $("input[name=diaChi]").val(data.address);
+                  $("input[name=email]").val(data.email);
+                  $("#selectQuan").val(data.district).trigger('change');
+                  auth = true;
+              }
+            })
+            .fail(function( jqxhr, textStatus, error ) {
+              var err = textStatus + ", " + error;
+              console.log( "Request Failed: " + err );
+          });
+          }
+      }
+      
       function backStep() {
             var period_val = activaTab();
             switch (period_val){
@@ -416,7 +435,7 @@ trước khi giao hàng! --></p>
       };
    
       function payment(argument) {
-         var tick = '<i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-check fa-stack-1x fa-inverse"></i>';
+         var tick = '<i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i>';
          var notick = '<i class="fa fa-circle fa-stack-2x"></i>';
          if(argument == 0){
             $('#payment-0').removeClass('deselected').addClass('selected');
@@ -441,7 +460,7 @@ trước khi giao hàng! --></p>
          }
 
       function checkForm(ntab) {
-          var auth = '{{$auth}}';
+          
           if(auth)
           {
             return true;

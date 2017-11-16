@@ -18,10 +18,10 @@
               </div>
               <div class="icon-shipping" style="margin-top: 30px;margin-bottom: 10px;"> <!--icon-email, icon-discount, icon-shipping-->
                 <h4 class="title-box text-uppercase no-margin-top">
-                  GIAO HÀNG TẬN NƠI
+                  {{ trans('head.right_title') }}
                 </h4>
                 <p class="copy-box no-margin">
-                  Miễn phí giao hàng cho đơn hàng trên 500.000 VND.
+                  {{ trans('head.freeShip') }}
                 </p>
               </div>
 
@@ -38,18 +38,18 @@
                 <div class="product-options">
                   <section class="choose">
                     <h5 class="col-sm-12">
-                      <b>Chọn nông trại cung cấp:</b>
+                      <b>{{trans('head.selectFarm')}}</b>
                     </h5>
                     <article class="col-sm-12">
                         
                         <table class="table table-striped" id="tbSupp">
                           <thead>
                             <tr>
-                              <th class="col-sm-1">Chọn</th>
-                              <th class="col-sm-5">Nông trại</th>
-                              <th class="col-sm-3">Đang còn</th>
+                              <th class="col-sm-1">{{trans('head.select')}}</th>
+                              <th class="col-sm-5">{{trans('head.farm')}}</th>
+                              <th class="col-sm-3">{{trans('head.quantity_left')}}</th>
                               <th class="col-sm-2">
-                               Đánh giá
+                               {{trans('head.review')}}
                               </th>
                               <th class="col-sm-1"> </th>
                             </tr>
@@ -63,7 +63,7 @@
                   <section class="choose">
                     <div class="col-sm-2 vcenter">
                     <h5 class="">
-                      <b>Số lượng:</b>
+                      <b>{{trans('head.quantity')}}</b>
                     </h5>
                     </div>
                     <div class="stepper col-sm-5 vcenter"><input type="text" class="form-control stepper-input text-center" id="stepper" value="{{$product[0]->unit_quantity}} {{$product[0]->unit}}" min="1" max="1000"><span class="stepper-arrow up" onclick="stepperUp()">Up</span><span class="stepper-arrow down" onclick="stepperDown()">Down</span></div>  
@@ -82,16 +82,13 @@
                           <p class="discounted-price pull-left" id="dis_price">
                             {{number_format($product[0]->price)}} VND
                             @if($product[0]->category == 0)
-                              <p style="font-size: 19px;">Mua lẻ: <span style="text-decoration: line-through;">{{$product[0]->price_old}} VND</span></p>
+                              <p style="font-size: 19px;">{{trans('head.retail')}}: <span style="text-decoration: line-through;">{{$product[0]->price_old}} VND</span></p>
                             @endif
                           </p>
                         </div>
                       </article>
                     </div>
                   </section>
-                </div>
-                <div class="text-center">
-                  <i class="glyphicon glyphicon-option-horizontal"></i>
                 </div>
 </form>              <section>
                 
@@ -101,7 +98,7 @@
           <!-- chi tiet -->
           <article class="col-sm-12 col-md-12" style="margin-top:-10px">
             <ul class="product-tabs">
-                  <li class=" active first"><a href="#product_tabs_description_contents" data-toggle="pill">Chi tiết sản phẩm</a>
+                  <li class=" active first"><a href="#product_tabs_description_contents" data-toggle="pill">{{trans('head.details')}}</a>
                   </li>
                   
                   <li class=""><a href="#product_tabs_product_additional_data_contents" data-toggle="pill"></a>
