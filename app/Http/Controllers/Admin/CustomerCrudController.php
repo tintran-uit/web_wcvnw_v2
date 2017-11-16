@@ -57,8 +57,8 @@ class CustomerCrudController extends CrudController
             'label' => 'Điểm',
         ]);
         $this->crud->addColumn([
-            'name' => 'photo',
-            'label' => 'Hình Ảnh',
+            'name' => 'note',
+            'label' => 'Ghi chú',
         ]);
 
         // ------ CRUD FIELDS
@@ -91,9 +91,9 @@ class CustomerCrudController extends CrudController
         ]);
 
         $this->crud->addField([
-            'name' => 'photo',
-            'label' => 'Hình Ảnh',
-            'type' => 'browse',
+            'name' => 'note',
+            'label' => 'Ghi Chú',
+            'type' => 'text',
         ]);
 /*
 
