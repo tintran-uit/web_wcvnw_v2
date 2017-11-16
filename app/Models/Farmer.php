@@ -24,7 +24,7 @@ class Farmer extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id','name','address', 'short_address', 'quality', 'product_list', 'phone', 'rating', 'agent_id', 'rating_count', 'profile', 'photo'];
+    protected $fillable = ['id','name', 'en_name','address', 'short_address', 'en_short_address', 'quality', 'en_quality', 'product_list', 'en_product_list', 'phone', 'rating', 'agent_id', 'rating_count', 'profile', 'en_profile', 'photo'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [

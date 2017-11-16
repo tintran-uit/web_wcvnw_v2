@@ -24,6 +24,17 @@ class CustomerController extends Controller
 	 * @return array of products in its categories 
 	 */
 
+	public function customerInfo($phone)
+	{
+		$info = "No Found";
+		$info = DB::select('SELECT c.`name`, c.`address`, c.`district`, c.`city`, c.`email`
+							  FROM `customers` c  
+							 WHERE c.`phone` = ?', [$phone]
+						  );
+		
+	    return $info;
+	}
+
 	public function orderContent($order_id)
 	{
 		$items = DB::select('SELECT p.`name` "product_name", m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", f.`name` "farmer_name" FROM `m_orders` m, `products` p, `farmers` f  

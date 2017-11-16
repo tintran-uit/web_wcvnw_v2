@@ -65,6 +65,10 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Brand', 'brand_id');
     }
+    public function farmer()
+    {
+        return $this->belongsTo('App\Models\Farmer', 'farmer_id');
+    }
 
     public function sold()
     {

@@ -68,6 +68,13 @@ class FarmerCrudController extends CrudController
                 'class' => 'form-group col-md-6'
             ],
         ]);
+         $this->crud->addField([
+            'name' => 'en_name',
+            'label' => 'Tên Tiếng Anh',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ],
+        ]);
 
        $this->crud->addField([    // TEXT
             'name' => 'phone',
@@ -94,9 +101,28 @@ class FarmerCrudController extends CrudController
                 'class' => 'form-group col-md-10'
             ],
         ]);
+
+       $this->crud->addField([    // TEXT
+            'name' => 'en_short_address',
+            'label' => 'Địa Chỉ Ngắn Tiếng Anh',
+            'type' => 'text',
+            'placeholder' => 'Địa chỉ này sẽ hiển thị cho người dùng',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10'
+            ],
+        ]);
         $this->crud->addField([   // WYSIWYG
             'name' => 'product_list',
             'label' => 'Các sản phẩm nuôi trồng',
+            'type' => 'textarea',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10'
+            ],
+            'placeholder' => 'Các sản phẩm nuôi trồng',
+        ]);
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'en_product_list',
+            'label' => 'Các sản phẩm nuôi trồng Tiếng Anh',
             'type' => 'textarea',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-10'
@@ -109,10 +135,22 @@ class FarmerCrudController extends CrudController
             'type' => 'textarea',
             'placeholder' => 'Cam kết chất lượng',
         ]);
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'en_quality',
+            'label' => 'Cam kết chất lượng Tiếng Anh',
+            'type' => 'textarea',
+            'placeholder' => 'Cam kết chất lượng',
+        ]);
 
         $this->crud->addField([   // WYSIWYG
             'name' => 'profile',
             'label' => 'Thông Tin Nông Trại',
+            'type' => 'ckeditor',
+            'placeholder' => 'Your meta description here',
+        ]);
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'en_profile',
+            'label' => 'Thông Tin Nông Trại Tiếng Anh',
             'type' => 'ckeditor',
             'placeholder' => 'Your meta description here',
         ]);
@@ -125,7 +163,7 @@ class FarmerCrudController extends CrudController
         ]);
 
 
-        $this->crud->enableAjaxTable();
+        //$this->crud->enableAjaxTable();
 
 
 
