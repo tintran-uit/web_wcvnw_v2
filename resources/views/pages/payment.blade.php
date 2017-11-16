@@ -9,7 +9,7 @@
 <script type="text/javascript">
             $(document).ready(function() {
               $('#tab-1').bootstrapValidator({
-                  excluded: ':disabled',
+                  framework: 'bootstrap',
                   feedbackIcons: {
                       valid: 'glyphicon glyphicon-ok',
                       invalid: 'glyphicon glyphicon-remove',
@@ -353,16 +353,36 @@ trước khi giao hàng! --></p>
 <script type="text/javascript">
       var spacerToal = '{{$subtotal}}';
       spacerToal = parseInt(spacerToal);
+      var auth = '{{$auth}}';
       var dataPost = {};
       dataPost['thanhToan'] = 1;
       isMobilePayment();
       // var t=setInterval(checkForm1,900);
       function getCustomer(input) {
+      $('#selectQuan').val('1');
+
           var checkSDT = input.value;
           if(checkSDT.length>=10){
-            alert(checkSDT);
+            checkSDT = checkSDT.replace(" ", "");
+            var url = 'api/customerinfo/phone='+checkSDT;
+            $.getJSON( url )
+            .done(function( data ) {
+              data = data[0];
+              if('name' in data){
+                  $("input[name=ten]").val(data.name).trigger('change');
+                  $("input[name=diaChi]").val(data.address);
+                  $("input[name=email]").val(data.email);
+                  $("#selectQuan").val(data.district).trigger('change');
+                  auth = true;
+              }
+            })
+            .fail(function( jqxhr, textStatus, error ) {
+              var err = textStatus + ", " + error;
+              console.log( "Request Failed: " + err );
+          });
           }
       }
+      
       function backStep() {
             var period_val = activaTab();
             switch (period_val){
@@ -440,7 +460,7 @@ trước khi giao hàng! --></p>
          }
 
       function checkForm(ntab) {
-          var auth = '{{$auth}}';
+          
           if(auth)
           {
             return true;
