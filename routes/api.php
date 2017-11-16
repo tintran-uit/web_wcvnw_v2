@@ -29,8 +29,6 @@ Route::get('/orders', 'CustomerController@getOrders');
 Route::get('/orderstats/date={date}', 'OrderController@itemStats');
 Route::get('/orderrm/order_id={order_id}/product_id={product_id}/farmer_id={farmer_id}', 'OrderController@removeItemAdmin');
 
-Route::post('/customer/rate', 'CustomerController@rating');
-
 Route::get('/getProductDetail/{product_id}', 'ProductController@getProductDetail');
 Route::get('/farmer/farmer_id={farmer_id}', 'FarmerController@getFarmerProfile');
 Route::get('/farmer/trading/farmer_id={farmer_id}', 'FarmerController@farmerOrderList');
@@ -55,4 +53,6 @@ Route::post('payment/add', 'OrderController@addOrder');
 
 //customer
 Route::get('customer/addEmailCus={emailCus}&receiveEmailCus={receiveEmailCus}', 'CustomerController@addEmaiVister');
+Route::post('/customer/rate', 'CustomerController@rating');
+Route::get('/customerinfo/phone={phone}', 'CustomerController@customerInfo');
 

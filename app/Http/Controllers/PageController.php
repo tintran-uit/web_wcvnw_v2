@@ -34,6 +34,7 @@ class PageController extends Controller
         $this->data['menu'] = MenuItem::all();
         $this->data['cart'] = Cart::content();
 
+
         $categories = ProductCategory::orderBy('id', 'asc')->get();
         $this->data['categories'] = $categories;
         return view('pages.index', $this->data);
@@ -127,9 +128,30 @@ class PageController extends Controller
 
     public function getProduct($slug)
     {
-        
-        $product = DB::select('SELECT p.`id` "id", p.`name` "name", p.`slug` "slug", p.`image` 
-            "image", p.`price` "price", p.`price_old` "price_old", p.`category` "category", p.`unit_quantity` "unit_quantity", p.`unit` "unit", p.`short_description` "short_description", p.`description` "description" FROM `products` p WHERE p.`slug` = ? ', [$slug]);
+        $locale = 'vi';
+        if (Session::has('locale')) {
+            $locale = Session::get('locale');
+        }
+
+        if (strcmp($locale, 'en') == 0) {
+            $product = DB::select('SELECT p.`id` "id", p.`en_name` "name", p.`slug` "slug", p.`image` "image", 
+                                          p.`price` "price", p.`price_old` "price_old", p.`category` "category", 
+                                          p.`unit_quantity` "unit_quantity", p.`unit` "unit", 
+                                          p.`en_short_description` "short_description", p.`en_description` "description" 
+                                     FROM `products` p 
+                                    WHERE p.`slug` = ? ', [$slug]
+                                );
+        }
+        else {
+            $product = DB::select('SELECT p.`id` "id", p.`name` "name", p.`slug` "slug", p.`image` "image", 
+                                          p.`price` "price", p.`price_old` "price_old", p.`category` "category", 
+                                          p.`unit_quantity` "unit_quantity", p.`unit` "unit", 
+                                          p.`short_description` "short_description", p.`description` "description" 
+                                     FROM `products` p 
+                                    WHERE p.`slug` = ? ', [$slug]
+                                );
+
+        }
 
         if (!$product)
         {
@@ -204,6 +226,12 @@ class PageController extends Controller
     
     public function showFarmer($farmer_id)
     {
+        $locale = 'vi';
+        if (Session::has('locale')) {
+            $locale = Session::get('locale');
+        }
+
+
         $page = Page::findBySlug('thong-tin-trang-trai-an-toan');
 
         if (!$page)
@@ -222,7 +250,24 @@ class PageController extends Controller
         $this->data['menu'] = MenuItem::all();
         $this->data['cart'] = Cart::content();
 
-        $this->data['farmer'] = DB::select('SELECT f.`id` "id", f.`name` "name", f.`photo` "photo", f.`short_address` "short_address", f.`rating` "rating", f.`rating_count` "rating_count", f.`profile` "profile" FROM `farmers` f WHERE f.`id` = ? ', [$farmer_id]);
+        if (strcmp($locale, 'en') == 0) {
+            $this->data['farmer'] = DB::select('SELECT f.`id` "id", f.`en_name` "name", f.`photo` "photo", 
+                                                       f.`en_short_address` "short_address", f.`rating` "rating", 
+                                                       f.`rating_count` "rating_count", f.`en_profile` "profile" 
+                                                  FROM `farmers` f 
+                                                 WHERE f.`id` = ? ', [$farmer_id]
+                                               );        
+        }
+        else {
+            $this->data['farmer'] = DB::select('SELECT f.`id` "id", f.`name` "name", f.`photo` "photo", 
+                                                       f.`short_address` "short_address", f.`rating` "rating", 
+                                                       f.`rating_count` "rating_count", f.`profile` "profile" 
+                                                  FROM `farmers` f 
+                                                 WHERE f.`id` = ? ', [$farmer_id]
+                                               );        
+
+        }
+
 
         return view('pages.farm_information_show', $this->data);
     }

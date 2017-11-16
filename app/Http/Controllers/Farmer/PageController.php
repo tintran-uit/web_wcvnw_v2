@@ -87,7 +87,7 @@ class PageController extends Controller
         $mua[$key->id]['pack'] = [];
       }
      // return $mua;
-      $orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`name` "status_name", s.`vn_name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id`AND g.`delivery_date` = ? AND g.`status` != ? ORDER BY g.`order_id` DESC', [$date, 8]);
+      $orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id`AND g.`delivery_date` = ? AND g.`status` != ? ORDER BY g.`order_id` DESC', [$date, 8]);
         $this->data['orders'] = $orders;
         $this->data['orderItem'] = [];
 

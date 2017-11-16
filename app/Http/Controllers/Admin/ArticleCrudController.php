@@ -59,7 +59,13 @@ class ArticleCrudController extends CrudController
         // ------ CRUD FIELDS
         $this->crud->addField([    // TEXT
                                 'name' => 'title',
-                                'label' => 'Title',
+                                'label' => 'Tiêu đề',
+                                'type' => 'text',
+                                'placeholder' => 'Your title here',
+                            ]);
+        $this->crud->addField([    // TEXT
+                                'name' => 'en_title',
+                                'label' => 'Tiêu đề tiếng anh',
                                 'type' => 'text',
                                 'placeholder' => 'Your title here',
                             ]);
@@ -85,6 +91,12 @@ class ArticleCrudController extends CrudController
 
         $this->crud->addField([    // WYSIWYG
                                 'name' => 'content',
+                                'label' => 'Nội dung ',
+                                'type' => 'ckeditor',
+                                'placeholder' => 'Your textarea text here',
+                            ]);
+        $this->crud->addField([    // WYSIWYG
+                                'name' => 'en_content',
                                 'label' => 'Content',
                                 'type' => 'ckeditor',
                                 'placeholder' => 'Your textarea text here',

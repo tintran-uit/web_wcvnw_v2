@@ -67,6 +67,13 @@ class ProductCrudController extends CrudController
                 'class' => 'form-group col-md-5'
             ],
         ]);
+        $this->crud->addField([
+            'name' => 'en_name',
+            'label' => 'Tên Tiếng Anh',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-5'
+            ],
+        ]);
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => 'Nhóm Sản Phẩm',
             'type' => 'select2',
@@ -87,6 +94,19 @@ class ProductCrudController extends CrudController
             'entity' => 'brand', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model' => "App\Models\Brand", // foreign key model
+            // 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-5'
+            ],
+        ]);
+
+        $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
+            'label' => 'Nông trại',
+            'type' => 'select2',
+            'name' => 'farmer_id', // the method that defines the relationship in your Model
+            'entity' => 'farmer', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\Farmer", // foreign key model
             // 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-5'
@@ -131,8 +151,20 @@ class ProductCrudController extends CrudController
             'placeholder' => 'Mô Tả ngắn sản phẩm',
         ]);
         $this->crud->addField([   // WYSIWYG
+            'name' => 'en_short_description',
+            'label' => 'Mô Tả Tiếng Anh',
+            'type' => 'summernote',
+            'placeholder' => 'Mô Tả ngắn sản phẩm',
+        ]);
+        $this->crud->addField([   // WYSIWYG
             'name' => 'description',
             'label' => 'Mô Tả chi tiết',
+            'type' => 'ckeditor',
+            'placeholder' => 'Liệt kê những mô tả chi tiết sản phẩm',
+        ]);
+        $this->crud->addField([   // WYSIWYG
+            'name' => 'en_description',
+            'label' => 'Mô Tả dài tiếng anh',
             'type' => 'ckeditor',
             'placeholder' => 'Liệt kê những mô tả chi tiết sản phẩm',
         ]);
@@ -150,7 +182,7 @@ class ProductCrudController extends CrudController
             'type' => 'hidden',
         ]);
 
-        $this->crud->enableAjaxTable();
+        // $this->crud->enableAjaxTable();
 
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
