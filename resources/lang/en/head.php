@@ -28,7 +28,7 @@ return [
     'farmer' => 'Quản lý nông trại',
     'right_title' => 'HOME DELIVERY',
     'order' => 'Order',
-    'cartStatus0' => 'Cart is empty',
+    'cartStatus0' => 'Cart empty',
     'cartStatus1_1' => 'You have',
     'cartStatus1_2' => 'products',
     'cartStatus3' => 'CFarm Viet Nam',

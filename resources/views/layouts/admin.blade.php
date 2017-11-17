@@ -38,6 +38,9 @@
 
     <!-- CRUD LIST CONTENT - crud_list_styles stack -->
     <link href="{{url('')}}/assets/stylesheets/all.css" rel="stylesheet" type="text/css" />
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
     @yield('css')
 </head>
 
@@ -104,7 +107,7 @@
                         <img src="https://placehold.it/160x160/00a65a/ffffff/&text=M" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Minh Huỳnh</p>
+                        <p>{{Auth::user()->name}}</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Đã Đăng Nhập</a>
                     </div>
                 </div>
@@ -255,7 +258,6 @@
 
 
     <!-- jQuery 2.2.0 -->
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script>
         window.jQuery || document.write('<script src="{{url('')}}/vendor/adminlte/plugins/jQuery/jQuery-2.2.0.min.js"><\/script>')
     </script>
