@@ -496,7 +496,7 @@
                                       <span id="country-lang"> English</span>
                                     </a>                
                                  </li>
-                              </ul>
+                              </ul> 
                             @else
                               <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/en">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
                               <span id="country-lang">English</span>

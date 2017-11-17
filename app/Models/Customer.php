@@ -24,7 +24,7 @@ class Customer extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['id','name', 'phone', 'email','address', 'district', 'photo'];
+    protected $fillable = ['id','name', 'phone', 'email','address', 'district', 'photo', 'note'];
     // protected $hidden = [];
     // protected $dates = [];
     /*protected $casts = [
