@@ -490,13 +490,13 @@
                               <span id="country-lang">Tiếng Việt</span>
                               <i class="fa fa-angle-down"></i>
                               </a>              
-                              <ul class="dropdown-menu list-unstyled">
+                              <!-- <ul class="dropdown-menu list-unstyled">
                                  <li>
                                     <a class="text-center" href="{{url('')}}/language/en"><img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
                                       <span id="country-lang"> English</span>
                                     </a>                
                                  </li>
-                              </ul>
+                              </ul> -->
                             @else
                               <a data-toggle="dropdown" class="dropdown-toggle" href="{{URL::asset('')}}language/en">                <img alt="England" src="{{url('')}}/assets/images/icons/flags/flag-england.jpg" />
                               <span id="country-lang">English</span>
