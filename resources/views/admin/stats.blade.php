@@ -1,9 +1,33 @@
 @extends('layouts.admin')
 
+@section('css')
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd', beforeShowDay: function(date){
+          if(date.getDay() == 6){
+                return [true];
+            } else {
+                return [false];
+            }
+        } });
+  } );
+  </script>
+@endsection
+
 @section('main')
 
 <div class="box-header with-border">
-    <h3>THÔNG KÊ MẶT HÀNG TRONG TUẦN</h3>
+    <h3>THÔNG KÊ MẶT HÀNG</h3>
+    <div class="">
+        <div class="col-md-1 vcenter">
+            <a class="btn btn-primary ladda-button" onclick="stats()">Thống kê</a>
+        </div>  
+        <div class="col-md-5 vcenter">
+            <b>Chọn tuần: </b><input type="text" value="{{$date}}" id="datepicker">
+        </div>
+        
+    </div>
 </div>
 
 <div class="box-body table-responsive">
@@ -95,4 +119,13 @@
 </div>
 <!-- /.box-body -->
 
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    function stats() {
+        var date = $('#datepicker').val();
+        window.location.href = "{{url('')}}/admin/order-stats/date="+date;
+    }
+</script>
 @endsection

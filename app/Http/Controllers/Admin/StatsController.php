@@ -37,8 +37,34 @@ public function stats()
                 $products[$farm->name] = $this->soangoi($farm->id, $date);
               }
             }
-          // return $products;  
-        return view('admin.stats', ['farmers' =>$farmers, 'products' => $products]);
+        $date = $date->format('Y-m-d'); 
+        return view('admin.stats', ['farmers' =>$farmers, 'products' => $products, 'date' => $date]);
+        
+    }
+
+public function statsByDate($date)
+    {
+      // $date = '2017-11-11'; 
+      // return $end = date('next saturday', $date);
+        $farmers = DB::select('SELECT DISTINCT f.`name` "name", f.`id` "id" 
+                                 FROM `farmers` f, `trading` tr 
+                                WHERE tr.`delivery_date` = ?
+                                  AND tr.`sold` > 0
+                                  AND tr.`farmer_id` = f.`id` 
+                             ORDER BY `id` ASC', [$date]);
+        if(empty($farmers)){
+          return $date." chưa có đơn hàng!";
+        }
+            foreach($farmers as $farm)
+            {
+              if($farm->id != 10){
+                $products[$farm->name] = $this->layhang($farm->id, $date);
+              }else{
+                $products[$farm->name] = $this->soangoi($farm->id, $date);
+              }
+            }
+        
+        return view('admin.stats', ['farmers' =>$farmers, 'products' => $products, 'date' => $date]);
         
     }
 
