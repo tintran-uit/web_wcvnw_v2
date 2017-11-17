@@ -36,18 +36,17 @@ class ProductController extends Controller
         }
 
 		if (strcmp($locale, 'en') == 0) {
-			$categories = DB::select('SELECT `id` "id", `en_name` "name" FROM `categories` ORDER BY `id` ASC');
+			$categories = DB::select('SELECT `id`, `en_name` as "name" FROM `categories` ORDER BY `id` ASC');
 			foreach($categories as $cat)
 			{
 			 	$products_list[""+$cat->id] = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`en_name` "farmer_name", 
-			 													 p.`id` "id" ,p.`en_name` "name", p.`slug` "slug", p.`price_old` "price_old" ,p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  
+			 													 p.`id` "id" ,p.`en_name` "name", p.`slug` "slug", p.`price_old` "price_old" ,p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` < 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`en_unit` "unit", p.`brand_id` "label"  
 			 												FROM `products` p, `trading` tr, `farmers` f 
 			 											   WHERE tr.`product_id` = p.`id` 
 			 											     AND tr.`status` = 1 
 			 											     AND f.`id` = tr.`farmer_id` 
 			 											     AND p.`category` = ? 
 			 											ORDER BY tr.`priority` ASC', [$cat->id]);
-
 			}		    
 		}
 		else {

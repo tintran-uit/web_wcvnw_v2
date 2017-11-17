@@ -14,10 +14,10 @@
             </a>
             <div class="label-slide hidden-sm hidden-xs slideInDown animated">
                <div>
-                  <h2 class="no-margin-bottom">GÓI</h2>
-                  <h5 class="no-margin-top">SẢN PHẨM</h5>
+                  <h2 class="no-margin-bottom">{{ trans('head.package') }}</h2>
+                  <h5 class="no-margin-top">{{ trans('head.package2') }}</h5>
                </div>
-               <p class="text-center">TIỆN DỤNG<BR>DINH DƯỠNG<BR>TIẾT KIỆM</p>
+               <p class="text-center"><?php echo(trans('head.package3')) ?></p>
                <h1 class="text-right">5-10%</h1>
             </div>      
          </div>
@@ -25,9 +25,9 @@
             <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 3.png" />
             </a>        
             <div class="carousel-caption">
-               <h4><b>Để đảm bảo đủ sản lượng thực phẩm nuôi trồng thuận tự nhiên & hữu cơ cung cấp cho khách hàng</b></h4>
-               <h3><b>Cfarm chốt đơn vào 6h:00 PM Thứ Năm - Giao hàng tại nhà vào Thứ Bảy hàng tuần.</b></h3>
-               <p>(Các đơn hàng đặt sau 6h00 PM Thứ Năm sẽ được giao vào thứ Bảy của tuần tiếp theo.<br> Cảm ơn quý khách đã đồng hành cùng Cfarm xây dựng cộng đồng nuôi trồng thực phẩm sạch & hữu cơ)</p>
+               <!-- <h4><b>Để đảm bảo đủ sản lượng thực phẩm nuôi trồng thuận tự nhiên & hữu cơ cung cấp cho khách hàng</b></h4> -->
+               <h3><b>{{ trans('head.bannerTop2_1') }}</b></h3>
+               <p><b>{{ trans('head.bannerTop2_2') }}</b></p>
             </div>
          </div>
          
@@ -35,8 +35,8 @@
             <a href="#">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 5.png" />
             </a>        
             <div class="carousel-caption">
-               <h3>Chuyên sản phẩm sạch - hữu cơ</h3>
-               <p>Kết nối lương nông - an lòng nội trợ.</p>
+               <h3>{{ trans('head.bannerTop3_1') }}</h3>
+               <p>{{ trans('head.bannerTop3_2') }}</p>
             </div>
          </div>
       </div>
@@ -148,7 +148,7 @@
 
 <section class="news-box spacer-bottom-30">
    <div class="container">
-      <h2 class="title-font-handwritten text-center space-only-bottom">Góc kinh nghiệm</h2>
+      <h2 class="title-font-handwritten text-center space-only-bottom">{{ trans('head.blog') }}</h2>
       <div class="row">
          <article class="col-xs-12 col-sm-6 col-md-4">
             <div class="content-new bg-white">
@@ -157,7 +157,7 @@
                      <figure>
                         <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=3">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo4.png" />
-                           <h4 class="title">Góc nhà bếp</h4>
+                           <h4 class="title">{{ trans('head.blog1') }}</h4>
                         </a>
                      </figure>
                   </section>
@@ -171,7 +171,7 @@
                      <figure>
                         <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=4">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo5.png" />
-                           <h4 class="title">Dinh dưỡng & Sức khỏe</h4>
+                           <h4 class="title">{{ trans('head.blog2') }}</h4>
                         </a>
                      </figure>
                   </section>
@@ -185,7 +185,7 @@
                      <figure>
                         <a href="{{url('')}}/kinh-nghiem-mua-thuc-pham-sach/blog_id=5">
                            <img class="img-responsive" alt="img" src="assets/images/photo/photo6.png" />
-                           <h4 class="title">Câu chuyện nhà nông</h4>
+                           <h4 class="title">{{ trans('head.blog3') }}</h4>
                         </a>
                      </figure>
                   </section>

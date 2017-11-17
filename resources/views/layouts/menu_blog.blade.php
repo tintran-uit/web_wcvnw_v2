@@ -1,6 +1,6 @@
 <div class="block block-nav">
     <div class="title">
-       <h4 class="text-uppercase no-margin">Góc kinh nghiệm</h4>
+       <h4 class="text-uppercase no-margin">{{ trans('head.blog') }}</h4>
     </div>
     <div class="content" style="padding-top: 10px;">
        <dl class="list-unstyled">
