@@ -136,22 +136,23 @@ class OrderController extends Controller
 	{
 		$data = $request->data;
 		$phone = $data["sdt"];
-        $email = $data["email"];
-        $name  = $data["ten"];
-        $address = $data["diaChi"];
-        $district = $data["selectQuan"];
-        $payment = $data["thanhToan"];
-        $promotion_code = $data["maGiamGia"];
-        $note = $data["note"];
-        
-         $items = Cart::content();
-         $orderPossible = 1;
-         $counter = 1;
-         $total = 0;
-         $promotion = 0;
+    $email = $data["email"];
+    $name  = $data["ten"];
+    $address = $data["diaChi"];
+    $district = $data["selectQuan"];
+    $payment = $data["thanhToan"];
+    $promotion_code = $data["maGiamGia"];
+    $note = $data["note"];
+    
+    $items = Cart::content();
+    $orderPossible = 1;
+    $counter = 1;
+    $total = 0;
+    $promotion = 0;
+
+    
 
 		foreach ($items as $item) {
-
 			$product_id = $item->id;
 			$farmer_id = $item->options["farmer_id"];
 			$price = $item->price;
@@ -174,83 +175,84 @@ class OrderController extends Controller
 				Cart::update($item->rowId, $item->options["error"]);
 			}
 		}
-        if($orderPossible == 0){
-         	$msg['Cart'] = Cart::content();
-       		return response()->json($msg); 
-        }
-        $delivery_date = $numbers[0]->delivery_date;        
-        $shipping_cost = DB::select('SELECT `shipping_cost`, `name` FROM `district` WHERE `id` = ?', [$district]);
+    if($orderPossible == 0){
+     	$msg['Cart'] = Cart::content();
+   		return response()->json($msg); 
+    }
 
-//Be careful of reassignment of $shipping_cost to itself
-        $district_name = $shipping_cost[0]->name;
-        $shipping_cost = $shipping_cost[0]->shipping_cost;
-        $msg['shipping_cost'] = $shipping_cost;
 
-        $msg['promotion'] = $promotion;
-        $balance = 0;
+    $delivery_date = $numbers[0]->delivery_date;        
+    $shipping_cost = DB::select('SELECT `shipping_cost`, `name` FROM `district` WHERE `id` = ?', [$district]);
 
-         if(Auth::check()) {
-         	$user = Auth::user();
-         	$customer_id = $user->connected_id;
-          $balance = $user->balance;
+    //Be careful of reassignment of $shipping_cost to itself
+    $district_name = $shipping_cost[0]->name;
+    $shipping_cost = $shipping_cost[0]->shipping_cost;
+    $msg['shipping_cost'] = $shipping_cost;
 
-         	$account_email = $user->email;
-         	if($customer_id === null) {
-         		//check if data exist in db (email and phone)
-	         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
-	         	//if not yet in db, create customer into db
-	         	if(count($customer_id) < 1) {
-	         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $account_email, $address, $district]);
-	         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
-	         	}
-	         	$customer_id = $customer_id[0]->id;
+    $msg['promotion'] = $promotion;
+    $balance = 0;
 
-	         	DB::statement('UPDATE `users` SET `account_type` = "Customer", `connected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);
-         	}
-         }
-         else 
-         {
-         	//check if data exist in db (email and phone)
-         	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
-         	//if not yet in db, create customer into db
-         	if(count($customer_id) < 1) {
-         		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $email, $address, $district]);
-         		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
-         	}
-         	$customer_id = $customer_id[0]->id;
-         }
+    if(Auth::check()) {
+     	$user = Auth::user();
+     	$customer_id = $user->connected_id;
+      $balance = $user->balance;
+
+     	$account_email = $user->email;
+     	if($customer_id === null) {
+     		//check if data exist in db (email and phone)
+       	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
+       	//if not yet in db, create customer into db
+       	if(count($customer_id) < 1) {
+       		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $account_email, $address, $district]);
+       		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
+       	}
+       	$customer_id = $customer_id[0]->id;
+
+       	DB::statement('UPDATE `users` SET `account_type` = "Customer", `connected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);
+     	}
+    }
+    else 
+    {
+     	//check if data exist in db (email and phone)
+     	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
+     	//if not yet in db, create customer into db
+     	if(count($customer_id) < 1) {
+     		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $email, $address, $district]);
+     		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
+     	}
+     	$customer_id = $customer_id[0]->id;
+    }
 // Create Order_id and return after adding the order successfully.
-        //#34256789
-        if($total >= 500000) {
-         	$shipping_cost = 0;//free ship
-        }
-        $address = $address." ".$district_name;
+    //#34256789
+    if($total >= 500000) {
+     	$shipping_cost = 0;//free ship
+    }
+    $address = $address." ".$district_name;
 
-        $discount_amount = ROUND(($promotion * $total)/100, 0);
-        $total = $total - $discount_amount + $shipping_cost;
-        $deposit = 0;
+    $discount_amount = ROUND(($promotion * $total)/100, 0);
+    $total = $total - $discount_amount + $shipping_cost;
+    $deposit = 0;
 
-        if($balance > 0){
-          if($balance >= $total){
-            $deposit = $total;
-          }
-          else {
-            $deposit = $balance;
-          }
-          $balance = $balance - $deposit;
-          DB::statement('UPDATE `users` SET `balance` = ? WHERE `email` = ?', [$balance, $account_email]);
-        }
-        $order_id = DB::select('SELECT `order_id` "order_id" FROM `uniqueids` WHERE `id` = 1');
-        $order_id = $order_id[0]->order_id;
-        DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
+    if($balance > 0){
+      if($balance >= $total){
+        $deposit = $total;
+      }
+      else {
+        $deposit = $balance;
+      }
+      $balance = $balance - $deposit;
+      DB::statement('UPDATE `users` SET `balance` = ? WHERE `email` = ?', [$balance, $account_email]);
+    }
+    $order_id = DB::select('SELECT `order_id` "order_id" FROM `uniqueids` WHERE `id` = 1');
+    $order_id = $order_id[0]->order_id;
+    DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-         DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `order_total`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`, `delivery_name`, `deposit`) VALUES(?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $total, $discount_amount, $delivery_date, $note, $name, $deposit]);
+    DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `order_total`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`, `delivery_name`, `deposit`) VALUES(?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $total, $discount_amount, $delivery_date, $note, $name, $deposit]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
 
 		foreach ($items as $item) {
-
 			$product_id = $item->id;
 			$farmer_id = $item->options["farmer_id"];
 			$price = $item->price;
@@ -291,16 +293,12 @@ class OrderController extends Controller
                                 AND m.`delivery_date` = t.`delivery_date`
              									  AND t.`product_id` = m.`product_id` 
              									  AND m.`package_id` = ?', [$product_id]);
-
 	        	}
-			}
-         	
-        }
-		Cart::destroy();
- 		$msg['Cart'] = Cart::content();
-       // return $order_id;
-       	return response()->json($msg);
-
+			}     	
+    }
+	Cart::destroy();
+ 	$msg['Cart'] = Cart::content();
+  return response()->json($msg);
 }
 	
 	public function rateOrder(Request $request)
@@ -430,10 +428,18 @@ class OrderController extends Controller
                   if(round($qty, 1) == 0){ 
                     $total = $total - $m_item[0]->price;
                     //$this->removeItemAdmin($order_id, $product_id, $farmer_id);
-                    DB::delete('DELETE FROM `m_orders`
-                                      WHERE `order_id` = ?
-                                        AND `product_id` = ?', [$order_id, $product_id]
-                              );
+                    // DB::delete('DELETE FROM `m_orders`
+                                      // WHERE `order_id` = ?
+                                        // AND `product_id` = ?', [$order_id, $product_id]
+                              // );
+                    DB::statement('UPDATE m_orders
+                                      SET `quantity` = 0,
+                                          `price` = 0,
+                                          `price_farmer` = 0
+                                    WHERE `order_id` = ?
+                                      AND `product_id` = ?
+                                      AND `farmer_id` = ?', [$order_id, $product_id, $farmer_id]
+                                  );                  
                   }
                   else {
 
