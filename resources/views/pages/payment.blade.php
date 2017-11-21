@@ -278,8 +278,8 @@ trước khi giao hàng! --></p>
                                           </h4>
                                           <p class="no-margin">
                                              <p class="no-margin" style="color: #222222">
-
-                                              Nhân viên chúng tôi sẽ giao hàng và nhận thanh toán vào ngày thứ Bảy.<br> Vui lòng giữ liên lạc qua điện thoại.
+                                                Quý khách khàng vui lòng thanh toán qua một trong các tài khoản ngân hàng bên dưới:<br>
+                                            </p>
                                        </div>
                                        <div class="pull-right hidden-xs">
                                           <img class="image-responsive" alt="giao hang tan noi" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-online.png" style="width: 40%; margin-left: 50px;margin-top: 10px;">
@@ -539,6 +539,7 @@ trước khi giao hàng! --></p>
           success: function(data){
             $('#modalLoader').modal('hide');
             $('[href="#tab-3"]').tab('show');
+            // if(dataPost['thanhToan']==)
             document.getElementById('btnStep').style.visibility = 'hidden';
             console.log(data);
             document.getElementById("order_id").textContent=data.order_id;
