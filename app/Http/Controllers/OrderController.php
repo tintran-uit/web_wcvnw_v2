@@ -351,36 +351,25 @@ class OrderController extends Controller
 	}
 
 
-    public function adjustRealOrder(Request $request)
+    public function productInOrder($product_id, $delivery_date)
     {
-        if(Auth::check()){
-            $data = $request->data;
-            $order_id = $data["order_id"];
-            $m_orders = $data["ItemsUpload"];
-            $g_orders = DB::select('SELECT g.`total`, g.`shipping_cost` "shipping_cost", g.`delivery_date`, 
-                                           d.`shipping_cost` "shipping_cost_ex"
-                                      FROM `g_orders` g, `district` d
-                                     WHERE `order_id` = ?
-                                       AND g.`delivery_district` = d.`id`', [$order_id]);
+      if(Auth::check()){
+        // $data = $request->data;
+        // $farmer_id = $data["farmerID"];
+        // $product_id = $data["prodID"];
+        // $delivery_date = $data["delivery_date"];
+        $g_orders = DB::select('SELECT g.`order_id`, g.`delivery_name`, g.`delivery_phone`, m.`quantity`, m.`unit`
+                                  FROM `g_orders` g, `m_orders` m
+                                 WHERE g.`order_id` = m.`order_id`
+                                   AND m.`product_id` = ?
+                                   AND g.`delivery_date` = ?', [$product_id, $delivery_date]);
 
-            if(count($g_orders) < 1){
-              $msg["error"]=1;
-              $msg["status"] = "Thông tin chung đơn hàng không tồn tại";
-              return response()->json($msg);
-            }
-            $total = $g_orders[0]->total;
-            $shipping_cost = $g_orders[0]->shipping_cost;
-            $shipping_cost_ex = $g_orders[0]->shipping_cost_ex;
-            $delivery_date = $g_orders[0]->delivery_date;
-
-
-            foreach ($m_orders as $m_order) {
-              //return response()->json($m_order);
-
-                $farmer_id = $m_order["farmerID"];
-                $product_id = $m_order["prodID"];
-                $qty = $m_order["qty"];          
-              }
+        if(count($g_orders) < 1){
+          $msg["error"]=1;
+          $msg["status"] = "Không có đơn hàng nào giao ngày ".$delivery_date." mua sản phẩm này";
+          return response()->json($msg);
+        }
+        return $g_orders;
       }
       else {
         return redirect()->back();
@@ -389,6 +378,9 @@ class OrderController extends Controller
 
     public function addItemAdmin(Request $request)
     {
+      /*
+       * order_type: 0: normal; 1:gift; 2:price_farmer; 3:wholesale;
+       **/
         if(Auth::check()){
             $data = $request->data;
             $order_id = $data["order_id"];
@@ -413,96 +405,112 @@ class OrderController extends Controller
 
 
             foreach ($m_orders as $m_order) {
-              //return response()->json($m_order);
+              $farmer_id = $m_order["farmerID"];
+              $product_id = $m_order["prodID"];
+              $qty = $m_order["qty"];
+              $order_type = $m_order["order_type"];
+              $m_item = DB::select('SELECT `product_id`, `price`, `quantity`, `order_type`
+                                      FROM `m_orders` 
+                                     WHERE `product_id` = ?
+                                       AND `farmer_id` = ?
+                                       AND `order_id` = ?', [$product_id, $farmer_id, $order_id]);
+              if(count($m_item) > 0){
+                //UPDATE
+                if(round($qty, 1) == 0){ 
+                  $total = $total - $m_item[0]->price;
+                  //$this->removeItemAdmin($order_id, $product_id, $farmer_id);
+                  // DB::delete('DELETE FROM `m_orders`
+                                    // WHERE `order_id` = ?
+                                      // AND `product_id` = ?', [$order_id, $product_id]
+                            // );
+                  DB::statement('UPDATE m_orders
+                                    SET `quantity` = 0,
+                                        `price` = 0,
+                                        `price_farmer` = 0
+                                  WHERE `order_id` = ?
+                                    AND `product_id` = ?
+                                    AND `farmer_id` = ?', [$order_id, $product_id, $farmer_id]
+                                );                  
+                }
+                else {
+                  $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, p.`price_farmer`, p.`price_wholesale`
+                                           FROM `products` p, `trading` tr
+                                          WHERE p.`id` = tr.`product_id`
+                                            AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
+                                            AND tr.`farmer_id` = ?
+                                            AND tr.`product_id` = ?
+                                            AND tr.`delivery_date` = ?', [round($qty, 2) - round($m_item[0]->quantity, 2), $farmer_id, $product_id, $delivery_date]
+                                       );
+                  if(count($product) < 1)
+                  {
+                      $msg["failed:".$product_id] = $m_order;
+                      $msg["m_quantity"]= round($m_item[0]->quantity, 2);
+                      $msg["qty"]= round($qty, 2);
 
-                $farmer_id = $m_order["farmerID"];
-                $product_id = $m_order["prodID"];
-                $qty = $m_order["qty"];
-                $m_item = DB::select('SELECT `product_id`, `price`, `quantity`
-                                        FROM `m_orders` 
-                                       WHERE `product_id` = ?
-                                         AND `farmer_id` = ?
-                                         AND `order_id` = ?', [$product_id, $farmer_id, $order_id]);
-                if(count($m_item) > 0){
-                  //UPDATE
-                  if(round($qty, 1) == 0){ 
-                    $total = $total - $m_item[0]->price;
-                    //$this->removeItemAdmin($order_id, $product_id, $farmer_id);
-                    // DB::delete('DELETE FROM `m_orders`
-                                      // WHERE `order_id` = ?
-                                        // AND `product_id` = ?', [$order_id, $product_id]
-                              // );
-                    DB::statement('UPDATE m_orders
-                                      SET `quantity` = 0,
-                                          `price` = 0,
-                                          `price_farmer` = 0
-                                    WHERE `order_id` = ?
-                                      AND `product_id` = ?
-                                      AND `farmer_id` = ?', [$order_id, $product_id, $farmer_id]
-                                  );                  
+
                   }
-                  else {
+                  else if (round($qty, 1) > 0){
+                      $msg["success:".$product_id] = $m_order;
+                      $msg["order_type"] = $order_type;
+                      $quantity = round($qty, 2);
+                      $new_quantity = $quantity - $m_item[0]->quantity;
+                      $price = round((round($qty, 2) * $product[0]->price)/$product[0]->unit_quantity);
+                      $price_farmer = round((round($qty, 2) * $product[0]->price_farmer)/$product[0]->unit_quantity);
+                      switch($order_type) {
+                        case 1://give as gift - free
+                          $price = 0;
+                          $msg["case1"] = 1;
+                          break;
+                        case 2://farmer_price order
+                          $price = $price_farmer;
+                          $msg["case2"] = 2;
+                          break;
+                        case 3: //wholesale
+                          $price = round((round($qty, 2)  * $product[0]->price_wholesale)/$product[0]->unit_quantity);
+                          $msg["case3"] = 3;
+                          break;
+                        default: //normal sale
+                          $msg["case"] = 0;
+                          break;
+                        //do nothing as price is set above for normal sale;
+                      }
+                      $category = $product[0]->category;
+                      $unit = $product[0]->unit;
 
-                    $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
-                                             FROM `products` p, `trading` tr
-                                            WHERE p.`id` = tr.`product_id`
-                                              AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
-                                              AND tr.`farmer_id` = ?
-                                              AND tr.`product_id` = ?
-                                              AND tr.`delivery_date` = ?', [round($qty, 2) - round($m_item[0]->quantity, 2), $farmer_id, $product_id, $delivery_date]
-                                         );
-                    if(count($product) < 1)
-                    {
-                        $msg["failed:".$product_id] = $m_order;
-                        $msg["m_quantity"]= round($m_item[0]->quantity, 2);
-                        $msg["qty"]= round($qty, 2);
+                      $total = $total + $price - $m_item[0]->price;
 
+                      DB::statement('UPDATE m_orders
+                                        SET `quantity` = ?,
+                                            `price` = ?,
+                                            `price_farmer` = ?,
+                                            `order_type` = ?
+                                      WHERE `order_id` = ?
+                                        AND `product_id` = ?
+                                        AND `farmer_id` = ?', [$quantity, $price, $price_farmer, $order_type, $order_id, $product_id, $farmer_id]
+                                    );
 
-                    }
-                    else if (round($qty, 1) > 0){
-                        $msg["success:".$product_id] = $m_order;
+                      DB::statement('UPDATE `trading` 
+                                        SET `sold` = `sold` + ? 
+                                      WHERE `delivery_date` = ?
+                                        AND `farmer_id` = ? 
+                                        AND `product_id` = ?', [$new_quantity, $delivery_date, $farmer_id, $product_id]);
 
-                        $quantity = round($qty, 2);
-                        $new_quantity = $quantity - $m_item[0]->quantity;
-                        $price = round((round($qty, 2) * $product[0]->price)/$product[0]->unit_quantity);
-                        $price_farmer = round((round($qty, 2) * $product[0]->price_farmer)/$product[0]->unit_quantity);
-                        $category = $product[0]->category;
-                        $unit = $product[0]->unit;
-
-                        $total = $total + $price - $m_item[0]->price;
-
-                        DB::statement('UPDATE m_orders
-                                          SET `quantity` = ?,
-                                              `price` = ?,
-                                              `price_farmer` = ?
-                                        WHERE `order_id` = ?
-                                          AND `product_id` = ?
-                                          AND `farmer_id` = ?', [$quantity, $price, $price_farmer, $order_id, $product_id, $farmer_id]
-                                      );
-
-                        DB::statement('UPDATE `trading` 
-                                          SET `sold` = `sold` + ? 
-                                        WHERE `delivery_date` = ?
-                                          AND `farmer_id` = ? 
-                                          AND `product_id` = ?', [$new_quantity, $delivery_date, $farmer_id, $product_id]);
-
-                        //Proccess the elements in case package is order
-                        if($category == 0) //package
-                        {
-                            DB::statement('UPDATE `trading` AS tr, `m_packages` AS m 
-                                              SET tr.`sold` = tr.`sold` + m.`quantity` * ?
-                                            WHERE tr.`farmer_id` = m.`farmer_id`
-                                              AND tr.`product_id` = m.`product_id` 
-                                              AND tr.`delivery_date` = m.`delivery_date`
-                                              AND tr.`delivery_date` = ?
-                                              AND m.`package_id` = ?', [$new_quantity, $delivery_date, $product_id]);
-
-                        }
+                      //Proccess the elements in case package is order
+                      if($category == 0) //package
+                      {
+                          DB::statement('UPDATE `trading` AS tr, `m_packages` AS m 
+                                            SET tr.`sold` = tr.`sold` + m.`quantity` * ?
+                                          WHERE tr.`farmer_id` = m.`farmer_id`
+                                            AND tr.`product_id` = m.`product_id` 
+                                            AND tr.`delivery_date` = m.`delivery_date`
+                                            AND tr.`delivery_date` = ?
+                                            AND m.`package_id` = ?', [$new_quantity, $delivery_date, $product_id]);
+                      }
                   }
                 }
               }
               else {
-                $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, tr.`price_farmer`
+                $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, p.`price_farmer`, p.`price_wholesale`
                                        FROM `products` p, `trading` tr
                                       WHERE p.`id` = tr.`product_id`
                                         AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
@@ -521,10 +529,24 @@ class OrderController extends Controller
                     $price_farmer = round((round($qty, 2) * $product[0]->price_farmer)/$product[0]->unit_quantity);
                     $category = $product[0]->category;
                     $unit = $product[0]->unit;
+                    switch($order_type) {
+                      case 1://give as gift - free
+                        $price = 0;
+                        break;
+                      case 2://farmer_price order
+                        $price = $price_farmer;
+                        break;
+                      case 3: //wholesale
+                        $price = round((round($qty, 2)  * $product[0]->price_wholesale)/$product[0]->unit_quantity);
+                        break;
+                      default: //normal sale
+                        break;
+                        //do nothing as price is set above for normal sale;
+                    }
 
                     $total = $total + $price;
 
-                    DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `order_quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $quantity, $unit, $price, $price_farmer]);
+                    DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `order_quantity`, `unit`, `price`, `price_farmer`, `order_type`) VALUES(?,?,?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $quantity, $unit, $price, $price_farmer, $order_type]);
 
                     DB::statement('UPDATE `trading` 
                                       SET `sold` = `sold` + ? 
@@ -542,7 +564,6 @@ class OrderController extends Controller
                                           AND tr.`delivery_date` = m.`delivery_date`
                                           AND tr.`delivery_date` = ?
                                           AND m.`package_id` = ?', [round($qty, 2), $delivery_date, $product_id]);
-
                     }
 
                   }
@@ -557,6 +578,10 @@ class OrderController extends Controller
             {
               $shipping_cost = $shipping_cost_ex;
               $total = $total + $shipping_cost;
+            }
+            if($shipping_cost != 0 && $total == $shipping_cost) {
+              $shipping_cost = 0;
+              $total = 0;
             }
 
             //update trading table

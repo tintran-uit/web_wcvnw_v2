@@ -100,7 +100,7 @@ $(document).ready(function() {
         "paging": false,
         dom: "Bfrtip",
         ajax: "/api/admin/product-trading/items",
-        order: [[ 1, 'asc' ]],
+        order: [[ 0, 'desc' ]],
         columns: [
             {
                 data:   "status",
