@@ -134,16 +134,13 @@ textarea.form-control {
 
 <?php 
 $order_id = $fields['order_id']['value'];
-$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", p.`price` "price", p.`id` "id", p.`unit` "unit", p.`category` "category", m.`quantity` "quantity", p.`unit_quantity` "unit_quantity", m.`price` "m_price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ? ORDER BY p.`category` DESC', [$order_id]);
+$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", p.`price` "price", p.`id` "id", p.`unit` "unit", p.`category` "category", m.`quantity` "quantity", m.`order_type` "order_type", p.`unit_quantity` "unit_quantity", m.`price` "m_price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ? ORDER BY p.`category` DESC', [$order_id]);
 
 for($x=0; $x<count($products); $x++) {
     if($products[$x]->category==0){
-        // $items =  DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", p.`price` "price", p.`id` "id", p.`unit` "unit", p.`category` "category", m.`quantity` "quantity", p.`unit_quantity` "unit_quantity", m.`price` "m_price", p.`thumbnail` "product_thumbnail" FROM m_packages m, products p, farmers f 
-        //    WHERE p.`id` = m.`product_id` 
-        //    AND f.`id` = m.`farmer_id` 
-        //    AND m.`package_id` = ?',[$products[$x]->id]);
+        $order_type = $products[$x]->order_type.' AS "order_type"';
         $items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", 
-                                            p.`id` "product_id", m.`quantity` "quantity", "" AS "order_quantity", m.`unit` "unit", m.`price` "price", p.`category` "category", p.`id` "id", p.`unit_quantity` "unit_quantity"
+                                            p.`id` "product_id", m.`quantity` "quantity", "" AS "order_quantity", '.$order_type.', m.`unit` "unit", m.`price` "price", p.`category` "category", p.`id` "id", p.`unit_quantity` "unit_quantity"
                                       FROM `m_packages` m, `products` p, `farmers` f, `g_orders` g
                                      WHERE p.`id` = m.`product_id` 
                                        AND f.`id` = m.`farmer_id` 
@@ -155,7 +152,7 @@ for($x=0; $x<count($products); $x++) {
     }
 }
 
-$mySQL = 'SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` ';
+$mySQL = 'SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", 0 AS "order_type",p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` ';
 
 foreach ($products as $item) {
   $mySQL = $mySQL.'AND p.`id` != '.$item->id.' ';
@@ -167,7 +164,7 @@ $products = array_merge($products, DB::select($mySQL));
 ?>
 <!-- Modal add item -->
 <div class="modal fade style-base-modal" id="modal-add-item" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width: 55%">
     <div class="modal-content">
       <div class="inner-container">
         <div class="modal-header" style="background-color: #f9f9f9">
@@ -197,8 +194,8 @@ $products = array_merge($products, DB::select($mySQL));
                                     <th class="bg-extra-light-grey">Sản Phẩm</th>
                                     <th class="bg-extra-light-grey col-md-2 col-xs-1">Số Lượng</th>
                                     <th class="bg-extra-light-grey">Giá</th>
-                                    <th class="bg-extra-light-grey">Thành tiền</th>
-                                    <th class="bg-extra-light-grey" style="display:none;">Xóa</th>
+                                    <th class="bg-extra-light-grey" style="display:none;">Thành tiền</th>
+                                    <th class="bg-extra-light-grey">Hình thức</th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
@@ -222,12 +219,14 @@ $products = array_merge($products, DB::select($mySQL));
                                     <td class="align-middle text-center">
                                        {{number_format($item->price)}} VND
                                     </td>
-                                    <td class="align-middle text-center">
+                                    <td class="align-middle text-center" style="display:none;">
                                        @if(isset($item->m_price)) {{$item->m_price}} @endif VND
                                     </td>
-                                    <td class="align-middle text-center" style="display:none;">
-                                       <a class="btn btn-info text-center no-margin item-delete">                            <i class="fa fa-trash"></i>
-                                       </a>                        
+                                    <td class="align-middle text-center">
+                                        <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="0" @if($item->order_type==0) checked @endif>Bán</label>
+                                        <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="1" @if($item->order_type==1) checked @endif>Tặng</label>
+                                        <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="2" @if($item->order_type==2) checked @endif>Gốc</label>  
+                                        <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="3" @if($item->order_type==3) checked @endif>Sỉ</label>                    
                                     </td>
                                     <td style="display:none;">@if(isset($item->quantity)) {{$item->quantity}} @else 0 @endif</td>
                                     <td style="display:none;">{{$item->unit_quantity}}</td>
@@ -322,8 +321,8 @@ $products = array_merge($products, DB::select($mySQL));
                     }
                 }
               });
-            newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 <\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(shipping_cost)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span class="quantity" id=\"tbtotal\">'+numberWithCommas(total)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
-            newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>';
+            newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 <\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(shipping_cost)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Tài khoản KH còn:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(shipping_cost)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span class="quantity" id=\"tbtotal\">'+numberWithCommas(total)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
+            // newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>';
             newRowContent += '\r\n<tr class="quantity">\r\n<td colspan=\"9\">Ghi chú: '+note+'<\/td>\r\n<\/tr>';
                 jQuery("#tbSupp tbody").append(newRowContent);
 
@@ -666,26 +665,53 @@ $(document).ready(function() {
          // var row = $(this).closest('tr').index();
          var tr = $(this).parents('tr');
     		var row = table.row( tr );
+         // console.log(row[0][0]);
+         var unit_quantity = table.row(row).data()[7];
+         var unit = table.row(row).data()[8];
+         var prodID = table.row(row).data()[9];
+         var farmerID = table.row(row).data()[10];
+         msg =  parseFloat($(this).val());
+         msg = converQty(msg, unit_quantity, unit);
+         // console.log(msg);
+         var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
+         price = parseInt(price)*msg;
+         // row = 2;
+         // table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
+         var index = row[0][0] + 1;
+         var nameRadio = 'input[name=order_type'+index+']:checked';
+         var order_type = $(nameRadio).val();
+         console.log(nameRadio+'--'+order_type);
+         var rowId = 0;
+         updateCart(order_type, msg, prodID, unit_quantity, unit, farmerID);
+      });
+
+    table.on( 'click', 'input.order_type' , function () {
+         var msg;
+         // var row = $(this).closest('tr').index();
+         var tr = $(this).parents('tr');
+        var row = table.row( tr );
          console.log(row);
          var unit_quantity = table.row(row).data()[7];
          var unit = table.row(row).data()[8];
          var prodID = table.row(row).data()[9];
          var farmerID = table.row(row).data()[10];
-         // $(this).closest('tr').find(':input').each(function() {
+         $(this).closest('tr').find(':input[type=text]').each(function() {
             
             msg =  parseFloat($(this).val());
             // msg = stepperUp(msg, unit_quantity, unit); 
-
             // $(this).val(msg);
-         // });
+         });
+         // console.log(msg+'---'+unit_quantity+'----'+unit);
          msg = converQty(msg, unit_quantity, unit);
          console.log(msg);
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          // row = 2;
-         // table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
+         var index = row[0][0] + 1;
+         var nameRadio = 'input[name=order_type'+index+']:checked';
+         var order_type = $(nameRadio).val();
          var rowId = 0;
-         updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
+         updateCart(order_type, msg, prodID, unit_quantity, unit, farmerID);
       });
 
     table.on( 'click', 'span.up' , function () {
@@ -698,21 +724,23 @@ $(document).ready(function() {
          var unit = table.row(row).data()[8];
          var prodID = table.row(row).data()[9];
          var farmerID = table.row(row).data()[10];
-         $(this).closest('tr').find(':input').each(function() {
+         $(this).closest('tr').find(':input[type=text]').each(function() {
             
             msg =  parseFloat($(this).val());
             msg = stepperUp(msg, unit_quantity, unit); 
-
             $(this).val(msg);
          });
+         // console.log(msg+'---'+unit_quantity+'----'+unit);
          msg = converQty(msg, unit_quantity, unit);
          console.log(msg);
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          // row = 2;
-         table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
+         var index = row[0][0] + 1;
+         var nameRadio = 'input[name=order_type'+index+']:checked';
+         var order_type = $(nameRadio).val();
          var rowId = 0;
-         updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
+         updateCart(order_type, msg, prodID, unit_quantity, unit, farmerID);
       });
 
     table.on( 'click', 'span.down' , function () {
@@ -723,7 +751,7 @@ $(document).ready(function() {
          var unit = table.row(row).data()[8];
          var prodID = table.row(row).data()[9];
          var farmerID = table.row(row).data()[10];
-         $(this).closest('tr').find(':input').each(function() {
+         $(this).closest('tr').find(':input[type=text]').each(function() {
             
             msg =  parseFloat($(this).val());
             msg = stepperDown(msg, unit_quantity, unit); 
@@ -733,24 +761,27 @@ $(document).ready(function() {
          msg = converQty(msg, unit_quantity, unit);
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
-         table.cell(row, 4).data(numberWithCommas(price) + ' VND').draw();
+         
+         var index = row[0][0] + 1;
+         var nameRadio = 'input[name=order_type'+index+']:checked';
+         var order_type = $(nameRadio).val();
          var rowId = 0;
-         updateCart(rowId, msg, prodID, unit_quantity, unit, farmerID);
+         updateCart(order_type, msg, prodID, unit_quantity, unit, farmerID);
       });
    
 
-    function updateCart(rowId, qty, prodID, unit_quantity, unit, farmerID) {
+    function updateCart(order_type, qty, prodID, unit_quantity, unit, farmerID) {
       // console.log(qty)
 
-
-      var markers = {"qty": qty, "prodID": prodID , "farmerID":farmerID};
-
+      var markers = {"qty": qty, "prodID": prodID , "farmerID":farmerID, "order_type":order_type};
+      console.log(ItemsUpload);
       var check = false;
       for(var i = 0; i<ItemsUpload.length; i++){
       	if(ItemsUpload[i].prodID==prodID){
-      		ItemsUpload[i].qty = qty;
+          ItemsUpload[i].qty = qty;
+      		ItemsUpload[i].order_type = order_type;
       		check = true;
-      		break; 
+      		// break; 
       	}
       }
       if(!check){
@@ -773,7 +804,7 @@ $(document).ready(function() {
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           success: function(data){
-            console.log(data);
+            // console.log(data);
             if(data.error){
             	alert(data.status);
             }else{
@@ -855,7 +886,9 @@ $(document).ready(function() {
             console.log(data);
             if(data.error==0){
             	// alert(data.status);
-            	location.reload();
+            	// location.reload();
+              loaditems();
+              ItemsUpload = [];
             }else{
             	alert(data.status);
             }

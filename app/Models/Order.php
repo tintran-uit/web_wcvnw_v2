@@ -48,6 +48,10 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\Customer', 'customer_id');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'customer_id');
+    }
     public function status()
     {
         return $this->belongsTo('App\Models\Status', 'status');

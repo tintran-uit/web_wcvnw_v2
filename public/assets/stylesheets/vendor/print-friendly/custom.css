@@ -4,6 +4,10 @@
     display:none;
 }
 
+#pf-print-area{
+	font-size: 10px;
+}
+
 p.box-header{
 	display:none;
 }

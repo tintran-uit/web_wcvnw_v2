@@ -69,7 +69,8 @@
                 <ul class="treeview-menu">
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order') }}"><i class="fa fa-id-card-o"></i> <span>Thông Tin Đơn Hàng</span></a></li>
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order-item') }}"><i class="fa fa-bars"></i> <span>Thông Tin Mặt Hàng</span></a></li>
-                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order-stats') }}"><i class="fa fa-id-card-o"></i> <span>Thống kê mặt Hàng</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order-stats') }}"><i class="fa fa-id-card-o"></i> <span>Thống Kê Mặt Hàng</span></a></li>
+                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order-print') }}"><i class="fa fa-id-card-o"></i> <span>Xuất Đơn Hàng</span></a></li>
                 </ul>
               </li>     
               

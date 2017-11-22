@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Image;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use DB;
+use DateTime;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ProductRequest as StoreRequest;
 use App\Http\Requests\ProductRequest as UpdateRequest;
 
-class OrderCrudController extends CrudController
+class OrderPrintCrudController extends CrudController
 {
     public function setUp()
     {
@@ -21,7 +22,7 @@ class OrderCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel("App\Models\Order");
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/order');
+        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/order-print');
         $this->crud->setEntityNameStrings('order', 'orders');
 
         /*
@@ -29,11 +30,18 @@ class OrderCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
+        if(date('D') == 'Sat'){
+            $date = date('Y-m-d');
+          }else{
+            $date = new DateTime('next saturday');
+            $date->format('Y-m-d');
+          }
 
 //        $this->crud->setFromDb();
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('name', 1);
         $this->crud->orderBy('created_at', 'DESC');
+        $this->crud->addClause('where', 'delivery_date', '2017-11-18');
 
 
         // ------ CRUD COLUMNS
@@ -45,9 +53,9 @@ class OrderCrudController extends CrudController
             'name' => 'customer_id',
             'label' => 'Người mua',
             'type' => 'select',
-            'entity' => 'user',
+            'entity' => 'customer',
             'attribute' => 'name',
-            'model' => "App\Models\User",
+            'model' => "App\Models\Customer",
         ]);
         $this->crud->addColumn([
             'name' => 'delivery_name',
@@ -185,8 +193,6 @@ class OrderCrudController extends CrudController
             ],
         ]);
 
-        
-
         $this->crud->addField([
             'name' => 'status',
             'label' => 'Trạng Thái',
@@ -194,18 +200,6 @@ class OrderCrudController extends CrudController
             'entity' => 'status',
             'attribute' => 'name',
             'model' => "App\Models\Status",
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ],
-        ]);
-
-        $this->crud->addField([
-            'name' => 'customer_id',
-            'label' => 'Tài khoản KH còn',
-            'type' => 'select2',
-            'entity' => 'user',
-            'attribute' => 'name',
-            'model' => "App\Models\User",
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4'
             ],

@@ -26,6 +26,8 @@ Route::get('/cancelorder/order_id={order_id}', 'OrderController@cancelOrder');
 Route::get('/moveorder/order_id={order_id}/week_num={week_num}', 'OrderController@moveOrder');
 Route::get('/orderitems/order_id={order_id}', 'OrderController@orderItems');
 Route::get('/orders', 'CustomerController@getOrders');
+Route::get('/productinorder/product_id={product_id}/delivery_date={delivery_date}', 'OrderController@productInOrder');
+
 Route::get('/orderstats/date={date}', 'OrderController@itemStats');
 Route::get('/orderrm/order_id={order_id}/product_id={product_id}/farmer_id={farmer_id}', 'OrderController@removeItemAdmin');
 
