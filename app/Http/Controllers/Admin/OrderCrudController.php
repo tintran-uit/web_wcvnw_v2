@@ -45,9 +45,9 @@ class OrderCrudController extends CrudController
             'name' => 'customer_id',
             'label' => 'Người mua',
             'type' => 'select',
-            'entity' => 'customer',
+            'entity' => 'user',
             'attribute' => 'name',
-            'model' => "App\Models\Customer",
+            'model' => "App\Models\User",
         ]);
         $this->crud->addColumn([
             'name' => 'delivery_name',
@@ -185,6 +185,8 @@ class OrderCrudController extends CrudController
             ],
         ]);
 
+        
+
         $this->crud->addField([
             'name' => 'status',
             'label' => 'Trạng Thái',
@@ -192,6 +194,18 @@ class OrderCrudController extends CrudController
             'entity' => 'status',
             'attribute' => 'name',
             'model' => "App\Models\Status",
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ],
+        ]);
+
+        $this->crud->addField([
+            'name' => 'customer_id',
+            'label' => 'Tài khoản KH còn',
+            'type' => 'select2',
+            'entity' => 'user',
+            'attribute' => 'name',
+            'model' => "App\Models\User",
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4'
             ],

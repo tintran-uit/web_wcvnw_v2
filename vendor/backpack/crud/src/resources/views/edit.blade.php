@@ -138,12 +138,9 @@ $products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`na
 
 for($x=0; $x<count($products); $x++) {
     if($products[$x]->category==0){
-        // $items =  DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", p.`price` "price", p.`id` "id", p.`unit` "unit", p.`category` "category", m.`quantity` "quantity", p.`unit_quantity` "unit_quantity", m.`price` "m_price", p.`thumbnail` "product_thumbnail" FROM m_packages m, products p, farmers f 
-        //    WHERE p.`id` = m.`product_id` 
-        //    AND f.`id` = m.`farmer_id` 
-        //    AND m.`package_id` = ?',[$products[$x]->id]);
+        $order_type = $products[$x]->order_type.' AS "order_type"';
         $items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", 
-                                            p.`id` "product_id", m.`quantity` "quantity", "" AS "order_quantity", m.`unit` "unit", m.`price` "price", p.`category` "category", p.`id` "id", p.`unit_quantity` "unit_quantity"
+                                            p.`id` "product_id", m.`quantity` "quantity", "" AS "order_quantity", '.$order_type.', m.`unit` "unit", m.`price` "price", p.`category` "category", p.`id` "id", p.`unit_quantity` "unit_quantity"
                                       FROM `m_packages` m, `products` p, `farmers` f, `g_orders` g
                                      WHERE p.`id` = m.`product_id` 
                                        AND f.`id` = m.`farmer_id` 
@@ -324,8 +321,8 @@ $products = array_merge($products, DB::select($mySQL));
                     }
                 }
               });
-            newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 <\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(shipping_cost)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span class="quantity" id=\"tbtotal\">'+numberWithCommas(total)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
-            newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>';
+            newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 <\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(shipping_cost)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Tài khoản KH còn:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(shipping_cost)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span class="quantity" id=\"tbtotal\">'+numberWithCommas(total)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
+            // newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>';
             newRowContent += '\r\n<tr class="quantity">\r\n<td colspan=\"9\">Ghi chú: '+note+'<\/td>\r\n<\/tr>';
                 jQuery("#tbSupp tbody").append(newRowContent);
 
@@ -683,6 +680,7 @@ $(document).ready(function() {
          var index = row[0][0] + 1;
          var nameRadio = 'input[name=order_type'+index+']:checked';
          var order_type = $(nameRadio).val();
+         console.log(nameRadio+'--'+order_type);
          var rowId = 0;
          updateCart(order_type, msg, prodID, unit_quantity, unit, farmerID);
       });
@@ -775,15 +773,15 @@ $(document).ready(function() {
     function updateCart(order_type, qty, prodID, unit_quantity, unit, farmerID) {
       // console.log(qty)
 
-
       var markers = {"qty": qty, "prodID": prodID , "farmerID":farmerID, "order_type":order_type};
-
+      console.log(ItemsUpload);
       var check = false;
       for(var i = 0; i<ItemsUpload.length; i++){
       	if(ItemsUpload[i].prodID==prodID){
-      		ItemsUpload[i].qty = qty;
+          ItemsUpload[i].qty = qty;
+      		ItemsUpload[i].order_type = order_type;
       		check = true;
-      		break; 
+      		// break; 
       	}
       }
       if(!check){
@@ -890,6 +888,7 @@ $(document).ready(function() {
             	// alert(data.status);
             	// location.reload();
               loaditems();
+              ItemsUpload = [];
             }else{
             	alert(data.status);
             }
