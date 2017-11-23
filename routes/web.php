@@ -33,7 +33,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 
     //Operation Management CRUD
     CRUD::resource('order', 'OrderCrudController');
-    Route::get('order-item', 'OrderItemController@index');
+    CRUD::resource('order-item', 'OrderItemCrudController');
+    // Route::get('order-item', 'OrderItemController@index');
     CRUD::resource('order-print', 'OrderPrintCrudController');
     // CRUD::resource('set-delivery-date/order-id={order_id}&date={delivery_date}', 'OrderCrudController@setDelivery');
     Route::get('order-stats/date={date}', 'StatsController@statsByDate');
