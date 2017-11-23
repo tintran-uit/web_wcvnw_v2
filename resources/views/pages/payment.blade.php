@@ -347,10 +347,76 @@ trước khi giao hàng! --></p>
    @include('layouts.banner_bottom')
 </main>
 
+<!-- Modal Dat hang -->
+<div class="modal fade style-base-modal" id="modalOrderStatus" tabindex="-1" role="dialog" aria-labelledby="modalSubscribeNewsletter" aria-hidden="true">
+  <div class="modal-dialog" style="">
+    <div class="modal-content">
+      <div class="inner-container">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">
+              <i class="fa fa-times"></i>
+            </span>
+          </button>
+          <h4 class="modal-title email-icon">Thông tin đặt hàng</h4>
+        </div>
+        <div class="modal-body row" style="margin: 0">
+          <p>
+            Trạng thái: đặt hàng thành công!
+          </p>
+          <p>
+            Quý khách vui lòng chuyển khoản trước <b>6h:00pm thứ Năm,</b> <br>nhân viên của Cfarm sẽ liên hệ với quý khách qua điện thoại để xác nhận đơn hàng.
+          </p>
+          <p>
+            Nội dung chuyển khoản bao gồm mã đơn hàng của bạn: <span id="order_id2" style="font-weight: bold;">"100000"</span>
+            <br> Thông tin chuyển khoản:
+          </p>
+          <div class="banks">
+              <div class="col-md-6 col-sm-12 bank">
+                <div class="image">
+                    <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-vcb.png">
+                </div>
+                <div class="contentBank">
+                    <h4 class="title">Ngân hàng Ngoại thương Việt Nam - VietComBank - Chi nhánh Phan Đăng Lưu</h4>
+
+                    <p>Tài khoản: <strong>Dương Thanh Bình</strong><br>
+                        Số tài khoản: <strong>0011000876287</strong></p>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 bank">
+                <div class="image">
+                    <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-hsbc.png">
+                </div>
+                <div class="contentBank">
+                    <h4 class="title">Ngân hàng HSBC Việt Nam - VietComBank - Chi nhánh Etown Tân Bình</h4>
+
+                    <p>Tài khoản: <strong>Dương Thanh Bình</strong><br>
+                        Số tài khoản: <strong>0011000876287</strong></p>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 bank">
+                <div class="image">
+                    <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-paypal.png">
+                </div>
+                <div class="contentBank">
+                    <h4 class="title">Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở</h4>
+
+                    <p>Tài khoản: <strong>Dương Thanh Bình</strong><br>
+                        Số tài khoản: <strong>0011000876287</strong></p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
 @section('scrip_code')
 
 <script type="text/javascript">
+  $('#modalOrderStatus').modal('show');
       var spacerToal = '{{$subtotal}}';
       spacerToal = parseInt(spacerToal);
       var auth = '{{$auth}}';

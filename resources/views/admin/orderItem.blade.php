@@ -9,21 +9,20 @@
 @section('main')
 
 <div class="box-header with-border">
-    <h3>TRADING TRONG TUẦN</h3>
+    <h3>Sản phẩm order</h3>
 </div>
 
 <div class="box-body table-responsive">
     <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Trading</th>
+                <th>Mã đơn hàng</th>
                 <th>Tên sản phẩm</th>
-                <th>Nông trại</th>
-                <th>Sản lượng</th>
-                <th>Đóng gói</th>
+                <th>SL đặt</th>
+                <th>SL thực tế</th>
                 <th>Đơn vị</th>
-                <th>Giá nhập</th>
-                <th>Giá bán</th>
+                <th>Thành tiền</th>
+                <th>Trang trại</th>
                 <th>Ngày giao hàng</th>
             </tr>
         </thead>
@@ -47,33 +46,25 @@ $(document).ready(function() {
         ajax: "/api/admin/product-trading/items",
         table: "#example",
         fields: [ {
-                label:     "Status:",
-                name:      "status",
-                type:      "checkbox",
-                separator: "|",
-                options:   [
-                    { label: '', value: 1 }
-                ]
-            },{
-                label: "Tên sản phẩm:",
+                label: "Mã đơn hàng:",
                 name: "product_name"
             }, {
-                label: "Nông trại:",
+                label: "Tên sản phẩm:",
                 name: "farmer_name"
             }, {
-                label: "Sản lượng:",
+                label: "SL đặt:",
                 name: "capacity"
             }, {
-                label: "Đóng gói:",
+                label: "SL thực tế:",
                 name: "unit_quantity"
             }, {
                 label: "Đơn vị:",
                 name: "unit"
             },{
-                label: "Giá nhập:",
+                label: "Thành tiền:",
                 name: "price_farmer"
             },{
-                label: "Giá bán:",
+                label: "Trang trại:",
                 name: "price"
             }, {
                 label: "Ngày giao hàng:",
@@ -86,9 +77,7 @@ $(document).ready(function() {
  
     // Activate an inline edit on click of a table cell
     $('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        editor.inline( this, {
-            submit: 'allIfChanged'
-        } );
+        editor.inline( this );
     } );
 
     $('#example').on( 'change', 'input.editor-active', function () {
@@ -102,24 +91,14 @@ $(document).ready(function() {
         "paging": false,
         dom: "Bfrtip",
         ajax: "/api/admin/product-trading/items",
-        order: [[ 0, 'desc' ]],
+        order: [[ 1, 'asc' ]],
         columns: [
-            {
-                data:   "status",
-                render: function ( data, type, row ) {
-                    if ( type === 'display' ) {
-                        return '<input type="checkbox" class="editor-active">';
-                    }
-                    return data;
-                },
-                className: "dt-body-center"
-            },
             { data: "product_name" },
             { data: "farmer_name" },
             { data: "capacity" },
             { data: "unit_quantity" },
+            { data: "unit_quantity" },
             { data: "unit" },
-            { data: "price_farmer", render: $.fn.dataTable.render.number( ',', '.', 0, 'VND ' ) },
             { data: "price", render: $.fn.dataTable.render.number( ',', '.', 0, 'VND ' ) },
             { data: "delivery_date" }
         ],
