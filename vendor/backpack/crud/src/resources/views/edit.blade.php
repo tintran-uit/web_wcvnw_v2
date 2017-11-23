@@ -17,7 +17,7 @@
 @if($crud->entity_name_plural == "orders")
 <style type="text/css">
 textarea.form-control {
-  height: 105px;
+  height: 182px;
 }
 </style>
 
@@ -271,6 +271,8 @@ $products = array_merge($products, DB::select($mySQL));
     var total = $("input[name=total]").val();
     var delivery_phone = $("input[name=delivery_phone]").val();
     var delivery_address = $("input[name=delivery_address]").val();
+    var payment = $("input[name=payment]").val();
+    var balance = $("select[name=customer_id] option:selected").text();
     // alert(order_id);
     jQuery("#tbSupp tbody").empty();
     $.ajaxSetup({ cache: false });
@@ -321,9 +323,14 @@ $products = array_merge($products, DB::select($mySQL));
                     }
                 }
               });
-            newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 <\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(shipping_cost)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px\">Tài khoản KH còn:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(shipping_cost)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"6\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span class="quantity" id=\"tbtotal\">'+numberWithCommas(total)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
+            newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td colspan=\"4\">Kh\u00E1ch h\u00E0ng: '+customer+'<\/td>\r\n<td colspan=\"2\" align=\"right\" style=\"padding-right: 20px\">Khuy\u1EBFn m\u00E3i:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right; width: 100%;\">0 <\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td colspan=\"4\">S\u0110T: '+delivery_phone+'<\/td>\r\n<td colspan=\"2\" align=\"right\" style=\"padding-right: 20px\">Ph\u00ED v\u1EADn chuy\u1EC3n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(shipping_cost)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td><td colspan=\"4\" rowspan="2">Địa chỉ: '+delivery_address+'<\/td>\r\n<td colspan=\"2\" align=\"right\" style=\"padding-right: 20px\">Tài khoản KH còn:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span id=\"tbshipping_cost\">'+numberWithCommas(balance)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>\r\n';
+            if(payment==1){
+              newRowContent += '<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" style=\"float: right;width: 100%;\"><span class="quantity" id=\"tbtotal\">'+numberWithCommas(total)+' VND<\/span><\/td>\r\n<td><\/td>\r\n<\/tr>';
+            }else{
+              newRowContent += '<tr><td style="display:none;"><\/td><td style="display:none;"><\/td><td style="display:none;"><\/td>\r\n<td colspan=\"2\" align=\"right\" style=\"padding-right: 20px;\">T\u1ED5ng ti\u1EC1n:<\/td><td style="display:none;"><\/td>\r\n<td colspan=\"3\" style=\"\"><span class="quantity" id=\"tbtotal\"><strike>'+numberWithCommas(total)+' VND <\/strike> (chuyển khoản)<\/span><\/td>\r\n<\/tr>';
+            }
             // newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr>\r\n<td colspan=\"9\">Kh\u00E1ch h\u00E0ng: '+customer+' --- S\u0110T: '+delivery_phone+'<\/td>\r\n<\/tr>\r\n<tr>\r\n<td colspan=\"9\">\u0110\u1ECBa ch\u1EC9: '+delivery_address+'<\/td>\r\n<\/tr>';
-            newRowContent += '\r\n<tr class="quantity">\r\n<td colspan=\"9\">Ghi chú: '+note+'<\/td>\r\n<\/tr>';
+            newRowContent += '<tr><td colspan=\"9\"><\/td><\/tr>\r\n<tr class="quantity">\r\n<td colspan=\"9\">Ghi chú: '+note+'<\/td>\r\n<\/tr>';
                 jQuery("#tbSupp tbody").append(newRowContent);
 
        }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
@@ -690,7 +697,7 @@ $(document).ready(function() {
          // var row = $(this).closest('tr').index();
          var tr = $(this).parents('tr');
         var row = table.row( tr );
-         console.log(row);
+         // console.log(row);
          var unit_quantity = table.row(row).data()[7];
          var unit = table.row(row).data()[8];
          var prodID = table.row(row).data()[9];
@@ -703,7 +710,7 @@ $(document).ready(function() {
          });
          // console.log(msg+'---'+unit_quantity+'----'+unit);
          msg = converQty(msg, unit_quantity, unit);
-         console.log(msg);
+         // console.log(msg);
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          // row = 2;
@@ -719,7 +726,7 @@ $(document).ready(function() {
          // var row = $(this).closest('tr').index();
          var tr = $(this).parents('tr');
     		var row = table.row( tr );
-         console.log(row);
+         // console.log(row);
          var unit_quantity = table.row(row).data()[7];
          var unit = table.row(row).data()[8];
          var prodID = table.row(row).data()[9];
@@ -732,7 +739,7 @@ $(document).ready(function() {
          });
          // console.log(msg+'---'+unit_quantity+'----'+unit);
          msg = converQty(msg, unit_quantity, unit);
-         console.log(msg);
+         // console.log(msg);
          var price = table.row(row).data()[3].replace(/[^0-9.]/g, "");
          price = parseInt(price)*msg;
          // row = 2;

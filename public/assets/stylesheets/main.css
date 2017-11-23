@@ -3245,5 +3245,37 @@ a.item-delete:hover{
 .content-product .thumbnail .image-product a.center-block .reported-out-of-stock:hover{
   color: #C04724 !important;
 }
+.banks{
+  border-top: 1px solid #e5e5e5;
+}
+.bank{
+  border: 1px solid #e5e5e5;
+  border-top: none;
+  float: left;
+  padding: 1px 5px;
+}
+@media (min-width: 780px) {
+  .banks .bank:nth-child(-n+1) {
+      border-right: none;
+  }
+}
+.bank .image{
+  float: left;
+  width: 20%;
+  margin-top: 10px;
+}
+.bank .image img{
+  width: 100%;
+}
+.bank .contentBank{
+  float: left;
+  width: 80%;
+  font-size: 14px;
+  padding-left: 5px;
+}
+.bank .contentBank h4{
+  font-size: 15px;
+  margin-bottom: 5px;
+}
 
 

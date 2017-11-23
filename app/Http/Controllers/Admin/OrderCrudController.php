@@ -134,7 +134,7 @@ class OrderCrudController extends CrudController
             'label' => 'Địa Chỉ Giao Hàng',
             'type' => 'text',
             'wrapperAttributes' => [
-                'class' => 'form-group col-md-10'
+                'class' => 'form-group col-md-12'
             ],
         ]);
 
@@ -185,7 +185,17 @@ class OrderCrudController extends CrudController
             ],
         ]);
 
-        
+        $this->crud->addField([
+            'name' => 'customer_id',
+            'label' => 'Tài khoản KH còn',
+            'type' => 'select',
+            'entity' => 'user',
+            'attribute' => 'balance',
+            'model' => "App\Models\User",
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4'
+            ],
+        ]);
 
         $this->crud->addField([
             'name' => 'status',
@@ -200,16 +210,15 @@ class OrderCrudController extends CrudController
         ]);
 
         $this->crud->addField([
-            'name' => 'customer_id',
-            'label' => 'Tài khoản KH còn',
-            'type' => 'select2',
-            'entity' => 'user',
-            'attribute' => 'name',
-            'model' => "App\Models\User",
+            'name' => 'payment',
+            'label' => 'Hình thức thanh toán',
+            'type' => 'number',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4'
             ],
         ]);
+
+        
 
         // ------ CRUD DETAILS ROW
         // $this->crud->enableDetailsRow();
