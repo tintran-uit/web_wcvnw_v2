@@ -25,14 +25,75 @@ public function index()
     public function editItem(Request $request)
     {
       $data = $request->data;
-      return $data;
+      $delivery_date = '2017-11-25';
       foreach ($data as $key => $value) {
         $id = $key;
         if(count($value)==1){
           // edit other
+          //update trading, products for that product.
+          switch(key($value)) {
+            case "capacity":
+              DB::statement('UPDATE `trading` 
+                                SET `capacity` = ? 
+                              WHERE `product_id` = ?
+                                AND `delivery_date` = ?', [$value["capacity"], $id, $delivery_date]
+                            );
+              break;
+            case "unit_quantity":
+              DB::statement('UPDATE `products` p 
+                                SET `unit_quantity` = ? 
+                              WHERE `id` = ?', [$value["unit_quantity"], $id]
+                            );
+              break;
+            case "unit":
+              DB::statement('UPDATE `trading` tr, `products` p 
+                                SET tr.`unit` = ?, 
+                                    p.`unit` = ?
+                              WHERE p.`id` = tr.`product_id`
+                                AND p.`id` = ?
+                                AND tr.`delivery_date` = ?', [$value["unit"], $value["unit"], $id, $delivery_date]
+                            );
+              break;
+            case "price":
+              DB::statement('UPDATE `products` p 
+                                SET `price` = ? 
+                              WHERE `id` = ?', [$value["price"], $id]
+                            );
+              break;
+            case "price_farmer":
+              DB::statement('UPDATE `trading` tr, `products` p 
+                                SET tr.`price_farmer` = ?, 
+                                    p.`price_farmer` = ?,
+                                    p.`price_wholesale` = ROUND(1.4*?,0)
+                              WHERE p.`id` = tr.`product_id`
+                                AND p.`id` = ?
+                                AND tr.`delivery_date` = ?', [$value["price_farmer"], $value["price_farmer"], $value["price_farmer"], $id, $delivery_date]
+                            );
+              break;
+            case "price_wholesale":
+              DB::statement('UPDATE `products` p 
+                                SET `price_wholesale` = ? 
+                              WHERE `id` = ?', [$value["price_wholesale"], $id]
+                            );
+              break;
+          }
+
           return $value;
         }else{
-          //edit status
+          if($value['status'] == 1) {
+            //add trading product
+            DB::insert('INSERT INTO trading(`farmer_id`, `product_id`, `product_name`, `capacity`, `price_farmer`,
+                                            `sold`, `unit`, `status`, `delivery_date`, `priority`, `category`) 
+                          VALUES (?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $email, $address, $district]);
+          }
+          else {
+            //remove trading product
+            $value['status'] = 0;
+            DB::delete('DELETE FROM `trading`
+                              WHERE `product_id` = ?
+                                AND `delivery_date` = ?', [$id, $delivery_date]
+                      );
+          }
           return $value['status'];
         }
       }
