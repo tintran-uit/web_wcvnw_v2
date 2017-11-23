@@ -287,12 +287,12 @@ class OrderController extends Controller
 	        	if($category == 0) //package
 	        	{
 		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
-		        		                SET t.`sold` = ROUND(t.`sold` + m.`quantity`, 2)
+		        		                SET t.`sold` = ROUND(t.`sold` + m.`quantity`*?, 2)
            									  WHERE t.`farmer_id` = m.`farmer_id`
            									    AND t.`status` = 1
                                 AND m.`delivery_date` = t.`delivery_date`
              									  AND t.`product_id` = m.`product_id` 
-             									  AND m.`package_id` = ?', [$product_id]);
+             									  AND m.`package_id` = ?', [$quantity, $product_id]);
 	        	}
 			}     	
     }
