@@ -362,13 +362,16 @@ trước khi giao hàng! --></p>
         </div>
         <div class="modal-body row" style="margin: 0">
           <p>
-            Trạng thái: đặt hàng thành công!
+            Đặt hàng thành công!
           </p>
           <p>
-            Quý khách vui lòng chuyển khoản trước <b>6h:00pm thứ Năm,</b> <br>nhân viên của Cfarm sẽ liên hệ với quý khách qua điện thoại để xác nhận đơn hàng.
+            Trạng thái: <b>chờ xác nhận.</b>
           </p>
           <p>
-            Nội dung chuyển khoản bao gồm mã đơn hàng của bạn: <span id="order_id2" style="font-weight: bold;">"100000"</span>
+            Quý khách vui lòng chuyển khoản trước <b>6h:00pm thứ Năm, để xác nhận đơn hàng.</b> (*)
+          </p>
+          <p>
+            Nội dung chuyển khoản bao gồm mã đơn hàng của bạn: <span id="order_id_modal" style="font-weight: bold;"></span>
             <br> Thông tin chuyển khoản:
           </p>
           <div class="banks">
@@ -379,8 +382,8 @@ trước khi giao hàng! --></p>
                 <div class="contentBank">
                     <h4 class="title">Ngân hàng Ngoại thương Việt Nam - VietComBank - Chi nhánh Phan Đăng Lưu</h4>
 
-                    <p>Tài khoản: <strong>Dương Thanh Bình</strong><br>
-                        Số tài khoản: <strong>0011000876287</strong></p>
+                    <p>Tài khoản: <strong>Phan Dinh Vuong</strong><br>
+                        Số tài khoản: <strong>0441000644128</strong></p>
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 bank">
@@ -388,10 +391,10 @@ trước khi giao hàng! --></p>
                     <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-hsbc.png">
                 </div>
                 <div class="contentBank">
-                    <h4 class="title">Ngân hàng HSBC Việt Nam - VietComBank - Chi nhánh Etown Tân Bình</h4>
+                    <h4 class="title">Ngân hàng TNHH một thành viên HSBC Việt Nam - Chi nhánh Etown Tân Bình</h4>
 
-                    <p>Tài khoản: <strong>Dương Thanh Bình</strong><br>
-                        Số tài khoản: <strong>0011000876287</strong></p>
+                    <p>Tài khoản: <strong>Phan Dinh Vuong</strong><br>
+                        Số tài khoản: <strong>001 680883 041</strong></p>
                 </div>
               </div>
               <div class="col-md-12 col-sm-12 bank">
@@ -399,12 +402,15 @@ trước khi giao hàng! --></p>
                     <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-paypal.png">
                 </div>
                 <div class="contentBank">
-                    <h4 class="title">Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở</h4>
+                    <h4 class="title">Thanh toán Paypal (Dành cho khách hàng ngoài Việt Nam)</h4>
 
-                    <p>Tài khoản: <strong>Dương Thanh Bình</strong><br>
-                        Số tài khoản: <strong>0011000876287</strong></p>
+                    <p>Tài khoản: <strong>dinhvuong1206@gmail.com</strong><br></p>
                 </div>
               </div>
+          </div>
+
+          <div style="margin-top: 10px;float: left;">
+              <p>(*) Sau khi nhận được thanh toán, nhân viên của Cfarm sẽ liên lạc qua điện thoại để xác nhận đơn hàng. Cảm ơn quý khách đã đồng hành cùng Cfarm xây dựng cộng đồng nuôi trồng thực phẩm sạch và hữu cơ.</p>
           </div>
         </div>
       </div>
@@ -416,7 +422,7 @@ trước khi giao hàng! --></p>
 @section('scrip_code')
 
 <script type="text/javascript">
-  $('#modalOrderStatus').modal('show');
+  // $('#modalOrderStatus').modal('show');
       var spacerToal = '{{$subtotal}}';
       spacerToal = parseInt(spacerToal);
       var auth = '{{$auth}}';
@@ -605,6 +611,10 @@ trước khi giao hàng! --></p>
           success: function(data){
             $('#modalLoader').modal('hide');
             $('[href="#tab-3"]').tab('show');
+            if(dataPost['thanhToan']==2){
+              $('#modalOrderStatus').modal('show');
+              document.getElementById("order_id_modal").textContent=data.order_id;
+            }
             // if(dataPost['thanhToan']==)
             document.getElementById('btnStep').style.visibility = 'hidden';
             console.log(data);
