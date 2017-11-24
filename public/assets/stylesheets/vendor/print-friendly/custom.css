@@ -5,7 +5,7 @@
 }
 
 #pf-print-area{
-	font-size: 10px;
+	font-size: 12px;
 }
 
 p.box-header{
@@ -23,6 +23,7 @@ p.box-header{
 
 #pf-body td {
     vertical-align: inherit;
+
 }
 
 #pf-body img#pf-src-icon{
@@ -36,7 +37,7 @@ p.box-header{
 
 .print-title{
 	display: block;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: bold;
 }
 
