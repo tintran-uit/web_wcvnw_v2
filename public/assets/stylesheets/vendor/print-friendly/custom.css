@@ -12,6 +12,10 @@ p.box-header{
 	display:none;
 }
 
+.box-footer{
+	width: 90%;
+	margin: 0 auto;
+}
 #saveActions{
 	display:none;
 }
