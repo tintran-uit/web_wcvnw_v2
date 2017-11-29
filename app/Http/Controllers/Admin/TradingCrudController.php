@@ -57,11 +57,13 @@ class TradingCrudController extends CrudController
             'name' => 'capacity',
             'label' => 'Sản Lượng',
         ]);
-
-
         $this->crud->addColumn([
             'name' => 'sold',
             'label' => 'Đã Bán',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'unit_quantity',
+            'label' => 'Gói Bán',
         ]);
 
         $this->crud->addColumn([
@@ -72,6 +74,16 @@ class TradingCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'price_farmer',
             'label' => 'Giá thu mua',
+            'type' => 'number',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'price',
+            'label' => 'Giá Bán',
+            'type' => 'number',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'price_wholesale',
+            'label' => 'Giá sỉ',
             'type' => 'number',
         ]);
 
@@ -109,7 +121,24 @@ class TradingCrudController extends CrudController
         $this->crud->addField([
             'name' => 'capacity',
             'label' => 'Sản Lượng',
-            'type' => 'number',
+            'type' => 'text',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'unit_quantity',
+            'label' => 'Gói Bán',
+            'type' => 'text',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'unit',
+            'label' => 'Đơn vị',
+            'type' => 'text',
+            'default'    => 'kg',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
@@ -117,6 +146,22 @@ class TradingCrudController extends CrudController
         $this->crud->addField([
             'name' => 'price_farmer',
             'label' => 'Giá thu mua',
+            'type' => 'number',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'price',
+            'label' => 'Giá Bán',
+            'type' => 'number',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'price_wholesale',
+            'label' => 'Giá Bán Sỉ',
             'type' => 'number',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
@@ -133,15 +178,6 @@ class TradingCrudController extends CrudController
             ],
         ]);
 
-        $this->crud->addField([
-            'name' => 'unit',
-            'label' => 'Đơn vị',
-            'type' => 'text',
-            'default'    => 'kg',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-3'
-            ],
-        ]);
         $this->crud->addField([
             'name' => 'status',
             'label' => 'Trạng Thái',
