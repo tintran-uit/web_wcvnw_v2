@@ -24,7 +24,7 @@
             <a class="btn btn-primary ladda-button" onclick="stats()">Thống kê</a>
         </div>  
         <div class="col-md-5 vcenter">
-            <b>Chọn tuần: </b><input type="text" value="{{$date}}" id="datepicker">
+            <b>Chọn tuần: </b><input type="text" value="" id="datepicker">
         </div>
         
     </div>

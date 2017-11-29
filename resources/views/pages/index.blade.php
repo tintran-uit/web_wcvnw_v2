@@ -349,7 +349,7 @@
 
                   html += '<!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\">';
                   $.each(data, function(i, d){
-
+                    if(d.price!=null){
                      var prodHtml = '<article class=\"col-xs-6 col-sm-4 col-lg-3\" style=\"\">\r\n                           <div class=\"relative\">\r\n                              <div class=\"ribbon ribbon-new\">\r\n                                 '+createLabel(d.label)+'                              <\/div>\r\n                                                           <div class=\"content-product\">\r\n                                 <div class=\"thumbnail\">\r\n                                    <figure class=\"image-product\">\r\n                                       <div class=\"btn-view\">\r\n                                          <a class=\"white\" href=\"product/slug='+d.slug+'\">    <i class=\"fa fa-search\"><\/i>\r\n                                          <\/a>\r\n                                       <\/div>\r\n                                       <a class=\"center-block\" href=\"/product/slug='+d.slug+'\">        <img class=\"img-responsive center-block small-img\" alt=\"product\" src=\"{{url('')}}/'+d.thumbnail +'\" \/>\r\n                                       <\/a>    \r\n                                    <\/figure>\r\n                                    <div class=\"caption text-center\">\r\n                                       <article class=\"copy\">\r\n                                          <h4 class=\"no-margin-top\"><a class=\"new-price\" href=\"product/slug='+d.slug+'\">'+d.name + ' '+d.unit_quantity+d.unit+'</a><\/h4>\r\n                                          \r\n                                          <p>\r\n                                       <\/article>\r\n                                       <article class=\"price\">\r\n                                                            <a href=\"{{url('')}}/nong-trai-sach/farmer_id='+d.farmer_id+'\"><span class=\"new-price\"> '+d.farmer_name+'                                          <\/span></a>\r\n                                       <\/article>\r\n                                            <article class=\"button-group clearfix\">\r\n                                           <div class=\"pull-left vcenter\">\r\n                                             <a class=\"btn btn-primary no-margin\" onclick=\"addCart(\''+d.id+'\','+d.farmer_id+')\">'+'{{ trans('head.addCart') }}'+'\r\n  <\/a>        \r\n  <\/div>\r\n ';
 
                      if(d.quantity_left==0){
@@ -412,7 +412,7 @@
                             }
                             break;
                       }   
-
+                    }
                   });
 
                   html += '<\/div>\r\n <\/div> \r\n <ul class=\"pagination\">\r\n    <li>\r\n<a href=\"#myCarousel'+index+'\" data-slide=\"prev\">        <span aria-hidden=\"true\" class=\"fa fa-chevron-left\"><\/span>\r\n<\/a>    <\/li>\r\n';
