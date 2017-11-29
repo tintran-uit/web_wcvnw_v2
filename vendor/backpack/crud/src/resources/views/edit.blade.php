@@ -893,8 +893,8 @@ $(document).ready(function() {
             console.log(data);
             if(data.error==0){
             	// alert(data.status);
-            	// location.reload();
-              loaditems();
+            	location.reload();
+              // loaditems();
               ItemsUpload = [];
             }else{
             	alert(data.status);

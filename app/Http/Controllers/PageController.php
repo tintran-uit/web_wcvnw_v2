@@ -135,20 +135,24 @@ class PageController extends Controller
 
         if (strcmp($locale, 'en') == 0) {
             $product = DB::select('SELECT p.`id` "id", p.`en_name` "name", p.`slug` "slug", p.`image` "image", 
-                                          p.`price` "price", p.`price_old` "price_old", p.`category` "category", 
-                                          p.`unit_quantity` "unit_quantity", p.`unit` "unit", 
+                                          tr.`price` "price", p.`price_old` "price_old", p.`category` "category", 
+                                          tr.`unit_quantity` "unit_quantity", tr.`unit` "unit", 
                                           p.`en_short_description` "short_description", p.`en_description` "description" 
-                                     FROM `products` p 
-                                    WHERE p.`slug` = ? ', [$slug]
+                                     FROM `products` p, `trading` tr  
+                                    WHERE p.`id` = tr.`product_id`
+                                      AND tr.`status` = 1
+                                      AND p.`slug` = ? ', [$slug]
                                 );
         }
         else {
             $product = DB::select('SELECT p.`id` "id", p.`name` "name", p.`slug` "slug", p.`image` "image", 
-                                          p.`price` "price", p.`price_old` "price_old", p.`category` "category", 
-                                          p.`unit_quantity` "unit_quantity", p.`unit` "unit", 
+                                          tr.`price` "price", p.`price_old` "price_old", p.`category` "category", 
+                                          tr.`unit_quantity` "unit_quantity", tr.`unit` "unit", 
                                           p.`short_description` "short_description", p.`description` "description" 
-                                     FROM `products` p 
-                                    WHERE p.`slug` = ? ', [$slug]
+                                     FROM `products` p, `trading` tr  
+                                    WHERE p.`id` = tr.`product_id`
+                                      AND tr.`status` = 1
+                                      AND p.`slug` = ? ', [$slug]
                                 );
 
         }

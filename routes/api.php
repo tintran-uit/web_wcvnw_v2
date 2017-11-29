@@ -26,7 +26,7 @@ Route::get('/cancelorder/order_id={order_id}', 'OrderController@cancelOrder');
 Route::get('/moveorder/order_id={order_id}/week_num={week_num}', 'OrderController@moveOrder');
 Route::get('/orderitems/order_id={order_id}', 'OrderController@orderItems');
 Route::get('/orders', 'CustomerController@getOrders');
-Route::get('/productinorder/product_id={product_id}/delivery_date={delivery_date}', 'OrderController@productInOrder');
+Route::get('/productinorder/delivery_date={delivery_date}', 'OrderController@productInOrder');
 
 Route::get('/orderstats/date={date}', 'OrderController@itemStats');
 Route::get('/orderrm/order_id={order_id}/product_id={product_id}/farmer_id={farmer_id}', 'OrderController@removeItemAdmin');
@@ -40,7 +40,13 @@ Route::get('/farmers', 'FarmerController@farmers');
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace' => 'Admin'], function () {
 	Route::get('product-trading/items', 'TradingController@getItems');
 	Route::post('product-trading/items', 'TradingController@editItem');
+
+	// order
+	Route::get('order-items', 'OrderItemController@getItems');
+	Route::post('order-items', 'OrderItemController@updateItems');
 });
+
+
 	Route::post('admin/update-cart', 'OrderController@addItemAdmin');
 
 

@@ -4,6 +4,11 @@
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.3/css/select.dataTables.min.css">
+<style type="text/css">
+    tr td:nth-child(6) {
+        font-weight: bold;
+    }
+</style>
 @endsection
 
 @section('main')
@@ -17,12 +22,12 @@
         <thead>
             <tr>
                 <th>Mã đơn hàng</th>
+                <th>Người nhận</th>
+                <th>SĐT</th>
                 <th>Tên sản phẩm</th>
                 <th>SL đặt</th>
                 <th>SL thực tế</th>
                 <th>Đơn vị</th>
-                <th>Thành tiền</th>
-                <th>Trang trại</th>
                 <th>Ngày giao hàng</th>
             </tr>
         </thead>
@@ -43,29 +48,29 @@
  
 $(document).ready(function() {
     editor = new $.fn.dataTable.Editor( {
-        ajax: "/api/admin/product-trading/items",
+        ajax: "/api/admin/order-items",
         table: "#example",
         fields: [ {
                 label: "Mã đơn hàng:",
-                name: "product_name"
+                name: "order_id"
+            }, {
+                label: "Người nhận:",
+                name: "delivery_name"
+            }, {
+                label: "Số điện thoại:",
+                name: "delivery_phone"
             }, {
                 label: "Tên sản phẩm:",
-                name: "farmer_name"
-            }, {
+                name: "product_name"
+            },{
                 label: "SL đặt:",
-                name: "capacity"
+                name: "order_quantity"
             }, {
                 label: "SL thực tế:",
-                name: "unit_quantity"
+                name: "quantity"
             }, {
                 label: "Đơn vị:",
                 name: "unit"
-            },{
-                label: "Thành tiền:",
-                name: "price_farmer"
-            },{
-                label: "Trang trại:",
-                name: "price"
             }, {
                 label: "Ngày giao hàng:",
                 name: "delivery_date",
@@ -76,42 +81,36 @@ $(document).ready(function() {
     } );
  
     // Activate an inline edit on click of a table cell
-    $('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        editor.inline( this );
+    $('#example').on( 'click', 'tbody td:nth-child(6)', function (e) {
+        editor.inline( this, {
+            submit: 'allIfChanged'
+        } );
     } );
 
-    $('#example').on( 'change', 'input.editor-active', function () {
-        editor
-            .edit( $(this).closest('tr'), false )
-            .set( 'status', $(this).prop( 'checked' ) ? 1 : 0 )
-            .submit();
-    } );
- 
     $('#example').DataTable( {
         "paging": false,
         dom: "Bfrtip",
-        ajax: "/api/admin/product-trading/items",
+        ajax: "/api/admin/order-items",
         order: [[ 1, 'asc' ]],
         columns: [
+            { data: "order_id" },
+            { data: "delivery_name" },
+            { data: "delivery_phone" },
             { data: "product_name" },
-            { data: "farmer_name" },
-            { data: "capacity" },
-            { data: "unit_quantity" },
-            { data: "unit_quantity" },
-            { data: "unit" },
-            { data: "price", render: $.fn.dataTable.render.number( ',', '.', 0, 'VND ' ) },
+            { data: "order_quantity" },
+            { data: "quantity" },
+            { data: "unit"},
             { data: "delivery_date" }
         ],
         select: {
             style:    'os',
-            selector: 'td:first-child'
+            selector: 'td:nth-child(6)'
         },
         buttons: [
             
         ],
         rowCallback: function ( row, data ) {
             // Set the checked state of the checkbox in the table
-            $('input.editor-active', row).prop( 'checked', data.status == 1 );
         }
     } );
 
