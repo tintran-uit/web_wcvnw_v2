@@ -20,7 +20,12 @@ public function index()
     public function updateItems(Request $request)
     {
       $data = $request->data;
-
+      foreach ($data as $key => $value) {
+        $product_id = $key;
+        $order_id = $value['order_id'];
+        $quantity = $value['quantity'];
+      }
+      
       // tra du lieu ve bang
       return $this->getItems();
 

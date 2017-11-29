@@ -82,7 +82,9 @@ $(document).ready(function() {
  
     // Activate an inline edit on click of a table cell
     $('#example').on( 'click', 'tbody td:nth-child(6)', function (e) {
-        editor.inline( this );
+        editor.inline( this, {
+            submit: 'allIfChanged'
+        } );
     } );
 
     $('#example').DataTable( {
