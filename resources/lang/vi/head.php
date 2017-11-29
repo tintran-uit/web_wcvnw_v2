@@ -51,8 +51,8 @@ return [
     'package' => 'GÓI',
     'package2' => 'SẢN PHẨM',
     'package3' => 'TIỆN DỤNG<BR>DINH DƯỠNG<BR>TIẾT KIỆM',
-    'bannerTop2_1' => 'Cfarm chốt đơn vào 6h:00 PM Thứ Năm - Giao hàng tại nhà vào Thứ Bảy hàng tuần.',
-    'bannerTop2_2' => 'Các đơn hàng đặt sau 6h00 PM Thứ Năm sẽ được giao vào thứ Bảy của tuần tiếp theo.<br> Cảm ơn quý khách đã đồng hành cùng Cfarm xây dựng cộng đồng nuôi trồng thực phẩm sạch & hữu cơ',
+    'bannerTop2_1' => 'Cfarm chốt đơn vào 6h:00 PM Thứ Tư - Giao hàng tại nhà vào Thứ Sáu hàng tuần.',
+    'bannerTop2_2' => 'Các đơn hàng đặt sau 6h00 PM Thứ Tư sẽ được giao vào thứ Sáu của tuần tiếp theo.<br> Cảm ơn quý khách đã đồng hành cùng Cfarm xây dựng cộng đồng nuôi trồng thực phẩm sạch & hữu cơ',
     'bannerTop3_1' => 'Chuyên sản phẩm sạch - hữu cơ',
     'bannerTop3_2' => 'Kết nối lương nông - an lòng nội trợ.',
 

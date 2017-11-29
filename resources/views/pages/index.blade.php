@@ -25,9 +25,8 @@
             <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 3.png" />
             </a>        
             <div class="carousel-caption">
-               <!-- <h4><b>Để đảm bảo đủ sản lượng thực phẩm nuôi trồng thuận tự nhiên & hữu cơ cung cấp cho khách hàng</b></h4> -->
                <h3><b>{{ trans('head.bannerTop2_1') }}</b></h3>
-               <p><b>{{ trans('head.bannerTop2_2') }}</b></p>
+               <p><b><?php echo(trans('head.bannerTop2_2')) ?></b></p>
             </div>
          </div>
          
