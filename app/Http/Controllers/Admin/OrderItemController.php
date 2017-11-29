@@ -25,6 +25,12 @@ public function index()
 
     public function getItems()
     {
+      if(date('D') == 'Fri'){
+        $delivery_date = date('Y-m-d');
+      }else{
+        $delivery_date = new DateTime('next friday');
+        $delivery_date = $delivery_date->format('Y-m-d');
+      }
       $items = DB::select('SELECT p.`id` "DT_RowId", f.`name` "farmer_name", p.`name` "product_name", 
                                   ROUND(tr.`capacity`, 2) "capacity", ROUND(tr.`unit_quantity`, 2) "unit_quantity", 
                                   tr.`unit` "unit", tr.`price` "price", tr.`price_farmer` "price_farmer", 

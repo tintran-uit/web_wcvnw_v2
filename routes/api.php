@@ -40,7 +40,12 @@ Route::get('/farmers', 'FarmerController@farmers');
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace' => 'Admin'], function () {
 	Route::get('product-trading/items', 'TradingController@getItems');
 	Route::post('product-trading/items', 'TradingController@editItem');
+
+	// order
+	Route::get('order-items', 'OrderItemController@getItems');
 });
+
+
 	Route::post('admin/update-cart', 'OrderController@addItemAdmin');
 
 

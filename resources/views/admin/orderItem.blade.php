@@ -16,7 +16,7 @@
     <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Mã đơn hàng</th>
+                <th>Người mua</th>
                 <th>Tên sản phẩm</th>
                 <th>SL đặt</th>
                 <th>SL thực tế</th>
@@ -43,7 +43,7 @@
  
 $(document).ready(function() {
     editor = new $.fn.dataTable.Editor( {
-        ajax: "/api/admin/product-trading/items",
+        ajax: "/api/admin/order-items",
         table: "#example",
         fields: [ {
                 label: "Mã đơn hàng:",
@@ -90,7 +90,7 @@ $(document).ready(function() {
     $('#example').DataTable( {
         "paging": false,
         dom: "Bfrtip",
-        ajax: "/api/admin/product-trading/items",
+        ajax: "/api/admin/order-items",
         order: [[ 1, 'asc' ]],
         columns: [
             { data: "product_name" },
