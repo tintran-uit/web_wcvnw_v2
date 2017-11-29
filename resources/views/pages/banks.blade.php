@@ -107,147 +107,59 @@ body .popover {
    <section class="spacer-20">
       <div class="container">
          <div class="row">
-            <aside class="col-sm-5 col-md-4 col-lg-3">
-              <section class="single-block bg-white wrap-radius">
-                  <div class="">
-                     <!--icon-email, icon-discount, icon-shipping-->
-                     <h4 class="title-box text-uppercase no-margin-top" style="">
-                        QUY TRÌNH TUYỂN CHỌN LƯƠNG NÔNG <img class="img_nhanchungnhan" style="height: 25px; margin-left: 10px;" src="{{url('')}}/assets/images/icons/icon-tick.png">
-                     </h4>
-                     <a href="#" data-toggle="popover2" data-full="{{url('')}}/assets/images/banner/banner-nong-dan-san-suat-sach-cfarm.png">
-                     <img class="img-responsive" src="{{url('')}}/assets/images/banner/banner-nong-dan-san-suat-sach-cfarm.png">
-                   </a>
-                     <div class="text-center">
-                      <br>
-                        <a class="btn btn-link no-margin" href="{{url('')}}/chinh-sach-lien-ket-nong-dan">CHI TIẾT</a>
-                     </div>
-                  </div>
-               </section>
-            </aside>
-            <section class="col-sm-7 col-md-8 col-lg-6">
+            <section class="col-sm-12 col-md-12 col-lg-12 text-center" style="margin-bottom: 8px"><h3 class="text-uppercase no-margin-top title-article">
+                  Thông tin chuyển khoản 
+               </h3></section>
+            <section class="col-sm-6 col-md-6 col-lg-6">
                <article class="internal-padding wrap-radius bg-white style-post animated fadeInDown">
-                     <div class="well profile_view">
-                        
+                     <div class="well profile_view bank_page">
+                        <div class="image">
+                            <img class="" alt="mua thực phẩm sạch online" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-vcb.png">
+                        </div>
+                        <div class="contentBank">
+                            <h4 class="title">Ngân hàng Ngoại thương Việt Nam VietComBank - Chi nhánh Phan Đăng Lưu</h4>
+
+                            <p>Tài khoản: <strong>Phan Dinh Vuong</strong><br>
+                                Số tài khoản: <strong>0441000644128</strong></p>
+                        </div>
                      </div>
                </article>
                
             </section>
-            <aside class="col-lg-3 hidden-sm hidden-md">
-               <section class="wrap wrap-border internal-padding bg-white wrap-radius">
-                  <h4 class="text-center no-margin-top spacer-bottom-10">Hình ảnh thực tế nông trại</h4>
-                  <div class="row clearfix frame-photo">
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_1.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_1.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_2.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_2.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_3.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_3.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_4.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_4.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_5.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_5.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_6.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_6.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_7.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_7.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_8.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_8.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_9.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_9.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_10.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_10.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_11.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_11.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-xs-6">
-                        <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
-                           <div class="shadow-wrap-box bg-white photo-frame">
-                              <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_12.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_12.jpg">
-                              </a>
-                           </div>
-                        </div>
-                     </div>
 
-                  </div>
-               </section>
-            </aside>
+            <section class="col-sm-6 col-md-6 col-lg-6">
+               <article class="internal-padding wrap-radius bg-white style-post animated fadeInDown">
+                     <div class="well profile_view bank_page">
+                        <div class="image">
+                            <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-hsbc.png">
+                        </div>
+                        <div class="contentBank">
+                            <h4 class="title">Ngân hàng TNHH một thành viên HSBC Việt Nam - Chi nhánh Etown Tân Bình</h4>
+
+                            <p>Tài khoản: <strong>Phan Dinh Vuong</strong><br>
+                                Số tài khoản: <strong>001 680883 041</strong></p>
+                        </div>
+                     </div>
+               </article>
+               
+            </section>
+
+            <section class="col-sm-6 col-md-6 col-lg-6">
+               <article class="internal-padding wrap-radius bg-white style-post animated fadeInDown">
+                     <div class="well profile_view bank_page">
+                        <div class="image">
+                            <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-paypal.png" style="margin-top: 10px">
+                        </div>
+                        <div class="contentBank">
+                            <h4 class="title">Thanh toán Paypal (Dành cho khách hàng ngoài Việt Nam)</h4>
+
+                            <p>Tài khoản: <strong>dinhvuong1206@gmail.com</strong><br></p><br>
+                        </div>
+                     </div>
+               </article>
+               
+            </section>
+            
          </div>
       </div>
    </section>

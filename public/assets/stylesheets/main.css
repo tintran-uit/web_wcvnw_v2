@@ -3280,4 +3280,34 @@ a.item-delete:hover{
   color: #64903E;
 }
 
+.bank_page{
+  padding: 8px 18px !important;
+}
+
+.bank_page .image{
+  float: left;
+  width: 20%;
+  /*margin-top: 10px;*/
+}
+.bank_page .image img{
+  width: 100%;
+}
+.bank_page .contentBank{
+  float: left;
+  width: 80%;
+  font-size: 15px;
+  padding-left: 25px;
+}
+.bank_page .contentBank h4{
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #64903E;
+  font-weight: bold;
+}
+
+@media (max-width: 780px) {
+  .bank_page .image{
+    margin-top: 10px;
+  }
+}
 

@@ -34,7 +34,10 @@
                            </a>      
                         </dd>
                         @endforeach
-                        
+                        <dd>
+                           <a class="{{ Request::is('thong-tin-chuyen-khoan') ? 'current' : '' }}" href="{{url('')}}/thong-tin-chuyen-khoan">          <i class="fa fa-angle-right"></i> {{ trans('head.about4') }}
+                           </a>      
+                        </dd>
                      </dl>
                   </div>
                </div>

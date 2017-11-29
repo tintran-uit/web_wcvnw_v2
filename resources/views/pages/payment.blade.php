@@ -377,7 +377,7 @@ trước khi giao hàng! --></p>
           <div class="banks">
               <div class="col-md-6 col-sm-12 bank">
                 <div class="image">
-                    <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-vcb.png">
+                    <img class="" alt="mua thực phẩm sạch online" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-vcb.png">
                 </div>
                 <div class="contentBank">
                     <h4 class="title">Ngân hàng Ngoại thương Việt Nam - VietComBank - Chi nhánh Phan Đăng Lưu</h4>
