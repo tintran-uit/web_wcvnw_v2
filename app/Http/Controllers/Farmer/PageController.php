@@ -19,8 +19,12 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        $date = new DateTime('next saturday');
-        $date->format('Y-m-d');
+        if(date('D') == 'Fri'){
+          $date = date('Y-m-d');
+        }else{
+          $date = new DateTime('next friday');
+          $date = $date->format('Y-m-d');
+        }
 
         $category = [];
         $products = [];
@@ -73,10 +77,9 @@ class PageController extends Controller
 
     public function layhang($id, $date)
   {
-    $products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,
-                                        p.`name` "name", p.`slug` "slug", p.`image` "image", p.`category` "category", 
-                                        tr.`price` "price", tr.`unit_quantity` "unit_quantity", tr.`sold` "sold", 
-                                        tr.`unit` "unit", p.`brand_id` "label"  
+    $products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`category` "                                  category", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", tr.`price` "price",
+                                        tr.`unit_quantity` "unit_quantity", tr.`sold` "sold", tr.`unit` "unit", 
+                                        p.`brand_id` "label"  
                                    FROM `products` p, `trading` tr, `farmers` f 
                                   WHERE tr.`product_id` = p.`id` 
                                     AND f.`id` = ? 
@@ -97,7 +100,15 @@ class PageController extends Controller
         $mua[$key->id]['pack'] = [];
       }
      // return $mua;
-      $orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost", g.`customer_id` "customer_id" FROM `g_orders` g, `status` s WHERE g.`status` = s.`id`AND g.`delivery_date` = ? AND g.`status` != ? ORDER BY g.`order_id` DESC', [$date, 8]);
+      $orders = DB::select('SELECT g.`order_id` "order_id", g.`total` "total", g.`created_at` "date", 
+                                 s.`en_name` "status_name", s.`name` "status_vn_name", g.`status` "status", 
+                                 g.`discount_amount` "discount_amount", g.`note` "note", g.`shipping_cost` "shipping_cost"
+                                 , g.`customer_id` "customer_id" 
+                            FROM `g_orders` g, `status` s 
+                           WHERE g.`status` = s.`id`
+                             AND g.`delivery_date` = ? 
+                             AND g.`status` != ? 
+                        ORDER BY g.`order_id` DESC', [$date, 8]);
         $this->data['orders'] = $orders;
         $this->data['orderItem'] = [];
 
@@ -108,12 +119,14 @@ class PageController extends Controller
           // $this->data['orderItem'] += $item;
           foreach ($item as $it) {
             if($it->product_category==0){
-              $sp =  DB::select('SELECT f.`name` "farmer_name", p.`slug` "slug", f.`id` "farmer_id", p.`name` "product_name", p.`id` "product_id", 
-                               m.`quantity` "quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" FROM m_packages m, products p, farmers f 
-                           WHERE p.`id` = m.`product_id` 
-                           AND f.`id` = m.`farmer_id` 
-                           AND m.`package_id` = ?
-                           AND m.`delivery_date` = ?',[$it->product_id, $date]);
+              $sp =  DB::select('SELECT f.`name` "farmer_name", p.`slug` "slug", f.`id` "farmer_id", 
+                                        p.`name` "product_name", p.`id` "product_id", m.`quantity` "quantity", 
+                                        m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" 
+                                   FROM `m_packages` m, `products` p, `farmers` f 
+                                  WHERE p.`id` = m.`product_id` 
+                                    AND f.`id` = m.`farmer_id` 
+                                    AND m.`delivery_date` = ?
+                                    AND m.`package_id` = ?',[$date, $it->product_id]);
               foreach ($sp as $key) {
                 if(array_key_exists($key->product_id, $mua)){
                   if($key->slug == $mua[$key->product_id]['name'])
