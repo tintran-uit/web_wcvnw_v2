@@ -47,16 +47,20 @@ class ProductCrudController extends CrudController
         ]);
 
         $this->crud->addColumn([
-            'name' => 'price',
-            'label' => 'Giá Bán',
+            'name' => 'farmer_id',
+            'label' => 'Nông Trại',
+            'type' => 'select',
+            'entity' => 'farmer', 
+            'attribute' => 'name', 
+            'model' => "App\Models\Farmer", // foreign key model
         ]);
         $this->crud->addColumn([
-            'name' => 'unit_quantity',
-            'label' => 'ĐVT cơ bản',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'unit',
-            'label' => 'Đơn vị',
+            'name' => 'brand_id',
+            'label' => 'Nhãn SP',
+            'type' => 'select',
+            'entity' => 'brand', 
+            'attribute' => 'name', 
+            'model' => "App\Models\Brand", // foreign key model
         ]);
 
 //--------CRUD Fields
@@ -110,37 +114,6 @@ class ProductCrudController extends CrudController
             // 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-5'
-            ],
-        ]);
-
-       $this->crud->addField([    // TEXT
-            'name' => 'price',
-            'label' => 'Giá Bán',
-            'type' => 'number',
-            // optionals
-            'prefix' => "VND",
-//             'suffix' => ".00",
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-4'
-            ],
-        ]);
-
-        $this->crud->addField([    // TEXT
-            'name' => 'unit_quantity',
-            'label' => 'ĐVT Cơ Bản',
-            'type' => 'number',
-            'attributes' => ["step" => "any"],
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-4'
-            ],
-        ]);
-        $this->crud->addField([    // TEXT
-            'name' => 'unit',
-            'label' => 'Đơn Vị Tính',
-            'type' => 'text',
-            'default'    => 'kg',
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-3'
             ],
         ]);
 

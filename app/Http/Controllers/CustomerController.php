@@ -359,7 +359,16 @@ class CustomerController extends Controller
 
 		if(Auth::check() && Auth::user()->email == 'minh.huynh@cfarm.vn'){
 			if($id==1){
-				$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+				$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,
+													p.`name` "name", p.`slug` "slug", p.`image` "image", 
+													p.`thumbnail` "thumbnail", tr.`price` "price", 
+													tr.`unit_quantity` "unit_quantity", tr.`sold` "sold", 
+													tr.`unit` "unit", p.`brand_id` "label"  
+											   FROM `products` p, `trading` tr, `farmers` f 
+											  WHERE tr.`product_id` = p.`id` 
+											    AND f.`id` = ? 
+											    AND f.`id` = tr.`farmer_id`  
+										   ORDER BY tr.`priority` ASC', [$id]);
 
 		 	$mua = [];
 		 	foreach ($products_list as $key) {
@@ -407,7 +416,16 @@ class CustomerController extends Controller
 
 		if($id==2){
 		
-		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,
+		 										p.`name` "name", p.`slug` "slug", p.`image` "image", 
+		 										p.`thumbnail` "thumbnail", tr.`price` "price", 
+		 										tr.`unit_quantity` "unit_quantity", tr.`sold` "sold", tr.`unit` "unit", 
+		 										p.`brand_id` "label"  
+		 								   FROM `products` p, `trading` tr, `farmers` f 
+		 								  WHERE tr.`product_id` = p.`id` 
+		 								    AND f.`id` = ? 
+		 								    AND f.`id` = tr.`farmer_id`  
+		 							   ORDER BY tr.`priority` ASC', [$id]);
 
 		 	$mua = [];
 		 	foreach ($products_list as $key) {
@@ -479,7 +497,16 @@ class CustomerController extends Controller
 
 	    if($id==3){
 		
-		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,
+		 										p.`name` "name", p.`slug` "slug", p.`image` "image", 
+		 										p.`thumbnail` "thumbnail", tr.`price` "price", 
+		 										tr.`unit_quantity` "unit_quantity", tr.`sold` "sold", tr.`unit` "unit", 
+		 										p.`brand_id` "label"  
+		 								   FROM `products` p, `trading` tr, `farmers` f 
+		 								  WHERE tr.`product_id` = p.`id` 
+		 								    AND f.`id` = ? 
+		 								    AND f.`id` = tr.`farmer_id`  
+		 							   ORDER BY tr.`priority` ASC', [$id]);
 
 		 	$mua = [];
 		 	foreach ($products_list as $key) {
@@ -552,7 +579,16 @@ class CustomerController extends Controller
 
 	    if($id==9){
 		
-		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,
+		 										p.`name` "name", p.`slug` "slug", p.`image` "image", 
+		 										p.`thumbnail` "thumbnail", tr.`price` "price", 
+		 										tr.`unit_quantity` "unit_quantity", tr.`sold` "sold", tr.`unit` "unit", 
+		 										p.`brand_id` "label"  
+		 								   FROM `products` p, `trading` tr, `farmers` f 
+		 								  WHERE tr.`product_id` = p.`id` 
+		 								    AND f.`id` = ? 
+		 								    AND f.`id` = tr.`farmer_id`  
+		 							   ORDER BY tr.`priority` ASC', [$id]);
 
 		 	$mua = [];
 		 	foreach ($products_list as $key) {
@@ -665,7 +701,16 @@ class CustomerController extends Controller
 
 	    if($id==7){
 		
-		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id`  ORDER BY tr.`priority` ASC', [$id]);
+		 	$products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,
+		 										p.`name` "name", p.`slug` "slug", p.`image` "image", 
+		 										p.`thumbnail` "thumbnail", tr.`price` "price", 
+		 										tr.`unit_quantity` "unit_quantity", tr.`sold` "sold", tr.`unit` "unit", 
+		 										p.`brand_id` "label"  
+		 								   FROM `products` p, `trading` tr, `farmers` f 
+		 								  WHERE tr.`product_id` = p.`id` 
+		 								    AND f.`id` = ? 
+		 								    AND f.`id` = tr.`farmer_id`  
+		 							   ORDER BY tr.`priority` ASC', [$id]);
 
 		 	$mua = [];
 		 	foreach ($products_list as $key) {

@@ -105,9 +105,9 @@ public function index()
   {
     $delivery_date = '2017-11-18';
     $items = DB::select('SELECT p.`id` "DT_RowId", f.`name` "farmer_name", p.`name` "product_name", 
-                                ROUND(tr.`capacity`, 2) "capacity", ROUND(p.`unit_quantity`, 2) "unit_quantity", 
-                                p.`unit` "unit", p.`price` "price", tr.`price_farmer` "price_farmer", 
-                                p.`price_wholesale` "price_wholesale", tr.`delivery_date` "delivery_date", 
+                                ROUND(tr.`capacity`, 2) "capacity", ROUND(tr.`unit_quantity`, 2) "unit_quantity", 
+                                tr.`unit` "unit", tr.`price` "price", tr.`price_farmer` "price_farmer", 
+                                tr.`price_wholesale` "price_wholesale", tr.`delivery_date` "delivery_date", 
                                 p.`category` "category", 1 as "status"
                           FROM `trading` tr, `products` p, `farmers` f
                          WHERE `delivery_date`= ?
@@ -115,7 +115,7 @@ public function index()
                            AND tr.`farmer_id` = f.`id` 
                         UNION 
                         SELECT p.`id` "DT_RowId", f.`name` "farmer_name", p.`name` "product_name", 0 AS "capacity", 
-                               0.3 AS "unit_quantity", "kg" AS "unit", p.`price` "price", 0 "price_farmer", 
+                               0.3 AS "unit_quantity", "kg" AS "unit", tr.`price` "price", 0 "price_farmer", 
                                 p.`price_wholesale` "price_wholesale", ? AS "delivery_date", p.`category` "category", 0 AS "status"
                           FROM `products` p, `farmers` f
                          WHERE f.`id` = p.`farmer_id`
