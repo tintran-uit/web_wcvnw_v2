@@ -73,7 +73,17 @@ class PageController extends Controller
 
     public function layhang($id, $date)
   {
-    $products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`category` "category", p.`price` "price", p.`unit_quantity` "unit_quantity", tr.`sold` "sold", p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND f.`id` = ? AND f.`id` = tr.`farmer_id` AND tr.`sold` > 0 AND tr.`delivery_date` = ? ORDER BY p.`category` DESC', [$id, $date]);
+    $products_list = DB::select('SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,
+                                        p.`name` "name", p.`slug` "slug", p.`image` "image", p.`category` "category", 
+                                        tr.`price` "price", tr.`unit_quantity` "unit_quantity", tr.`sold` "sold", 
+                                        tr.`unit` "unit", p.`brand_id` "label"  
+                                   FROM `products` p, `trading` tr, `farmers` f 
+                                  WHERE tr.`product_id` = p.`id` 
+                                    AND f.`id` = ? 
+                                    AND f.`id` = tr.`farmer_id` 
+                                    AND tr.`sold` > 0 
+                                    AND tr.`delivery_date` = ? 
+                               ORDER BY p.`category` DESC', [$id, $date]);
 
       $mua = [];
       foreach ($products_list as $key) {

@@ -5,7 +5,7 @@
   <script>
   $( function() {
     $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd', beforeShowDay: function(date){
-          if(date.getDay() == 6){
+          if(date.getDay() == 6 || date.getDay() == 5){
                 return [true];
             } else {
                 return [false];

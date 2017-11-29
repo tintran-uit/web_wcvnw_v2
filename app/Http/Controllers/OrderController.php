@@ -433,7 +433,7 @@ class OrderController extends Controller
                                 );                  
                 }
                 else {
-                  $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, p.`price_farmer`, p.`price_wholesale`
+                  $product = DB::select('SELECT p.`category`, tr.`unit_quantity`, tr.`price`, p.`unit`, tr.`price_farmer`, tr.`price_wholesale`
                                            FROM `products` p, `trading` tr
                                           WHERE p.`id` = tr.`product_id`
                                             AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
@@ -510,7 +510,7 @@ class OrderController extends Controller
                 }
               }
               else {
-                $product = DB::select('SELECT p.`category`, p.`unit_quantity`, p.`price`, p.`unit`, p.`price_farmer`, p.`price_wholesale`
+                $product = DB::select('SELECT p.`category`, p.`unit_quantity`, tr.`price`, p.`unit`, tr.`price_farmer`, tr.`price_wholesale`
                                        FROM `products` p, `trading` tr
                                       WHERE p.`id` = tr.`product_id`
                                         AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
