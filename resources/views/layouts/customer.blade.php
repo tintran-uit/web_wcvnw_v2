@@ -615,6 +615,7 @@
                                              <ul class="list-unstyled">
                                                 <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-thuc-pham-sach-Cfarm">{{ trans('head.about1') }}</a> </li>     
                                                 <li><a href="{{url('')}}/dia-chi-lien-he-Cfarm">{{ trans('head.about2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/thong-tin-chuyen-khoan"> {{ trans('head.about4') }}</a>  </li> 
                                                 <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> {{ trans('head.about3') }}</a>  </li> 
                                              </ul>
                                           </div>
@@ -713,6 +714,7 @@
                                     <ul class="dropdown-menu">
                                                 <li><a href="{{url('')}}/thong-tin-nha-phan-phoi-thuc-pham-sach-Cfarm">{{ trans('head.about1') }}</a> </li>     
                                                 <li><a href="{{url('')}}/dia-chi-lien-he-Cfarm">{{ trans('head.about2') }}</a>      </li>
+                                                <li><a href="{{url('')}}/thong-tin-chuyen-khoan"> {{ trans('head.about4') }}</a>  </li>
                                                 <li><a href="{{url('')}}/chinh-sach-lien-ket-nong-dan"> {{ trans('head.about3') }}</a>  </li> 
                                     </ul>
                                  </li>
