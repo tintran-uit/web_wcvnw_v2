@@ -351,24 +351,23 @@ class OrderController extends Controller
 	}
 
 
-    public function productInOrder($product_id, $delivery_date)
+    public function productInOrder($delivery_date)
     {
       if(Auth::check()){
         // $data = $request->data;
         // $farmer_id = $data["farmerID"];
         // $product_id = $data["prodID"];
         // $delivery_date = $data["delivery_date"];
-        $g_orders = DB::select('SELECT g.`order_id`, g.`delivery_name`, g.`delivery_phone`, m.`quantity`, m.`unit`
-                                  FROM `g_orders` g, `m_orders` m
-                                 WHERE g.`order_id` = m.`order_id`
-                                   AND m.`product_id` = ?
-                                   AND g.`delivery_date` = ?', [$product_id, $delivery_date]);
 
-        if(count($g_orders) < 1){
-          $msg["error"]=1;
-          $msg["status"] = "Không có đơn hàng nào giao ngày ".$delivery_date." mua sản phẩm này";
-          return response()->json($msg);
-        }
+          $g_orders = DB::select('SELECT g.`order_id`, g.`delivery_name`, g.`delivery_phone`, 
+                                         tr.`product_name` AS "product_name", tr.`product_id` "product_id", m.`quantity`, m.`unit`
+                                    FROM `g_orders` g, `m_orders` m, `trading` tr
+                                   WHERE g.`order_id` = m.`order_id`
+                                     AND g.`delivery_date` = tr.`delivery_date`
+                                     AND tr.`product_id` = m.`product_id`
+                                     AND g.`status` != 8
+                                     AND g.`delivery_date` = ?
+                                  ORDER BY tr.`product_id`', [$delivery_date]);     
         return $g_orders;
       }
       else {
