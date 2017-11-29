@@ -23,7 +23,7 @@
       <link href="{{url('')}}/assets/stylesheets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
       <link href="{{url('')}}/assets/stylesheets/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
       <link href="{{url('')}}/assets/stylesheets/all.css" rel="stylesheet" type="text/css" />
-      <link href="{{url('')}}/assets/stylesheets/main.css" rel="stylesheet" type="text/css" />
+      <link href="{{url('')}}/assets/stylesheets/main.css?<?php=filemtime('css/custom.css')?>" rel="stylesheet" type="text/css" />
       <link href="{{url('')}}/assets/stylesheets/loader.css" rel="stylesheet" type="text/css" />
       <link rel="apple-touch-icon" sizes="57x57" href="{{url('')}}/assets/images/favicon/apple-icon-57x57.png">
       <link rel="apple-touch-icon" sizes="60x60" href="{{url('')}}/assets/images/favicon/apple-icon-60x60.png">
