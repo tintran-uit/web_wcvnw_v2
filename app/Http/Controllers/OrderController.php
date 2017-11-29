@@ -160,7 +160,7 @@ class OrderController extends Controller
 			$total = $total + ($price * $qty);
 			
 			//receive numbers and check if quantity_left is >= order quantity
-			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", 
+			$numbers = DB::select('SELECT tr.`unit` "unit", tr.`price_farmer` "price_farmer", tr.`unit_quantity` "unit_quantity", 
                                     ROUND(tr.`capacity` - tr.`sold`, 2) AS "quantity_left", tr.`delivery_date` "delivery_date" 
                                FROM `products` p, `trading` tr 
                               WHERE p.`id` = tr.`product_id` 
@@ -259,7 +259,7 @@ class OrderController extends Controller
 			$qty = $item->qty;
 			
 			//receive numbers and check if quantity_left is >= order quantity
-			$numbers = DB::select('SELECT p.`unit` "unit", tr.`price_farmer` "price_farmer", p.`unit_quantity` "unit_quantity", 
+			$numbers = DB::select('SELECT tr.`unit` "unit", tr.`price_farmer` "price_farmer", tr.`unit_quantity` "unit_quantity", 
                                    ROUND(tr.`capacity` - tr.`sold`, 2) AS "quantity_left", p.`category` AS "category" 
                               FROM `products` p, `trading` tr 
                              WHERE p.`id` = tr.`product_id` 
@@ -433,7 +433,7 @@ class OrderController extends Controller
                                 );                  
                 }
                 else {
-                  $product = DB::select('SELECT p.`category`, tr.`unit_quantity`, tr.`price`, p.`unit`, tr.`price_farmer`, tr.`price_wholesale`
+                  $product = DB::select('SELECT p.`category`, tr.`unit_quantity`, tr.`price`, tr.`unit`, tr.`price_farmer`, tr.`price_wholesale`
                                            FROM `products` p, `trading` tr
                                           WHERE p.`id` = tr.`product_id`
                                             AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
@@ -510,7 +510,7 @@ class OrderController extends Controller
                 }
               }
               else {
-                $product = DB::select('SELECT p.`category`, p.`unit_quantity`, tr.`price`, p.`unit`, tr.`price_farmer`, tr.`price_wholesale`
+                $product = DB::select('SELECT p.`category`, tr.`unit_quantity`, tr.`price`, tr.`unit`, tr.`price_farmer`, tr.`price_wholesale`
                                        FROM `products` p, `trading` tr
                                       WHERE p.`id` = tr.`product_id`
                                         AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
