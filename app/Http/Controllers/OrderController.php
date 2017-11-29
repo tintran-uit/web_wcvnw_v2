@@ -353,26 +353,7 @@ class OrderController extends Controller
 
     public function productInOrder($delivery_date)
     {
-      if(Auth::check()){
-        // $data = $request->data;
-        // $farmer_id = $data["farmerID"];
-        // $product_id = $data["prodID"];
-        // $delivery_date = $data["delivery_date"];
-
-          $g_orders = DB::select('SELECT g.`order_id`, g.`delivery_name`, g.`delivery_phone`, 
-                                         tr.`product_name` AS "product_name", tr.`product_id` "product_id", m.`quantity`, m.`unit`
-                                    FROM `g_orders` g, `m_orders` m, `trading` tr
-                                   WHERE g.`order_id` = m.`order_id`
-                                     AND g.`delivery_date` = tr.`delivery_date`
-                                     AND tr.`product_id` = m.`product_id`
-                                     AND g.`status` != 8
-                                     AND g.`delivery_date` = ?
-                                  ORDER BY tr.`product_id`', [$delivery_date]);     
-        return $g_orders;
-      }
-      else {
-        return redirect()->back();
-      }
+      
     }
 
     public function addItemAdmin(Request $request)
