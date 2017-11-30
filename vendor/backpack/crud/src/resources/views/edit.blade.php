@@ -300,7 +300,7 @@ $products = array_merge($products, DB::select($mySQL));
                     // if(firstGoi==0){
                       $.each(data.items, function(index, data2){
                         if(firstGoi==0){
-                          newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">Gói</td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>   \r\n  <td class="quantity">'+data2.quantity+'    \r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">'+numberWithCommas(data.price)+'</td>\r\n <\/tr>';
+                          newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">Gói</td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>   \r\n  <td class="quantity">'+data2.quantity+'    \r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">'+numberWithCommas(data.price, data.order_type)+'</td>\r\n <\/tr>';
                           stt++;
                           firstGoi++;
                         }else{
@@ -314,11 +314,11 @@ $products = array_merge($products, DB::select($mySQL));
                 }else{
                   // them le
                     if(firstLe==0){
-                      newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+countLe+'">Lẻ</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.order_quantity+'<\/td>\r\n  <td class="quantity">'+data.quantity+'</td>     \r\n<td>'+numberWithCommas(data.price)+'</td>\r\n <\/tr>';
+                      newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+countLe+'">Lẻ</td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.order_quantity+'<\/td>\r\n  <td class="quantity">'+data.quantity+'</td>     \r\n<td>'+numberWithCommas(data.price, data.order_type)+'</td>\r\n <\/tr>';
                       firstLe++;
                       stt++;
                     }else{
-                      newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.order_quantity+'<\/td>   \r\n  <td class="quantity">'+data.quantity+'    \r\n<td>'+numberWithCommas(data.price)+'</td>\r\n <\/tr>';
+                      newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td><td style="display:none;"><\/td>  \r\n<td>'+data.product_name+'<\/td>\r\n<td>'+data.farmer_name+'<\/td>      \r\n <td>'+data.unit+'<\/td>                    \r\n<td>'+data.order_quantity+'<\/td>   \r\n  <td class="quantity">'+data.quantity+'    \r\n<td>'+numberWithCommas(data.price, data.order_type)+'</td>\r\n <\/tr>';
                       stt++;
                     }
                 }
@@ -348,6 +348,14 @@ function exportExcell() {
 
 function numberWithCommas(x) {
              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         }
+
+function numberWithCommas(x, order_type) {
+            if(order_type==1)
+            {
+              return "(tặng)";
+            }
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
          }
 
 </script>
@@ -893,7 +901,7 @@ $(document).ready(function() {
             console.log(data);
             if(data.error==0){
             	// alert(data.status);
-            	location.reload();
+            	// location.reload();
               // loaditems();
               ItemsUpload = [];
             }else{
