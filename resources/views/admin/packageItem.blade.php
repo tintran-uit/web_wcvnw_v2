@@ -2,14 +2,30 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.3/css/select.dataTables.min.css">
+<style type="text/css">
+    tr td:nth-child(4), td:nth-child(5), td:nth-child(8), td:nth-child(9) {
+        background-color: #00CC00;
+    }
+
+    tr th:nth-child(4), th:nth-child(5), th:nth-child(8), th:nth-child(9) {
+        background-color: #00CC00;
+    }
+
+    tr td:nth-child(6), td:nth-child(7), td:nth-child(10), td:nth-child(11) {
+        background-color: #990000;
+        color: #fff;
+    }
+    tr th:nth-child(6), th:nth-child(7), th:nth-child(10), th:nth-child(11) {
+        background-color: #990000;
+        color: #fff;
+    }
+</style>
 @endsection
 
 @section('main')
 
 <div class="box-header with-border">
-    <h3>TRADING TRONG TUẦN</h3>
+    <h3>SOẠN GÓI</h3>
 </div>
 
 <div class="box-body table-responsive">
@@ -18,7 +34,7 @@
             <tr>
                 <th>Trading</th>
                 <th>Tên sản phẩm</th>
-                <th>Giá</th>
+                <th>Giá ĐV</th>
                 <th>SL gói 1</th>
                 <th>Giá gói 1</th>
                 <th>SL gói 2</th>
@@ -27,8 +43,28 @@
                 <th>Giá gói 3</th>
                 <th>SL gói 4</th>
                 <th>Giá gói 4</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
     </table>
 
 </div>
@@ -38,106 +74,155 @@
 
 @section('script')
 <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/datatables/dataTables.editor.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
+<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/datatables/dataTables.checkboxes.min.js"></script>
 <script type="text/javascript">
-    var editor; // use a global for the submit and return data rendering in the examples
- 
 $(document).ready(function() {
-    editor = new $.fn.dataTable.Editor( {
-        ajax: "/api/admin/product-trading/items",
-        table: "#example",
-        fields: [ {
-                label:     "Status:",
-                name:      "status",
-                type:      "checkbox",
-                separator: "|",
-                options:   [
-                    { label: '', value: 1 }
-                ]
-            },{
-                label: "Tên sản phẩm:",
-                name: "product_name"
-            }, {
-                label: "Nông trại:",
-                name: "farmer_name"
-            }, {
-                label: "Sản lượng:",
-                name: "capacity"
-            }, {
-                label: "Đóng gói:",
-                name: "unit_quantity"
-            }, {
-                label: "Đơn vị:",
-                name: "unit"
-            },{
-                label: "Giá nhập:",
-                name: "price_farmer"
-            },{
-                label: "Giá bán:",
-                name: "price"
-            }, {
-                label: "Ngày giao hàng:",
-                name: "delivery_date",
-                type: "date",
-                dateFormat: $.datepicker.ISO_8601
-            }
-        ]
-    } );
- 
-    // Activate an inline edit on click of a table cell
-    $('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        editor.inline( this, {
-            submit: 'allIfChanged'
-        } );
-    } );
-
-    $('#example').on( 'change', 'input.editor-active', function () {
-        editor
-            .edit( $(this).closest('tr'), false )
-            .set( 'status', $(this).prop( 'checked' ) ? 1 : 0 )
-            .submit();
-    } );
- 
-    $('#example').DataTable( {
-        "paging": false,
-        dom: "Bfrtip",
-        ajax: "/api/admin/product-trading/items",
-        order: [[ 0, 'desc' ]],
-        columns: [
-            {
-                data:   "status",
-                render: function ( data, type, row ) {
-                    if ( type === 'display' ) {
-                        return '<input type="checkbox" class="editor-active">';
-                    }
-                    return data;
-                },
-                className: "dt-body-center"
-            },
-            { data: "product_name" },
-            { data: "farmer_name" },
-            { data: "capacity" },
-            { data: "unit_quantity" },
-            { data: "unit" },
-            { data: "price_farmer", render: $.fn.dataTable.render.number( ',', '.', 0, 'VND ' ) },
-            { data: "price", render: $.fn.dataTable.render.number( ',', '.', 0, 'VND ' ) },
-            { data: "delivery_date" }
-        ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
+   var table = $('#example').DataTable({
+      'ajax': '/api/admin/package-item',
+      'columns': [
+                    { 'data': 'checked',
+                        'checkboxes': {
+                           'selectRow': true
+                        } 
+                    },
+                    { "data": "name" },
+                    { "data": "price" },
+                    { "data": "quantity_p1" },
+                    { "data": "price_p1" },
+                    { "data": "quantity_p2" },
+                    { "data": "price_p2" },
+                    { "data": "quantity_p3" },
+                    { "data": "price_p3" },
+                    { "data": "quantity_p4" },
+                    { "data": "price_p4" },
+                    { "data": "farmer_id" },
+                    { "data": "product_id" },
+                    { "data": "unit_quantity" },
+                    { "data": "unit" },
+                    { "data": "category" },
+                ],
+      'columnDefs': [
+         {
+           'targets': 0,
+           'searchable':false,
+           'orderable':false,
+           'className': 'dt-body-center',
+           'render': function (data, type, full, meta){
+                if(data==0){
+                    return '<input type="checkbox" name="checked" value="' + $('<div/>').text(data).html() + '">';
+                }else{
+                    return '<input type="checkbox" name="checked" value="' + $('<div/>').text(data).html() + '" checked="checked">';
+                }
+           }
         },
-        buttons: [
-            
-        ],
-        rowCallback: function ( row, data ) {
-            // Set the checked state of the checkbox in the table
-            $('input.editor-active', row).prop( 'checked', data.status == 1 );
+        {
+            "targets": [ 11 ],
+            "visible": false
+        },
+        {
+            "targets": [ 12 ],
+            "visible": false
+        },
+        {
+            "targets": [ 13 ],
+            "visible": false
+        },
+        {
+            "targets": [ 14 ],
+            "visible": false
+        },
+        {
+            "targets": [ 15 ],
+            "visible": false
         }
-    } );
+      ],
+      'select': {
+         'style': 'multi',
+         'selector': 'td:not(:first-child)'
+      },
+      'order': [[1, 'asc']],
+      "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
 
-} );
+            checked = api
+                .column( 0 )
+                .data()
+                .reduce( function (a, b) {
+                    return b;
+                }, 0 );
+
+            // Total over all pages
+            total = api
+                .column( 4 )
+                .data()
+                .reduce( function (a, b) {
+                    if(checked==1){
+                    return intVal(a) + intVal(b);
+                    }
+                }, 0 );
+            console.log(checked);
+
+            // Total over this page
+            pageTotal = api
+                .column( 4, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Update footer
+            $( api.column( 4 ).footer() ).html(
+                total
+            );
+        }
+   });
+
+   $('#example').on( 'click', 'tbody td', function () {
+        var idx = table.cell( this ).index().row;
+        var data = table.cells( idx, '' ).render( 'display' );
+     
+        console.log( data );
+    } );
+   
+   // Handle form submission event 
+   $('#frm-example').on('submit', function(e){
+      var form = this;
+      
+      var rows_selected = table.column(0).checkboxes.selected();
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element 
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+
+      // FOR DEMONSTRATION ONLY
+      // The code below is not needed in production
+      
+      // Output form data to a console     
+      $('#example-console-rows').text(rows_selected.join(","));
+      
+      // Output form data to a console     
+      $('#example-console-form').text($(form).serialize());
+       
+      // Remove added elements
+      $('input[name="id\[\]"]', form).remove();
+       
+      // Prevent actual form submission
+      e.preventDefault();
+   });   
+}); 
 </script>
 @endsection

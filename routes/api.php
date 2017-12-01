@@ -44,6 +44,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 	// order
 	Route::get('order-items', 'OrderItemController@getItems');
 	Route::post('order-items', 'OrderItemController@updateItems');
+
+	//goi
+	Route::get('package-item', 'PackageItemController@getItems');
 });
 
 

@@ -39,17 +39,12 @@ public function index()
         $delivery_date = new DateTime('next friday');
         $delivery_date = $delivery_date->format('Y-m-d');
       }
-        
-          $g_orders = DB::select('SELECT g.`order_id`, g.`delivery_name`, g.`delivery_phone`, 
-                                         tr.`product_name` AS "product_name", tr.`product_id` "DT_RowId", m.`order_quantity`, m.`quantity`, m.`unit`, g.`delivery_date` "delivery_date"
-                                    FROM `g_orders` g, `m_orders` m, `trading` tr
-                                   WHERE g.`order_id` = m.`order_id`
-                                     AND g.`delivery_date` = tr.`delivery_date`
-                                     AND tr.`product_id` = m.`product_id`
-                                     AND g.`status` != 8
-                                     AND g.`delivery_date` = ?
-                                  ORDER BY tr.`product_id`', [$delivery_date]);     
-        $data['data'] = $g_orders;
+        $items = DB::select('SELECT 0 AS "checked", tr.`farmer_id`, tr.`product_id`, p.`name`, tr.`unit_quantity`, 
+                                    tr.`unit`, ROUND(tr.`price`/tr.`unit_quantity`) AS "price", p.`category`, tr.`unit_quantity` AS "quantity_p1", tr.`unit_quantity` AS "quantity_p2", tr.`unit_quantity` AS "quantity_p3", tr.`unit_quantity` AS "quantity_p4", tr.`price` AS "price_p1", tr.`price` AS "price_p2", tr.`price` AS "price_p3", tr.`price` AS "price_p4"
+                               FROM `trading` tr, `products` p
+                              WHERE tr.`product_id` = p.`id`
+                                AND tr.`delivery_date` = ? LIMIT 3', [$delivery_date]);
+        $data['data'] = $items;
       return $data;
       
 
