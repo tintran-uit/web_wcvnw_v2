@@ -29,6 +29,7 @@
                 <th>SL thực tế</th>
                 <th>Đơn vị</th>
                 <th>Ngày giao hàng</th>
+                <th></th>
             </tr>
         </thead>
     </table>
@@ -76,6 +77,9 @@ $(document).ready(function() {
                 name: "delivery_date",
                 type: "date",
                 dateFormat: $.datepicker.ISO_8601
+            }, {
+                label: "ID:",
+                name: "product_id"
             }
         ]
     } );
@@ -88,7 +92,6 @@ $(document).ready(function() {
     } );
 
     $('#example').DataTable( {
-        "paging": false,
         dom: "Bfrtip",
         ajax: "/api/admin/order-items",
         order: [[ 1, 'asc' ]],
@@ -100,18 +103,22 @@ $(document).ready(function() {
             { data: "order_quantity" },
             { data: "quantity" },
             { data: "unit"},
-            { data: "delivery_date" }
+            { data: "delivery_date" },
+            { data: "product_id" }
         ],
         select: {
             style:    'os',
-            selector: 'td:nth-child(6)'
+            selector: 'td:first-child'
         },
         buttons: [
             
         ],
-        rowCallback: function ( row, data ) {
-            // Set the checked state of the checkbox in the table
-        }
+        columnDefs: [
+            {   
+                "targets": [ 8 ],
+                "visible": false 
+            }
+          ]
     } );
 
 } );

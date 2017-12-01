@@ -320,12 +320,12 @@ class OrderController extends Controller
 	{
 		if(Auth::check()) {
 			$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "product_name", 
-                                     p.`id` "product_id", p.`category` "category", m.`quantity` "quantity", m.`order_quantity` "order_quantity", m.`unit` "unit", m.`price` "price", p.`thumbnail` "product_thumbnail" 
+                                     p.`id` "product_id", p.`category` "category", m.`quantity` "quantity", m.`order_quantity` "order_quantity", m.`unit` "unit", m.`price` "price", m.`order_type` "order_type"
                                 FROM `m_orders` m, `products` p, `farmers` f 
                                WHERE p.`id` = m.`product_id` 
                                  AND f.`id` = m.`farmer_id` 
                                  AND `order_id` = ? 
-                            ORDER BY p.`category` DESC', [$order_id]);
+                            ORDER BY m.`order_type` ASC, p.`category` DESC', [$order_id]);
 
       for($x=0; $x<count($products); $x++) {
           if($products[$x]->category==0){
