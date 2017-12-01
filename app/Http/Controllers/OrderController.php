@@ -403,7 +403,7 @@ class OrderController extends Controller
                                     // WHERE `order_id` = ?
                                       // AND `product_id` = ?', [$order_id, $product_id]
                             // );
-                  DB::statement('UPDATE m_orders
+                  DB::statement('UPDATE `m_orders`
                                     SET `quantity` = 0,
                                         `price` = 0,
                                         `price_farmer` = 0
@@ -419,15 +419,18 @@ class OrderController extends Controller
                                             AND ROUND(tr.`capacity` - tr.`sold`, 1) >= ?
                                             AND tr.`farmer_id` = ?
                                             AND tr.`product_id` = ?
-                                            AND tr.`delivery_date` = ?', [round($qty, 2) - round($m_item[0]->quantity, 2), $farmer_id, $product_id, $delivery_date]
+                                            AND tr.`delivery_date` = ?', [(round($qty, 1) - round($m_item[0]->quantity, 1)), 
+                                            $farmer_id, $product_id, $delivery_date]
                                        );
-                  if(count($product) < 1)
+                  if(count($product) <= 0)
                   {
                       $msg["failed:".$product_id] = $m_order;
-                      $msg["m_quantity"]= round($m_item[0]->quantity, 2);
-                      $msg["qty"]= round($qty, 2);
-
-
+                      $msg["quantity_a"] = round($qty, 1) - round($m_item[0]->quantity, 1);
+                      $msg["delivery_date"]= $delivery_date;
+                      $msg["farmer_id"] = $farmer_id;
+                      $msg["product_id"] = $product_id;
+                      $msg["m_quantity"]= round($m_item[0]->quantity, 1);
+                      $msg["qty"]= round($qty, 1);
                   }
                   else if (round($qty, 1) > 0){
                       $msg["success:".$product_id] = $m_order;

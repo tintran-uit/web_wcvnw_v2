@@ -73,6 +73,27 @@ class ProductController extends Controller
 		return $packages;
 	}
 
+	public function itemsForPackage(Request $request)
+	{
+        $data = $request->data;
+        $order_id = $data["order_id"];
+        $m_orders = $data["ItemsUpload"];
+		$delivery_date = "2017-12-01";
+		$items = DB::select('SELECT 0 AS "checked", tr.`farmer_id`, tr.`product_id`, p.`name`, tr.`unit_quantity`, 
+									tr.`unit`, ROUND(tr.`price`/tr.`unit_quantity`) AS "price", p.`category`, tr.`unit_quantity` AS "quantity_p1", tr.`unit_quantity` AS "quantity_p2", tr.`unit_quantity` AS "quantity_p3", tr.`unit_quantity` AS "quantity_p4", tr.`price` AS "price_p1", tr.`price` AS "price_p2", tr.`price` AS "price_p3", tr.`price` AS "price_p4"
+							   FROM `trading` tr, `products` p
+							  WHERE tr.`product_id` = p.`id`
+							    AND tr.`delivery_date` = ? ', [$delivery_date]
+							);
+		return $items;
+	}
+
+	public function savePackage(Request $request)
+	{
+		$packages = DB::select('SELECT `id`, `name` FROM `products` WHERE `category` = 0');
+		return $packages;
+	}
+
 	public function setupPackages()
 	{
 		$packages = DB::select('SELECT `id`, `name` FROM `products` WHERE `category` = 0');
