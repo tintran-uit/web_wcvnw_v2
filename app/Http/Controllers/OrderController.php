@@ -209,6 +209,9 @@ class OrderController extends Controller
       if(!is_numeric($user->connected_id)) {
         DB::statement('UPDATE `users` SET `account_type` = "Customer", `connected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);         
       }
+      else {
+        $customer_id = $user->connected_id;
+      }
  
     }
     else 
