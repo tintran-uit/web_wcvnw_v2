@@ -40,7 +40,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
     Route::get('order-stats/date={date}', 'StatsController@statsByDate');
     CRUD::resource('order-stats', 'StatsController@stats');
     CRUD::resource('package', 'PackageCrudController');
-    CRUD::resource('package-item', 'PackageItemCrudController');
+    Route::get('package-item', 'PackageItemController@index');
     CRUD::resource('agent-item', 'AgentCrudController');
     CRUD::resource('customer-item', 'CustomerCrudController');
     CRUD::resource('farmer-item', 'FarmerCrudController');

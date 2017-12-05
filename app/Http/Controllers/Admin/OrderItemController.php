@@ -21,7 +21,7 @@ public function index()
     {
       $data = $request->data;
       foreach ($data as $key => $value) {
-        $product_id = $key;
+        $product_id = $value['product_id'];
         $order_id = $value['order_id'];
         $quantity = $value['quantity'];
 
@@ -66,8 +66,8 @@ public function index()
 
       }
       
-      // tra du lieu ve bang
-      return $this->getItems();
+      
+      return $this->getItemsAfterUpdate($delivery_date, $order_id, $product_id);
 
     }
 
@@ -81,7 +81,7 @@ public function index()
       }
         
           $g_orders = DB::select('SELECT g.`order_id`, g.`delivery_name`, g.`delivery_phone`, 
-                                         tr.`product_name` AS "product_name", tr.`product_id` "DT_RowId", m.`order_quantity`, m.`quantity`, m.`unit`, g.`delivery_date` "delivery_date"
+                                         tr.`product_name` AS "product_name", tr.`product_id` "product_id", m.`order_quantity`, m.`quantity`, m.`unit`, g.`delivery_date` "delivery_date", m.`id` "DT_RowId"
                                     FROM `g_orders` g, `m_orders` m, `trading` tr
                                    WHERE g.`order_id` = m.`order_id`
                                      AND g.`delivery_date` = tr.`delivery_date`
@@ -89,6 +89,25 @@ public function index()
                                      AND g.`status` != 8
                                      AND g.`delivery_date` = ?
                                   ORDER BY tr.`product_id`', [$delivery_date]);     
+        $data['data'] = $g_orders;
+      return $data;
+      
+
+    }
+
+    public function getItemsAfterUpdate($delivery_date, $order_id, $product_id)
+    {
+          $g_orders = DB::select('SELECT g.`order_id`, g.`delivery_name`, g.`delivery_phone`, 
+                                         tr.`product_name` AS "product_name", tr.`product_id` "product_id", m.`order_quantity`, m.`quantity`, m.`unit`, g.`delivery_date` "delivery_date", m.`id` "DT_RowId"
+                                    FROM `g_orders` g, `m_orders` m, `trading` tr
+                                   WHERE g.`order_id` = m.`order_id`
+                                     AND g.`delivery_date` = tr.`delivery_date`
+                                     AND tr.`product_id` = m.`product_id`
+                                     AND g.`status` != 8
+                                     AND g.`delivery_date` = ?
+                                     AND m.`order_id` = ?
+                                     AND m.`product_id` = ?
+                                  ORDER BY tr.`product_id`', [$delivery_date, $order_id, $product_id]);     
         $data['data'] = $g_orders;
       return $data;
       
