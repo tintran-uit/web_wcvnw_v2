@@ -194,22 +194,22 @@ class OrderController extends Controller
 
     if(Auth::check()) {
      	$user = Auth::user();
-     	$customer_id = $user->connected_id;
+     	// $customer_id = $user->connected_id;
       $balance = $user->balance;
 
      	$account_email = $user->email;
-     	if($customer_id === null) {
      		//check if data exist in db (email and phone)
-       	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
-       	//if not yet in db, create customer into db
-       	if(count($customer_id) < 1) {
-       		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $account_email, $address, $district]);
-       		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
-       	}
-       	$customer_id = $customer_id[0]->id;
-
-       	DB::statement('UPDATE `users` SET `account_type` = "Customer", `connected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);
+     	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
+     	//if not yet in db, create customer into db
+     	if(count($customer_id) < 1) {
+     		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $account_email, $address, $district]);
+     		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
      	}
+     	$customer_id = $customer_id[0]->id;
+      if(!is_numeric($user->connected_id)) {
+        DB::statement('UPDATE `users` SET `account_type` = "Customer", `connected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);         
+      }
+ 
     }
     else 
     {
