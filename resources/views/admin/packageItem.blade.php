@@ -184,11 +184,13 @@ $(document).ready(function() {
         }
    });
 
-   $('#example').on( 'click', 'tbody td', function () {
-        var idx = table.cell( this ).index().row;
-        var data = table.cells( idx, '' ).render( 'display' );
+   table.on( 'click', 'tbody td', function () {
+        // var idx = table.cell( this ).index().row;
+        // var data = table.cells( idx, '' ).render( 'display' );
      
-        console.log( data );
+        // console.log( idx );
+        var row = $(this).closest('tr').index();
+        table.cell(row, 4).data('4').draw();
     } );
    
    // Handle form submission event 

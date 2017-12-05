@@ -39,7 +39,8 @@ public function index()
         $delivery_date = new DateTime('next friday');
         $delivery_date = $delivery_date->format('Y-m-d');
       }
-        $items = DB::select('SELECT 0 AS "checked", tr.`farmer_id`, tr.`product_id`, p.`name`, tr.`unit_quantity`, 
+      $delivery_date = '2017-12-1';
+        $items = DB::select('SELECT 1 AS "checked", tr.`farmer_id`, tr.`product_id`, p.`name`, tr.`unit_quantity`, 
                                     tr.`unit`, ROUND(tr.`price`/tr.`unit_quantity`) AS "price", p.`category`, tr.`unit_quantity` AS "quantity_p1", tr.`unit_quantity` AS "quantity_p2", tr.`unit_quantity` AS "quantity_p3", tr.`unit_quantity` AS "quantity_p4", tr.`price` AS "price_p1", tr.`price` AS "price_p2", tr.`price` AS "price_p3", tr.`price` AS "price_p4"
                                FROM `trading` tr, `products` p
                               WHERE tr.`product_id` = p.`id`
