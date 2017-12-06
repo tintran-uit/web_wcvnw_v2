@@ -167,8 +167,8 @@ UPDATE `trading` AS t, `m_packages` AS m, `m_orders` AS mo, `products` AS p
 
 UPDATE `trading` SET `status` = 2 WHERE `status` = 1;
  
-INSERT INTO `trading`(`farmer_id`, `product_id`, `capacity`, `price_farmer`, `sold`, `unit`, `status`, `delivery_date`, `priority`, `product_name`, `category`) 
-SELECT `farmer_id`, `product_id`, `capacity`, `price_farmer`, 0 , `unit`, 0, DATE_ADD(`delivery_date`, INTERVAL 7 DAY), `priority`, `product_name`, `category`
+INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
+SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, DATE_ADD(`delivery_date`, INTERVAL 7 DAY), `priority`, `category`
   FROM `trading`
  WHERE `delivery_date`= '2017-12-01';
 
@@ -265,6 +265,12 @@ UPDATE `trading` tr, `products` p
    AND tr.`product_id` = p.`id`
    AND (tr.`category` IS NULL OR tr.`product_name` IS NULL);
 
+SELECT * FROM `trading` WHERE `delivery_date`='2017-12-08' ORDER BY `category`;
+
+INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
+SELECT `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2017-12-08'
+FROM `m_packages` WHERE (`delivery_date` = '2017-11-11' OR `delivery_date`= '2017-11-25') AND `product_id` IN (53, 5)
+
 //sort products in categories
 UPDATE `trading` tr, `products` p 
    SET tr.`priority` = LENGTH(CONCAT(p.`name`, ' ', p.`unit_quantity`, ' ', p.`unit`))
@@ -278,6 +284,7 @@ UPDATE `trading` tr, `products` p
        tr.`product_name` = p.`name`,
        tr.`category` = p.`category`
  WHERE tr.`status` = 1
+   AND tr.`priority` IS NULL
    AND tr.`product_id` = p.`id`
    AND p.`category` IN (1, 2, 3, 4, 5);
 
@@ -285,6 +292,11 @@ INSERT INTO `products`(`brand_id`, `name`, `en_name`, `category`, `farmer_id`, `
 SELECT `brand_id`, "Bắp Cải", `en_name`, `category`, 5, `price`, `price_wholesale`, `price_farmer`, `unit_quantity`, `unit`, `en_unit`, `image`, `thumbnail`, `slug`, `description`, `en_description`, `short_description`, `en_short_description`, `created_at`, `updated_at`, `price_old`
 FROM `products`
 WHERE `id` = 24;
+
+INSERT INTO `products`(`brand_id`, `name`, `en_name`, `category`, `farmer_id`, `price`, `price_wholesale`, `price_farmer`, `unit_quantity`, `unit`, `en_unit`, `image`, `thumbnail`, `slug`, `description`, `en_description`, `short_description`, `en_short_description`, `created_at`, `updated_at`, `price_old`) 
+SELECT `brand_id`, "Mướp Non", "Baby Luffa", `category`, 13, `price`, `price_wholesale`, `price_farmer`, `unit_quantity`, `unit`, `en_unit`, "uploads/\products/\images/\muop-non.png", "uploads/\products/\thumbnails/\muop-non.png", "muop-non", `description`, `en_description`, `short_description`, `en_short_description`, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, `price_old`
+FROM `products`
+WHERE `id` = 11;
 
 SELECT  CONCAT(p.`name`, ' ', p.`unit_quantity`, p.`unit`), LENGTH(CONCAT(p.`name`, ' ', p.`unit_quantity`, p.`unit`))
   FROM `trading` tr, `products` p 
