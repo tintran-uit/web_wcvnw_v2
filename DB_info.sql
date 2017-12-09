@@ -176,7 +176,7 @@ SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `
     SET `status`=2
  WHERE `delivery_date`= '2017-12-01';
 
-
+#production
 INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
 SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, DATE_ADD(`delivery_date`, INTERVAL 7 DAY), `priority`, `category`
   FROM `trading`
@@ -204,7 +204,7 @@ SELECT `order_id` "order_id"
    AND `status` != 8;
 
 SELECT * FROM `trading` WHERE `delivery_date`='2017-11-04' ORDER BY `product_id`;
-SELECT * FROM `trading` WHERE `delivery_date`='2017-12-08' ORDER BY `category`;
+SELECT * FROM `trading` WHERE `delivery_date`='2017-12-15' ORDER BY `category`;
 
 INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
 SELECT `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, DATE_ADD(`delivery_date`, INTERVAL 6 DAY)
@@ -369,7 +369,7 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
 #production
 (SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", p.`category` "category"
   FROM `m_orders` m, `g_orders` g, `products` p
- WHERE g.`delivery_date` = '2017-12-01'
+ WHERE g.`delivery_date` = '2017-12-08'
    AND g.`status` != 8
    AND g.`order_id` = m.`order_id`
    AND p.`id` = m.`product_id`
@@ -378,7 +378,7 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
 UNION ALL 
 (SELECT CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", m.`category` "category"
   FROM `m_orders` mo, `g_orders` g, `products` p, `m_packages` m
- WHERE g.`delivery_date` = '2017-12-01'
+ WHERE g.`delivery_date` = '2017-12-08'
    AND g.`status` != 8
    AND g.`order_id` = mo.`order_id`
    AND p.`id` = mo.`product_id`
@@ -389,6 +389,16 @@ UNION ALL
    GROUP BY `Product`
  )
  ORDER BY `category`, `Product`;
+
+INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
+SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, DATE_ADD(`delivery_date`, INTERVAL 7 DAY), `priority`, `category`
+  FROM `trading`
+ WHERE `status`= 1;
+
+ UPDATE `trading` 
+    SET `status`=2
+ WHERE `delivery_date`= '2017-12-08';
+
 
 #stats one specific product:
 (SELECT g.`order_id`, g.`delivery_name`, "Lẻ" AS "order_as", m.`quantity` "quantity", m.`unit` "unit", g.`delivery_address`

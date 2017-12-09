@@ -53,8 +53,8 @@ class CustomerCrudController extends CrudController
         ]);
 
         $this->crud->addColumn([
-            'name' => 'rating',
-            'label' => 'Điểm',
+            'name' => 'balance',
+            'label' => 'Tài Khoản Còn',
         ]);
         $this->crud->addColumn([
             'name' => 'note',
@@ -77,6 +77,10 @@ class CustomerCrudController extends CrudController
         $this->crud->addField([
             'name' => 'address',
             'label' => 'Địa chỉ',
+        ]);
+        $this->crud->addField([
+            'name' => 'balance',
+            'label' => 'Tài Khoản Còn',
         ]);
         $this->crud->addField([
             'name' => 'district',
