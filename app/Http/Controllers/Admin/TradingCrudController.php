@@ -397,8 +397,6 @@ class TradingCrudController extends CrudController
 	public function update(UpdateRequest $request)
 	{
 		// your additional operations before save here
-        var_dump($request);
-        die();
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
