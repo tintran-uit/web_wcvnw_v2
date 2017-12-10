@@ -67,6 +67,7 @@
       /></noscript>
       <!-- End Facebook Pixel Code -->
 
+
       @yield('headInput')
       
    </head>
