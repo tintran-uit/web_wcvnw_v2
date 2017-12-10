@@ -183,13 +183,13 @@
                                        </div>
                                           <div class="form-group">
                                              <!-- <label>First and Last Name</label> -->
-                                             <input name="sdt" value="@if($auth) {{$customer->phone}} @endif" type="text" class="form-control input-lg" placeholder="Số điện thoại: (*)" oninput="getCustomer(this)">
+                                             <input name="sdt" value="@if($auth){{$customer->phone}}@endif" type="text" class="form-control input-lg" placeholder="Số điện thoại: (*)" oninput="getCustomer(this)">
                                           </div>
                                           <div class="form-group">
-                                                <input name="ten" type="text" value="@if($auth) {{$customer->name}} @endif" class="form-control input-lg" placeholder="Họ tên khách hàng (*)">
+                                                <input name="ten" type="text" value="@if($auth){{$customer->name}}@endif" class="form-control input-lg" placeholder="Họ tên khách hàng (*)">
                                           </div>
                                           <div class="form-group">
-                                                <input name="email" type="text" value="@if($auth) {{$customer->email}} @endif" class="form-control input-lg" placeholder="Email">
+                                                <input name="email" type="text" value="@if($auth){{$customer->email}}@endif" class="form-control input-lg" placeholder="Email">
                                           </div>
                                    </article>
                                  <article class="col-sm-6" style="margin-top: 6px">
@@ -197,7 +197,7 @@
                                           <label>Địa chỉ giao hàng:</label>
                                       </div>
                                        <div class="form-group">
-                                          <input name="diaChi" type="text" class="form-control input-lg" value="@if($auth) {{$customer->address}} @endif" placeholder="Nhập địa chỉ (*)">
+                                          <input name="diaChi" type="text" class="form-control input-lg" value="@if($auth){{$customer->address}}@endif" placeholder="Nhập địa chỉ (*)">
                                        </div>
                                        <div class="form-group">
                                           <!-- <label>State</label>-->
@@ -253,7 +253,7 @@
                                           <p class="no-margin">
                                              <p class="no-margin" style="color: #222222">
 
-                                              Nhân viên chúng tôi sẽ giao hàng và nhận thanh toán vào ngày thứ Bảy.<br> Vui lòng giữ liên lạc qua điện thoại.
+                                              Nhân viên chúng tôi sẽ giao hàng và nhận thanh toán vào ngày thứ Sáu.<br> Vui lòng giữ liên lạc qua điện thoại.
                                               <!-- Cảm ơn bạn đã lựa chọn mua sắm tại Cfarm <br>
 Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
 XÁC NHẬN ĐƠN HÀNG
@@ -320,7 +320,7 @@ trước khi giao hàng! --></p>
                               <i class="fa fa-check fa-4x alert-success"></i>
                               <h3>Đặt hàng thành công!</h3>
                               <p><b>Mã đơn đặt hàng: #<span id="order_id"></span>.</b><br>
-                              Tất cả đơn hàng sẽ được giao vào ngày Thứ Bảy vì chúng tôi muốn nhận những <span style="color: #B62029; font-weight: 600">sản phẩm tươi ngon nhất, vừa thu hoạch và gửi trực tiếp đến bạn từ nông trại vào thứ Bảy hàng tuần.</span> Cảm ơn bạn đã mua thực phẩm sạch tại CFarm.vn.</p>
+                              Tất cả đơn hàng sẽ được giao vào ngày Thứ Sáu vì chúng tôi muốn nhận những <span style="color: #B62029; font-weight: 600">sản phẩm tươi ngon nhất, vừa thu hoạch và gửi trực tiếp đến bạn từ nông trại vào thứ Sáu hàng tuần.</span> Cảm ơn bạn đã mua thực phẩm sạch tại CFarm.vn.</p>
                            </div>
                         </div>
 
