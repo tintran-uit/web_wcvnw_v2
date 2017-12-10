@@ -135,10 +135,10 @@ class OrderController extends Controller
 	public function addOrder(Request $request)
 	{
 		$data = $request->data;
-		$phone = $data["sdt"];
-    $email = $data["email"];
-    $name  = $data["ten"];
-    $address = $data["diaChi"];
+		$phone = trim($data["sdt"]);
+    $email = trim($data["email"]);
+    $name  = trim($data["ten"]);
+    $address = trim($data["diaChi"]);
     $district = $data["selectQuan"];
     $payment = $data["thanhToan"];
     $promotion_code = $data["maGiamGia"];
@@ -195,31 +195,36 @@ class OrderController extends Controller
     if(Auth::check()) {
      	$user = Auth::user();
      	// $customer_id = $user->connected_id;
-      $balance = $user->balance;
+      // $balance = $user->balance;
 
      	$account_email = $user->email;
      		//check if data exist in db (email and phone)
-     	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
+     	$customer_id = DB::select('SELECT `id`, `balance` FROM `customers` WHERE `phone` = ?', [$phone]);
      	//if not yet in db, create customer into db
      	if(count($customer_id) < 1) {
-     		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $account_email, $address, $district]);
-     		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
+     		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $email, $address, $district]);
+     		$customer_id = DB::select('SELECT `id`, `balance` FROM `customers` WHERE `phone` = ?', [$phone]);
      	}
+      $balance = $customer_id[0]->balance;
      	$customer_id = $customer_id[0]->id;
       if(!is_numeric($user->connected_id)) {
-        DB::statement('UPDATE `users` SET `account_type` = "Customer", `connected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);         
+        DB::statement('UPDATE `users` SET `account_type` = "Customer", `connected_id` = ? WHERE `email` = ?', [$customer_id, $user->email]);     
+      }
+      else {
+        $customer_id = $user->connected_id;
       }
  
     }
     else 
     {
      	//check if data exist in db (email and phone)
-     	$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
+     	$customer_id = DB::select('SELECT `id`, `balance` FROM `customers` WHERE `phone` = ?', [$phone]);
      	//if not yet in db, create customer into db
      	if(count($customer_id) < 1) {
      		DB::insert('INSERT INTO customers(`name`, `phone`, `email`, `address`, `district`, `created_at`) VALUES(?,?,?,?,?, CURRENT_TIMESTAMP)', [$name, $phone, $email, $address, $district]);
-     		$customer_id = DB::select('SELECT `id` FROM `customers` WHERE `phone` = ?', [$phone]);
+     		$customer_id = DB::select('SELECT `id`, `balance` FROM `customers` WHERE `phone` = ?', [$phone]);
      	}
+      $balance = $customer_id[0]->balance;
      	$customer_id = $customer_id[0]->id;
     }
 // Create Order_id and return after adding the order successfully.
@@ -241,7 +246,7 @@ class OrderController extends Controller
         $deposit = $balance;
       }
       $balance = $balance - $deposit;
-      DB::statement('UPDATE `users` SET `balance` = ? WHERE `email` = ?', [$balance, $account_email]);
+      DB::statement('UPDATE `customers` SET `balance` = ? WHERE `phone` = ?', [$balance, $phone]);
     }
     $order_id = DB::select('SELECT `order_id` "order_id" FROM `uniqueids` WHERE `id` = 1');
     $order_id = $order_id[0]->order_id;
@@ -259,7 +264,7 @@ class OrderController extends Controller
 			$qty = $item->qty;
 			
 			//receive numbers and check if quantity_left is >= order quantity
-			$numbers = DB::select('SELECT tr.`unit` "unit", tr.`price_farmer` "price_farmer", tr.`unit_quantity` "unit_quantity", 
+		$numbers = DB::select('SELECT tr.`unit` "unit", tr.`price_farmer` "price_farmer", tr.`unit_quantity` "unit_quantity", 
                                    ROUND(tr.`capacity` - tr.`sold`, 2) AS "quantity_left", p.`category` AS "category" 
                               FROM `products` p, `trading` tr 
                              WHERE p.`id` = tr.`product_id` 
@@ -278,22 +283,22 @@ class OrderController extends Controller
 				$unit = $numbers[0]->unit;
 				$category = $numbers[0]->category;
 
-	         	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `order_quantity`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $quantity, $unit, $price * $qty, $price_farmer]);
+       	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `order_quantity`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $quantity, $unit, $price * $qty, $price_farmer]);
 
-	         	//update trading table
-	        	DB::statement('UPDATE `trading` SET `sold` = `sold` + ? WHERE `status` = 1 AND `farmer_id` = ? AND `product_id` = ?', [$quantity, $farmer_id, $product_id]);
+       	//update trading table
+      	DB::statement('UPDATE `trading` SET `sold` = `sold` + ? WHERE `status` = 1 AND `farmer_id` = ? AND `product_id` = ?', [$quantity, $farmer_id, $product_id]);
 
-	        	//Proccess the elements in case package is order
-	        	if($category == 0) //package
-	        	{
-		        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
-		        		                SET t.`sold` = ROUND(t.`sold` + m.`quantity`*?, 2)
-           									  WHERE t.`farmer_id` = m.`farmer_id`
-           									    AND t.`status` = 1
-                                AND m.`delivery_date` = t.`delivery_date`
-             									  AND t.`product_id` = m.`product_id` 
-             									  AND m.`package_id` = ?', [$quantity, $product_id]);
-	        	}
+      	//Proccess the elements in case package is order
+      	if($category == 0) //package
+      	{
+        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
+        		                SET t.`sold` = ROUND(t.`sold` + m.`quantity`*?, 2)
+       									  WHERE t.`farmer_id` = m.`farmer_id`
+       									    AND t.`status` = 1
+                            AND m.`delivery_date` = t.`delivery_date`
+         									  AND t.`product_id` = m.`product_id` 
+         									  AND m.`package_id` = ?', [$quantity, $product_id]);
+      	}
 			}     	
     }
 	Cart::destroy();
