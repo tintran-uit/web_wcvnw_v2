@@ -183,13 +183,13 @@
                                        </div>
                                           <div class="form-group">
                                              <!-- <label>First and Last Name</label> -->
-                                             <input name="sdt" value="@if($auth) {{$customer->phone}} @endif" type="text" class="form-control input-lg" placeholder="Số điện thoại: (*)" oninput="getCustomer(this)">
+                                             <input name="sdt" value="@if($auth){{$customer->phone}}@endif" type="text" class="form-control input-lg" placeholder="Số điện thoại: (*)" oninput="getCustomer(this)">
                                           </div>
                                           <div class="form-group">
-                                                <input name="ten" type="text" value="@if($auth) {{$customer->name}} @endif" class="form-control input-lg" placeholder="Họ tên khách hàng (*)">
+                                                <input name="ten" type="text" value="@if($auth){{$customer->name}}@endif" class="form-control input-lg" placeholder="Họ tên khách hàng (*)">
                                           </div>
                                           <div class="form-group">
-                                                <input name="email" type="text" value="@if($auth) {{$customer->email}} @endif" class="form-control input-lg" placeholder="Email">
+                                                <input name="email" type="text" value="@if($auth){{$customer->email}}@endif" class="form-control input-lg" placeholder="Email">
                                           </div>
                                    </article>
                                  <article class="col-sm-6" style="margin-top: 6px">
@@ -197,7 +197,7 @@
                                           <label>Địa chỉ giao hàng:</label>
                                       </div>
                                        <div class="form-group">
-                                          <input name="diaChi" type="text" class="form-control input-lg" value="@if($auth) {{$customer->address}} @endif" placeholder="Nhập địa chỉ (*)">
+                                          <input name="diaChi" type="text" class="form-control input-lg" value="@if($auth){{$customer->address}}@endif" placeholder="Nhập địa chỉ (*)">
                                        </div>
                                        <div class="form-group">
                                           <!-- <label>State</label>-->
