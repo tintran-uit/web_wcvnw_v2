@@ -16,7 +16,7 @@ class CartProductController extends Controller
         $farmerID = $data['farmerID'];
         $qty = $data['qty'];
         $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  td.`price` "price", p.`image` "image", 
-                                   p.`unit_quantity` "unit_quantity", p.`unit` "unit" 
+                                   td.`unit_quantity` "unit_quantity", td.`unit` "unit" 
                               FROM `products` p, `trading` td  
                              WHERE p.`id` = ? 
                                AND td.`product_id` = p.`id` 
@@ -51,7 +51,7 @@ class CartProductController extends Controller
         $farmerID = $data['farmerID'];
         $qty = $data['qty'];
         $prod = DB::select('SELECT p.`id` "id", p.`name` "name",  td.`price` "price", p.`image` "image", 
-                                   p.`unit_quantity` "unit_quantity", p.`unit` "unit" 
+                                   td.`unit_quantity` "unit_quantity", td.`unit` "unit" 
                               FROM `products` p, `trading` td  
                              WHERE p.`id` = ? 
                                AND td.`status` = 1 
