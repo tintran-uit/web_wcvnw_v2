@@ -18,7 +18,7 @@
       <!-- Use title if it's in the page YAML frontmatter -->
       <title>@yield('title')</title>
       <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=cyrillic-ext,latin" rel="stylesheet" type="text/css" />
-      <link href="{{url('')}}/assets/stylesheets/vendor/normalize.css" rel="stylesheet" type="text/css" />
+      <link href="{{url('')}}/assets/stylesheets/vendor/normalize.min.css" rel="stylesheet" type="text/css" />
       <link href="{{url('')}}/assets/stylesheets/vendor/animate.css" rel="stylesheet" type="text/css" />
       <link href="{{url('')}}/assets/stylesheets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
       <link href="{{url('')}}/assets/stylesheets/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
