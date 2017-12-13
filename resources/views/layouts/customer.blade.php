@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
    <head>
+      <?php if (substr_count($_SERVER[‘HTTP_ACCEPT_ENCODING’], ‘gzip’))
+      ob_start(“ob_gzhandler”); else ob_start(); ?>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
