@@ -364,7 +364,7 @@ class OrderController extends Controller
     public function addItemAdmin(Request $request)
     {
       /*
-       * order_type: 0: normal; 1:gift; 2:price_farmer; 3:wholesale;
+       * order_type: 0: normal; 1:gift; 2:price_farmer; 3:wholesale; 4: gói
        **/
         if(Auth::check()){
             $data = $request->data;
