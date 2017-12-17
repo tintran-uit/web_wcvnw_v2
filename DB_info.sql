@@ -399,7 +399,7 @@ SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `
 
  UPDATE `trading` 
     SET `status`=2
- WHERE `delivery_date`= '2017-12-08';
+ WHERE `delivery_date`= '2017-12-15';
 
 
 #stats one specific product:
