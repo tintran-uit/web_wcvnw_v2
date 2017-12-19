@@ -45,6 +45,10 @@ class ProductCrudController extends CrudController
             'name' => 'name',
             'label' => 'Tên SP',
         ]);
+        $this->crud->addColumn([
+            'name' => 'price_old',
+            'label' => 'Giá Gói Bán Lẻ',
+        ]);
 
         $this->crud->addColumn([
             'name' => 'farmer_id',
@@ -74,6 +78,13 @@ class ProductCrudController extends CrudController
         $this->crud->addField([
             'name' => 'en_name',
             'label' => 'Tên Tiếng Anh',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-5'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'price_old',
+            'label' => 'Giá Gói Bán Lẻ',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-5'
             ],
