@@ -681,7 +681,7 @@ trước khi giao hàng! --></p>
               break;
           
       }
-      if(spacerToal>500000){
+      if(spacerToal>=500000){
         text = "0 VND";
         spacerToalNow = spacerToal;
       }
