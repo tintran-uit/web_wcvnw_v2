@@ -204,11 +204,29 @@ SELECT `order_id` "order_id"
    AND `status` != 8;
 
 SELECT * FROM `trading` WHERE `delivery_date`='2017-11-04' ORDER BY `product_id`;
-SELECT * FROM `trading` WHERE `delivery_date`='2017-12-15' ORDER BY `category`;
+SELECT * FROM `trading` WHERE `delivery_date`='2017-12-22' ORDER BY `category`;
 
 INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
-SELECT  `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, DATE_ADD(`delivery_date`, INTERVAL 7 DAY) FROM `m_packages`
-WHERE `delivery_date`='2017-12-08'
+SELECT  `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2017-12-22' FROM `m_packages`
+WHERE `id` IN (275, 444, 359, 276, 280, 364, 130, 587, 283, 209)
+
+INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
+SELECT  `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2017-12-22' FROM `m_packages`
+WHERE `id` IN (313, 455, 397, 322, 323, 394, 658, 593, 597, 246, 399, 315)
+
+INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
+SELECT  64, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2017-12-22' FROM `m_packages`
+WHERE `delivery_date`='2017-12-22'
+  AND `package_id` = 61;
+
+INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
+SELECT  63, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2017-12-22' FROM `m_packages`
+WHERE `delivery_date`='2017-12-22'
+  AND `package_id` = 62;
+
+INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
+SELECT  102, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2017-12-22' FROM `m_packages`
+WHERE `id` IN (377, 295, 658, 470, 619, 675)
 
 INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
 SELECT `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, DATE_ADD(`delivery_date`, INTERVAL 6 DAY)
@@ -269,7 +287,7 @@ UPDATE `trading` tr, `products` p
    AND tr.`product_id` = p.`id`
    AND (tr.`category` IS NULL OR tr.`product_name` IS NULL);
 
-SELECT * FROM `trading` WHERE `delivery_date`='2017-12-15' ORDER BY `category`;
+SELECT * FROM `trading` WHERE `delivery_date`='2017-12-22' ORDER BY `category`;
 
 SELECT *
   FROM `m_orders`
