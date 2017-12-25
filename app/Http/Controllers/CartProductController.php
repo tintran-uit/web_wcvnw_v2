@@ -22,7 +22,7 @@ class CartProductController extends Controller
                                AND td.`product_id` = p.`id` 
                                AND td.`farmer_id` = ? 
                                AND td.`status` = 1 
-                               AND td.`capacity` - td.`sold` >= ? * p.`unit_quantity`', [$prodID, $farmerID, $qty]);
+                               AND td.`capacity` - td.`sold` >= ? * td.`unit_quantity`', [$prodID, $farmerID, $qty]);
         if($prod)
         {
             Cart::update($data['rowId'], $data['qty']);
@@ -57,7 +57,7 @@ class CartProductController extends Controller
                                AND td.`status` = 1 
                                AND td.`product_id` = p.`id` 
                                AND td.`farmer_id` = ? 
-                               AND td.`capacity` - td.`sold` >= ? * p.`unit_quantity`', [$proID, $farmerID, $qty]);
+                               AND td.`capacity` - td.`sold` >= ? * td.`unit_quantity`', [$proID, $farmerID, $qty]);
         if($prod)
         {
             Cart::add([
