@@ -21,13 +21,7 @@
                <h1 class="text-right">5-10%</h1>
             </div>      
          </div>
-         <div class="item">
-            <a href="#">          <img alt="slide" src="{{url('')}}/assets/images/slides/event_giansinh2.png" />
-            </a>        
-            <div class="carousel-caption">
-               <h3><a href="https://www.facebook.com/Cfarm.vn/photos/a.486436175073949.1073741828.448388605545373/509876609396572/?type=3&theater" target="_blank" style="color: #fff; margin-left: -25px"><b>Click xem chi tiết...</b></a></h3>
-            </div>
-         </div>
+         
          <div class="item">
             <a href="#" onclick="scrollToMuaHang()">          <img alt="slide" src="{{url('')}}/assets/images/slides/Artboard 3.png" />
             </a>        
