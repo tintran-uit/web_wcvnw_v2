@@ -41,9 +41,10 @@
 
 @section('script')
 <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/datatables/dataTables.editor.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
+<script type="text/javascript" src="{{url('')}}/assets/javascripts/vendor/datatables/dataTables.altEditor.free.js"></script>
+
 <script type="text/javascript">
     var editor; // use a global for the submit and return data rendering in the examples
  
