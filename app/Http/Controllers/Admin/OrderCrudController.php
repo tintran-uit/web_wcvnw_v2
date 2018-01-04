@@ -64,11 +64,11 @@ class OrderCrudController extends CrudController
             'label' => 'Địa Chỉ Giao Hàng',
             'type' => 'text',
         ]);
-        // $this->crud->addColumn([
-        //     'name' => 'delivery_district',
-        //     'label' => 'Quận',
-        //     'type' => 'text',
-        // ]);
+        $this->crud->addColumn([
+            'name' => 'payment',
+            'label' => 'Thanh Toán',
+            'type' => 'text',
+        ]);
         $this->crud->addColumn([
             'name' => 'delivery_district',
             'label' => 'Quận',
