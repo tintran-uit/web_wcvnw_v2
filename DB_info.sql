@@ -204,7 +204,28 @@ SELECT `order_id` "order_id"
    AND `status` != 8;
 
 SELECT * FROM `trading` WHERE `delivery_date`='2017-11-04' ORDER BY `product_id`;
-SELECT * FROM `trading` WHERE `delivery_date`='2017-12-22' ORDER BY `category`;
+SELECT * FROM `trading` WHERE `delivery_date`='2017-12-29' ORDER BY `category`;
+
+SELECT * FROM `m_packages` m 
+WHERE `delivery_date`='2017-12-29'
+  AND NOT EXISTS (SELECT 1 
+                    FROM `trading` 
+                   WHERE `product_id`=m.`product_id`
+                     AND `farmer_id`=m.`farmer_id`
+                     AND `delivery_date`=m.`delivery_date`
+                  )
+
+#production  
+INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
+SELECT  `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2018-01-12' FROM `m_packages`
+WHERE `delivery_date`='2018-01-05'
+  AND `category`=1;
+
+INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
+SELECT  `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2017-12-29' FROM `m_packages`
+WHERE `id` IN (584, 589, 612, 623, 357, 372, 403, 418, 565, 566, 567, 568, 633, 634, 635, 636, 
+               362, 377, 401, 416, 586, 596, 600, 622, 650, 664, 681, 694, 643, 668, 674, 698,
+               652, 669, 683, 699, 367, 382, 396, 411, 366, 381, 399, 414)  
 
 INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
 SELECT  `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2017-12-22' FROM `m_packages`
@@ -287,11 +308,29 @@ UPDATE `trading` tr, `products` p
    AND tr.`product_id` = p.`id`
    AND (tr.`category` IS NULL OR tr.`product_name` IS NULL);
 
-SELECT * FROM `trading` WHERE `delivery_date`='2017-12-22' ORDER BY `category`;
+SELECT * FROM `trading` WHERE `delivery_date`='2018-01-12' ORDER BY `category`;
+
+SELECT `product_id`, g.`delivery_date` "delivery_date", COUNT(*)
+  FROM `m_orders` m, `g_orders` g 
+ WHERE g.`status` != 8
+   AND g.`order_id` = m.`order_id`
+   AND `product_id` IN (38, 39)
+GROUP BY `product_id`, `delivery_date`
+ORDER BY `delivery_date` DESC;
+
+
+UPDATE `trading` AS t, `m_packages` AS m 
+    SET t.`sold` = ROUND(t.`sold` + m.`quantity`*3, 2)
+  WHERE t.`farmer_id` = m.`farmer_id`
+    AND t.`status` = 1
+    AND m.`delivery_date` = t.`delivery_date`
+    AND t.`product_id` = m.`product_id` 
+    AND m.`package_id` = 61
+    AND t.`delivery_date` = '2017-12-22';
 
 SELECT *
   FROM `m_orders`
- WHERE `order_id` IN (SELECT `order_id` FROM `g_orders` WHERE `delivery_date`='2017-12-15')
+ WHERE `order_id` IN (SELECT `order_id` FROM `g_orders` WHERE `delivery_date`='2017-12-22')
    AND `product_id` = 94;
 
 INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
@@ -389,7 +428,7 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
 #production
 (SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", p.`category` "category"
   FROM `m_orders` m, `g_orders` g, `products` p
- WHERE g.`delivery_date` = '2017-12-15'
+ WHERE g.`delivery_date` = '2017-12-29'
    AND g.`status` != 8
    AND g.`order_id` = m.`order_id`
    AND p.`id` = m.`product_id`
@@ -398,7 +437,7 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
 UNION ALL 
 (SELECT CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", m.`category` "category"
   FROM `m_orders` mo, `g_orders` g, `products` p, `m_packages` m
- WHERE g.`delivery_date` = '2017-12-15'
+ WHERE g.`delivery_date` = '2017-12-29'
    AND g.`status` != 8
    AND g.`order_id` = mo.`order_id`
    AND p.`id` = mo.`product_id`
@@ -417,7 +456,8 @@ SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `
 
  UPDATE `trading` 
     SET `status`=2
- WHERE `delivery_date`= '2017-12-15';
+ WHERE `delivery_date`= '2018-01-05';
+ 
 
 
 #stats one specific product:

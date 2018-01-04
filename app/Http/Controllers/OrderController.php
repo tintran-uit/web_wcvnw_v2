@@ -157,16 +157,30 @@ class OrderController extends Controller
 			$farmer_id = $item->options["farmer_id"];
 			$price = $item->price;
 			$qty = $item->qty;
-			$total = $total + ($price * $qty);
 			
 			//receive numbers and check if quantity_left is >= order quantity
-			$numbers = DB::select('SELECT tr.`unit` "unit", tr.`price_farmer` "price_farmer", tr.`unit_quantity` "unit_quantity", 
-                                    ROUND(tr.`capacity` - tr.`sold`, 2) AS "quantity_left", tr.`delivery_date` "delivery_date" 
+			$numbers = DB::select('SELECT tr.`unit` "unit", tr.`price_farmer` "price_farmer", tr.`unit_quantity` "unit_quantity", ROUND(tr.`capacity` - tr.`sold`, 2) AS "quantity_left", tr.`delivery_date` "delivery_date", p.`category` AS "category"
                                FROM `products` p, `trading` tr 
                               WHERE p.`id` = tr.`product_id` 
                                 AND tr.`status` = 1 
                                 AND tr.`farmer_id` = ? 
                                 AND p.`id` = ?', [$farmer_id, $product_id]);
+
+      if($numbers[0]->category == 0){
+        $m_package_price =  DB::select('SELECT SUM(ROUND((0.95 * tr.`price`*m.`quantity`)/tr.`unit_quantity`)) AS "package_price"
+                                          FROM `m_packages` m, `trading` tr
+                                         WHERE `package_id` = ?
+                                           AND m.`delivery_date` = ?
+                                           AND m.`product_id` = tr.`product_id`
+                                           AND m.`farmer_id` = tr.`farmer_id`
+                                           AND m.`delivery_date` = tr.`delivery_date` ', 
+                                           [$product_id, $numbers[0]->delivery_date]
+                                      );
+        $total = $total + ($m_package_price[0]->package_price * $qty);
+      }
+      else {
+        $total = $total + ($price * $qty);
+      }
 			
 			if($numbers[0]->quantity_left < round($qty * $numbers[0]->unit_quantity, 2) )
 			{
@@ -283,22 +297,37 @@ class OrderController extends Controller
 				$unit = $numbers[0]->unit;
 				$category = $numbers[0]->category;
 
-       	$m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `order_quantity`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $quantity, $unit, $price * $qty, $price_farmer]);
+        //Proccess the elements in case package is order
+        if($category == 0) //package
+        {
+          DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
+                            SET t.`sold` = ROUND(t.`sold` + m.`quantity`*?, 2)
+                          WHERE t.`farmer_id` = m.`farmer_id`
+                            AND t.`status` = 1
+                            AND m.`delivery_date` = t.`delivery_date`
+                            AND t.`product_id` = m.`product_id` 
+                            AND m.`package_id` = ?', [$quantity, $product_id]);
+
+          DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `order_quantity`, 
+                                           `unit`, `price`, `price_farmer`, `order_type`) 
+                      SELECT ?, m.`farmer_id`, m.`product_id`, m.`quantity`, m.`quantity`, m.`unit`, 
+                             ROUND(0.95*(tr.`price` * m.`quantity`)/tr.`unit_quantity`), ROUND((tr.`price_farmer` * m.`quantity`)/tr.`unit_quantity`), 4
+                        FROM `m_packages` m, `trading` tr
+                       WHERE m.`package_id` = ? 
+                         AND m.`delivery_date` = tr.`delivery_date`
+                         AND tr.`product_id` = m.`product_id`
+                         AND tr.`farmer_id` = m.`farmer_id` 
+                         AND m.`delivery_date` = ?', [$order_id, $product_id, $delivery_date]);
+        }
+        else {
+          $m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `order_quantity`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $quantity, $unit, $price * $qty, $price_farmer]);
+
+        }
+
 
        	//update trading table
       	DB::statement('UPDATE `trading` SET `sold` = `sold` + ? WHERE `status` = 1 AND `farmer_id` = ? AND `product_id` = ?', [$quantity, $farmer_id, $product_id]);
 
-      	//Proccess the elements in case package is order
-      	if($category == 0) //package
-      	{
-        	DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
-        		                SET t.`sold` = ROUND(t.`sold` + m.`quantity`*?, 2)
-       									  WHERE t.`farmer_id` = m.`farmer_id`
-       									    AND t.`status` = 1
-                            AND m.`delivery_date` = t.`delivery_date`
-         									  AND t.`product_id` = m.`product_id` 
-         									  AND m.`package_id` = ?', [$quantity, $product_id]);
-      	}
 			}     	
     }
 	Cart::destroy();
@@ -457,6 +486,10 @@ class OrderController extends Controller
                           $price = round((round($qty, 2)  * $product[0]->price_wholesale)/$product[0]->unit_quantity);
                           $msg["case3"] = 3;
                           break;
+                        case 4: //package
+                        $price = round(0.95*$price);
+                        $msg["case4"] = 4;
+                        break;
                         default: //normal sale
                           $msg["case"] = 0;
                           break;
@@ -526,6 +559,9 @@ class OrderController extends Controller
                         break;
                       case 3: //wholesale
                         $price = round((round($qty, 2)  * $product[0]->price_wholesale)/$product[0]->unit_quantity);
+                        break;
+                      case 4: //package
+                        $price = round(0.95*$price);
                         break;
                       default: //normal sale
                         break;
