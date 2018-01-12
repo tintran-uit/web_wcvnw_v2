@@ -226,7 +226,8 @@ $products = array_merge($products, DB::select($mySQL));
                                         <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="0" @if($item->order_type==0) checked @endif>Bán</label>
                                         <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="1" @if($item->order_type==1) checked @endif>Tặng</label>
                                         <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="2" @if($item->order_type==2) checked @endif>Gốc</label>  
-                                        <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="3" @if($item->order_type==3) checked @endif>Sỉ</label>                    
+                                        <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="3" @if($item->order_type==3) checked @endif>Sỉ</label>
+                                        <label class="radio-inline"><input type="radio" name="order_type{{$i}}" class="order_type" value="4" @if($item->order_type==4) checked @endif>Gói</label>                    
                                     </td>
                                     <td style="display:none;">@if(isset($item->quantity)) {{$item->quantity}} @else 0 @endif</td>
                                     <td style="display:none;">{{$item->unit_quantity}}</td>
