@@ -134,7 +134,18 @@ textarea.form-control {
 
 <?php 
 $order_id = $fields['order_id']['value'];
-$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", p.`price` "price", p.`id` "id", p.`unit` "unit", p.`category` "category", m.`quantity` "quantity", m.`order_type` "order_type", p.`unit_quantity` "unit_quantity", m.`price` "m_price", p.`thumbnail` "product_thumbnail" FROM `m_orders` m, `products` p, `farmers` f WHERE p.`id` = m.`product_id` AND f.`id` = m.`farmer_id` AND `order_id` = ? ORDER BY p.`category` DESC', [$order_id]);
+$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", tr.`price` "price", 
+                               p.`id` "id", tr.`unit` "unit", p.`category` "category", m.`quantity` "quantity", 
+                               m.`order_type` "order_type", tr.`unit_quantity` "unit_quantity", m.`price` "m_price", 
+                               p.`thumbnail` "product_thumbnail" 
+                          FROM `m_orders` m, `products` p, `farmers` f, `g_orders` g, `trading` tr 
+                         WHERE p.`id` = m.`product_id` 
+                           AND f.`id` = m.`farmer_id` 
+                           AND m.`order_id` = ? 
+                           AND g.`order_id` = m.`order_id`
+                           AND g.`delivery_date` = tr.`delivery_date`
+                           AND tr.`product_id` = p.`id`
+                      ORDER BY p.`category` DESC', [$order_id]);
 
 for($x=0; $x<count($products); $x++) {
     if($products[$x]->category==0){
@@ -152,7 +163,7 @@ for($x=0; $x<count($products); $x++) {
     }
 }
 
-$mySQL = 'SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", p.`price` "price", p.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", 0 AS "order_type",p.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` ';
+$mySQL = 'SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", tr.`price` "price", tr.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", 0 AS "order_type", tr.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` ';
 
 foreach ($products as $item) {
   $mySQL = $mySQL.'AND p.`id` != '.$item->id.' ';
