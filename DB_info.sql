@@ -190,6 +190,12 @@ SELECT *
   FROM `m_orders` m 
  WHERE m.`order_id` IN (SELECT `order_id` FROM `g_orders` WHERE `delivery_date`='2017-11-11');
 
+INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
+SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, '2018-01-19', `priority`, `category`
+  FROM `trading`
+ WHERE `id`= 1279;
+
+
 SELECT *
   FROM `trading`
 WHERE `delivery_date`='2017-11-11'
@@ -308,7 +314,7 @@ UPDATE `trading` tr, `products` p
    AND tr.`product_id` = p.`id`
    AND (tr.`category` IS NULL OR tr.`product_name` IS NULL);
 
-SELECT * FROM `trading` WHERE `delivery_date`='2018-01-12' ORDER BY `category`;
+SELECT * FROM `trading` WHERE `delivery_date`='2018-01-19' ORDER BY `category`;
 
 SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", 
        p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`price_old` "price_old" ,p.`image` "image", p.`thumbnail` "thumbnail", tr.`price` "price", tr.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - tr.`unit_quantity` < 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", tr.`unit` "unit", p.`brand_id` "label"  
