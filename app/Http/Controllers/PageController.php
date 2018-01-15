@@ -120,7 +120,7 @@ class PageController extends Controller
 
         //he thong nong trai
         if ($page->template == 'farm_information') {
-            $this->data['farmers'] = DB::select('SELECT f.`id` "id", f.`name` "name", f.`photo` "photo", f.`short_address` "short_address", f.`rating` "rating", f.`rating_count` "rating_count", f.`quality` "quality", f.`product_list` "product_list" FROM `farmers` f WHERE 1');
+            $this->data['farmers'] = DB::select('SELECT f.`id` "id", f.`name` "name", f.`photo` "photo", f.`short_address` "short_address", f.`rating` "rating", f.`rating_count` "rating_count", f.`quality` "quality", f.`product_list` "product_list" FROM `farmers` f WHERE `deleted_at` IS NULL');
         }
 
         return view('pages.'.$page->template, $this->data);

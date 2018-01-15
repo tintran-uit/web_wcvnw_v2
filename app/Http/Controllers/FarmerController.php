@@ -41,7 +41,7 @@ class FarmerController extends Controller
 
     public function farmers()
 	{
-		$farmers = DB::select('SELECT `id`, `name`, `address`, `rating`, `photo`, `profile` FROM `farmers` ');
+		$farmers = DB::select('SELECT `id`, `name`, `address`, `rating`, `photo`, `profile` FROM `farmers` WHERE `deleted_at` IS NULL');
 		
 	    return $farmers;	        
 	}
