@@ -124,7 +124,7 @@ body .popover {
                   </div>
                </section>
             </aside>
-            <section class="col-sm-7 col-md-8 col-lg-6">
+            <section class="col-sm-7 col-md-10 col-lg-8">
               @foreach($farmers as $farmer)
                <article class="internal-padding wrap-radius bg-white style-post animated fadeInDown">
                      <div class="well profile_view">
@@ -151,13 +151,12 @@ body .popover {
                @endforeach
                
             </section>
-            <aside class="col-lg-3 hidden-sm hidden-md">
+            <!-- <aside class="col-lg-3 hidden-sm hidden-md">
                <section class="wrap wrap-border internal-padding bg-white wrap-radius">
                   <h4 class="text-center no-margin-top spacer-bottom-10">Hình ảnh thực tế nông trại</h4>
                   <div class="row clearfix frame-photo">
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_1.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_1.jpg">
                               </a>
@@ -166,7 +165,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_2.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_2.jpg">
                               </a>
@@ -175,7 +173,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_3.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_3.jpg">
                               </a>
@@ -184,7 +181,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_4.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_4.jpg">
                               </a>
@@ -193,7 +189,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_5.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_5.jpg">
                               </a>
@@ -202,7 +197,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_6.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_6.jpg">
                               </a>
@@ -211,7 +205,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_7.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_7.jpg">
                               </a>
@@ -220,7 +213,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_8.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_8.jpg">
                               </a>
@@ -229,7 +221,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_9.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_9.jpg">
                               </a>
@@ -238,7 +229,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_10.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_10.jpg">
                               </a>
@@ -247,7 +237,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_11.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_11.jpg">
                               </a>
@@ -256,7 +245,6 @@ body .popover {
                      </div>
                      <div class="col-xs-6">
                         <div class="spacer-bottom-10">
-                           <!--Image width and hight should be the same -->
                            <div class="shadow-wrap-box bg-white photo-frame">
                               <a href="#" data-toggle="popover" data-full="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_12.jpg">    <img class="img-responsive" alt="img" src="{{url('')}}/uploads/anh-thuc-te/nong_trai_sach_cfarm_12.jpg">
                               </a>
@@ -266,7 +254,7 @@ body .popover {
 
                   </div>
                </section>
-            </aside>
+            </aside> -->
          </div>
       </div>
    </section>
