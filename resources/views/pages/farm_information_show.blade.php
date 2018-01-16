@@ -106,7 +106,7 @@ body .popover {
       <div class="container">
          <div class="row">
             
-            <section class="col-md-12 col-lg-12">
+            <section class="col-md-10 col-lg-9">
                <article class="internal-padding wrap-radius bg-white style-post animated fadeInDown">
                      <div class="well profile_view">
 
