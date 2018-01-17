@@ -210,7 +210,7 @@ SELECT `order_id` "order_id"
    AND `status` != 8;
 
 SELECT * FROM `trading` WHERE `delivery_date`='2017-11-04' ORDER BY `product_id`;
-SELECT * FROM `trading` WHERE `delivery_date`='2018-01-19' ORDER BY `category`;
+SELECT * FROM `trading` WHERE `delivery_date`='2018-01-19' ORDER BY `category`, `priority`;
 
 SELECT * FROM `m_packages` m 
 WHERE `delivery_date`='2017-12-29'
@@ -222,6 +222,15 @@ WHERE `delivery_date`='2017-12-29'
                   )
 
 #production  
+INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `quantity`, `unit`, `price`, `category`, `delivery_date`) 
+SELECT 102, tr.`farmer_id`, tr.`product_id`, p.`name`, tr.`unit_quantity`, tr.`unit`, tr.`price`, p.`category`, tr.`delivery_date` 
+  FROM `trading` tr, `products` p
+WHERE tr.`status` = 1
+  AND tr.`product_id` = p.`id`
+  AND tr.`product_id` IN (17, 54, 87, 116, 23, 33, 41);
+
+SELECT * FROM `m_packages` WHERE `delivery_date` = '2018-01-19' ORDER BY `package_id`;
+
 INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, `delivery_date`) 
 SELECT  `package_id`, `farmer_id`, `product_id`, `product_name`, `category`, `quantity`, `unit`, `price`, '2018-01-19' FROM `m_packages`
 WHERE `delivery_date`='2018-01-12'
