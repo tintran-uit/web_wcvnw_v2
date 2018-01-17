@@ -309,7 +309,8 @@ SELECT m.`order_id`, p.`id`, tr.`sold`,m.`quantity`, g.`delivery_date`, p.`name`
                                   AND p.`id` = tr.`product_id`
 
 UPDATE `trading` tr, `products` p 
-   SET tr.`category` = p.`category`, tr.`product_name` = p.`name`
+   SET tr.`category` = p.`category`, tr.`product_name` = p.`name`,
+       `priority` = 
  WHERE tr.`status`=1
    AND tr.`product_id` = p.`id`
    AND (tr.`category` IS NULL OR tr.`product_name` IS NULL);
