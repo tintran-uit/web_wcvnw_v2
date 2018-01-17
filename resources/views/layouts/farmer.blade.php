@@ -107,8 +107,8 @@
                      <a href="#"><i class="fa fa-database"></i> <span>Quản Lý Vận Hành</span> <i class="fa fa-angle-left pull-right"></i></a>
                      <ul class="treeview-menu">
                         <li class="{{ Request::is('farmer/dashboard') ? 'active' : '' }}"><a href="{{url('')}}/farmer/dashboard"><i class="fa fa-user-o"></i> <span>Thống kê đơn hàng</span></a></li>
-                        <li class="{{ Request::is('farmer/sell') ? 'active' : '' }}"><a href="{{url('')}}/farmer/sell"><i class="fa fa-address-card"></i> <span>Đăng bán</span></a></li>
-                     </ul>
+<!--                         <li class="{{ Request::is('farmer/sell') ? 'active' : '' }}"><a href="{{url('')}}/farmer/sell"><i class="fa fa-address-card"></i> <span>Đăng bán</span></a></li>
+ -->                     </ul>
                   </li>
                   <!-- Users, Roles Permissions -->
                   <!-- ======================================= -->
