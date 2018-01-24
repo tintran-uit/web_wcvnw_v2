@@ -25,10 +25,10 @@ class PageController extends Controller
           $date = new DateTime('next friday');
           $date = $date->format('Y-m-d');
         }
-
+        $farmer_id = Auth::user()->partner_id;
         $category = [];
         $products = [];
-        $items = $this->layhang(2, $date);
+        $items = $this->layhang($farmer_id, $date);
         foreach ($items as $key) {
         	array_push($category, $key['category']);
         }
@@ -64,7 +64,8 @@ class PageController extends Controller
 
     public function sellUpdate(Request $request)
     {
-      $farmer_id = 2;
+      /* User->partneri_id*/
+      $farmer_id = Auth::user()->partner_id;
       $delivery_date = '2017-11-11';
       $products_id = DB::select('SELECT product_id FROM trading WHERE `status`=1 AND farmer_id = ? ORDER BY `category`', [$farmer_id]);
       $products_list = [];
