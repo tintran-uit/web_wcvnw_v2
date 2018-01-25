@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use DB;
 use DateTime;
 
-class OrderItemController extends Controller
+class AuditItemController extends Controller
 {
 
 public function index()
     {
       
-      return view('admin.orderItem', []);
+      return view('admin.auditItem', []);
         
     }
 

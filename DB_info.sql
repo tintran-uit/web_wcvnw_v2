@@ -210,7 +210,7 @@ SELECT `order_id` "order_id"
    AND `status` != 8;
 
 SELECT * FROM `trading` WHERE `delivery_date`='2017-11-04' ORDER BY `product_id`;
-SELECT * FROM `trading` WHERE `delivery_date`='2018-01-19' ORDER BY `category`, `priority`;
+SELECT * FROM `trading` WHERE `delivery_date`='2018-01-26' ORDER BY `category`, `priority`;
 
 SELECT * FROM `m_packages` m 
 WHERE `delivery_date`='2017-12-29'
@@ -465,9 +465,19 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
  ORDER BY `Product`;
 
 #production
+SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", p.`category` "category"
+  FROM `m_orders` m, `g_orders` g, `products` p
+ WHERE g.`delivery_date` = '2018-01-26'
+   AND g.`status` != 8
+   AND g.`order_id` = m.`order_id`
+   AND p.`id` = m.`product_id`
+   AND m.`quantity` > 0
+   GROUP BY `Product`
+ ORDER BY `category`, `Product`;
+
 (SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", p.`category` "category"
   FROM `m_orders` m, `g_orders` g, `products` p
- WHERE g.`delivery_date` = '2018-01-19'
+ WHERE g.`delivery_date` = '2018-01-26'
    AND g.`status` != 8
    AND g.`order_id` = m.`order_id`
    AND p.`id` = m.`product_id`
@@ -476,7 +486,7 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
 UNION ALL 
 (SELECT CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", m.`category` "category"
   FROM `m_orders` mo, `g_orders` g, `products` p, `m_packages` m
- WHERE g.`delivery_date` = '2018-01-19'
+ WHERE g.`delivery_date` = '2018-01-26'
    AND g.`status` != 8
    AND g.`order_id` = mo.`order_id`
    AND p.`id` = mo.`product_id`
@@ -545,7 +555,7 @@ WHERE tr.`product_id` = p.`id`;
 SELECT `order_id`, g.`delivery_name`, g.`delivery_phone`, g.`delivery_address`, d.`name` "district", g.`total`, g.`total`, "10h00", "" as "shipper", g.`note`, d.`area` 
   FROM `g_orders` g, `district` d
  WHERE g.`status` !=8
-   AND g.`delivery_date`='2018-01-19' 
+   AND g.`delivery_date`='2018-01-26' 
    AND g.`delivery_district` = d.`id` 
 ORDER BY d.`area`, `district` DESC
 
