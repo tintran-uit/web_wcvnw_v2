@@ -39,6 +39,14 @@ return [
     'chatBoxTitle' => 'Bạn cần hỗ trợ?',
     'chatBoxDescript' => 'CFarm sẽ trả lời yêu cầu của bạn sớm nhất!',
     'freeShip' => 'Miễn phí giao hàng cho đơn hàng trên 500.000 VND.',
+    //cart & payment
+    'deliveryInformation' => 'Thông tin giao hàng',
+    'paymentMethod' => 'Phương thức thanh toán',
+    'Complete' => 'Hoàn tất',
+    'deliveryAddress' => 'CHỌN QUẬN/HUYỆN(*)',
+    'deliveryFullNamHolder' => 'Họ tên khách hàng (*)',
+    
+
     //produc details
     'selectFarm' => 'Chọn nông trại cung cấp:',
     'select' => 'Chọn',

@@ -210,7 +210,6 @@ SELECT `order_id` "order_id"
    AND `status` != 8;
 
 SELECT * FROM `trading` WHERE `delivery_date`='2017-11-04' ORDER BY `product_id`;
-SELECT * FROM `trading` WHERE `delivery_date`='2018-01-26' ORDER BY `category`, `priority`;
 
 SELECT * FROM `m_packages` m 
 WHERE `delivery_date`='2017-12-29'
@@ -316,13 +315,6 @@ SELECT m.`order_id`, p.`id`, tr.`sold`,m.`quantity`, g.`delivery_date`, p.`name`
                                   AND tr.`product_id` = m.`product_id`
                                   AND tr.`farmer_id` = m.`farmer_id` 
                                   AND p.`id` = tr.`product_id`
-#production
-UPDATE `trading` tr, `products` p 
-   SET tr.`category` = p.`category`, tr.`product_name` = p.`name`,
-       `priority` = 
- WHERE tr.`status`=1
-   AND tr.`product_id` = p.`id`
-   AND (tr.`category` IS NULL OR tr.`product_name` IS NULL);
 
 SELECT * FROM `trading` WHERE `delivery_date`='2018-01-26' ORDER BY `category`, `priority`;
 
@@ -465,15 +457,33 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
  ORDER BY `Product`;
 
 #production
+SELECT * FROM `trading` WHERE `delivery_date`='2018-02-02' ORDER BY `category`, `priority`;
+
+SELECT `order_id`, g.`delivery_name`, g.`delivery_phone`, g.`delivery_address`, d.`name` "district", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thu Hộ", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thực Tế", "10h00", "" as "shipper", g.`note`, d.`area` 
+  FROM `g_orders` g, `district` d
+ WHERE g.`status` !=8
+   AND g.`delivery_date`='2018-02-02' 
+   AND g.`delivery_district` = d.`id` 
+ORDER BY d.`area`, `district` DESC;
+
 SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", p.`category` "category"
   FROM `m_orders` m, `g_orders` g, `products` p
- WHERE g.`delivery_date` = '2018-01-26'
+ WHERE g.`delivery_date` = '2018-02-02'
    AND g.`status` != 8
    AND g.`order_id` = m.`order_id`
    AND p.`id` = m.`product_id`
    AND m.`quantity` > 0
    GROUP BY `Product`
  ORDER BY `category`, `Product`;
+
+ UPDATE `trading` tr, `products` p 
+   SET tr.`priority` = LENGTH(CONCAT(p.`name`, ' ', tr.`unit_quantity`, ' ', tr.`unit`)),
+       tr.`product_name` = p.`name`,
+       tr.`category` = p.`category`
+ WHERE tr.`status` = 1
+   AND (tr.`priority` IS NULL OR tr.`product_name` IS NULL)
+   AND tr.`product_id` = p.`id`
+   AND p.`category` IN (1, 2, 3, 4, 5, 6);
 
 (SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", p.`category` "category"
   FROM `m_orders` m, `g_orders` g, `products` p
@@ -505,7 +515,7 @@ SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `
 
  UPDATE `trading` 
     SET `status`=2
- WHERE `delivery_date`= '2018-01-12';
+ WHERE `delivery_date`= '2018-02-02';
  
 
 
@@ -552,12 +562,6 @@ UPDATE `trading` tr, `products` p
       tr.`unit_quantity` = p.`unit_quantity`
 WHERE tr.`product_id` = p.`id`;
 
-SELECT `order_id`, g.`delivery_name`, g.`delivery_phone`, g.`delivery_address`, d.`name` "district", g.`total`, g.`total`, "10h00", "" as "shipper", g.`note`, d.`area` 
-  FROM `g_orders` g, `district` d
- WHERE g.`status` !=8
-   AND g.`delivery_date`='2018-01-26' 
-   AND g.`delivery_district` = d.`id` 
-ORDER BY d.`area`, `district` DESC
 
 #change product farmer trading
 UPDATE `trading` tr, `g_orders` g, `m_orders` mo, `m_packages` m 

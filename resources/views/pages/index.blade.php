@@ -548,11 +548,11 @@
 
           function createLabel(label) {
             var code = '';
-            if(label==1){
-              code = '<span class=\"ribbonBadge new text-uppercase\"> Hữu cơ <\/span>\r\n';
-            }else{
-              code = '<span class=\"ribbonBadge new2 text-uppercase\"> An toàn <\/span>\r\n';
-            }
+              if(label==1){
+                code = '<span class=\"ribbonBadge new text-uppercase\"> Organic <\/span>\r\n';
+              }else{
+                code = '<span class=\"ribbonBadge new2 text-uppercase\"> GAP <\/span>\r\n';
+              }
             return code;
           }
 
