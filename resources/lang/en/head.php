@@ -41,6 +41,13 @@ return [
     'chatBoxTitle' => 'Do you have questions?',
     'chatBoxDescript' => 'You can send your request by Facebook Messenger!',
     'freeShip' => 'Free shipping on orders over 500.000 VND',
+        //cart & payment
+    'deliveryInformation' => 'Delivery Information',
+    'paymentMethod' => 'Payment Method',
+    'Complete' => 'Complete',
+    'deliveryAddress' => 'SELECT DISTRICT(*)',
+    'deliveryFullNamHolder' => 'Customer Full Name(*)',
+
 
 //product details
     'selectFarm' => 'Select farm:',
@@ -50,7 +57,8 @@ return [
     'review' => 'Review',
     'quantity' => 'Quantity:',
     'details' => 'Product details',
-
+    'tag_organic' => 'Organic',
+    'tag_gap' => 'GAP',
     //banner top
     'package' => 'Package',
     'package2' => '',
