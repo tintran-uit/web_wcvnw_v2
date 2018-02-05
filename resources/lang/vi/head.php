@@ -55,6 +55,8 @@ return [
     'review' => 'Đánh giá',
     'quantity' => 'Số lượng:',
     'details' => 'Chi tiết sản phẩm',
+    'tag_organic' => 'Hữu Cơ',
+    'tag_gap' => 'An Toàn',
     
     //banner top
     'package' => 'GÓI',

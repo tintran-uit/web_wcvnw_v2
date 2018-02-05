@@ -549,9 +549,9 @@
           function createLabel(label) {
             var code = '';
               if(label==1){
-                code = '<span class=\"ribbonBadge new text-uppercase\"> Organic <\/span>\r\n';
+                code = '<span class=\"ribbonBadge new text-uppercase\"> {{ trans('head.tag_organic') }} <\/span>\r\n';
               }else{
-                code = '<span class=\"ribbonBadge new2 text-uppercase\"> GAP <\/span>\r\n';
+                code = '<span class=\"ribbonBadge new2 text-uppercase\"> {{ trans('head.tag_gap') }} <\/span>\r\n';
               }
             return code;
           }
