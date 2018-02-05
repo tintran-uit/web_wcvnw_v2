@@ -457,7 +457,7 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
  ORDER BY `Product`;
 
 #production
-SELECT * FROM `trading` WHERE `delivery_date`='2018-02-02' ORDER BY `category`, `priority`;
+SELECT * FROM `trading` WHERE `delivery_date`='2018-02-09' ORDER BY `category`, `priority`;
 
 SELECT `order_id`, g.`delivery_name`, g.`delivery_phone`, g.`delivery_address`, d.`name` "district", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thu Hộ", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thực Tế", "10h00", "" as "shipper", g.`note`, d.`area` 
   FROM `g_orders` g, `district` d

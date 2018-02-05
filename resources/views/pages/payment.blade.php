@@ -19,41 +19,41 @@
                       ten: {
                           validators: {
                               notEmpty: {
-                                  message: 'Vui lòng nhập họ tên.'
+                                  message: "{{ trans('head.pleaseInputYourFullName') }}"
                               },
                               stringLength: {
-                                  min: 1,
+                                  min: 2,
                                   max: 35,
-                                  message: 'Họ tên không dưới 2 ký tự.'
+                                  message: "{{ trans('head.pleaseInputYourCorrectName') }}"
                               }
                           }
                       },
                       sdt: {
                           validators: {
                               notEmpty: {
-                                  message: 'Vui lòng nhập số điện thoại.'
+                                  message: "{{ trans('head.pleaseInputYourPhoneNumber') }}"
                               },
                               numeric: {
-                                   message: 'Vui lòng nhập chính xác số điện thoại.',
+                                   message: "{{ trans('head.pleaseInputYourCorrectPhoneNumber') }}",
                               },
                               stringLength: {
                                   min: 10,
                                   max: 13,
-                                  message: 'Vui lòng nhập chính xác số điện thoại.'
+                                  message: "{{ trans('head.pleaseInputYourCorrectPhoneNumber') }}"
                               }
                           }
                       },
                       diaChi: {
                           validators: {
                             notEmpty: {
-                                  message: 'Vui lòng nhập địa chỉ.'
+                                  message: "{{ trans('head.pleaseInputYourDeliveryAddress') }}"
                               }
                           }
                       },
                       selectQuan: {
                           validators: {
                             notEmpty: {
-                                  message: 'Vui lòng chọn quận.'
+                                  message: "{{ trans('head.pleaseSelectDeliveryDistrict') }}"
                               }
                           }
                       }
@@ -87,10 +87,10 @@
             <aside class="col-sm-12 col-md-3">
                @include('layouts.menu_user')
                <section class="wrap wrap-border internal-padding spacer-bottom-15">
-              <h4 class="text-uppercase no-margin">Giỏ thực phẩm an toàn</h4>
+              <h4 class="text-uppercase no-margin">{{ trans('head.foodBag') }}</h4>
               <div class="spacer-top-5" style="margin-top: 5px;">
                 <div class="row spacer-bottom-5">
-                  <div class="col-xs-6">Tạm tính:</div>
+                  <div class="col-xs-6">{{ trans('head.estimation') }}</div>
                   <div class="col-xs-6 text-right" id="spacer-subtoal">
                     <?php 
                       $subtotal = 0; 
@@ -103,27 +103,27 @@
                   </div>
                 </div>
                 <div class="row spacer-bottom-5">
-                  <div class="col-xs-6">Phí vận chuyển (*):</div>
+                  <div class="col-xs-6">{{ trans('head.deliveryFee') }} (*):</div>
                   <div class="col-xs-6 text-right" id="spacer-ship">
                     
                   </div>
                 </div>
                 <div class="row spacer-bottom-5">
-                  <div class="col-xs-6">Khuyến mãi:</div>
+                  <div class="col-xs-6">{{ trans('head.promotion') }}:</div>
                   <div class="col-xs-6 text-right" id="spacer-coupon">
                     
                   </div>
                 </div>
                 <hr>
                 <div class="row spacer-bottom-5">
-                  <div class="col-xs-6 highlighted"><strong>Thành tiền:</strong></div>
+                  <div class="col-xs-6 highlighted"><strong>{{ trans('head.total') }}:</strong></div>
                   <div class="col-xs-6 text-right" id="spacer-toal"><?php echo(number_format($subtotal));
                       echo " VND"; ?></div>
                 </div>
                 <p class="small no-margin spacer-top-15">
                   
                   <a href="{{url('')}}/chinh-sach-giao-hang">
-                    <u>(*) Miễn phí giao hàng với đơn hàng có giá trị trên 500.000 VND</u>
+                    <u>(*) {{ trans('head.freeShip') }}</u>
                   </a>
                 </p>
               </div>
@@ -138,22 +138,22 @@
                            <li href="#tab-1" class="active text-center" data-toggle="tab" id="liTab1">
                               <a data-toggle="tab" aria-expanded="false">
                               <span class="numberCircle">1</span><br class="visible-xs">
-                              <label class="visible-xs">Thông tin</label>
-                              <label class="hidden-xs">Thông tin giao hàng</label>
+                              <label class="visible-xs">{{ trans('head.information') }}</label>
+                              <label class="hidden-xs">{{ trans('head.deliveryInformation') }}</label>
                               </a>
                            </li>
                            <li data-toggle="tab" class="text-center" id="liTab2">
                               <a id="aTab2" data-toggle="tab" href="#tab-2" class="li-disabled">
                               <span class="numberCircle">2</span><br class="visible-xs">
-                              <label class="visible-xs">Thanh toán</label>
-                              <label class="hidden-xs">Phương thức thanh toán</label>
+                              <label class="visible-xs">{{ trans('head.payment') }}</label>
+                              <label class="hidden-xs">{{ trans('head.paymentMethod') }}</label>
                               </a>
                            </li>
                            <li href="#tab-3" class="text-center" data-toggle="tab" id="liTab3">
                               <a data-toggle="tab">
                               <span class="numberCircle">3</span><br class="visible-xs">
-                              <label class="visible-xs">Hoàn tất</label>
-                              <label class="hidden-xs">Hoàn tất</label>
+                              <label class="visible-xs">{{ trans('head.complete') }}</label>
+                              <label class="hidden-xs">{{ trans('head.complete') }}</label>
                               </a>
                            </li>
                         </ul>
@@ -169,8 +169,8 @@
                                  <article class="col-sm-12">
                                  <div class="col-sm-6">
                                   @if(!Auth::check())
-                                    <p>Bạn đã có tài khoản? <a data-toggle="modal" data-target="#modal-signin" style="color: #0071b6; font-weight: 700;" href="#">Đăng nhập</a></p>
-                                    <p><a data-toggle="modal" data-target="#modal-signup" style="color: #0071b6; font-weight: 700;" href="#">Đăng ký tài khoản</a> <b>để nhận ưu đãi, đánh giá, kiểm tra tình trạng đơn hàng và mua sản phẩm nhanh chóng hơn!</b></p>
+                                    <p>{{ trans('head.alreadyHaveAccount') }}? <a data-toggle="modal" data-target="#modal-signin" style="color: #0071b6; font-weight: 700;" href="#">{{ trans('head.login') }}</a></p>
+                                    <p><a data-toggle="modal" data-target="#modal-signup" style="color: #0071b6; font-weight: 700;" href="#">{{ trans('head.registerAccount') }}</a> <b>{{ trans('head.registerAccountMsg') }}!</b></p>
                                   @endif
                                     
                                  </div>
@@ -179,14 +179,14 @@
 
                                   <article class="col-sm-6" style="margin-top: 6px">
                                        <div class="form-group">
-                                          <label>Thông tin liên hệ:</label>
+                                          <label>{{ trans('head.contactInformation') }}:</label>
                                        </div>
                                           <div class="form-group">
                                              <!-- <label>First and Last Name</label> -->
-                                             <input name="sdt" value="@if($auth){{$customer->phone}}@endif" type="text" class="form-control input-lg" placeholder="Số điện thoại: (*)" oninput="getCustomer(this)">
+                                             <input name="sdt" value="@if($auth){{$customer->phone}}@endif" type="text" class="form-control input-lg" placeholder="{{ trans('head.phoneNumber') }}: (*)" oninput="getCustomer(this)">
                                           </div>
                                           <div class="form-group">
-                                                <input name="ten" type="text" value="@if($auth){{$customer->name}}@endif" class="form-control input-lg" placeholder="Họ tên khách hàng (*)">
+                                                <input name="ten" type="text" value="@if($auth){{$customer->name}}@endif" class="form-control input-lg" placeholder="{{ trans('head.deliveryFullNamHolder') }} (*)">
                                           </div>
                                           <div class="form-group">
                                                 <input name="email" type="text" value="@if($auth){{$customer->email}}@endif" class="form-control input-lg" placeholder="Email">
@@ -194,15 +194,15 @@
                                    </article>
                                  <article class="col-sm-6" style="margin-top: 6px">
                                       <div class="form-group">
-                                          <label>Địa chỉ giao hàng:</label>
+                                          <label>{{ trans('head.deliveryAddress') }}:</label>
                                       </div>
                                        <div class="form-group">
-                                          <input name="diaChi" type="text" class="form-control input-lg" value="@if($auth){{$customer->address}}@endif" placeholder="Nhập địa chỉ (*)">
+                                          <input name="diaChi" type="text" class="form-control input-lg" value="@if($auth){{$customer->address}}@endif" placeholder="{{ trans('head.deliveryAddress') }} (*)">
                                        </div>
                                        <div class="form-group">
                                           <!-- <label>State</label>-->
                                              <select id="selectQuan" name="selectQuan" class="selectpicker show-tick form-control" onchange="setShipping()">
-                                                <option value="">Chọn Quận/Huyện (*)</option>
+                                                <option value="">{{ trans('head.deliveryDistrict') }} </option>
                                                 @foreach($districts as $district)
                                                 <option value="{{$district->id}}" @if($auth) @if($district->id == $customer->district)
                                                     selected="selected"
@@ -216,7 +216,7 @@
                                        <div class="form-group">
                                           <!-- <label>State</label>-->
                                           <div class="selecter  closed" tabindex="0">
-                                             <span class="selecter-selected">Hồ Chí Minh</span>
+                                             <span class="selecter-selected">{{ trans('head.HCMC') }}</span>
                                           </div>
                                        </div>
                                     
@@ -227,7 +227,7 @@
                                  </article>
                               </div>
                               <div class="form-group no-margin">
-                                 <p class="required-fields text-right no-margin">* Bắt buộc</p>
+                                 <p class="required-fields text-right no-margin">* {{ trans('head.mandatory') }}</p>
                               </div>
                            </form>
                         </div>
@@ -235,7 +235,7 @@
                            <form action="#" accept-charset="UTF-8" method="post" id="tab-2" class="form-style-base">
                               <!-- <h4 class="nomargin spacer-bottom-15">Phương thức thanh toán:</h4> -->
                               <div class="form-group no-margin">
-                                 <p class="required-fields no-margin">* Nhấn "tiếp tục" để hoàn tất quá trình mua hàng</p>
+                                 <p class="required-fields no-margin">* {{ trans('head.nextMsg') }}</p>
                               </div>
                               <div class="payment-method-box">
                                  <div id="payment-0" class="choose selected">
@@ -248,16 +248,10 @@
                                        </div>
                                        <div class="col-xs-9">
                                           <h4 class="no-margin">
-                                             <b>Thanh toán khi nhận hàng</b>
+                                             <b>{{ trans('head.paymentOnCollection') }}</b>
                                           </h4>
                                           <p class="no-margin">
-                                             <p class="no-margin" style="color: #222222">
-
-                                              Nhân viên chúng tôi sẽ giao hàng và nhận thanh toán vào ngày thứ Sáu.<br> Vui lòng giữ liên lạc qua điện thoại.
-                                              <!-- Cảm ơn bạn đã lựa chọn mua sắm tại Cfarm <br>
-Nhân viên của chúng tôi sẽ sớm liên lạc với bạn qua điện thoại để <br>
-XÁC NHẬN ĐƠN HÀNG
-trước khi giao hàng! --></p>
+                                             <p class="no-margin" style="color: #222222">{{ trans('head.pocMsg') }} </p>
                                           </p>
                                        </div>
                                        <div class="pull-right hidden-xs">
@@ -274,11 +268,10 @@ trước khi giao hàng! --></p>
                                        </div>
                                        <div class="col-xs-9">
                                           <h4 class="no-margin">
-                                             <b>Thanh toán chuyển khoản ngân hàng</b>
+                                             <b>{{ trans('head.payByBankTransfer') }}</b>
                                           </h4>
                                           <p class="no-margin">
-                                             <p class="no-margin" style="color: #222222">
-                                                Quý khách khàng vui lòng thanh toán qua một trong các tài khoản ngân hàng bên dưới:<br>
+                                             <p class="no-margin" style="color: #222222">{{ trans('head.payByBankMsg') }}:<br>
                                             </p>
                                        </div>
                                        <div class="pull-right hidden-xs">
@@ -289,38 +282,38 @@ trước khi giao hàng! --></p>
                               </div>
                               
                               <section>
-                                 <h4>Bạn có mã giảm giá?</h4>
+                                 <h4>{{ trans('head.youHavePromotionCode') }}?</h4>
                                  <div class="row clearfix">
                                     <div class="col-xs-6 form-group">
-                                       <input name="maGiamGia" type="text" class="form-control input-lg" placeholder="Nhập mã giảm giá (nếu có)">
+                                       <input name="maGiamGia" type="text" class="form-control input-lg" placeholder="{{ trans('head.inputPromotionIfHave') }}">
                                     </div>
                                     <div class="col-xs-4 form-group no-padding-left">
                                     <a onclick="checkMaGiamGia()" class="btn btn-warning btn-block btn-lg no-margin">
-                                      Thêm mã
+                                      {{ trans('head.orderNote') }}
                                     </a>
                                   </div>
                                  </div>
                               </section>
                               <section style="margin-top: 20px">
-                                  <h4>Ghi chú thêm (nếu có)</h4>
+                                  <h4>{{ trans('head.orderNoteTitle') }}</h4>
                                   <div class="form-group row clearfix">
                                      <div class="col-sm-9">
-                                        <textarea rows="4" name="note" class="form-control" placeholder="Nhập ghi chú thêm (nếu có)"></textarea>
+                                        <textarea rows="4" name="note" class="form-control" placeholder="{{ trans('head.orderNote') }}"></textarea>
                                      </div>
                                   </div>
                                </section>
                               <div class="form-group no-margin">
                                 <p></p>
-                                 <p class="required-fields text-right no-margin">* Nhấn "tiếp tục" để hoàn tất quá trình mua hàng</p>
+                                 <p class="required-fields text-right no-margin">* {{ trans('head.nextMsg') }}</p>
                               </div>
                            </form>
                         </div>
                         <div class="tab-pane" id="tab-3">
                            <div class="text-center">
                               <i class="fa fa-check fa-4x alert-success"></i>
-                              <h3>Đặt hàng thành công!</h3>
-                              <p><b>Mã đơn đặt hàng: #<span id="order_id"></span>.</b><br>
-                              Tất cả đơn hàng sẽ được giao vào ngày Thứ Sáu vì chúng tôi muốn nhận những <span style="color: #B62029; font-weight: 600">sản phẩm tươi ngon nhất, vừa thu hoạch và gửi trực tiếp đến bạn từ nông trại vào thứ Sáu hàng tuần.</span> Cảm ơn bạn đã mua thực phẩm sạch tại CFarm.vn.</p>
+                              <h3>{{ trans('head.orderSuccess') }}!</h3>
+                              <p><b>{{ trans('head.orderID') }}: #<span id="order_id"></span>.</b><br>
+                              {{ trans('head.orderSuccessMsg') }}.</p>
                            </div>
                         </div>
 
@@ -332,9 +325,9 @@ trước khi giao hàng! --></p>
                   </div>
                   <div class="col-xs-6">
                      <div class="pull-right" id="btnStep">
-                        <a class="btn btn-info btn-lg" onclick="backStep()">                  <i class="fa fa-angle-double-left"></i> <span class="hidden-xs">Quay lại</span>
+                        <a class="btn btn-info btn-lg" onclick="backStep()">                  <i class="fa fa-angle-double-left"></i> <span class="hidden-xs">{{ trans('head.back') }}</span>
                         </a>
-                        <a class="btn btn-primary btn-lg" onclick="nextStep()" id="nextButtonStep">                  <span class="hidden-xs" id="payment-next-button">Tiếp tục</span> <i class="fa fa-angle-double-right"></i>
+                        <a class="btn btn-primary btn-lg" onclick="nextStep()" id="nextButtonStep">                  <span class="hidden-xs" id="payment-next-button">{{ trans('head.next') }}</span> <i class="fa fa-angle-double-right"></i>
                         </a>              
                      </div>
                   </div>
@@ -358,21 +351,21 @@ trước khi giao hàng! --></p>
               <i class="fa fa-times"></i>
             </span>
           </button>
-          <h4 class="modal-title email-icon">Thông tin đặt hàng</h4>
+          <h4 class="modal-title email-icon">{{ trans('head.orderInformation') }}</h4>
         </div>
         <div class="modal-body row" style="margin: 0">
           <p>
-            Đặt hàng thành công!
+            {{ trans('head.orderSuccess') }}!
           </p>
           <p>
-            Trạng thái: <b>chờ xác nhận.</b>
+            {{ trans('head.orderStatus') }}: <b>{{ trans('head.waitingForConfirmation') }}.</b>
           </p>
           <p>
-            Quý khách vui lòng chuyển khoản trước <b>6h:00pm thứ Năm, để xác nhận đơn hàng.</b> (*)
+            {{ trans('head.transferDeadline') }}.</b> (*)
           </p>
           <p>
-            Nội dung chuyển khoản bao gồm mã đơn hàng của bạn: <span id="order_id_modal" style="font-weight: bold;"></span>
-            <br> Thông tin chuyển khoản:
+            {{ trans('head.transferContent') }}: <span id="order_id_modal" style="font-weight: bold;"></span>
+            <br> {{ trans('head.transferInformation') }}:
           </p>
           <div class="banks">
               <div class="col-md-6 col-sm-12 bank">
@@ -380,10 +373,10 @@ trước khi giao hàng! --></p>
                     <img class="" alt="mua thực phẩm sạch online" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-vcb.png">
                 </div>
                 <div class="contentBank">
-                    <h4 class="title">Ngân hàng Ngoại thương Việt Nam - VietComBank - Chi nhánh Phan Đăng Lưu</h4>
+                    <h4 class="title">{{ trans('head.VCBBankTitle') }}</h4>
 
-                    <p>Tài khoản: <strong>Phan Dinh Vuong</strong><br>
-                        Số tài khoản: <strong>0441000644128</strong></p>
+                    <p>{{ trans('head.bankAccountName') }}: <strong>Phan Dinh Vuong</strong><br>
+                        {{ trans('head.bankAccountNumber') }}: <strong>0441000644128</strong></p>
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 bank">
@@ -391,10 +384,10 @@ trước khi giao hàng! --></p>
                     <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-hsbc.png">
                 </div>
                 <div class="contentBank">
-                    <h4 class="title">Ngân hàng TNHH một thành viên HSBC Việt Nam - Chi nhánh Etown Tân Bình</h4>
+                    <h4 class="title">HSBCBankTitle</h4>
 
-                    <p>Tài khoản: <strong>Phan Dinh Vuong</strong><br>
-                        Số tài khoản: <strong>001 680883 041</strong></p>
+                    <p>{{ trans('head.bankAccountName') }}: <strong>Phan Dinh Vuong</strong><br>
+                        {{ trans('head.bankAccountNumber') }}: <strong>001 680883 041</strong></p>
                 </div>
               </div>
               <div class="col-md-12 col-sm-12 bank">
@@ -402,15 +395,15 @@ trước khi giao hàng! --></p>
                     <img class="" alt="Ngân hàng Ngoại thương Việt Nam - VietComBank - Hội sở" src="{{url('')}}/assets/images/icons/credit-cards/thanh-toan-paypal.png">
                 </div>
                 <div class="contentBank">
-                    <h4 class="title">Thanh toán Paypal (Dành cho khách hàng ngoài Việt Nam)</h4>
+                    <h4 class="title">{{ trans('head.paypalBankTitle') }}</h4>
 
-                    <p>Tài khoản: <strong>dinhvuong1206@gmail.com</strong><br></p>
+                    <p>{{ trans('head.bankAccountNumber') }}: <strong>dinhvuong1206@gmail.com</strong><br></p>
                 </div>
               </div>
           </div>
 
           <div style="margin-top: 10px;float: left;">
-              <p>(*) Sau khi nhận được thanh toán, nhân viên của Cfarm sẽ liên lạc qua điện thoại để xác nhận đơn hàng. Cảm ơn quý khách đã đồng hành cùng Cfarm xây dựng cộng đồng nuôi trồng thực phẩm sạch và hữu cơ.</p>
+              <p>(*) {{ trans('head.bankTransferMsg') }}.</p>
           </div>
         </div>
       </div>
@@ -462,7 +455,7 @@ trước khi giao hàng! --></p>
                   break;
                case "liTab2":
                   $('[href="#tab-1"]').tab('show');
-                  $('#payment-next-button').html('Tiếp tục');
+                  $('#payment-next-button').html("{{ trans('head.next') }}");
                   break;
                case "liTab3":
                   $('[href="#tab-2"]').tab('show');
@@ -482,12 +475,12 @@ trước khi giao hàng! --></p>
                   if(check==true)
                     {
                       $('[href="#tab-2"]').tab('show');
-                      $('#payment-next-button').html('Tiếp tục');
+                      $('#payment-next-button').html("{{ trans('head.next') }}");
                       getFormValue('#tab-1');
                       console.log(dataPost);
                     }
                   else{
-                      var message = 'VUI LÒNG NHẬP ĐỦ THÔNG TIN BẮT BUỘC (*)';
+                      var message = "{{ trans('head.pleaseInputAllMandatoryInformation') }}";
                       $('#modalMessage').html(message);
                       $('#modalAlert').modal('show');
                     }
