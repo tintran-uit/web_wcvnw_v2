@@ -79,7 +79,14 @@
                    $selected = ($counter === 0) ? 'class="active"' : ''; 
                    $output  = '';
                    $output .= '<li '. $selected .'>'; 
-                   $output .= '<a data-toggle="tab" href="#category'.$category->id.'" class="scroll">' . $img . $category->name . '</a>';
+                    if(App::isLocale('vi')) {
+                      $output .= '<a data-toggle="tab" href="#category'.$category->id.'" class="scroll">' . $img . $category->name . '</a>';
+                    }
+                    else 
+                    {
+                       $output .= '<a data-toggle="tab" href="#category'.$category->id.'" class="scroll">' . $img . $category->en_name . '</a>';
+                    }
+                    
                    $output .= '</li>';
                    echo($output);
                    $counter++; 
