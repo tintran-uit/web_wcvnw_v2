@@ -587,7 +587,7 @@
                                           <div class="col-xs-10 product-details">
                                              <div class="clearfix row">
                                                 <p class="col-xs-8 product-name no-margin">
-                                                   {{$item->name}}  x{{$item->qty}}
+                                                   {{$item->en_name}}  x{{$item->qty}}
                                                 </p>
                                                 <p class="col-xs-4 price no-margin text-right no-padding">
                                                    {{number_format($item->subtotal)}} VND
