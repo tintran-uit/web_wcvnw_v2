@@ -96,6 +96,7 @@ return [
     'bankAccountNumber' => "Account number",
     'bankTransferMsg' => "After your payment, we will contact you to CONFIRM your order. Thank you for supporting Cfarm.vn in building stable and healthy genuine farming community",
     'transferInformation' => "Bank Transfer Information",
+    'soldOut' => 'Sold out',
 
 
 

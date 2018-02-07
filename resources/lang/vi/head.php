@@ -94,6 +94,7 @@ return [
     'bankAccountNumber' => "Số tài khoản",
     'bankTransferMsg' => "Sau khi nhận được thanh toán, nhân viên của Cfarm sẽ liên lạc qua điện thoại để xác nhận đơn hàng. Cảm ơn quý khách đã đồng hành cùng Cfarm xây dựng cộng đồng nuôi trồng thực phẩm sạch và hữu cơ",
     'transferInformation' => "Thông tin chuyển khoản",
+    'soldOut' => 'Tạm hết hàng',
 
 
     //produc details
