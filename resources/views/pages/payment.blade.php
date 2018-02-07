@@ -540,13 +540,13 @@
               {
                 $('[href="#tab-2"]').tab('show');
                 $("#aTab2").removeClass("li-disabled");
-                $('#payment-next-button').html('Tiếp tục');
+                $('#payment-next-button').html("{{ trans('head.next') }}");
                 getFormValue('#tab-1');
               }else{
-                var message = 'VUI LÒNG NHẬP ĐỦ THÔNG TIN BẮT BUỘC (*)';
+                var message = "{{ trans('head.pleaseInputAllMandatoryInformation') }}";
                 $('#modalMessage').html(message);
                 $('#modalAlert').modal('show');
-                $('#payment-next-button').html('Tiếp tục');
+                $('#payment-next-button').html("{{ trans('head.next') }}");
                 setTimeout(function(){ 
                   $("#liTab2").removeClass("active");
                   $("#liTab1").addClass("active");
