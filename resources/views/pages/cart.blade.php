@@ -13,7 +13,7 @@
             <article class="col-sm-12 col-md-9">
                <div class="spacer-bottom-25">
                   <h3 class="no-margin-top text-uppercase spacer-10 text-center">
-                     Giỏ hàng thực phẩm an toàn
+                     {{ trans('head.foodBag') }}
                   </h3>
                   <form action="#" accept-charset="UTF-8" class="form-style-base">
                      <input type="hidden" name="_method" value="delete">
@@ -22,12 +22,12 @@
                            <table id="cartTable" class="table table-bordered" cellspacing="0">
                               <thead>
                                  <tr>
-                                    <th class="bg-extra-light-grey col-md-2 col-xs-1">Hình ảnh</th>
-                                    <th class="bg-extra-light-grey">Sản Phẩm</th>
-                                    <th class="bg-extra-light-grey col-md-2 col-xs-1">Số Lượng</th>
-                                    <th class="bg-extra-light-grey">Giá</th>
-                                    <th class="bg-extra-light-grey">Tổng</th>
-                                    <th class="bg-extra-light-grey">Xóa</th>
+                                    <th class="bg-extra-light-grey col-md-2 col-xs-1">{{ trans('head.picture') }}</th>
+                                    <th class="bg-extra-light-grey">{{ trans('head.product') }}</th>
+                                    <th class="bg-extra-light-grey col-md-2 col-xs-1">{{ trans('head.quantity') }}</th>
+                                    <th class="bg-extra-light-grey">{{ trans('head.price') }}</th>
+                                    <th class="bg-extra-light-grey">{{ trans('head.total') }}</th>
+                                    <th class="bg-extra-light-grey">{{ trans('head.remove') }}</th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
                                     <th style="display:none;"></th>
@@ -69,7 +69,7 @@
                               </tbody>
                               <tfoot>
                                  <tr>
-                                   <td colspan="4" align="right" style="padding-right: 20px"><b>Tổng Tiền</b>  </td>
+                                   <td colspan="4" align="right" style="padding-right: 20px"><b>{{ trans('head.total') }}</b>  </td>
                                    <td colspan="2" style="padding-left: 20px"><span id="total"></span></td>
                                  </tr>
                               </tfoot>
@@ -79,8 +79,8 @@
                      <hr>
                      <fieldset class="buttons">
                         <div class="pull-right">
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/mua-thuc-pham-sach')}}">Tiếp tục mua hàng</a>
-                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/thanh-toan')}}">Đặt hàng</a>
+                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/mua-thuc-pham-sach')}}">{{ trans('head.orderMore') }}</a>
+                           <a class="btn btn-info btn-lg lg-2x text-uppercase" href="{{url('/thanh-toan')}}">{{ trans('head.order') }}</a>
                         </div>
                      </fieldset>
                   </form>

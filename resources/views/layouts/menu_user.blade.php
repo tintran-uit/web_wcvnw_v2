@@ -1,7 +1,7 @@
 
                <div class="block block-nav spacer-15">
                   <div class="title">
-                     <h4 class="text-uppercase no-margin">Tài khoản</h4>
+                     <h4 class="text-uppercase no-margin">{{ trans('head.account') }}</h4>
                   </div>
                   <div class="content">
                      <ul class="list-unstyled">
@@ -16,11 +16,11 @@
                         </li>
                         @endif
                         <li>
-                           <a class="{{ Request::is('gio-hang-thuc-pham-sach') ? 'current' : '' }}" href="{{url('gio-hang-thuc-pham-sach')}}">          <i class="fa fa-angle-right"></i> Giỏ hàng mới
+                           <a class="{{ Request::is('gio-hang-thuc-pham-sach') ? 'current' : '' }}" href="{{url('gio-hang-thuc-pham-sach')}}">          <i class="fa fa-angle-right"></i> {{ trans('head.currentOrder') }}
                            </a>      
                         </li>
                         <li>
-                           <a class="{{ Request::is('thanh-toan') ? 'current' : '' }}" href="{{url('thanh-toan')}}">          <i class="fa fa-angle-right"></i> Đặt hàng
+                           <a class="{{ Request::is('thanh-toan') ? 'current' : '' }}" href="{{url('thanh-toan')}}">          <i class="fa fa-angle-right"></i> {{ trans('head.order') }}
                            </a>      
                         </li>
                         
