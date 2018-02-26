@@ -191,9 +191,9 @@ SELECT *
  WHERE m.`order_id` IN (SELECT `order_id` FROM `g_orders` WHERE `delivery_date`='2017-11-11');
 
 INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
-SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, '2018-01-19', `priority`, `category`
+SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, '2018-03-02', `priority`, `category`
   FROM `trading`
- WHERE `id`= 1279;
+ WHERE `id`= 1622;
 
 
 SELECT *
@@ -457,12 +457,12 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
  ORDER BY `Product`;
 
 #production
-SELECT * FROM `trading` WHERE `delivery_date`='2018-02-09' ORDER BY `category`, `priority`;
+SELECT * FROM `trading` WHERE `delivery_date`='2018-03-02' ORDER BY `category`, `priority`;
 
 SELECT `order_id`, g.`delivery_name`, g.`delivery_phone`, g.`delivery_address`, d.`name` "district", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thu Hộ", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thực Tế", "10h00", "" as "shipper", g.`note`, d.`area` 
   FROM `g_orders` g, `district` d
- WHERE g.`status` !=8
-   AND g.`delivery_date`='2018-02-02' 
+ WHERE g.`status` = 0
+   AND g.`delivery_date`='2018-02-09' 
    AND g.`delivery_district` = d.`id` 
 ORDER BY d.`area`, `district` DESC;
 
@@ -509,13 +509,13 @@ UNION ALL
  ORDER BY `category`, `Product`;
 
 INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
-SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, DATE_ADD(`delivery_date`, INTERVAL 7 DAY), `priority`, `category`
+SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, '2018-03-02', `priority`, `category`
   FROM `trading`
  WHERE `status`= 1;
 
  UPDATE `trading` 
     SET `status`=2
- WHERE `delivery_date`= '2018-02-02';
+ WHERE `delivery_date`= '2018-02-12';
  
 
 
