@@ -105,8 +105,20 @@ SELECT 61, tr.`farmer_id`, tr.`product_id`, p.`name`, tr.`unit_quantity`, tr.`un
   FROM `trading` tr, `products` p
 WHERE tr.`status` = 1
   AND tr.`product_id` = p.`id`
-  AND tr.`product_id` IN (17, 20, 88, 94,38);
+  AND p.`name` IN ('Cải cầu vồng', 'Ổi Xá Lị Ruột Đỏ', 'Bồ ngót Nhật', 'Vú sữa bơ', 'Dưa leo Nhật', 'Đậu Côve Mỹ', 
+                  'Cà tím', 'Súp lơ baby', 'Bắp cải trái tim', 'Hành lá', 'Nấm mỡ trắng');
 ORDER BY p.`category`;
+
+SELECT `id`, `name`
+  FROM `products`
+ WHERE `name` IN ('Cải cầu vồng', 'Ổi Xá Lị Ruột Đỏ', 'Bồ ngót Nhật', 'Vú sữa bơ', 'Dưa leo Nhật', 'Đậu Côve Mỹ', 
+                  'Cà tím', 'Súp lơ baby', 'Bắp cải trái tim', 'Hành lá', 'Nấm mỡ trắng');
+
+SELECT `id`, `name`
+  FROM `products`
+ WHERE `name` IN ('Cải cầu vồng', 'Ổi', 'Bồ ngót Nhật', 'Vú sữa bơ', 'Dưa leo Nhật', 'Đậu cô ve Mỹ', 
+                  'Cà tím', 'Súp lơ baby', 'Bắp cải trái tim', 'Hành lá', 'Nấm mỡ trắng')
+
 
 INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `quantity`, `unit`, `price`, `category`, `delivery_date`) 
 SELECT 63, `farmer_id`, `product_id`, `product_name`, `quantity`, `unit`, `price`, `category`, `delivery_date`
@@ -457,7 +469,27 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
  ORDER BY `Product`;
 
 #production
-SELECT * FROM `trading` WHERE `delivery_date`='2018-03-02' ORDER BY `category`, `priority`;
+SELECT * FROM `trading` WHERE `delivery_date`='2018-03-09' ORDER BY `category`, `priority`;
+
+INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
+SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, DATE_ADD(`delivery_date`, INTERVAL 7 DAY), `priority`, `category`
+  FROM `trading`
+ WHERE `status`= 1;
+
+ UPDATE `trading` 
+    SET `status`=2
+ WHERE `delivery_date`= '2018-03-02';
+
+SELECT `product_name`, CONCAT(FORMAT(`price`, 0), '/', `unit_quantity`, `unit`) 
+  FROM `trading` 
+ WHERE `delivery_date`='2018-03-02' 
+   AND ROUND(`sold`,2) < ROUND(`capacity`, 2) 
+ORDER BY `category`, `priority`;
+
+UPDATE `g_orders` g
+   SET `note` = CONCAT('Tặng Nấm Mỡ Nâu', '. ', `note`)
+  WHERE `delivery_date`='2018-03-02'
+    AND EXISTS (SELECT 1 FROM `m_orders` WHERE `order_id` = g.`order_id` AND `production_id` = 75)
 
 SELECT `order_id`, g.`delivery_name`, g.`delivery_phone`, g.`delivery_address`, d.`name` "district", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thu Hộ", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thực Tế", "10h00", "" as "shipper", g.`note`, d.`area` 
   FROM `g_orders` g, `district` d
@@ -468,7 +500,7 @@ ORDER BY d.`area`, `district` DESC;
 
 SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", p.`category` "category"
   FROM `m_orders` m, `g_orders` g, `products` p
- WHERE g.`delivery_date` = '2018-02-02'
+ WHERE g.`delivery_date` = '2018-03-02'
    AND g.`status` != 8
    AND g.`order_id` = m.`order_id`
    AND p.`id` = m.`product_id`
@@ -515,8 +547,8 @@ SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `
 
  UPDATE `trading` 
     SET `status`=2
- WHERE `delivery_date`= '2018-02-12';
- 
+ WHERE `delivery_date`= '2018-03-02';
+
 
 
 #stats one specific product:
