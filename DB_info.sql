@@ -471,8 +471,8 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
 #production
 SELECT * FROM `trading` WHERE `delivery_date`='2018-03-09' ORDER BY `category`, `priority`;
 
-INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
-SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, DATE_ADD(`delivery_date`, INTERVAL 7 DAY), `priority`, `category`
+INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `en_unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
+SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `en_unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, DATE_ADD(`delivery_date`, INTERVAL 7 DAY), `priority`, `category`
   FROM `trading`
  WHERE `status`= 1;
 
@@ -491,10 +491,10 @@ UPDATE `g_orders` g
   WHERE `delivery_date`='2018-03-02'
     AND EXISTS (SELECT 1 FROM `m_orders` WHERE `order_id` = g.`order_id` AND `production_id` = 75)
 
-SELECT `order_id`, g.`delivery_name`, g.`delivery_phone`, g.`delivery_address`, d.`name` "district", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thu Hộ", CASE WHEN g.`payment`=1 THEN g.`total` ELSE 0 END "Thực Tế", "10h00", "" as "shipper", g.`note`, d.`area` 
+SELECT `order_id`, g.`delivery_name`, g.`delivery_phone`, g.`delivery_address`, d.`name` "district", CASE WHEN g.`payment`=1 THEN FORMAT(g.`total`, 0) ELSE 0 END "Thu Hộ", CASE WHEN g.`payment`=1 THEN FORMAT(g.`total`, 0) ELSE 0 END "Thực Tế", "10h00", "" as "shipper", g.`note`, d.`area` 
   FROM `g_orders` g, `district` d
- WHERE g.`status` = 0
-   AND g.`delivery_date`='2018-02-09' 
+ WHERE g.`status` != 8
+   AND g.`delivery_date`='2018-03-09' 
    AND g.`delivery_district` = d.`id` 
 ORDER BY d.`area`, `district` DESC;
 
