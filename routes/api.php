@@ -41,6 +41,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin'], 'namespace'
 	Route::get('product-trading/items', 'TradingController@getItems');
 	Route::post('product-trading/items', 'TradingController@editItem');
 
+	//available-product
+	Route::get('available-product', 'TradingController@getAvailableProduct');
+
 	// order
 	Route::get('order-items', 'OrderItemController@getItems');
 	Route::post('order-items', 'OrderItemController@updateItems');
