@@ -469,7 +469,7 @@ SELECT *, CONCAT(m.`product_name`, " (", m.`quantity`, m.`unit`, ")") "Product"
  ORDER BY `Product`;
 
 #production
-SELECT * FROM `trading` WHERE `delivery_date`='2018-03-09' ORDER BY `category`, `priority`;
+SELECT * FROM `trading` WHERE `delivery_date`='2018-03-16' ORDER BY `category`, `priority`;
 
 INSERT INTO `trading`(`farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `en_unit`, `price`, `price_wholesale`, `price_farmer`, `sold`, `status`, `delivery_date`, `priority`, `category`) 
 SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `unit`, `en_unit`, `price`, `price_wholesale`, `price_farmer`, 0, 1, DATE_ADD(`delivery_date`, INTERVAL 7 DAY), `priority`, `category`
@@ -478,13 +478,28 @@ SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `
 
  UPDATE `trading` 
     SET `status`=2
- WHERE `delivery_date`= '2018-03-02';
+ WHERE `delivery_date`= '2018-03-09';
+
+INSERT INTO `m_packages`(`package_id`, `farmer_id`, `product_id`, `product_name`, `quantity`, `unit`, `price`, `category`, `delivery_date`) 
+SELECT 61, tr.`farmer_id`, tr.`product_id`, p.`name`, tr.`unit_quantity`, tr.`unit`, tr.`price`, p.`category`, tr.`delivery_date` 
+  FROM `trading` tr, `products` p
+WHERE tr.`status` = 1
+  AND tr.`product_id` = p.`id`
+  AND p.`name` IN ('Bó Xôi', 'Cải Thảo', 'Mồng Tơi', 'Đậu Côve', 'Cà Chua Beef', 'Bí Đỏ Tròn', 
+                  'Nấm Mỡ Trắng', 'Cam Xoàn', 'Đu Đủ', 'Hành lá');
+
+SELECT * FROM `m_packages` WHERE `delivery_date`='2018-03-16' ORDER BY `package_id`;
 
 SELECT `product_name`, CONCAT(FORMAT(`price`, 0), '/', `unit_quantity`, `unit`) 
   FROM `trading` 
- WHERE `delivery_date`='2018-03-02' 
+ WHERE `status`=1 
    AND ROUND(`sold`,2) < ROUND(`capacity`, 2) 
 ORDER BY `category`, `priority`;
+
+
+ssh -i /Users/mac/Dropbox/Personal/confidential/vuong-phan-new.pem ec2-user@54.169.236.118
+
+chmod 400 /Users/mac/Dropbox/Personal/confidential/vuong-phan-new.pem
 
 UPDATE `g_orders` g
    SET `note` = CONCAT('Tặng Nấm Mỡ Nâu', '. ', `note`)
@@ -500,7 +515,7 @@ ORDER BY d.`area`, `district` DESC;
 
 SELECT CONCAT(p.`name`, " (", m.`quantity`, m.`unit`, ")") "Product", COUNT(*) "Quantity", p.`category` "category"
   FROM `m_orders` m, `g_orders` g, `products` p
- WHERE g.`delivery_date` = '2018-03-02'
+ WHERE g.`delivery_date` = '2018-03-09'
    AND g.`status` != 8
    AND g.`order_id` = m.`order_id`
    AND p.`id` = m.`product_id`
