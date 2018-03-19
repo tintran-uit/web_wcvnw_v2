@@ -478,7 +478,7 @@ SELECT `farmer_id`, `product_id`, `product_name`, `capacity`, `unit_quantity`, `
 
  UPDATE `trading` 
     SET `status`=2
- WHERE `delivery_date`= '2018-03-09';
+ WHERE `delivery_date`= '2018-03-16';
 
 SELECT * 
   FROM `m_orders` m 
