@@ -16,10 +16,10 @@ class StatsController extends CrudController
 
 public function stats()
     {
-      if(date('D') == 'Fri'){
+      if(date('D') == 'Sat'){
         $date = date('Y-m-d');
       }else{
-        $date = new DateTime('next friday');
+        $date = new DateTime('next saturday');
         $date = $date->format('Y-m-d');
       }
       // var_dump($date);   die();
