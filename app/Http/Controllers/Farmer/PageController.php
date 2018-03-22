@@ -19,10 +19,10 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        if(date('D') == 'Fri'){
+        if(date('D') == 'Sat'){
           $date = date('Y-m-d');
         }else{
-          $date = new DateTime('next friday');
+          $date = new DateTime('next saturday');
           $date = $date->format('Y-m-d');
         }
         $farmer_id = Auth::user()->partner_id;
