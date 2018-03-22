@@ -73,10 +73,10 @@ public function index()
 
     public function getItems()
     {
-      if(date('D') == 'Fri'){
+      if(date('D') == 'Sat'){
         $delivery_date = date('Y-m-d');
       }else{
-        $delivery_date = new DateTime('next friday');
+        $delivery_date = new DateTime('next saturday');
         $delivery_date = $delivery_date->format('Y-m-d');
       }
         
