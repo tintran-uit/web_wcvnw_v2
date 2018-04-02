@@ -72,6 +72,11 @@ class TradingCrudController extends CrudController
         ]);
 
         $this->crud->addColumn([
+            'name' => 'en_unit',
+            'label' => 'Đơn vị EN',
+        ]);
+
+        $this->crud->addColumn([
             'name' => 'price_farmer',
             'label' => 'Giá thu mua',
             'type' => 'number',
@@ -135,8 +140,25 @@ class TradingCrudController extends CrudController
             ],
         ]);
         $this->crud->addField([
+            'name' => 'priority',
+            'label' => 'Thứ Tự Sắp Xếp',
+            'type' => 'text',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
             'name' => 'unit',
             'label' => 'Đơn vị',
+            'type' => 'text',
+            'default'    => 'kg',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'en_unit',
+            'label' => 'Đơn vị EN',
             'type' => 'text',
             'default'    => 'kg',
             'wrapperAttributes' => [
