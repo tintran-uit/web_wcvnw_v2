@@ -298,31 +298,32 @@ class OrderController extends Controller
 				$category = $numbers[0]->category;
 
         //Proccess the elements in case package is order
-        if($category == 0) //package
-        {
-          DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
-                            SET t.`sold` = ROUND(t.`sold` + m.`quantity`*?, 2)
-                          WHERE t.`farmer_id` = m.`farmer_id`
-                            AND t.`status` = 1
-                            AND m.`delivery_date` = t.`delivery_date`
-                            AND t.`product_id` = m.`product_id` 
-                            AND m.`package_id` = ?', [$quantity, $product_id]);
+        // if($category == 0) //package
+        // {
+          // DB::statement('UPDATE `trading` AS t, `m_packages` AS m 
+          //                   SET t.`sold` = ROUND(t.`sold` + m.`quantity`*?, 2)
+          //                 WHERE t.`farmer_id` = m.`farmer_id`
+          //                   AND t.`status` = 1
+          //                   AND m.`delivery_date` = t.`delivery_date`
+          //                   AND t.`product_id` = m.`product_id` 
+          //                   AND m.`package_id` = ?', [$quantity, $product_id]);
 
-          DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `order_quantity`, 
-                                           `unit`, `price`, `price_farmer`, `order_type`) 
-                      SELECT ?, m.`farmer_id`, m.`product_id`, m.`quantity`, m.`quantity`, m.`unit`, 
-                             ROUND(0.95*(tr.`price` * m.`quantity`)/tr.`unit_quantity`), ROUND((tr.`price_farmer` * m.`quantity`)/tr.`unit_quantity`), 4
-                        FROM `m_packages` m, `trading` tr
-                       WHERE m.`package_id` = ? 
-                         AND m.`delivery_date` = tr.`delivery_date`
-                         AND tr.`product_id` = m.`product_id`
-                         AND tr.`farmer_id` = m.`farmer_id` 
-                         AND m.`delivery_date` = ?', [$order_id, $product_id, $delivery_date]);
-        }
-        else {
+          // DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `quantity`, `order_quantity`, 
+          //                                  `unit`, `price`, `price_farmer`, `order_type`) 
+          //             SELECT ?, m.`farmer_id`, m.`product_id`, m.`quantity`, m.`quantity`, m.`unit`, 
+          //                    ROUND(0.95*(tr.`price` * m.`quantity`)/tr.`unit_quantity`), ROUND((tr.`price_farmer` * m.`quantity`)/tr.`unit_quantity`), 4
+          //               FROM `m_packages` m, `trading` tr
+          //              WHERE m.`package_id` = ? 
+          //                AND m.`delivery_date` = tr.`delivery_date`
+          //                AND tr.`product_id` = m.`product_id`
+          //                AND tr.`farmer_id` = m.`farmer_id` 
+          //                AND m.`delivery_date` = ?', [$order_id, $product_id, $delivery_date]);
+          
+        // }
+        // else {
           $m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `order_quantity`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $quantity, $unit, $price * $qty, $price_farmer]);
 
-        }
+        // }
 
 
        	//update trading table
