@@ -221,7 +221,7 @@ class OrderCrudController extends CrudController
         $this->crud->addField([
             'name' => 'language',
             'label' => 'Ngôn Ngữ',
-            'type' => 'number',
+            'type' => 'text',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
             ],
