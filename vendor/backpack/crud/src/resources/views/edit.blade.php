@@ -150,7 +150,7 @@ if( $language == 'en') {
                       ORDER BY p.`category` DESC', [$order_id]);
 }
 else {
-  $products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", tr.`price` "price", 
+  $products = DB::select('SELECT f.`en_name` "farmer_name", f.`id` "farmer_id", p.`en_name` "name", tr.`price` "price", 
                                p.`id` "id", tr.`unit` "unit", p.`category` "category", m.`quantity` "quantity", 
                                m.`order_type` "order_type", tr.`unit_quantity` "unit_quantity", m.`price` "m_price", 
                                p.`thumbnail` "product_thumbnail" 
