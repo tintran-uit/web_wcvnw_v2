@@ -134,7 +134,9 @@ textarea.form-control {
 
 <?php 
 $order_id = $fields['order_id']['value'];
-$products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", tr.`price` "price", 
+$language = $fields['language']['value'];
+if( $language == 'en') {
+  $products = DB::select('SELECT f.`en_name` "farmer_name", f.`id` "farmer_id", p.`en_name` "name", tr.`price` "price", 
                                p.`id` "id", tr.`unit` "unit", p.`category` "category", m.`quantity` "quantity", 
                                m.`order_type` "order_type", tr.`unit_quantity` "unit_quantity", m.`price` "m_price", 
                                p.`thumbnail` "product_thumbnail" 
@@ -146,8 +148,23 @@ $products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`na
                            AND g.`delivery_date` = tr.`delivery_date`
                            AND tr.`product_id` = p.`id`
                       ORDER BY p.`category` DESC', [$order_id]);
+}
+else {
+  $products = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", tr.`price` "price", 
+                               p.`id` "id", tr.`unit` "unit", p.`category` "category", m.`quantity` "quantity", 
+                               m.`order_type` "order_type", tr.`unit_quantity` "unit_quantity", m.`price` "m_price", 
+                               p.`thumbnail` "product_thumbnail" 
+                          FROM `m_orders` m, `products` p, `farmers` f, `g_orders` g, `trading` tr 
+                         WHERE p.`id` = m.`product_id` 
+                           AND f.`id` = m.`farmer_id` 
+                           AND m.`order_id` = ? 
+                           AND g.`order_id` = m.`order_id`
+                           AND g.`delivery_date` = tr.`delivery_date`
+                           AND tr.`product_id` = p.`id`
+                      ORDER BY p.`category` DESC', [$order_id]);
+}
 
-for($x=0; $x<count($products); $x++) {
+/*for($x=0; $x<count($products); $x++) {
     if($products[$x]->category==0){
         $order_type = $products[$x]->order_type.' AS "order_type"';
         $items = DB::select('SELECT f.`name` "farmer_name", f.`id` "farmer_id", p.`name` "name", 
@@ -158,10 +175,10 @@ for($x=0; $x<count($products); $x++) {
                                        AND m.`delivery_date` = g.`delivery_date`
                                        AND g.`order_id` = ?
                                        AND m.`package_id` = ?',[$order_id, $products[$x]->id]);
-        unset($products[$x]);
+         unset($products[$x]);
         $products += $items;
     }
-}
+}*/
 
 $mySQL = 'SELECT tr.`farmer_id` "farmer_id", f.`name` "farmer_name", p.`id` "id" ,p.`name` "name", p.`slug` "slug", p.`image` "image", p.`thumbnail` "thumbnail", tr.`price` "price", tr.`unit_quantity` "unit_quantity", IF(tr.`capacity` - tr.`sold` - p.`unit_quantity` <= 0, 0, round(tr.`capacity` - tr.`sold`, 1)) AS "quantity_left", 0 AS "order_type", tr.`unit` "unit", p.`brand_id` "label"  FROM `products` p, `trading` tr, `farmers` f WHERE tr.`product_id` = p.`id` AND tr.`status` = 1 AND f.`id` = tr.`farmer_id` ';
 
@@ -307,9 +324,9 @@ $products = array_merge($products, DB::select($mySQL));
         var stt = 1;
           $.each(data0, function(index, data){ 
             
-                 if(data.category==0){
+                  if(data.order_type==4){
                   //them goi
-                    // if(firstGoi==0){
+                     // if(firstGoi==0){
                       $.each(data.items, function(index, data2){
                         if(firstGoi==0){
                           newRowContent += '<tr role=\"row\" class=\"odd\">\r\n  <td>'+stt+'<\/td>\r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">Gói</td>  \r\n<td>'+data2.product_name+'<\/td>\r\n<td>'+data2.farmer_name+'<\/td>      \r\n <td>'+data2.unit+'<\/td>                    \r\n<td>'+data2.quantity+'<\/td>   \r\n  <td class="quantity">'+data2.quantity+'    \r\n<td style="vertical-align: inherit;" rowspan="'+Object.keys(data.items).length+'">'+numberWithCommas(data.price, data.order_type)+'</td>\r\n <\/tr>';

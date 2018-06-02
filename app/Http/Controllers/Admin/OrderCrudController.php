@@ -205,19 +205,27 @@ class OrderCrudController extends CrudController
             'attribute' => 'name',
             'model' => "App\Models\Status",
             'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
+                'class' => 'form-group col-md-3'
             ],
         ]);
 
         $this->crud->addField([
             'name' => 'payment',
-            'label' => 'Hình thức thanh toán',
+            'label' => 'Thanh toán',
             'type' => 'number',
             'wrapperAttributes' => [
-                'class' => 'form-group col-md-4'
+                'class' => 'form-group col-md-3'
             ],
         ]);
 
+        $this->crud->addField([
+            'name' => 'language',
+            'label' => 'Ngôn Ngữ',
+            'type' => 'number',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ],
+        ]);
         
 
         // ------ CRUD DETAILS ROW

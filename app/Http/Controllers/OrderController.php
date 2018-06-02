@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Cart;
 use Auth;
+use Session;
 
 class OrderController extends Controller
 {
@@ -150,7 +151,10 @@ class OrderController extends Controller
     $total = 0;
     $promotion = 0;
 
-    
+    $locale = 'vi';
+    if (Session::has('locale')) {
+            $locale = Session::get('locale');
+    }
 
 		foreach ($items as $item) {
 			$product_id = $item->id;
@@ -266,7 +270,7 @@ class OrderController extends Controller
     $order_id = $order_id[0]->order_id;
     DB::statement('UPDATE `uniqueids` SET `order_id` = `order_id`+1 WHERE `id` = 1');
 
-    DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `order_total`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`, `delivery_name`, `deposit`) VALUES(?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $total, $discount_amount, $delivery_date, $note, $name, $deposit]);
+    DB::insert('INSERT INTO g_orders(`order_id`, `customer_id`, `payment`, `promotion_code`, `delivery_address`, `delivery_phone`, `delivery_district`, `shipping_cost`, `order_total`, `total`, `discount_amount`, `created_at`, `delivery_date`, `note`, `delivery_name`, `deposit`, `language`) VALUES(?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP,?,?,?,?,?)', [$order_id, $customer_id, $payment, $promotion_code, $address, $phone, $district, $shipping_cost, $total, $total, $discount_amount, $delivery_date, $note, $name, $deposit, $locale]);
 
  		// $items = Cart::content();
 		$msg['order_id'] = $order_id;
@@ -318,7 +322,7 @@ class OrderController extends Controller
           //                AND tr.`product_id` = m.`product_id`
           //                AND tr.`farmer_id` = m.`farmer_id` 
           //                AND m.`delivery_date` = ?', [$order_id, $product_id, $delivery_date]);
-          
+
         // }
         // else {
           $m_order = DB::insert('INSERT INTO m_orders(`order_id`, `farmer_id`, `product_id`, `order_quantity`, `quantity`, `unit`, `price`, `price_farmer`) VALUES(?,?,?,?,?,?,?,?)', [$order_id, $farmer_id, $product_id, $quantity, $quantity, $unit, $price * $qty, $price_farmer]);
