@@ -166,21 +166,21 @@ class OrderController extends Controller
                                 AND tr.`farmer_id` = ? 
                                 AND p.`id` = ?', [$farmer_id, $product_id]);
 
-      if($numbers[0]->category == 0){
-        $m_package_price =  DB::select('SELECT SUM(ROUND((0.95 * tr.`price`*m.`quantity`)/tr.`unit_quantity`)) AS "package_price"
-                                          FROM `m_packages` m, `trading` tr
-                                         WHERE `package_id` = ?
-                                           AND m.`delivery_date` = ?
-                                           AND m.`product_id` = tr.`product_id`
-                                           AND m.`farmer_id` = tr.`farmer_id`
-                                           AND m.`delivery_date` = tr.`delivery_date` ', 
-                                           [$product_id, $numbers[0]->delivery_date]
-                                      );
-        $total = $total + ($m_package_price[0]->package_price * $qty);
-      }
-      else {
+      // if($numbers[0]->category == 0){
+      //   $m_package_price =  DB::select('SELECT SUM(ROUND((0.95 * tr.`price`*m.`quantity`)/tr.`unit_quantity`)) AS "package_price"
+      //                                     FROM `m_packages` m, `trading` tr
+      //                                    WHERE `package_id` = ?
+      //                                      AND m.`delivery_date` = ?
+      //                                      AND m.`product_id` = tr.`product_id`
+      //                                      AND m.`farmer_id` = tr.`farmer_id`
+      //                                      AND m.`delivery_date` = tr.`delivery_date` ', 
+      //                                      [$product_id, $numbers[0]->delivery_date]
+      //                                 );
+      //   $total = $total + ($m_package_price[0]->package_price * $qty);
+      // }
+      // else {
         $total = $total + ($price * $qty);
-      }
+      // }
 			
 			if($numbers[0]->quantity_left < round($qty * $numbers[0]->unit_quantity, 2) )
 			{
